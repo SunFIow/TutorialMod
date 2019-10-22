@@ -51,8 +51,6 @@ public class TutorialMod {
 	public void serverStarting(FMLServerStartingEvent event) {
 		Log.info("Preparing the server for u senpai.");
 
-//		new ModCommands(event.getCommandDispatcher());
 		ModCommands.register(event.getCommandDispatcher());
-//		ConfigCommand.register(event.getCommandDispatcher());
 	}
 }
