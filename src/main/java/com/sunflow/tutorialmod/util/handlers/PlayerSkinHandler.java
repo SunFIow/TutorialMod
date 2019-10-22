@@ -31,11 +31,14 @@ public class PlayerSkinHandler {
 //		net.minecraftforge.client.event.ClientPlayerNetworkEvent.
 
 		PlayerEntity player = event.getPlayer();
-		System.out.println(player.getServer().getPlayerList());
+//		System.out.println(player.getServer().getPlayerList());
 
 		String uuid = PlayerEntity.getUUID(player.getGameProfile()).toString();
-//		if (player instanceof AbstractClientPlayerEntity && !done.contains(player) && UUIDS.contains(uuid)) {
+		if (UUIDS.contains(uuid)) {
+			player.sendMessage(new StringTextComponent("Welcome Back"));
+		}
 
+//		if (player instanceof AbstractClientPlayerEntity && !done.contains(player) && UUIDS.contains(uuid)) {
 		TutorialMod.LOGGER.info("Joined " + player);
 		if (player instanceof AbstractClientPlayerEntity && !done.contains(player)) {
 			AbstractClientPlayerEntity clplayer = (AbstractClientPlayerEntity) player;
@@ -53,31 +56,4 @@ public class PlayerSkinHandler {
 			textures.put(MinecraftProfileTexture.Type.SKIN, location);
 		}
 	}
-
-	private static class PlayerSkin {
-		private AbstractClientPlayerEntity player;
-		private ResourceLocation location;
-
-		public PlayerSkin(AbstractClientPlayerEntity player, ResourceLocation location) {
-			this.player = player;
-			this.location = location;
-		}
-
-		public AbstractClientPlayerEntity getPlayer() {
-			return player;
-		}
-
-		public ResourceLocation getLocation() {
-			return location;
-		}
-//
-//		public void setPlayer(AbstractClientPlayerEntity player) {
-//			this.player = player;
-//		}
-//
-//		public void setLocation(ResourceLocation location) {
-//			this.location = location;
-//		}
-	}
-
 }
