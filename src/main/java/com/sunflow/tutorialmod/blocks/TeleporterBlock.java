@@ -1,8 +1,8 @@
 package com.sunflow.tutorialmod.blocks;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.base.BlockBase;
 import com.sunflow.tutorialmod.commands.util.Teleport;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -40,7 +40,7 @@ public class TeleporterBlock extends BlockBase {
 				if (player instanceof ServerPlayerEntity) {
 					Teleport.teleportToDimension((ServerPlayerEntity) player, this.dimensionID, player.getPosition());
 				} else {
-					TutorialMod.LOGGER.warn("You are not an ServerPlayerEntity");
+					Log.warn("You are not an ServerPlayerEntity");
 				}
 			}
 			return true;

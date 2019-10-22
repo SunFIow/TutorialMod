@@ -22,6 +22,11 @@ public class ModSetup {
 		}
 	};
 
+	public ModSetup() {
+		itemGroup.setBackgroundImageName("tutorial.png");
+		itemGroup2.setBackgroundImageName("tutorial2.png");
+	}
+
 	public void init() {
 		itemGroup.setBackgroundImageName("tutorial.png");
 		itemGroup2.setBackgroundImageName("tutorial2.png");

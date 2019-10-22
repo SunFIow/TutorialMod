@@ -9,6 +9,7 @@ import java.util.WeakHashMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.Reference;
 
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
@@ -39,7 +40,7 @@ public class PlayerSkinHandler {
 		}
 
 //		if (player instanceof AbstractClientPlayerEntity && !done.contains(player) && UUIDS.contains(uuid)) {
-		TutorialMod.LOGGER.info("Joined " + player);
+		Log.info("Joined " + player);
 		if (player instanceof AbstractClientPlayerEntity && !done.contains(player)) {
 			AbstractClientPlayerEntity clplayer = (AbstractClientPlayerEntity) player;
 			ResourceLocation loc = new ResourceLocation(TutorialMod.MODID, "textures/entity/skins/customplayer_" + clplayer.getSkinType() + "_" + new Random().nextInt(3) + ".png");

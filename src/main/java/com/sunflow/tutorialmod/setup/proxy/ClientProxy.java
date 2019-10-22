@@ -1,6 +1,5 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.tile.CopperChestTile;
 import com.sunflow.tutorialmod.entity.CentaurEntity;
 import com.sunflow.tutorialmod.entity.WeirdMobEntity;
@@ -9,6 +8,7 @@ import com.sunflow.tutorialmod.entity.renderer.CopperChestTileRenderer;
 import com.sunflow.tutorialmod.entity.renderer.WeirdMobRenderer;
 import com.sunflow.tutorialmod.init.ModEnchantments;
 import com.sunflow.tutorialmod.setup.ClientRegistrations;
+import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.handlers.CustomHandlers;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
 import com.sunflow.tutorialmod.util.handlers.PlayerSkinHandler;
@@ -26,11 +26,11 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preSetup() {
-		TutorialMod.LOGGER.info("Welcome home senpai.");
+		Log.info("Welcome home senpai.");
 //		TutorialMod.LOGGER.info("Gimme just a moment senpai while I get some things to tinker with...");
-		TutorialMod.LOGGER.info("Would you like to have dinner first?");
-		TutorialMod.LOGGER.info("Or would you rather take a bath?");
-		TutorialMod.LOGGER.info("Or...");
+		Log.info("Would you like to have dinner first?");
+		Log.info("Or would you rather take a bath?");
+		Log.info("Or...");
 
 		super.preSetup();
 
@@ -40,7 +40,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void setup() {
-		TutorialMod.LOGGER.info("perhaps you would like...");
+		Log.info("perhaps you would like...");
 
 		super.setup();
 
@@ -63,12 +63,12 @@ public class ClientProxy extends CommonProxy {
 		eventBus.register(PlayerSkinHandler.class);
 		eventBus.register(CustomHandlers.class);
 
-		TutorialMod.LOGGER.info("m...");
-		TutorialMod.LOGGER.info("mm...");
-		TutorialMod.LOGGER.info("me? ");
-		TutorialMod.LOGGER.info("*giggling*");
+		Log.info("m...");
+		Log.info("mm...");
+		Log.info("me? ");
+		Log.info("*giggling*");
 
-		TutorialMod.LOGGER.info("I am ready now senpai. Shall we begin?");
+		Log.info("I am ready now senpai. Shall we begin?");
 	}
 
 	@Override

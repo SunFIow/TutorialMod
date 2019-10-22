@@ -1,9 +1,9 @@
 package com.sunflow.tutorialmod.data;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.data.provider.ModLootTabelProvider;
 import com.sunflow.tutorialmod.data.provider.ModBlockTagsProvider;
 import com.sunflow.tutorialmod.data.provider.ModItemTagsProvider;
+import com.sunflow.tutorialmod.data.provider.ModLootTabelProvider;
 import com.sunflow.tutorialmod.data.provider.ModRecipesProvider;
 
 import net.minecraft.data.DataGenerator;
@@ -24,6 +24,5 @@ public class DataGenerators {
 			generator.addProvider(new ModRecipesProvider(generator));
 			generator.addProvider(new ModLootTabelProvider(generator));
 		}
-
 	}
 }

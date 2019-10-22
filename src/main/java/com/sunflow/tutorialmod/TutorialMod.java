@@ -1,13 +1,11 @@
 package com.sunflow.tutorialmod;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.sunflow.tutorialmod.init.ModCommands;
 import com.sunflow.tutorialmod.setup.ModSetup;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +21,8 @@ public class TutorialMod {
 	public static final String VERSION = "1.0.4";
 	public static final String ACCEPTED_VERSION = "[1.14.4,)";
 
-	public static final Logger LOGGER = LogManager.getLogger(NAME);
+//	public static final Logger LOGGER = LogManager.getLogger(NAME);
+
 //  private static final Marker FORGEMOD = MarkerManager.getMarker("FORGEMOD");
 
 	private static TutorialMod INSTANCE;
@@ -37,7 +36,7 @@ public class TutorialMod {
 	public static final ModSetup setup = new ModSetup();
 
 	public TutorialMod() {
-		LOGGER.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
+		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
 
 		INSTANCE = this;
 		TutorialMod.proxy.preSetup();
@@ -46,12 +45,12 @@ public class TutorialMod {
 	public void setup(FMLCommonSetupEvent event) {
 //		LOGGER.info("Almost ready senpai ...");
 
-		TutorialMod.setup.init();
+//		TutorialMod.setup.init();
 		TutorialMod.proxy.setup();
 	}
 
 	public void serverStarting(FMLServerStartingEvent event) {
-		LOGGER.info("Preparing the server for u senpai.");
+		Log.info("Preparing the server for u senpai.");
 
 //		new ModCommands(event.getCommandDispatcher());
 		ModCommands.register(event.getCommandDispatcher());

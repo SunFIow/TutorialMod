@@ -124,12 +124,12 @@ public class Config {
 
 	@SubscribeEvent
 	public static void onLoad(ModConfig.Loading event) {
-		TutorialMod.LOGGER.debug("Loaded {} config file {}", TutorialMod.MODID, event.getConfig().getFileName());
+		Log.debug("Loaded {} config file {}", TutorialMod.MODID, event.getConfig().getFileName());
 	}
 
 	@SubscribeEvent
 	public static void onReload(ModConfig.ConfigReloading event) {
-		TutorialMod.LOGGER.fatal("{} config just got changed on the file system!", TutorialMod.MODID);
+		Log.fatal("{} config just got changed on the file system!", TutorialMod.MODID);
 
 	}
 }

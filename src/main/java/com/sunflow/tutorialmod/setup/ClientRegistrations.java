@@ -1,6 +1,5 @@
 package com.sunflow.tutorialmod.setup;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.screen.ChargerScreen;
 import com.sunflow.tutorialmod.blocks.screen.CopperChestScreen;
 import com.sunflow.tutorialmod.blocks.screen.ElectricSinteringFurnaceScreen;
@@ -10,6 +9,7 @@ import com.sunflow.tutorialmod.blocks.screen.SinteringFurnaceScreen;
 import com.sunflow.tutorialmod.init.ModItems;
 import com.sunflow.tutorialmod.init.ModTypes;
 import com.sunflow.tutorialmod.items.base.MobEggBase;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.client.gui.IHasContainer;
 import net.minecraft.client.gui.ScreenManager;
@@ -27,7 +27,7 @@ public class ClientRegistrations {
 
 	@SubscribeEvent
 	public static void onItemColor(ColorHandlerEvent.Item event) {
-		TutorialMod.LOGGER.debug("I am going to register the item colors now senpai.");
+		Log.debug("I am going to register the item colors now senpai.");
 
 		ItemColors registry = event.getItemColors();
 		for (MobEggBase egg : ModItems.EGGS) {
@@ -36,7 +36,7 @@ public class ClientRegistrations {
 	}
 
 	public static <M extends Container, U extends Screen & IHasContainer<M>> void registerScreens() {
-		TutorialMod.LOGGER.debug("I am going to register the screens now senpai.");
+		Log.debug("I am going to register the screens now senpai.");
 
 		registerScreen(ModTypes.FIRSTBLOCK_CONTAINER, FirstBlockScreen::new);
 		registerScreen(ModTypes.ENERGY_STORAGE_CONTAINER, EnergyStorageScreen::new);

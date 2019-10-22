@@ -25,6 +25,7 @@ import com.sunflow.tutorialmod.init.ModEnchantments;
 import com.sunflow.tutorialmod.init.ModItems;
 import com.sunflow.tutorialmod.init.ModSounds;
 import com.sunflow.tutorialmod.items.base.MobEggBase;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -52,7 +53,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onBlockRegistry(RegistryEvent.Register<Block> event) {
-		TutorialMod.LOGGER.debug("I am going to register the blocks now senpai.");
+		Log.debug("I am going to register the blocks now senpai.");
 
 		IForgeRegistry<Block> registry = event.getRegistry();
 		registry.registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
@@ -60,7 +61,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onItemRegistry(RegistryEvent.Register<Item> event) {
-		TutorialMod.LOGGER.debug("I am going to register the items now senpai.");
+		Log.debug("I am going to register the items now senpai.");
 
 		IForgeRegistry<Item> registry = event.getRegistry();
 		registry.registerAll(ModItems.ITEMS.toArray(new Item[0]));
@@ -70,7 +71,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onTileEntityRegistry(RegistryEvent.Register<TileEntityType<?>> event) {
-		TutorialMod.LOGGER.debug("I am going to register the tileEntites now senpai.");
+		Log.debug("I am going to register the tileEntites now senpai.");
 
 		IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
 		registerTileEntity(registry, FirstBlockTile::new, ModBlocks.FIRSTBLOCK);
@@ -83,7 +84,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onEnchantmentRegistry(RegistryEvent.Register<Enchantment> event) {
-		TutorialMod.LOGGER.debug("I am going to register the enchantments now senpai.");
+		Log.debug("I am going to register the enchantments now senpai.");
 
 		IForgeRegistry<Enchantment> registry = event.getRegistry();
 		registry.registerAll(ModEnchantments.ENCHANTMENTS.toArray(new Enchantment[0]));
@@ -91,7 +92,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onEntityRegistry(RegistryEvent.Register<EntityType<?>> event) {
-		TutorialMod.LOGGER.debug("I am going to register the entities now senpai.");
+		Log.debug("I am going to register the entities now senpai.");
 
 		IForgeRegistry<EntityType<?>> registry = event.getRegistry();
 		registry.register(createEntityType("weirdmob", 1.0F, 1.0F, false, EntityClassification.CREATURE, WeirdMobEntity::new, ModItems.WEIRDMOB_SPAWN_EGG));
@@ -101,7 +102,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onContainerRegistry(RegistryEvent.Register<ContainerType<?>> event) {
-		TutorialMod.LOGGER.debug("I am going to register the containers now senpai.");
+		Log.debug("I am going to register the containers now senpai.");
 
 		event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
 			return new CopperChestContainer(windowId, inv, new Inventory(CopperChestTile.SIZE));
@@ -118,7 +119,7 @@ public class CommonRegistrations {
 
 	@SubscribeEvent
 	public static void onSoundRegistry(RegistryEvent.Register<SoundEvent> event) {
-		TutorialMod.LOGGER.debug("I am going to register the sounds now senpai.");
+		Log.debug("I am going to register the sounds now senpai.");
 
 		IForgeRegistry<SoundEvent> registry = event.getRegistry();
 		registry.registerAll(ModSounds.SOUNDS.toArray(new SoundEvent[0]));

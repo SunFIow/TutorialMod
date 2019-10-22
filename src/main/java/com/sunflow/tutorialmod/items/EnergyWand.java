@@ -2,12 +2,12 @@ package com.sunflow.tutorialmod.items;
 
 import java.util.List;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.items.base.ItemBase;
 import com.sunflow.tutorialmod.util.Config;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
+import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -70,7 +70,7 @@ public class EnergyWand extends ItemBase implements IEnergyItem {
 
 	@Override
 	public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		TutorialMod.LOGGER.warn("hellooo");
+		Log.warn("hellooo");
 	}
 
 }
