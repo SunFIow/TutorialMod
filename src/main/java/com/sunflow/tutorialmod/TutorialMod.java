@@ -41,7 +41,7 @@ public class TutorialMod {
 		INSTANCE = this;
 		TutorialMod.proxy.preSetup();
 
-		Log.info("Test Message 1");
+		Log.info("Test Message 2");
 	}
 
 	public void setup(FMLCommonSetupEvent event) {
