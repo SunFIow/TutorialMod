@@ -45,7 +45,6 @@ public class TutorialMod {
 	public void setup(FMLCommonSetupEvent event) {
 //		LOGGER.info("Almost ready senpai ...");
 
-//		TutorialMod.setup.init();
 		TutorialMod.proxy.setup();
 	}
 
