@@ -40,6 +40,8 @@ public class TutorialMod {
 
 		INSTANCE = this;
 		TutorialMod.proxy.preSetup();
+
+		Log.info("Test Message 1");
 	}
 
 	public void setup(FMLCommonSetupEvent event) {
