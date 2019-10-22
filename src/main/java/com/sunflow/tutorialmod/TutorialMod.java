@@ -42,6 +42,7 @@ public class TutorialMod {
 		TutorialMod.proxy.preSetup();
 
 		Log.info("Test Message 2");
+		Log.debug("Conflict 2");
 	}
 
 	public void setup(FMLCommonSetupEvent event) {
