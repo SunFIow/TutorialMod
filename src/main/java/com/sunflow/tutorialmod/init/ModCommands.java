@@ -21,11 +21,20 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.sunflow.tutorialmod.commands.CommandSlimeChunk;
 
 import net.minecraft.command.CommandSource;
+import net.minecraftforge.server.command.ConfigCommand;
 
 public class ModCommands {
-	public ModCommands(CommandDispatcher<CommandSource> dispatcher) {
+//	public ModCommands(CommandDispatcher<CommandSource> dispatcher) {
+//		dispatcher.register(
+//				LiteralArgumentBuilder.<CommandSource>literal("tutorialmod")
+//						.then(CommandSlimeChunk.register()));
+//	}
+
+	public static void register(CommandDispatcher<CommandSource> dispatcher) {
 		dispatcher.register(
 				LiteralArgumentBuilder.<CommandSource>literal("tutorialmod")
 						.then(CommandSlimeChunk.register()));
+
+		ConfigCommand.register(dispatcher);
 	}
 }

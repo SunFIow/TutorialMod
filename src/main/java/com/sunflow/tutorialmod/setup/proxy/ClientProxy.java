@@ -1,5 +1,6 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
+import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.tile.CopperChestTile;
 import com.sunflow.tutorialmod.entity.CentaurEntity;
 import com.sunflow.tutorialmod.entity.WeirdMobEntity;
@@ -25,14 +26,24 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preSetup() {
+		TutorialMod.LOGGER.info("Welcome home senpai.");
+//		TutorialMod.LOGGER.info("Gimme just a moment senpai while I get some things to tinker with...");
+		TutorialMod.LOGGER.info("Would you like to have dinner first?");
+		TutorialMod.LOGGER.info("Or would you rather take a bath?");
+		TutorialMod.LOGGER.info("Or...");
+
 		super.preSetup();
+
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.register(ClientRegistrations.class);
 	}
 
 	@Override
 	public void setup() {
+		TutorialMod.LOGGER.info("perhaps you would like...");
+
 		super.setup();
+
 		ClientRegistrations.registerScreens();
 
 		RenderingRegistry.registerEntityRenderingHandler(WeirdMobEntity.class, WeirdMobRenderer::new);
@@ -51,6 +62,13 @@ public class ClientProxy extends CommonProxy {
 		eventBus.register(ModEnchantments.class);
 		eventBus.register(PlayerSkinHandler.class);
 		eventBus.register(CustomHandlers.class);
+
+		TutorialMod.LOGGER.info("m...");
+		TutorialMod.LOGGER.info("mm...");
+		TutorialMod.LOGGER.info("me? ");
+		TutorialMod.LOGGER.info("*giggling*");
+
+		TutorialMod.LOGGER.info("I am ready now senpai. Shall we begin?");
 	}
 
 	@Override
