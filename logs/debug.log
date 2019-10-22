@@ -1,0 +1,65 @@
+[19Okt2019 17:32:22.756] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--gameDir, ., --launchTarget, fmlserver, --fml.forgeVersion, 28.1.61, --fml.mcpVersion, 20190829.143755, --fml.mcVersion, 1.14.4, --fml.forgeGroup, net.minecraftforge]
+[19Okt2019 17:32:22.760] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 4.1.0+62+5bfa59b starting: java version 1.8.0_221 by Oracle Corporation
+[19Okt2019 17:32:22.791] [main/DEBUG] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Found launch services [minecraft,fmldevdata,fmldevclient,fmldevserver,fmluserdevserver,testharness,fmluserdevdata,fmlclient,fmluserdevclient,fmlserver]
+[19Okt2019 17:32:22.806] [main/DEBUG] [cpw.mods.modlauncher.NameMappingServiceHandler/MODLAUNCHER]: Found naming services : [srgtomcp]
+[19Okt2019 17:32:22.819] [main/DEBUG] [cpw.mods.modlauncher.LaunchPluginHandler/MODLAUNCHER]: Found launch plugins: [eventbus,object_holder_definalize,runtime_enum_extender,accesstransformer,capability_inject_definalize,runtimedistcleaner]
+[19Okt2019 17:32:22.838] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Discovering transformation services
+[19Okt2019 17:32:22.843] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Found additional transformation services from discovery services: []
+[19Okt2019 17:32:22.885] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Found transformer services : [fml]
+[19Okt2019 17:32:22.885] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Transformation services loading
+[19Okt2019 17:32:22.886] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loading service fml
+[19Okt2019 17:32:22.887] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/]: Injecting tracing printstreams for STDOUT/STDERR.
+[19Okt2019 17:32:22.890] [main/DEBUG] [net.minecraftforge.fml.loading.LauncherVersion/CORE]: Found FMLLauncher version 28.1
+[19Okt2019 17:32:22.891] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML 28.1 loading
+[19Okt2019 17:32:22.891] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found ModLauncher version : 4.1.0+62+5bfa59b
+[19Okt2019 17:32:22.891] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Initializing modjar URL handler
+[19Okt2019 17:32:22.892] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found AccessTransformer version : 1.0.0+45+b99295a
+[19Okt2019 17:32:22.892] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found EventBus version : 1.0.0+54+3f83a9e
+[19Okt2019 17:32:22.893] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Found Runtime Dist Cleaner
+[19Okt2019 17:32:22.896] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found CoreMod version : 1.0.0+4+e6fed88
+[19Okt2019 17:32:22.896] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Found ForgeSPI package implementation version 1.4.0+5+4682005
+[19Okt2019 17:32:22.896] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Found ForgeSPI package specification 3
+[19Okt2019 17:32:23.111] [main/INFO] [net.minecraftforge.fml.loading.FixSSL/CORE]: Added Lets Encrypt root certificates as additional trust
+[19Okt2019 17:32:23.111] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loaded service fml
+[19Okt2019 17:32:23.114] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Configuring option handling for services
+[19Okt2019 17:32:23.124] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Transformation services initializing
+[19Okt2019 17:32:23.124] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformation service fml
+[19Okt2019 17:32:23.124] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Setting up basic FML game directories
+[19Okt2019 17:32:23.126] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Found existing GAMEDIR directory : D:\Programming\Minecraft Modding\TutorialMod
+[19Okt2019 17:32:23.126] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path GAMEDIR is D:\Programming\Minecraft Modding\TutorialMod
+[19Okt2019 17:32:23.127] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Making MODSDIR directory : D:\Programming\Minecraft Modding\TutorialMod\mods
+[19Okt2019 17:32:23.127] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Created MODSDIR directory : D:\Programming\Minecraft Modding\TutorialMod\mods
+[19Okt2019 17:32:23.128] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path MODSDIR is D:\Programming\Minecraft Modding\TutorialMod\mods
+[19Okt2019 17:32:23.129] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Making CONFIGDIR directory : D:\Programming\Minecraft Modding\TutorialMod\config
+[19Okt2019 17:32:23.129] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Created CONFIGDIR directory : D:\Programming\Minecraft Modding\TutorialMod\config
+[19Okt2019 17:32:23.129] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path CONFIGDIR is D:\Programming\Minecraft Modding\TutorialMod\config
+[19Okt2019 17:32:23.129] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path FMLCONFIG is D:\Programming\Minecraft Modding\TutorialMod\config\fml.toml
+[19Okt2019 17:32:23.129] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Loading configuration
+[19Okt2019 17:32:23.170] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file D:\Programming\Minecraft Modding\TutorialMod\config\fml.toml is not correct. Correcting
+[19Okt2019 17:32:23.179] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [defaultConfigPath] was corrected from null to defaultconfigs
+[19Okt2019 17:32:23.185] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Making default config directory directory : D:\Programming\Minecraft Modding\TutorialMod\defaultconfigs
+[19Okt2019 17:32:23.185] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Created default config directory directory : D:\Programming\Minecraft Modding\TutorialMod\defaultconfigs
+[19Okt2019 17:32:23.185] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Preparing launch handler
+[19Okt2019 17:32:23.186] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Using fmlserver as launch service
+[19Okt2019 17:32:23.196] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Received command line version data  : MC Version: '1.14.4' MCP Version: '20190829.143755' Forge Version: '28.1.61' Forge group: 'net.minecraftforge'
+[19Okt2019 17:32:23.197] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found JAR asm at path C:\Users\Philipp\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm\6.2\1b6c4ff09ce03f3052429139c2a68e295cae6604\asm-6.2.jar
+[19Okt2019 17:32:23.197] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found probable library path C:\Users\Philipp\.gradle\caches\modules-2
+[19Okt2019 17:32:23.198] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found forge path C:\Users\Philipp\.gradle\caches\modules-2\net\minecraftforge\forge\1.14.4-28.1.61\forge-1.14.4-28.1.61-universal.jar is missing
+[19Okt2019 17:32:23.199] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: SRG MC at C:\Users\Philipp\.gradle\caches\modules-2\net\minecraft\server\1.14.4-20190829.143755\server-1.14.4-20190829.143755-srg.jar is missing
+[19Okt2019 17:32:23.199] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: MC Extras at C:\Users\Philipp\.gradle\caches\modules-2\net\minecraft\server\1.14.4\server-1.14.4-extra-stable.jar is missing
+[19Okt2019 17:32:23.199] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Forge patches at C:\Users\Philipp\.gradle\caches\modules-2\net\minecraftforge\forge\1.14.4-28.1.61\forge-1.14.4-28.1.61-server.jar is missing
+[19Okt2019 17:32:23.199] [main/FATAL] [net.minecraftforge.fml.loading.FMLCommonLaunchHandler/CORE]: Failed to find forge version 28.1.61 for MC 1.14.4 at C:\Users\Philipp\.gradle\caches\modules-2\net\minecraftforge\forge\1.14.4-28.1.61\forge-1.14.4-28.1.61-universal.jar
+[19Okt2019 17:32:23.215] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: java.lang.RuntimeException: Missing forge!
+[19Okt2019 17:32:23.215] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at net.minecraftforge.fml.loading.FMLCommonLaunchHandler.validatePaths(FMLCommonLaunchHandler.java:113)
+[19Okt2019 17:32:23.216] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at net.minecraftforge.fml.loading.FMLLoader.setupLaunchHandler(FMLLoader.java:194)
+[19Okt2019 17:32:23.216] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at net.minecraftforge.fml.loading.FMLServiceProvider.initialize(FMLServiceProvider.java:92)
+[19Okt2019 17:32:23.217] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at cpw.mods.modlauncher.TransformationServiceDecorator.onInitialize(TransformationServiceDecorator.java:68)
+[19Okt2019 17:32:23.217] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at cpw.mods.modlauncher.TransformationServicesHandler.lambda$initialiseTransformationServices$7(TransformationServicesHandler.java:107)
+[19Okt2019 17:32:23.217] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at java.util.HashMap$Values.forEach(HashMap.java:981)
+[19Okt2019 17:32:23.218] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at cpw.mods.modlauncher.TransformationServicesHandler.initialiseTransformationServices(TransformationServicesHandler.java:107)
+[19Okt2019 17:32:23.218] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at cpw.mods.modlauncher.TransformationServicesHandler.initializeTransformationServices(TransformationServicesHandler.java:59)
+[19Okt2019 17:32:23.218] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at cpw.mods.modlauncher.Launcher.run(Launcher.java:75)
+[19Okt2019 17:32:23.219] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at cpw.mods.modlauncher.Launcher.main(Launcher.java:65)
+[19Okt2019 17:32:23.219] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at net.minecraftforge.server.ServerMain$Runner.runLauncher(ServerMain.java:63)
+[19Okt2019 17:32:23.220] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at net.minecraftforge.server.ServerMain$Runner.access$100(ServerMain.java:60)
+[19Okt2019 17:32:23.220] [main/INFO] [STDERR/]: [java.lang.ThreadGroup:uncaughtException:1052]: 	at net.minecraftforge.server.ServerMain.main(ServerMain.java:57)

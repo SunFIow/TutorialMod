@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tutorialmod:ruby_shovel"
+    ]
+  },
+  "criteria": {
+    "ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "tutorialmod:ruby"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tutorialmod:ruby_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ruby",
+      "has_the_recipe"
+    ]
+  ]
+}

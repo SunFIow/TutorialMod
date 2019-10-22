@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "B"
+    ],
+   
+    "key":
+    {
+        "B":
+        {
+            "item": "tutorialmod:block_ruby"
+        }
+    },
+   
+    "result":
+    {
+        "item": "tutorialmod:ruby",
+        "count": 9
+    }
+}

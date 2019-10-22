@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "tutorialmod:firstblock",
+    "tutorialmod:ruby_ore",
+    "tutorialmod:firstitem",
+    "tutorialmod:default_skin",
+    "tutorialmod:sunflow_skin",
+    "tutorialmod:beke_skin",
+    "tutorialmod:phantom_skin"
+  ]
+}

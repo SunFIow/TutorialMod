@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "SSS",
+        "SIS",
+        "SSS"
+    ],
+   
+    "key":
+    {
+                
+        "S":
+        {
+            "item": "minecraft:stone",
+            "data": 0
+        },
+        
+        "I":
+        {
+            "type": "forge:ore_dict",
+            "ore": "ingotCopper"
+        }
+    },
+   
+    "result":
+    {
+  		"item": "tutorialmod:ore_overworld",
+  		"data": 0,
+    	"count": 1
+    }
+}

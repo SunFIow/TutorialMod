@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+        {
+            "item": "tutorialmod:ruby"
+        },
+        {
+            "item": "minecraft:fire_charge"
+        },
+        {
+            "item": "minecraft:paper"
+        }
+    ],
+    "result": 
+    {
+        "item": "tutorialmod:wand_ruby",
+        "count": 3
+    }
+}

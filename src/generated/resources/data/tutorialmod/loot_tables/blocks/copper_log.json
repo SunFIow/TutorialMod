@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "copper_log",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tutorialmod:copper_log"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
