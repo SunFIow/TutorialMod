@@ -40,6 +40,8 @@ public class TutorialMod {
 
 		INSTANCE = this;
 		TutorialMod.proxy.preSetup();
+
+		Log.debug("Conflict 2");
 	}
 
 	public void setup(FMLCommonSetupEvent event) {

@@ -70,6 +70,4 @@ public class ModBlocks {
 	public static final TileBlockBase SINTERING_FURNACE = new SinteringFurnaceBlock();
 	public static final TileBlockBase ELECTRIC_SINTERING_FURNACE = new ElectricSinteringFurnaceBlock();
 	public static final TileBlockBase CHARGER = new ChargerBlock();
-
-	// Just a Test Comment
 }
