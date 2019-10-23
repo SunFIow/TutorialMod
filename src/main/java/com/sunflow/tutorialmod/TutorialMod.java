@@ -37,12 +37,10 @@ public class TutorialMod {
 
 	public TutorialMod() {
 		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
+//		Log.info("Loading Network data for FML net version: {}", NetworkHandler.init());
 
 		INSTANCE = this;
 		TutorialMod.proxy.preSetup();
-
-		Log.info("Test Message 2");
-		Log.debug("Conflict 2");
 	}
 
 	public void setup(FMLCommonSetupEvent event) {

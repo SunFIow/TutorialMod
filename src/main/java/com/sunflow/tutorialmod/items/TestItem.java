@@ -4,7 +4,6 @@ import com.sunflow.tutorialmod.items.base.ItemBase;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
@@ -18,15 +17,7 @@ public class TestItem extends ItemBase {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		if (!world.isRemote) {
-			ItemStack stack = player.getHeldItem(hand);
-			CompoundNBT tag = stack.getOrCreateChildTag("tutorialmod");
-			if (player.isSneaking()) {
-				tag.putInt("counter", tag.getInt("counter") + 1);
-			} else {
-				player.sendStatusMessage(new StringTextComponent("Counter: " + tag.getInt("counter")), true);
-			}
-		}
+		player.sendMessage(new StringTextComponent(world.isRemote + ": " + player.fallDistance));
 
 		return super.onItemRightClick(world, player, hand);
 	}

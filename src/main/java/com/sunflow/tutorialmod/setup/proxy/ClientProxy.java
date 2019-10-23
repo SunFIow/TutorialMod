@@ -6,7 +6,6 @@ import com.sunflow.tutorialmod.entity.WeirdMobEntity;
 import com.sunflow.tutorialmod.entity.renderer.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.renderer.CopperChestTileRenderer;
 import com.sunflow.tutorialmod.entity.renderer.WeirdMobRenderer;
-import com.sunflow.tutorialmod.init.ModEnchantments;
 import com.sunflow.tutorialmod.setup.ClientRegistrations;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.handlers.CustomHandlers;
@@ -59,7 +58,7 @@ public class ClientProxy extends CommonProxy {
 
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
 		eventBus.register(KeyBindingHandler.class);
-		eventBus.register(ModEnchantments.class);
+//		eventBus.register(ModEnchantments.class);
 		eventBus.register(PlayerSkinHandler.class);
 		eventBus.register(CustomHandlers.class);
 

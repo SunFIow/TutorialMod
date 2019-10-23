@@ -28,6 +28,7 @@ public class KeyBindingHandler {
 				switch (key) {
 					case EXPLODE:
 						Log.info("Boom!");
+//						NetworkHandler.sendToServer(new MessageExplode(4711));
 						break;
 				}
 			}

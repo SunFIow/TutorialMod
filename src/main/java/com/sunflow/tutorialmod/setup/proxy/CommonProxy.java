@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.init.ModEnchantments;
 import com.sunflow.tutorialmod.setup.CommonRegistrations;
 import com.sunflow.tutorialmod.util.Config;
 
@@ -29,7 +30,11 @@ public abstract class CommonProxy {
 		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("tutorialmod-common.toml"));
 	}
 
-	public void setup() {}
+	public void setup() {
+		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
+		eventBus.register(ModEnchantments.ENCHANTMENT_MULTIJUMP);
+//		eventBus.register(EnchantmentMultiJump.class);
+	}
 
 	public abstract World getClientWorld();
 
