@@ -1,23 +1,32 @@
 {
-	"entity.centaur.ambient":
-	{
+	"entity.centaur.ambient": {
 		"category": "entity",
 		"subtitle": "entity.centaur.ambient",
-		"sounds": [{"name": "tutorialmod:entity/centaur/ambient", "stream": true}]
+		"sounds": [
+			{
+				"name": "tutorialmod:entity/centaur/ambient",
+				"stream": true
+			}
+		]
 	},
-	
-	"entity.centaur.hurt":
-	{
+	"entity.centaur.hurt": {
 		"category": "entity",
 		"subtitle": "entity.centaur.hurt",
-		"sounds": [{"name": "tutorialmod:entity/centaur/hurt", "stream": true}]
+		"sounds": [
+			{
+				"name": "tutorialmod:entity/centaur/hurt",
+				"stream": true
+			}
+		]
 	},
-	
-	"entity.centaur.death":
-	{
+	"entity.centaur.death": {
 		"category": "entity",
 		"subtitle": "entity.centaur.death",
-		"sounds": [{"name": "tutorialmod:entity/centaur/death", "stream": true}]
+		"sounds": [
+			{
+				"name": "tutorialmod:entity/centaur/death",
+				"stream": true
+			}
+		]
 	}
-	
 }
