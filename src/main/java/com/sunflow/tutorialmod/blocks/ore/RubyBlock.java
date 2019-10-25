@@ -14,7 +14,7 @@ import net.minecraftforge.common.ToolType;
 public class RubyBlock extends BlockBase {
 
 	public RubyBlock() {
-		super("ruby_block", Material.IRON, 5.0f, 15.0f, ToolType.PICKAXE, 2, SoundType.METAL, 5);
+		super("ruby_block", Material.IRON, 5.0f, 5.0f, ToolType.PICKAXE, 2, SoundType.METAL, 5);
 	}
 
 	@Override

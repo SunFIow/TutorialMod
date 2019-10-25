@@ -51,12 +51,13 @@
 	"item.tutorialmod.centaur_spawn_egg": "Centaur Egg",
 	
 	
-"_comment": "Blocks",	
-	"block.tutorialmod.ruby_ore": "Ruby Ore",
+"_comment": "Blocks",
 	"block.tutorialmod.ruby_block": "Block of Ruby",
-	
 	"block.tutorialmod.copper_block": "Block of Copper",
+	"block.tutorialmod.aluminium_block": "Block of Aluminium",
 	
+"_comment": "Ores",
+	"block.tutorialmod.ruby_ore": "Ruby Ore",	
 	"block.tutorialmod.copper_ore": "Copper Ore",
 	"block.tutorialmod.copper_ore_end": "Ender Copper Ore",
 	"block.tutorialmod.copper_ore_nether": "Nether Copper Ore",
@@ -77,6 +78,7 @@
 	
 "_comment": "Furniture",
 	"block.tutorialmod.santa_hat": "Santa Hat",
+	"block.tutorialmod.gridless": "Gridless Block",
 		
 "_comment": "Tile Entities",
 	
