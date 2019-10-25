@@ -1,37 +1,48 @@
 package com.sunflow.tutorialmod.blocks.ore;
 
+import java.util.Random;
+
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.blocks.base.BlockBase;
 import com.sunflow.tutorialmod.init.ModBlocks;
-import com.sunflow.tutorialmod.init.ModItems;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.OreBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.ToolType;
 
-public class CustomOreBlock extends OreBlock {
+public class CustomOreBlock extends BlockBase {
 
-	public CustomOreBlock(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+	public CustomOreBlock(String name, float hardnessAndResistance, int harvestlevel, int lightlevel) {
+		this(name, TutorialMod.setup.itemGroup, hardnessAndResistance, harvestlevel, lightlevel);
 	}
 
-	public CustomOreBlock(String name, Material material) {
-		this(name, TutorialMod.setup.itemGroup, Block.Properties.create(material).hardnessAndResistance(2.5f, 5.0f));
-	}
-
-	public CustomOreBlock(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {
-		this(name, TutorialMod.setup.itemGroup, Block.Properties.create(material).hardnessAndResistance(hardness, resistance).harvestTool(tooltype).harvestLevel(harvestlevel).sound(soundtype).lightValue(lightlevel));
+	public CustomOreBlock(String name, ItemGroup group, float hardnessAndResistance, int harvestlevel, int lightlevel) {
+		this(name, group, Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(hardnessAndResistance).harvestLevel(harvestlevel).lightValue(lightlevel));
 	}
 
 	public CustomOreBlock(String name, ItemGroup group, Properties properties) {
-		super(properties);
-		this.setRegistryName(name);
+		super(name, group, properties);
+	}
 
-		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(group)).setRegistryName(name));
+	protected int getExperience(Random rand) {
+		if (this == ModBlocks.RUBY_ORE) {
+			return MathHelper.nextInt(rand, 0, 2);
+		} else if (this == ModBlocks.COPPER_ORE_OVERWORLD || this == ModBlocks.COPPER_ORE_NETHER || this == ModBlocks.COPPER_ORE_END) {
+			return MathHelper.nextInt(rand, 1, 4);
+		} else if (this == ModBlocks.ALUMINIUM_ORE_OVERWORLD || this == ModBlocks.ALUMINIUM_ORE_NETHER || this == ModBlocks.ALUMINIUM_ORE_END) {
+			return MathHelper.nextInt(rand, 1, 4);
+		} else {
+			return 0;
+		}
+	}
+
+	@Override
+	public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
+		return silktouch == 0 ? this.getExperience(RANDOM) : 0;
 	}
 }

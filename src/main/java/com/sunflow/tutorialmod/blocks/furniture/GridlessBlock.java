@@ -4,7 +4,6 @@ import com.sunflow.tutorialmod.blocks.base.HorizontalBlockBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
@@ -13,13 +12,13 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 
-public class SantaHatBlock extends HorizontalBlockBase {
+public class GridlessBlock extends HorizontalBlockBase {
 
 //	private static final AxisAlignedBB SANTA_HAT_AABB = new AxisAlignedBB(2D / 16D, 0, 2D / 16D, 1D - 2D / 16D, 13D / 16D, 1D - 2D / 16D);
-	private static final VoxelShape SANTA_HAT_AABB = Block.makeCuboidShape(2D, 0, 2D, 14D, 13D, 14D);
+	private static final VoxelShape SANTA_HAT_AABB = Block.makeCuboidShape(1D, 0, 1D, 17D, 16D, 17D);
 
-	public SantaHatBlock() {
-		super("santa_hat", Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH));
+	public GridlessBlock() {
+		super("gridless", Block.Properties.create(Material.CLAY));
 	}
 
 	@Override

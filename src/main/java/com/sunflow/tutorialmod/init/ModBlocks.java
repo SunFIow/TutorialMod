@@ -13,7 +13,9 @@ import com.sunflow.tutorialmod.blocks.TeleporterBlock;
 import com.sunflow.tutorialmod.blocks.base.BlockBase;
 import com.sunflow.tutorialmod.blocks.base.TileBlockBase;
 import com.sunflow.tutorialmod.blocks.food.FoodPlantBlock;
+import com.sunflow.tutorialmod.blocks.furniture.GridlessBlock;
 import com.sunflow.tutorialmod.blocks.furniture.SantaHatBlock;
+import com.sunflow.tutorialmod.blocks.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.blocks.ore.RubyBlock;
 import com.sunflow.tutorialmod.blocks.ore.RubyOre;
 import com.sunflow.tutorialmod.blocks.tree.CustomLeavesBlock;
@@ -25,27 +27,27 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraftforge.common.ToolType;
 
 public class ModBlocks {
 	public static final List<Block> BLOCKS = new ArrayList<>();
 
 	public static final Block RUBY_BLOCK = new RubyBlock();
-
 	public static final Block COPPER_BLOCK = new BlockBase("copper_block", Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f));
+	public static final Block ALUMINIUM_BLOCK = new BlockBase("aluminium_block", Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f));
 
 	public static final Block RUBY_ORE = new RubyOre();
 
-	public static final Block COPPER_ORE_OVERWORLD = new BlockBase("copper_ore", Material.ROCK, 3f, 3f, ToolType.PICKAXE, 2, SoundType.STONE, 0);
-	public static final Block COPPER_ORE_END = new BlockBase("copper_ore_end", Material.ROCK, 3f, 3f, ToolType.PICKAXE, 2, SoundType.STONE, 0);
-	public static final Block COPPER_ORE_NETHER = new BlockBase("copper_ore_nether", Material.ROCK, 3f, 3f, ToolType.PICKAXE, 2, SoundType.STONE, 0);
+	public static final Block COPPER_ORE_OVERWORLD = new CustomOreBlock("copper_ore", 3f, 2, 0);
+	public static final Block COPPER_ORE_END = new CustomOreBlock("copper_ore_end", 3f, 2, 0);
+	public static final Block COPPER_ORE_NETHER = new CustomOreBlock("copper_ore_nether", 3f, 2, 0);
 
-	public static final Block ALUMINIUM_ORE_OVERWORLD = new BlockBase("aluminium_ore", Material.ROCK, 3f, 3f, ToolType.PICKAXE, 2, SoundType.STONE, 0);
-	public static final Block ALUMINIUM_ORE_END = new BlockBase("aluminium_ore_end", Material.ROCK, 3f, 3f, ToolType.PICKAXE, 2, SoundType.STONE, 0);
-	public static final Block ALUMINIUM_ORE_NETHER = new BlockBase("aluminium_ore_nether", Material.ROCK, 3f, 3f, ToolType.PICKAXE, 2, SoundType.STONE, 0);
+	public static final Block ALUMINIUM_ORE_OVERWORLD = new CustomOreBlock("aluminium_ore", 3f, 2, 0);
+	public static final Block ALUMINIUM_ORE_END = new CustomOreBlock("aluminium_ore_end", 3f, 2, 0);
+	public static final Block ALUMINIUM_ORE_NETHER = new CustomOreBlock("aluminium_ore_nether", 3f, 2, 0);
 
 // Furniture
-	public static final Block SANTA_HAT = new SantaHatBlock("santa_hat");
+	public static final Block SANTA_HAT = new SantaHatBlock();
+	public static final Block GRIDLESS = new GridlessBlock();
 
 // Food
 	public static final Block RICE_PLANT = new FoodPlantBlock("rice_plant", ModItems.RICE, ModItems.RICE, 3f, 2f);
