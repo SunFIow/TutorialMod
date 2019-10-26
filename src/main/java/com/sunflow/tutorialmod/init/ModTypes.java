@@ -8,6 +8,7 @@ import com.sunflow.tutorialmod.blocks.container.SinteringFurnaceContainer;
 import com.sunflow.tutorialmod.blocks.tile.ChargerTile;
 import com.sunflow.tutorialmod.blocks.tile.CopperChestTile;
 import com.sunflow.tutorialmod.blocks.tile.EnergyStorageTile;
+import com.sunflow.tutorialmod.blocks.tile.FancyBlockTile;
 import com.sunflow.tutorialmod.blocks.tile.FirstBlockTile;
 import com.sunflow.tutorialmod.blocks.tile.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.entity.GrenadeEntity;
@@ -58,4 +59,8 @@ public class ModTypes {
 
 	@ObjectHolder("grenade")
 	public static final EntityType<GrenadeEntity> GRENADE_ENTITY = null;
+
+	@ObjectHolder("fancyblock")
+	public static final TileEntityType<FancyBlockTile> FANCYBLOCK_TILE = null;
+
 }

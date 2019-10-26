@@ -15,6 +15,7 @@ import com.sunflow.tutorialmod.blocks.tile.ChargerTile;
 import com.sunflow.tutorialmod.blocks.tile.CopperChestTile;
 import com.sunflow.tutorialmod.blocks.tile.ElectricSinteringFurnaceTile;
 import com.sunflow.tutorialmod.blocks.tile.EnergyStorageTile;
+import com.sunflow.tutorialmod.blocks.tile.FancyBlockTile;
 import com.sunflow.tutorialmod.blocks.tile.FirstBlockTile;
 import com.sunflow.tutorialmod.blocks.tile.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.entity.CentaurEntity;
@@ -80,6 +81,7 @@ public class CommonRegistrations {
 		registerTileEntity(registry, ElectricSinteringFurnaceTile::new, ModBlocks.ELECTRIC_SINTERING_FURNACE);
 		registerTileEntity(registry, CopperChestTile::new, ModBlocks.COPPER_CHEST);
 		registerTileEntity(registry, ChargerTile::new, ModBlocks.CHARGER);
+		registerTileEntity(registry, FancyBlockTile::new, ModBlocks.FANCY_BLOCK);
 	}
 
 	@SubscribeEvent

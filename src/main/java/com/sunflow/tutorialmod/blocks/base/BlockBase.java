@@ -27,7 +27,7 @@ public class BlockBase extends Block {
 	}
 
 	public BlockBase(String name, Material material) {
-		this(name, Block.Properties.create(material).hardnessAndResistance(2.5f, 5.0f));
+		this(name, Block.Properties.create(material).hardnessAndResistance(2.5f));
 	}
 
 	public BlockBase(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {

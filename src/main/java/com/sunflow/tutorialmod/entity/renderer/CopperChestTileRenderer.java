@@ -21,25 +21,25 @@ public class CopperChestTileRenderer<T extends TileEntity & IChestLid> extends T
 	private static final ResourceLocation TEXTURE_COPPER_CHEST = new ResourceLocation(TutorialMod.MODID, "textures/entity/chest/copper_chest.png");
 	private final CopperChestModel simpleChest = new CopperChestModel();
 
-//	public CopperChestTileRenderer() {}
-
 	@Override
 	public void render(T tileEntityIn, double x, double y, double z, float partialTicks, int destroyStage) {
 		GlStateManager.enableDepthTest();
 		GlStateManager.depthFunc(515);
 		GlStateManager.depthMask(true);
 		BlockState blockstate = tileEntityIn.hasWorld() ? tileEntityIn.getBlockState() : ModBlocks.COPPER_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
-		CopperChestModel chestmodel = getChestModel(tileEntityIn, destroyStage);
+//		CopperChestModel chestmodel = getChestModel(destroyStage);
+		CopperChestModel chestmodel = simpleChest;
 		if (destroyStage >= 0) {
+			bindTexture(DESTROY_STAGES[destroyStage]);
 			GlStateManager.matrixMode(5890);
 			GlStateManager.pushMatrix();
 			GlStateManager.scalef(4.0F, 4.0F, 1.0F);
 			GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
 			GlStateManager.matrixMode(5888);
 		} else {
+			bindTexture(TEXTURE_COPPER_CHEST);
 			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
-
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.translatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
@@ -63,17 +63,17 @@ public class CopperChestTileRenderer<T extends TileEntity & IChestLid> extends T
 		}
 	}
 
-	private CopperChestModel getChestModel(T tileEntityIn, int destroyStage) {
-		ResourceLocation resourcelocation;
-		if (destroyStage >= 0) {
-			resourcelocation = DESTROY_STAGES[destroyStage];
-		} else {
-			resourcelocation = TEXTURE_COPPER_CHEST;
-		}
-
-		bindTexture(resourcelocation);
-		return simpleChest;
-	}
+//	private CopperChestModel getChestModel(int destroyStage) {
+//		ResourceLocation resourcelocation;
+//		if (destroyStage >= 0) {
+//			resourcelocation = DESTROY_STAGES[destroyStage];
+//		} else {
+//			resourcelocation = TEXTURE_COPPER_CHEST;
+//		}
+//
+//		bindTexture(resourcelocation);
+//		return simpleChest;
+//	}
 
 	private void applyLidRotation(T tileEntityIn, float partialTicks, CopperChestModel model) {
 		float f = ((IChestLid) tileEntityIn).getLidAngle(partialTicks);
