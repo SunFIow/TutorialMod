@@ -11,7 +11,7 @@ import com.sunflow.tutorialmod.blocks.base.InventoryTileEntityBase;
 import com.sunflow.tutorialmod.blocks.container.SinteringFurnaceContainer;
 import com.sunflow.tutorialmod.init.ModBlocks;
 import com.sunflow.tutorialmod.init.ModItems;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModTileEntitiyTypes;
 import com.sunflow.tutorialmod.util.Config;
 
 import net.minecraft.block.BlockState;
@@ -71,7 +71,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	private int burnTimeTotal;
 
 	public SinteringFurnaceTile() {
-		super(ModTypes.SINTERING_FURNACE_TILE);
+		super(ModTileEntitiyTypes.SINTERING_FURNACE_TILE);
 	}
 
 	@Override

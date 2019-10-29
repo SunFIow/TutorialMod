@@ -37,6 +37,7 @@ public class Config {
 	public static ForgeConfigSpec.IntValue ELECTRIC_SINTERING_FURNACE_MAXPOWER;
 	public static ForgeConfigSpec.IntValue ELECTRIC_SINTERING_FURNACE_RECEIVE;
 	public static ForgeConfigSpec.IntValue ELECTRIC_SINTERING_FURNACE_TICKS;
+	public static ForgeConfigSpec.IntValue ELECTRIC_SINTERING_FURNACE_CONSUMPTION;
 
 	public static ForgeConfigSpec.IntValue CHARGER_MAXPOWER;
 	public static ForgeConfigSpec.IntValue CHARGER_RECEIVE;
@@ -89,6 +90,8 @@ public class Config {
 				.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
 		ELECTRIC_SINTERING_FURNACE_TICKS = COMMON_BUILDER.comment("Ticks per item")
 				.defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
+		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = COMMON_BUILDER.comment("Energy consumption per item")
+				.defineInRange("consumption", 200, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 	}
 

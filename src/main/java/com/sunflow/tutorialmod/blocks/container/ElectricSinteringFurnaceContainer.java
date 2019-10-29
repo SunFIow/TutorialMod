@@ -1,10 +1,12 @@
 package com.sunflow.tutorialmod.blocks.container;
 
+import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.base.ContainerBase;
 import com.sunflow.tutorialmod.blocks.tile.ElectricSinteringFurnaceTile;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModContainerTypes;
 
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -13,8 +15,12 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class ElectricSinteringFurnaceContainer extends ContainerBase {
 
+	public ElectricSinteringFurnaceContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
+		this(windowId, TutorialMod.proxy.getClientWorld(), data.readBlockPos(), inv);
+	}
+
 	public ElectricSinteringFurnaceContainer(int id, World world, BlockPos pos, PlayerInventory inv) {
-		super(ModTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, id, 3, world, pos);
+		super(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, id, 3, world, pos);
 
 		tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 //			addSlot(new SlotItemHandler(h, 0, 81, 35));

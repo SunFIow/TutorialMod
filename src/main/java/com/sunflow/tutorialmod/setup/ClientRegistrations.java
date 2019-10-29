@@ -3,15 +3,10 @@ package com.sunflow.tutorialmod.setup;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.base.BakedBlockBase;
 import com.sunflow.tutorialmod.blocks.model.CustomBakedModel;
-import com.sunflow.tutorialmod.blocks.screen.ChargerScreen;
-import com.sunflow.tutorialmod.blocks.screen.CopperChestScreen;
-import com.sunflow.tutorialmod.blocks.screen.ElectricSinteringFurnaceScreen;
-import com.sunflow.tutorialmod.blocks.screen.EnergyStorageScreen;
-import com.sunflow.tutorialmod.blocks.screen.FirstBlockScreen;
-import com.sunflow.tutorialmod.blocks.screen.SinteringFurnaceScreen;
 import com.sunflow.tutorialmod.init.ModBlocks;
 import com.sunflow.tutorialmod.init.ModItems;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModScreens;
+import com.sunflow.tutorialmod.init.ModScreens.ScreenEntry;
 import com.sunflow.tutorialmod.items.base.MobEggBase;
 import com.sunflow.tutorialmod.util.Log;
 
@@ -23,7 +18,6 @@ import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -67,18 +61,26 @@ public class ClientRegistrations {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <M extends Container, U extends Screen & IHasContainer<M>> void registerScreens() {
 		Log.debug("I am going to register the screens now senpai.");
 
-		registerScreen(ModTypes.FIRSTBLOCK_CONTAINER, FirstBlockScreen::new);
-		registerScreen(ModTypes.ENERGY_STORAGE_CONTAINER, EnergyStorageScreen::new);
-		registerScreen(ModTypes.SINTERING_FURNACE_CONTAINER, SinteringFurnaceScreen::new);
-		registerScreen(ModTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, ElectricSinteringFurnaceScreen::new);
-		registerScreen(ModTypes.COPPER_CHEST_CONTAINER, CopperChestScreen::new);
-		registerScreen(ModTypes.CHARGER_CONTAINER, ChargerScreen::new);
-	}
+//		registerScreen(ModContainerTypes.FIRSTBLOCK_CONTAINER, FirstBlockScreen::new);
+//		registerScreen(ModContainerTypes.ENERGY_STORAGE_CONTAINER, EnergyStorageScreen::new);
+//		registerScreen(ModContainerTypes.SINTERING_FURNACE_CONTAINER, SinteringFurnaceScreen::new);
+//		registerScreen(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, ElectricSinteringFurnaceScreen::new);
+//		registerScreen(ModContainerTypes.COPPER_CHEST_CONTAINER, CopperChestScreen::new);
+//		registerScreen(ModContainerTypes.CHARGER_CONTAINER, ChargerScreen::new);
 
-	public static <M extends Container, U extends Screen & IHasContainer<M>> void registerScreen(ContainerType<? extends M> type, ScreenManager.IScreenFactory<M, U> screenFactory) {
-		ScreenManager.registerFactory(type, screenFactory);
+//		IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
+//		registry.registerAll(ModScreens.SCREENS.toArray(new TileEntityType[0]));
+
+		for (ScreenEntry<M, U> screen : ModScreens.SCREENS) {
+			ScreenManager.registerFactory(screen.type, screen.factory);
+		}
+
+//		for (ScreenEntry<M, U> screen : ModScreens.SCREENS) {
+//			ScreenManager.registerFactory(screen.type, screen.factory);
+//		}
 	}
 }

@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.blocks.tile;
 import com.sunflow.tutorialmod.blocks.EnergyStorageBlock;
 import com.sunflow.tutorialmod.blocks.base.EnergyTileEntityBase;
 import com.sunflow.tutorialmod.blocks.container.EnergyStorageContainer;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModTileEntitiyTypes;
 import com.sunflow.tutorialmod.util.Config;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 
@@ -21,7 +21,7 @@ public class EnergyStorageTile extends EnergyTileEntityBase {
 	}
 
 	public EnergyStorageTile() {
-		super(ModTypes.ENERGY_STORAGE_TILE);
+		super(ModTileEntitiyTypes.ENERGY_STORAGE_TILE);
 	}
 
 	@Override

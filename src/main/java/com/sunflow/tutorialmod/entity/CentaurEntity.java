@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.entity;
 
-import com.sunflow.tutorialmod.init.ModEntities;
+import com.sunflow.tutorialmod.init.ModEntityTypes;
 import com.sunflow.tutorialmod.init.ModItems;
 import com.sunflow.tutorialmod.init.ModSounds;
 
@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 
 public class CentaurEntity extends CowEntity {
 
-	public CentaurEntity(EntityType<? extends CowEntity> type, World world) {
+	public CentaurEntity(EntityType<? extends CentaurEntity> type, World world) {
 		super(type, world);
 	}
 
@@ -69,7 +69,7 @@ public class CentaurEntity extends CowEntity {
 
 	@Override
 	public CentaurEntity createChild(AgeableEntity ageable) {
-		return ModEntities.CENTAUR.create(this.world);
+		return ModEntityTypes.CENTAUR.create(this.world);
 	}
 
 //	@Override

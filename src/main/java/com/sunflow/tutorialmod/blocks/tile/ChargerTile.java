@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.blocks.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.blocks.container.ChargerContainer;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModTileEntitiyTypes;
 import com.sunflow.tutorialmod.util.Config;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
@@ -50,7 +50,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	public ChargerTile() {
-		super(ModTypes.CHARGER_TILE);
+		super(ModTileEntitiyTypes.CHARGER_TILE);
 	}
 
 	@Override

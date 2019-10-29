@@ -4,8 +4,10 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.base.EnergyTileBlockBase;
 import com.sunflow.tutorialmod.blocks.tile.FirstBlockTile;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
 
 public class FirstBlock extends EnergyTileBlockBase {
 	public FirstBlock() {
@@ -15,7 +17,7 @@ public class FirstBlock extends EnergyTileBlockBase {
 	}
 
 	@Override
-	public TileEntity getTileEntity() {
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new FirstBlockTile();
 	}
 }

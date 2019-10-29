@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.blocks.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.blocks.container.ElectricSinteringFurnaceContainer;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModTileEntitiyTypes;
 import com.sunflow.tutorialmod.util.Config;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 
@@ -31,7 +31,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 
-	private static final int energyUse = 200 / Config.ELECTRIC_SINTERING_FURNACE_TICKS.get();
+	private static final int ENERGY_USE = Config.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / Config.ELECTRIC_SINTERING_FURNACE_TICKS.get();
 
 	@Override
 	protected ItemStackHandler getHandler() {
@@ -61,7 +61,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	private float cookTime;
 
 	public ElectricSinteringFurnaceTile() {
-		super(ModTypes.ELECTRIC_SINTERING_FURNACE_TILE);
+		super(ModTileEntitiyTypes.ELECTRIC_SINTERING_FURNACE_TILE);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 				if (canBurn() && canSmelt()) {
 					if (canBurn()) {
 						cookTime++;
-						e.extractEnergy(energyUse, false);
+						e.extractEnergy(ENERGY_USE, false);
 
 						if (cookTime >= Config.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
 							cookTime = 0;
@@ -102,7 +102,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 		if (!energy.isPresent())
 			return false;
 
-		return energy.orElse(null).getEnergyStored() >= energyUse;
+		return energy.orElse(null).getEnergyStored() >= ENERGY_USE;
 	}
 
 	public void smeltItem() {

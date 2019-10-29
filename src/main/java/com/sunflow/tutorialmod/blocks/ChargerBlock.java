@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -18,8 +19,9 @@ public class ChargerBlock extends EnergyTileBlockBase {
 	}
 
 	@Override
-	public TileEntity getTileEntity() {
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new ChargerTile();
+
 	}
 
 	@Override

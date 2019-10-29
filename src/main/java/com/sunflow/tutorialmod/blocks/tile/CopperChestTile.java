@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.blocks.tile;
 
 import com.sunflow.tutorialmod.blocks.CopperChestBlock;
 import com.sunflow.tutorialmod.blocks.container.CopperChestContainer;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModTileEntitiyTypes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -50,7 +50,7 @@ public class CopperChestTile extends LockableLootTileEntity implements IChestLid
 	private LazyOptional<IItemHandlerModifiable> chestHandler;
 
 	public CopperChestTile() {
-		super(ModTypes.COPPER_CHEST_TILE);
+		super(ModTileEntitiyTypes.COPPER_CHEST_TILE);
 	}
 
 	@Override

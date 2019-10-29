@@ -1,20 +1,26 @@
 package com.sunflow.tutorialmod.blocks.container;
 
 import com.sunflow.tutorialmod.blocks.tile.CopperChestTile;
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModContainerTypes;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 
 public class CopperChestContainer extends Container {
 	private final IInventory chestInventory;
 
+	public CopperChestContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
+		this(windowId, inv, new Inventory(CopperChestTile.SIZE));
+	}
+
 	public CopperChestContainer(int id, PlayerInventory playerInv, IInventory chestInv) {
-		super(ModTypes.COPPER_CHEST_CONTAINER, id);
+		super(ModContainerTypes.COPPER_CHEST_CONTAINER, id);
 		assertInventorySize(chestInv, CopperChestTile.SIZE);
 		this.chestInventory = chestInv;
 		chestInv.openInventory(playerInv.player);

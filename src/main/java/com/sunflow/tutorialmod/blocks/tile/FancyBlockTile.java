@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.blocks.tile;
 
 import java.util.Objects;
 
-import com.sunflow.tutorialmod.init.ModTypes;
+import com.sunflow.tutorialmod.init.ModTileEntitiyTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -25,7 +25,7 @@ public class FancyBlockTile extends TileEntity {
 	private Vec3d offset;
 
 	public FancyBlockTile() {
-		super(ModTypes.FANCYBLOCK_TILE);
+		super(ModTileEntitiyTypes.FANCYBLOCK_TILE);
 	}
 
 	public void setMimic(BlockState mimic) {

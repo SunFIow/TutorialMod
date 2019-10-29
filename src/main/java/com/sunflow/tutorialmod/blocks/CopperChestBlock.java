@@ -68,6 +68,11 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 	}
 
 	@Override
+	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+		return new CopperChestTile();
+	};
+
+	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if (!world.isRemote) {
 			CopperChestTile tile = getTile(state, world, pos, false);
@@ -153,11 +158,6 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 			return chesttileentity;
 		}
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return new CopperChestTile();
-	};
 
 	private static boolean isBlocked(IWorld world, BlockPos pos) {
 		return isBelowSolidBlock(world, pos) || isCatSittingOn(world, pos);

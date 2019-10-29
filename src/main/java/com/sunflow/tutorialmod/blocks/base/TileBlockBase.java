@@ -2,7 +2,6 @@ package com.sunflow.tutorialmod.blocks.base;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
-import com.sunflow.tutorialmod.util.interfaces.ITileEntity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -17,11 +16,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public abstract class TileBlockBase extends OrientableBlockBase implements ITileEntity {
+public abstract class TileBlockBase extends OrientableBlockBase {
 
 	public TileBlockBase(String name, ItemGroup group, Properties properties) {
 		super(name, group, properties);
@@ -72,8 +70,8 @@ public abstract class TileBlockBase extends OrientableBlockBase implements ITile
 		return true;
 	}
 
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return this.getTileEntity();
-	}
+//	@Override
+//	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+//		return this.getTileEntity();
+//	}
 }
