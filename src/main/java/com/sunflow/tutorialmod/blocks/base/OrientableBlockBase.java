@@ -1,5 +1,7 @@
 package com.sunflow.tutorialmod.blocks.base;
 
+import com.sunflow.tutorialmod.TutorialMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -17,24 +19,21 @@ import net.minecraftforge.common.ToolType;
 public class OrientableBlockBase extends BlockBase {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-	public OrientableBlockBase(String name, Material material) {
-		super(name, material);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+	public OrientableBlockBase(String name, ItemGroup group, Properties properties) {
+		super(name, group, properties);
+		setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
 	}
 
 	public OrientableBlockBase(String name, Properties properties) {
-		super(name, properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this(name, TutorialMod.setup.itemGroup, properties);
+	}
+
+	public OrientableBlockBase(String name, Material material) {
+		this(name, Block.Properties.create(material).hardnessAndResistance(2.5f));
 	}
 
 	public OrientableBlockBase(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {
-		super(name, material, hardness, resistance, tooltype, harvestlevel, soundtype, lightlevel);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
-	}
-
-	public OrientableBlockBase(String name, ItemGroup group, Properties properties) {
-		super(name, group, properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this(name, Block.Properties.create(material).hardnessAndResistance(hardness, resistance).harvestTool(tooltype).harvestLevel(harvestlevel).sound(soundtype).lightValue(lightlevel));
 	}
 
 	@Override
@@ -42,17 +41,10 @@ public class OrientableBlockBase extends BlockBase {
 		builder.add(FACING);
 	}
 
-//	@Override
-//	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-//		if (placer != null) {
-//			worldIn.setBlockState(pos, state.with(FACING, getFacingFromEntity(pos, placer)), 2);
-//		}
-//	}
-
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 //		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
-		return this.getDefaultState().with(FACING, getFacingFromEntity(context.getPos(), context.getPlayer()));
+		return getDefaultState().with(FACING, getFacingFromEntity(context.getPos(), context.getPlayer()));
 	}
 
 //

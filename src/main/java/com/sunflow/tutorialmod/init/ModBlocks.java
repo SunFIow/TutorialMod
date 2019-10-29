@@ -7,14 +7,14 @@ import com.sunflow.tutorialmod.blocks.ChargerBlock;
 import com.sunflow.tutorialmod.blocks.CopperChestBlock;
 import com.sunflow.tutorialmod.blocks.ElectricSinteringFurnaceBlock;
 import com.sunflow.tutorialmod.blocks.EnergyStorageBlock;
-import com.sunflow.tutorialmod.blocks.FancyBlock;
 import com.sunflow.tutorialmod.blocks.FirstBlock;
 import com.sunflow.tutorialmod.blocks.SinteringFurnaceBlock;
 import com.sunflow.tutorialmod.blocks.TeleporterBlock;
+import com.sunflow.tutorialmod.blocks.base.BakedBlockBase;
 import com.sunflow.tutorialmod.blocks.base.BlockBase;
 import com.sunflow.tutorialmod.blocks.base.TileBlockBase;
 import com.sunflow.tutorialmod.blocks.food.FoodPlantBlock;
-import com.sunflow.tutorialmod.blocks.furniture.GridlessBlock;
+import com.sunflow.tutorialmod.blocks.furniture.FancyBlock;
 import com.sunflow.tutorialmod.blocks.furniture.SantaHatBlock;
 import com.sunflow.tutorialmod.blocks.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.blocks.ore.RubyBlock;
@@ -31,7 +31,7 @@ import net.minecraft.block.material.MaterialColor;
 
 public class ModBlocks {
 	public static final List<Block> BLOCKS = new ArrayList<>();
-	public static final List<Block> BAKEDMODELBLOCKS = new ArrayList<>();
+	public static final List<BakedBlockBase> BAKEDMODELBLOCKS = new ArrayList<>();
 
 	public static final Block RUBY_BLOCK = new RubyBlock();
 	public static final Block COPPER_BLOCK = new BlockBase("copper_block", Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f));
@@ -49,7 +49,6 @@ public class ModBlocks {
 
 // Furniture
 	public static final Block SANTA_HAT = new SantaHatBlock();
-	public static final Block GRIDLESS = new GridlessBlock();
 	public static final Block FANCY_BLOCK = new FancyBlock();
 
 // Food

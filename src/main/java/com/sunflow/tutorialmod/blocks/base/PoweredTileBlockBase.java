@@ -20,7 +20,7 @@ public abstract class PoweredTileBlockBase extends TileBlockBase {
 
 	public PoweredTileBlockBase(String name, ItemGroup group, Properties properties) {
 		super(name, group, properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(POWERED, false));
+		setDefaultState(getDefaultState().with(POWERED, false));
 	}
 
 	public PoweredTileBlockBase(String name, Properties properties) {

@@ -37,10 +37,14 @@ public class CustomBakedModel implements IDynamicBakedModel {
 
 	private final String name;
 	private List<BakedQuad> quads;
+	private Vec3d offset;
+	private Vec3d length;
 
-	public CustomBakedModel(VertexFormat format, String name) {
+	public CustomBakedModel(VertexFormat format, String name, Vec3d offset, Vec3d length) {
 		this.format = format;
 		this.name = name;
+		this.offset = offset;
+		this.length = length;
 		this.quads = getOrCreateQuads();
 	}
 
@@ -67,7 +71,13 @@ public class CustomBakedModel implements IDynamicBakedModel {
 			return Collections.emptyList();
 		}
 
-//		return getOrCreateQuads();
+		Vec3d offset = extraData.getData(FancyBlockTile.OFFSET);
+		if (offset != null) {
+			this.offset = offset;
+			quads = null;
+			return getOrCreateQuads();
+		}
+
 		return quads;
 	}
 
@@ -75,37 +85,30 @@ public class CustomBakedModel implements IDynamicBakedModel {
 		if (quads == null) {
 			TextureAtlasSprite texture = getTexture();
 			quads = new ArrayList<BakedQuad>();
-			double l = 2D / 16D;
-			double r = 1D - 2D / 16D;
 
-			double x1 = l;
-			double y1 = l;
-			double z1 = l;
+			double x1 = offset.x + 0.25D;
+			double y1 = offset.y;
+			double z1 = offset.z + 0.25D;
 
-			double x2 = r;
-			double y2 = r;
-			double z2 = r;
+			double x2 = x1 + length.x;
+			double y2 = y1 + length.y;
+			double z2 = z1 + length.z;
 
+			Vec3d v5 = new Vec3d(x1, y1, z1);
+			Vec3d v8 = new Vec3d(x1, y1, z2);
 			Vec3d v1 = new Vec3d(x1, y2, z1);
 			Vec3d v2 = new Vec3d(x1, y2, z2);
-			Vec3d v3 = new Vec3d(x2, y2, z2);
-			Vec3d v4 = new Vec3d(x2, y2, z1);
-			Vec3d v5 = new Vec3d(x1, y1, z1);
 			Vec3d v6 = new Vec3d(x2, y1, z1);
 			Vec3d v7 = new Vec3d(x2, y1, z2);
-			Vec3d v8 = new Vec3d(x1, y1, z2);
-//									  1			  2			  3			  4
-			quads.add(createQuad(v1, v2, v3, v4, texture)); // 1
-//			  						  5			  6			  7			  8
-			quads.add(createQuad(v5, v6, v7, v8, texture)); // 2
-//			                          3			  7			  6			  4
-			quads.add(createQuad(v3, v7, v6, v4, texture)); // 3
-//               					  1			  5			  8			  2
-			quads.add(createQuad(v1, v5, v8, v2, texture)); // 4
-//               					  4			  6			  5			  1
-			quads.add(createQuad(v4, v6, v5, v1, texture)); // 5
-//               					  2			  8			  7			  3
-			quads.add(createQuad(v2, v8, v7, v3, texture)); // 6
+			Vec3d v4 = new Vec3d(x2, y2, z1);
+			Vec3d v3 = new Vec3d(x2, y2, z2);
+
+			quads.add(createQuad(v1, v2, v3, v4, texture));
+			quads.add(createQuad(v5, v6, v7, v8, texture));
+			quads.add(createQuad(v3, v7, v6, v4, texture));
+			quads.add(createQuad(v1, v5, v8, v2, texture));
+			quads.add(createQuad(v4, v6, v5, v1, texture));
+			quads.add(createQuad(v2, v8, v7, v3, texture));
 		}
 		return quads;
 	}
@@ -149,32 +152,6 @@ public class CustomBakedModel implements IDynamicBakedModel {
 			}
 		}
 	}
-
-//	private List<BakedQuad> getOrCreateQuads() {
-//		if (quads == null) {
-//			TextureAtlasSprite texture = getTexture();
-//			quads = new ArrayList<BakedQuad>();
-//			double l = 2f / 16f;
-//			double r = 1 - l;
-////									  1			  2			  3			  4
-//			quads.add(createQuad(v(l, r, l), v(l, r, r), v(r, r, r), v(r, r, l), texture)); // 1
-////			  						  5			  6			  7			  8
-//			quads.add(createQuad(v(l, l, l), v(r, l, l), v(r, l, r), v(l, l, r), texture)); // 2
-////			                          3			  7			  6			  4
-//			quads.add(createQuad(v(r, r, r), v(r, l, r), v(r, l, l), v(r, r, l), texture)); // 3
-////               					  1			  5			  8			  2
-//			quads.add(createQuad(v(l, r, l), v(l, l, l), v(l, l, r), v(l, r, r), texture)); // 4
-////               					  4			  6			  5			  1
-//			quads.add(createQuad(v(r, r, l), v(r, l, l), v(l, l, l), v(l, r, l), texture)); // 5
-////               					  2			  8			  7			  3
-//			quads.add(createQuad(v(l, r, r), v(l, l, r), v(r, l, r), v(r, r, r), texture)); // 6
-//		}
-//		return quads;
-//	}
-//
-//	private static Vec3d v(double x, double y, double z) {
-//		return new Vec3d(x, y, z);
-//	}
 
 	private int w() {
 		return getTexture().getWidth();

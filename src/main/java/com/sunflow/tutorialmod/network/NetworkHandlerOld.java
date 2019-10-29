@@ -41,6 +41,7 @@ public class NetworkHandlerOld {
 	public static void handle(MyMessage msg, Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			// Work that needs to be threadsafe (most work)
+			@SuppressWarnings("unused")
 			PlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
 			// do stuff
 		});

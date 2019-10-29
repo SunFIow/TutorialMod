@@ -59,8 +59,8 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 
 	public CopperChestBlock() {
 		super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
-		this.setRegistryName("copper_chest");
+		setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+		setRegistryName("copper_chest");
 
 		ModBlocks.BLOCKS.add(this);
 		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName("copper_chest"));

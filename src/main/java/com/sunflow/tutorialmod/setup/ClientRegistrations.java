@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.blocks.base.BakedBlockBase;
 import com.sunflow.tutorialmod.blocks.model.CustomBakedModel;
 import com.sunflow.tutorialmod.blocks.screen.ChargerScreen;
 import com.sunflow.tutorialmod.blocks.screen.CopperChestScreen;
@@ -58,11 +59,11 @@ public class ClientRegistrations {
 
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent event) {
-		for (Block b : ModBlocks.BAKEDMODELBLOCKS) {
+		for (BakedBlockBase b : ModBlocks.BAKEDMODELBLOCKS) {
 			event.getModelRegistry().put(new ModelResourceLocation(b.getRegistryName(), ""),
-					new CustomBakedModel(DefaultVertexFormats.BLOCK, b.getRegistryName().getPath()));
+					new CustomBakedModel(DefaultVertexFormats.BLOCK, b.getRegistryName().getPath(), b.offset, b.length));
 			event.getModelRegistry().put(new ModelResourceLocation(b.getRegistryName(), "inventory"),
-					new CustomBakedModel(DefaultVertexFormats.ITEM, b.getRegistryName().getPath()));
+					new CustomBakedModel(DefaultVertexFormats.ITEM, b.getRegistryName().getPath(), b.offset, b.length));
 		}
 	}
 

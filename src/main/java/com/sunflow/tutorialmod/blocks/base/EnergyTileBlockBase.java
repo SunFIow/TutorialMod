@@ -19,7 +19,7 @@ public abstract class EnergyTileBlockBase extends PoweredTileBlockBase {
 
 	public EnergyTileBlockBase(String name, ItemGroup group, Properties properties) {
 		super(name, group, properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FILLLEVEL, Integer.valueOf(0)));
+		setDefaultState(getDefaultState().with(FILLLEVEL, Integer.valueOf(0)));
 	}
 
 	public EnergyTileBlockBase(String name, Properties properties) {
