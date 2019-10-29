@@ -7,20 +7,19 @@ import com.sunflow.tutorialmod.init.ModContainerTypes;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class SinteringFurnaceContainer extends ContainerBase {
 
-	public SinteringFurnaceContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, TutorialMod.proxy.getClientWorld(), data.readBlockPos(), inv);
+	public SinteringFurnaceContainer(int id, PlayerInventory inv, PacketBuffer data) {
+		this(id, inv, TutorialMod.proxy.getClientWorld().getTileEntity(data.readBlockPos()));
 	}
 
-	public SinteringFurnaceContainer(int id, World world, BlockPos pos, PlayerInventory inv) {
-		super(ModContainerTypes.SINTERING_FURNACE_CONTAINER, id, 4, world, pos);
+	public SinteringFurnaceContainer(int id, PlayerInventory inv, TileEntity tile) {
+		super(ModContainerTypes.SINTERING_FURNACE_CONTAINER, id, 4, tile);
 
 		tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 //			addSlot(new SlotItemHandler(h, 0, 81, 35));
@@ -39,7 +38,7 @@ public class SinteringFurnaceContainer extends ContainerBase {
 	}
 
 	public int getCookTime() {
-		return ((SinteringFurnaceTile) tile).getField(SinteringFurnaceTile.COOKTIME_ID);
+		return field.getField(SinteringFurnaceTile.COOKTIME_ID);
 	}
 
 	public int getBurnTime() {

@@ -186,7 +186,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	@Override
 	public Container createMenu(int i, PlayerInventory inv, PlayerEntity player) {
-		return new ElectricSinteringFurnaceContainer(i, world, pos, inv);
+		return new ElectricSinteringFurnaceContainer(i, inv, this);
 	}
 
 	@Override

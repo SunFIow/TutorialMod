@@ -43,7 +43,6 @@ public class OrientableBlockBase extends BlockBase {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-//		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
 		return getDefaultState().with(FACING, getFacingFromEntity(context.getPos(), context.getPlayer()));
 	}
 

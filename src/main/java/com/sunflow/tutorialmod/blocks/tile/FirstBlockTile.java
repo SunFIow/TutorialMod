@@ -194,8 +194,9 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public Container createMenu(int i, PlayerInventory inv, PlayerEntity player) {
-		return new FirstBlockContainer(i, world, pos, inv);
+	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
+//		return new FirstBlockContainer(id, world, pos, inv);
+		return new FirstBlockContainer(id, inv, this);
 	}
 
 	@Override

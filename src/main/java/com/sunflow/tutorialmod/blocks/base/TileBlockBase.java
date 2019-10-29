@@ -69,9 +69,4 @@ public abstract class TileBlockBase extends OrientableBlockBase {
 	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
-
-//	@Override
-//	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-//		return this.getTileEntity();
-//	}
 }

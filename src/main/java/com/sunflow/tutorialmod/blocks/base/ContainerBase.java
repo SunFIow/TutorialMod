@@ -13,25 +13,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public abstract class ContainerBase extends Container {
 
-	protected TileEntity tile;
-	protected IHasField field;
-	protected int containerSlotCount;
+	protected final TileEntity tile;
+	protected final IHasField field;
+	protected final int containerSlotCount;
 	public IIntArray data;
 	private int dragType;
 
-	public ContainerBase(ContainerType<?> type, int id, int containerSlotCount, World world, BlockPos pos) {
+	public ContainerBase(ContainerType<?> type, int id, int containerSlotCount, TileEntity tile) {
 		super(type, id);
 		this.containerSlotCount = containerSlotCount;
-		tile = world.getTileEntity(pos);
+		this.tile = tile;
 		if (tile instanceof IHasField) {
 			field = (IHasField) tile;
+		} else {
+			field = null;
 		}
 	}
 

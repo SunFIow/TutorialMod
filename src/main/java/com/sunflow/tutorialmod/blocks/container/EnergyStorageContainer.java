@@ -7,18 +7,17 @@ import com.sunflow.tutorialmod.init.ModContainerTypes;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class EnergyStorageContainer extends ContainerBase {
 
-	public EnergyStorageContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, TutorialMod.proxy.getClientWorld(), data.readBlockPos(), inv);
+	public EnergyStorageContainer(int id, PlayerInventory inv, PacketBuffer data) {
+		this(id, inv, TutorialMod.proxy.getClientWorld().getTileEntity(data.readBlockPos()));
 	}
 
-	public EnergyStorageContainer(int id, World world, BlockPos pos, PlayerInventory inv) {
-		super(ModContainerTypes.ENERGY_STORAGE_CONTAINER, id, 1, world, pos);
+	public EnergyStorageContainer(int id, PlayerInventory inv, TileEntity tile) {
+		super(ModContainerTypes.ENERGY_STORAGE_CONTAINER, id, 1, tile);
 
 		layoutPlayerInventorySlots(new InvWrapper(inv), 8, 84);
 
@@ -26,10 +25,10 @@ public class EnergyStorageContainer extends ContainerBase {
 	}
 
 	public int getEnergy() {
-		return ((EnergyStorageTile) tile).getField(EnergyStorageTile.ENERGY_ID);
+		return field.getField(EnergyStorageTile.ENERGY_ID);
 	}
 
 	public int getEnergyMax() {
-		return ((EnergyStorageTile) tile).getField(EnergyStorageTile.ENERGY_MAX_ID);
+		return field.getField(EnergyStorageTile.ENERGY_MAX_ID);
 	}
 }

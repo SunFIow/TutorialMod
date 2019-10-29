@@ -7,22 +7,21 @@ import com.sunflow.tutorialmod.init.ModContainerTypes;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class ElectricSinteringFurnaceContainer extends ContainerBase {
 
-	public ElectricSinteringFurnaceContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, TutorialMod.proxy.getClientWorld(), data.readBlockPos(), inv);
+	public ElectricSinteringFurnaceContainer(int id, PlayerInventory inv, PacketBuffer data) {
+		this(id, inv, TutorialMod.proxy.getClientWorld().getTileEntity(data.readBlockPos()));
 	}
 
-	public ElectricSinteringFurnaceContainer(int id, World world, BlockPos pos, PlayerInventory inv) {
-		super(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, id, 3, world, pos);
+	public ElectricSinteringFurnaceContainer(int id, PlayerInventory inv, TileEntity tile) {
+		super(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, id, 3, tile);
 
-		tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
+		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 //			addSlot(new SlotItemHandler(h, 0, 81, 35));
 			addSlot(new SlotItemHandler(h, ElectricSinteringFurnaceTile.INPUT1_ID, 56, 17));
 			addSlot(new SlotItemHandler(h, ElectricSinteringFurnaceTile.INPUT2_ID, 56, 53));

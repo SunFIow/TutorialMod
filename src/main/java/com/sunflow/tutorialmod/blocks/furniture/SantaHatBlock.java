@@ -15,7 +15,6 @@ import net.minecraft.world.IWorldReader;
 
 public class SantaHatBlock extends HorizontalBlockBase {
 
-//	private static final AxisAlignedBB SANTA_HAT_AABB = new AxisAlignedBB(2D / 16D, 0, 2D / 16D, 1D - 2D / 16D, 13D / 16D, 1D - 2D / 16D);
 	private static final VoxelShape SANTA_HAT_AABB = Block.makeCuboidShape(2D, 0, 2D, 14D, 13D, 14D);
 
 	public SantaHatBlock() {

@@ -35,15 +35,14 @@ public class ModItems {
 	public static final List<MobEggBase> EGGS = new ArrayList<>();
 
 // Items
-
 	public static final Item FIRSTITEM = new FirstItem();
 	public static final Item GRENADE = new GrenadeItem();
 	public static final Item TESTITEM = new TestItem();
 	public static final Item ENERGYWAND = new EnergyWand();
+	public static final Item FANCY_SWORD = new FancySwordItem();
 
 	public static final Item RUBY = new ItemBase("ruby");
 	public static final Item COPPER_INGOT = new ItemBase("copper_ingot");
-	public static final Item FANCY_SWORD = new FancySwordItem();
 
 // Wands
 	public static final Item WOOD_WAND = new ItemBase("wood_wand");
@@ -94,13 +93,9 @@ public class ModItems {
 
 	public static final Item[] SKIN = ItemNBTSkin.create();
 
-// Food
-//	net.minecraft.potion.Effect
-//	Potion p = Potions.HEALING
-
-	private static final EffectInstance effect1 = new EffectInstance(Effects.INSTANT_HEALTH, 1, 1);
-	private static final EffectInstance effect2 = new EffectInstance(Effects.REGENERATION, 20 * 4, 0);
-	public static final Item EVIL_APPLE = new FoodItem("evil_apple", 6, 4, false, false, true, effect1, effect2);
+	public static final Item EVIL_APPLE = new FoodItem("evil_apple", 6, 4, false, false, true,
+			new EffectInstance(Effects.INSTANT_HEALTH, 1, 1),
+			new EffectInstance(Effects.REGENERATION, 20 * 4, 0));
 
 	public static final Item RICE_BOWL = new FoodItem("rice_bowl", 8, 2, false, false, false);
 	public static final Item RICE = new SeedItem("rice", 3);

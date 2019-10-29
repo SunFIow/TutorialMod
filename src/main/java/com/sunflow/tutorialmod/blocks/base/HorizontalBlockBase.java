@@ -34,21 +34,6 @@ public class HorizontalBlockBase extends BlockBase {
 		this(name, Block.Properties.create(material).hardnessAndResistance(hardness, resistance).harvestTool(tooltype).harvestLevel(harvestlevel).sound(soundtype).lightValue(lightlevel));
 	}
 
-//	@Override
-//	public BlockState rotate(BlockState state, Rotation rot) {
-//		return state.with(FACING, rot.rotate(state.get(FACING)));
-//	}
-
-//	@Override
-//	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-//		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-//	}
-
-//	@Override
-//	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-//		worldIn.setBlockState(pos, state.with(FACING, placer.getHorizontalFacing().getOpposite()), 2);
-//	}
-
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder) {
 		builder.add(FACING);

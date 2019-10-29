@@ -14,7 +14,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
 public class BakedBlockBase extends BlockBase {
-	protected VoxelShape shape; // = Block.makeCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+	protected VoxelShape shape;
 
 	public Vec3d offset;
 	public Vec3d length;
@@ -31,7 +31,6 @@ public class BakedBlockBase extends BlockBase {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-//		return GRIDLESS_AABB.withOffset(xOffset, 0, zOffset);
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof FancyBlockTile) {
 			Vec3d offset = ((FancyBlockTile) tile).getOffset();

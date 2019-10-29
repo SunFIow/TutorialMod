@@ -7,22 +7,23 @@ import com.sunflow.tutorialmod.init.ModContainerTypes;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class FirstBlockContainer extends ContainerBase {
 
-	public FirstBlockContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, TutorialMod.proxy.getClientWorld(), data.readBlockPos(), inv);
+	// CLIENT
+	public FirstBlockContainer(int id, PlayerInventory inv, PacketBuffer data) {
+		this(id, inv, TutorialMod.proxy.getClientWorld().getTileEntity(data.readBlockPos()));
 	}
 
-	public FirstBlockContainer(int id, World world, BlockPos pos, PlayerInventory inv) {
-		super(ModContainerTypes.FIRSTBLOCK_CONTAINER, id, 1, world, pos);
+	// SERVER
+	public FirstBlockContainer(int windowId, PlayerInventory inv, TileEntity tile) {
+		super(ModContainerTypes.FIRSTBLOCK_CONTAINER, windowId, 1, tile);
 
-		tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
+		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, FirstBlockTile.FUEL_SLOT, 80, 35));
 		});
 

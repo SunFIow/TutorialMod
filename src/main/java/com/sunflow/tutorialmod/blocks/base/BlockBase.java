@@ -7,6 +7,7 @@ import com.sunflow.tutorialmod.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -28,6 +29,10 @@ public class BlockBase extends Block {
 
 	public BlockBase(String name, Material material) {
 		this(name, Block.Properties.create(material).hardnessAndResistance(2.5f));
+	}
+
+	public BlockBase(String name, Material material, MaterialColor color, float hardness, float resistance, SoundType soundtype) {
+		this(name, Block.Properties.create(material, color).hardnessAndResistance(hardness, resistance).sound(soundtype));
 	}
 
 	public BlockBase(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {
