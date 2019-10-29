@@ -6,6 +6,8 @@ import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -33,6 +35,7 @@ public class EnchantmentMultiJump extends EnchantmentBase {
 		return 3;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void enchantmentFunction(InputUpdateEvent event) {
 		if (event.getMovementInput().jump) {
