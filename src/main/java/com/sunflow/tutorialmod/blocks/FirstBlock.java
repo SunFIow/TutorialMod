@@ -11,7 +11,7 @@ import net.minecraft.world.IBlockReader;
 
 public class FirstBlock extends EnergyTileBlockBase {
 	public FirstBlock() {
-		super("firstblock", TutorialMod.setup.itemGroup2, Properties.create(Material.ROCK)
+		super("firstblock", TutorialMod.groups.itemGroup2, Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
 				.lightValue(14));
 	}

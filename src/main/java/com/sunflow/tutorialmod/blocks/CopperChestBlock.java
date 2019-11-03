@@ -63,7 +63,7 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 		setRegistryName("copper_chest");
 
 		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName("copper_chest"));
+		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.groups.itemGroup)).setRegistryName("copper_chest"));
 
 	}
 

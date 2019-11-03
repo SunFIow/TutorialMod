@@ -33,7 +33,7 @@ public class MobEggBase extends ItemBase {
 	}
 
 	public MobEggBase(String name, int eggColor) {
-		this(name, eggColor, TutorialMod.setup.itemGroup);
+		this(name, eggColor, TutorialMod.groups.itemGroup);
 	}
 
 	public void setEntityType(EntityType<?> entity) {

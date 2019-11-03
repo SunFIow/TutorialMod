@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 public class ToolHoe extends HoeItem {
 
 	public ToolHoe(String name, float attackSpeed, IItemTier tier) {
-		super(tier, attackSpeed, new Item.Properties().group(TutorialMod.setup.itemGroup));
+		super(tier, attackSpeed, new Item.Properties().group(TutorialMod.groups.itemGroup));
 		this.setRegistryName(name);
 
 		ModItems.ITEMS.add(this);

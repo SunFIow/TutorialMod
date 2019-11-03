@@ -27,7 +27,7 @@ public class HorizontalBlockBase extends BlockBase {
 	}
 
 	public HorizontalBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+		this(name, TutorialMod.groups.itemGroup, properties);
 	}
 
 	public HorizontalBlockBase(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {

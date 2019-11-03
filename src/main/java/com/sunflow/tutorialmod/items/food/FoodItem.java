@@ -28,7 +28,7 @@ public class FoodItem extends ItemBase {
 		for (EffectInstance effect : effects) {
 			food.effect(effect, 1.0f);
 		}
-		Properties prop = new Item.Properties().group(TutorialMod.setup.itemGroup).food(food.build());
+		Properties prop = new Item.Properties().group(TutorialMod.groups.itemGroup).food(food.build());
 		return prop;
 	}
 }

@@ -8,6 +8,6 @@ import net.minecraft.item.Item;
 public class FirstItem extends ItemBase {
 
 	public FirstItem() {
-		super("firstitem", new Item.Properties().group(TutorialMod.setup.itemGroup2));
+		super("firstitem", new Item.Properties().group(TutorialMod.groups.itemGroup2));
 	}
 }

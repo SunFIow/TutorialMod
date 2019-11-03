@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod;
 
 import com.sunflow.tutorialmod.init.ModCommands;
-import com.sunflow.tutorialmod.setup.ModSetup;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
@@ -33,7 +33,7 @@ public class TutorialMod {
 
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
-	public static final ModSetup setup = new ModSetup();
+	public static final ModGroups groups = new ModGroups();
 
 	public TutorialMod() {
 		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());

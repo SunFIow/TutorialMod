@@ -27,7 +27,7 @@ public class FancyBlock extends BakedBlockBase {
 	private static final VoxelShape GRIDLESS_AABB = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
 
 	public FancyBlock() {
-		super("fancyblock", TutorialMod.setup.itemGroup, Properties.create(Material.ROCK)
+		super("fancyblock", TutorialMod.groups.itemGroup, Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f), GRIDLESS_AABB);
 	}
 

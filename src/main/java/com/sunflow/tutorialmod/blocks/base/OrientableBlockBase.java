@@ -25,7 +25,7 @@ public class OrientableBlockBase extends BlockBase {
 	}
 
 	public OrientableBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+		this(name, TutorialMod.groups.itemGroup, properties);
 	}
 
 	public OrientableBlockBase(String name, Material material) {

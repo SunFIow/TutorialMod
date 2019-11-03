@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 public class ToolAxe extends AxeItem {
 
 	public ToolAxe(String name, float attackDamge, float attackSpeed, IItemTier tier) {
-		super(tier, attackDamge, attackSpeed, new Item.Properties().group(TutorialMod.setup.itemGroup));
+		super(tier, attackDamge, attackSpeed, new Item.Properties().group(TutorialMod.groups.itemGroup));
 		this.setRegistryName(name);
 
 		ModItems.ITEMS.add(this);

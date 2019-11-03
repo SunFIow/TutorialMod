@@ -27,7 +27,7 @@ public class CustomLeavesBlock extends LeavesBlock {
 		this.setRegistryName(name);
 
 		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(name));
+		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.groups.itemGroup)).setRegistryName(name));
 	}
 
 	@Override

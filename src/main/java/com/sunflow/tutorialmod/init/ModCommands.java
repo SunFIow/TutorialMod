@@ -5,23 +5,30 @@ import java.util.List;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.commands.CommandBase;
 import com.sunflow.tutorialmod.commands.SlimeChunkCommand;
-import com.sunflow.tutorialmod.util.interfaces.ICommand;
+import com.sunflow.tutorialmod.commands.SpawnerCommand;
 
 import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 import net.minecraftforge.server.command.ConfigCommand;
 
 public class ModCommands {
-	public static final List<ICommand> COMMANDS = new ArrayList<>();
+	public static final List<CommandBase> COMMANDS = new ArrayList<>();
 
-	public static final ICommand SLIME_CHUNK_COMMAND = new SlimeChunkCommand();
+	public static final CommandBase SLIME_CHUNK_COMMAND = new SlimeChunkCommand();
+	public static final CommandBase SPAWNER_COMMAND = new SpawnerCommand();
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal("tutorialmod");
-		for (ICommand command : COMMANDS) {
+//		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal(TutorialMod.MODID);
+		LiteralArgumentBuilder<CommandSource> builder = Commands.literal(TutorialMod.MODID);
+		for (CommandBase command : COMMANDS) {
 			builder.then(command.getBuilder());
 		}
-		dispatcher.register(builder);
+		LiteralCommandNode<CommandSource> node = dispatcher.register(builder);
+		dispatcher.register(Commands.literal("tut").redirect(node));
 
 		ConfigCommand.register(dispatcher);
 	}

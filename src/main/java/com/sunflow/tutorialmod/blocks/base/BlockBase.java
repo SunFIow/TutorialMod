@@ -24,7 +24,7 @@ public class BlockBase extends Block {
 	}
 
 	public BlockBase(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+		this(name, TutorialMod.groups.itemGroup, properties);
 	}
 
 	public BlockBase(String name, Material material) {

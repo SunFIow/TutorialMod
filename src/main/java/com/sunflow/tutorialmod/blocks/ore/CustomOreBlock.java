@@ -19,7 +19,7 @@ import net.minecraftforge.common.ToolType;
 public class CustomOreBlock extends BlockBase {
 
 	public CustomOreBlock(String name, float hardnessAndResistance, int harvestlevel, int lightlevel) {
-		this(name, TutorialMod.setup.itemGroup, hardnessAndResistance, harvestlevel, lightlevel);
+		this(name, TutorialMod.groups.itemGroup, hardnessAndResistance, harvestlevel, lightlevel);
 	}
 
 	public CustomOreBlock(String name, ItemGroup group, float hardnessAndResistance, int harvestlevel, int lightlevel) {

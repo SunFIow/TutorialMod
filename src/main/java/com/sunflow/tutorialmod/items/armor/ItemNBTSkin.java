@@ -16,7 +16,7 @@ public class ItemNBTSkin {
 //		setUnlocalizedName("itemskin");
 //		setHasSubtypes(true);
 		for (SkinType skin : SkinType.values()) {
-			ModItems.ITEMS.add(new Item(new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName("skin_" + skin.getName()));
+			ModItems.ITEMS.add(new Item(new Item.Properties().group(TutorialMod.groups.itemGroup)).setRegistryName("skin_" + skin.getName()));
 		}
 //		ModItems.ITEMS.add(this);
 	}
@@ -24,7 +24,7 @@ public class ItemNBTSkin {
 	public static Item[] create() {
 		List<Item> skins = new ArrayList<>();
 		for (SkinType skin : SkinType.values()) {
-			Item item = new Item(new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(skin.getName() + "_skin");
+			Item item = new Item(new Item.Properties().group(TutorialMod.groups.itemGroup)).setRegistryName(skin.getName() + "_skin");
 			skins.add(item);
 		}
 		ModItems.ITEMS.addAll(skins);

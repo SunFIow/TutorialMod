@@ -26,7 +26,7 @@ public abstract class TileBlockBase extends OrientableBlockBase {
 	}
 
 	public TileBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+		this(name, TutorialMod.groups.itemGroup, properties);
 	}
 
 	public TileBlockBase(String name, Material material, SoundType sound, float hardness, float resistance) {

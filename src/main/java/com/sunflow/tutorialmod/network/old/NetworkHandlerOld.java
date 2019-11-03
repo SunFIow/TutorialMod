@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.network;
+package com.sunflow.tutorialmod.network.old;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;

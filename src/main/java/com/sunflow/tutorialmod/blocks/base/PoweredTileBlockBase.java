@@ -24,7 +24,7 @@ public abstract class PoweredTileBlockBase extends TileBlockBase {
 	}
 
 	public PoweredTileBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+		this(name, TutorialMod.groups.itemGroup, properties);
 	}
 
 	public PoweredTileBlockBase(String name, Material material, SoundType sound, float hardness, float resistance) {

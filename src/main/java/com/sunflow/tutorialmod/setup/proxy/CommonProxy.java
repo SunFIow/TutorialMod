@@ -2,6 +2,7 @@ package com.sunflow.tutorialmod.setup.proxy;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.init.ModEnchantments;
+import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.setup.CommonRegistrations;
 import com.sunflow.tutorialmod.util.Config;
 
@@ -28,6 +29,8 @@ public abstract class CommonProxy {
 
 		Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("tutorialmod-client.toml"));
 		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("tutorialmod-common.toml"));
+
+		Networking.registerMessages();
 	}
 
 	public void setup() {

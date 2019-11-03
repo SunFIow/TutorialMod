@@ -63,7 +63,7 @@ public class ModItems {
 
 // Spawn Eggs
 	public static final MobEggBase WEIRDMOB_SPAWN_EGG = new MobEggBase("weirdmob_spawn_egg", 0xff1111);
-	public static final MobEggBase CENTAUR_SPAWN_EGG = new MobEggBase("centaur_spawn_egg", 0xeecc11, TutorialMod.setup.itemGroup2);
+	public static final MobEggBase CENTAUR_SPAWN_EGG = new MobEggBase("centaur_spawn_egg", 0xeecc11, TutorialMod.groups.itemGroup2);
 
 // Armor
 	public static final Item RUBY_HELMET = new ArmorBase("ruby_helmet", CustomArmorMaterial.RUBY, EquipmentSlotType.HEAD);

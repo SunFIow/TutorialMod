@@ -6,7 +6,7 @@ import com.sunflow.tutorialmod.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class ModSetup {
+public class ModGroups {
 
 	public final ItemGroup itemGroup = new ItemGroup("tutorialtab") {
 		@Override
@@ -22,12 +22,7 @@ public class ModSetup {
 		}
 	};
 
-	public ModSetup() {
-		itemGroup.setBackgroundImageName("tutorial.png");
-		itemGroup2.setBackgroundImageName("tutorial2.png");
-	}
-
-	public void init() {
+	public ModGroups() {
 		itemGroup.setBackgroundImageName("tutorial.png");
 		itemGroup2.setBackgroundImageName("tutorial2.png");
 	}

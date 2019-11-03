@@ -22,7 +22,7 @@ public class ItemBase extends Item {
 	}
 
 	public ItemBase(String name, int maxDamageIn, Object __) {
-		this(name, new Item.Properties().maxDamage(maxDamageIn).group(TutorialMod.setup.itemGroup));
+		this(name, new Item.Properties().maxDamage(maxDamageIn).group(TutorialMod.groups.itemGroup));
 	}
 
 	public ItemBase(String name, int maxStackSizeIn, ItemGroup groupIn) {
@@ -30,10 +30,10 @@ public class ItemBase extends Item {
 	}
 
 	public ItemBase(String name, int maxStackSizeIn) {
-		this(name, new Item.Properties().maxStackSize(maxStackSizeIn).group(TutorialMod.setup.itemGroup));
+		this(name, new Item.Properties().maxStackSize(maxStackSizeIn).group(TutorialMod.groups.itemGroup));
 	}
 
 	public ItemBase(String name) {
-		this(name, new Item.Properties().group(TutorialMod.setup.itemGroup));
+		this(name, new Item.Properties().group(TutorialMod.groups.itemGroup));
 	}
 }

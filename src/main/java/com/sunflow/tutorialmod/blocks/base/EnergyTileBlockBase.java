@@ -23,7 +23,7 @@ public abstract class EnergyTileBlockBase extends PoweredTileBlockBase {
 	}
 
 	public EnergyTileBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.setup.itemGroup, properties);
+		this(name, TutorialMod.groups.itemGroup, properties);
 	}
 
 	public EnergyTileBlockBase(String name, Material material, SoundType sound, float hardness, float resistance) {

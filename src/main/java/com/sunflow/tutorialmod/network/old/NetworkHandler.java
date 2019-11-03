@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.network;
+package com.sunflow.tutorialmod.network.old;
 
 import java.util.function.Supplier;
 
@@ -28,8 +28,8 @@ public class NetworkHandler {
 	public static SimpleChannel getTutorialModChannel() {
 		SimpleChannel channel = NetworkRegistry.ChannelBuilder
 				.named(NetworkHandler.TUTORIALMOD_MAIN_RESOURCE)
-				.clientAcceptedVersions(a -> true)
-				.serverAcceptedVersions(a -> true)
+				.clientAcceptedVersions(s -> true)
+				.serverAcceptedVersions(s -> true)
 				.networkProtocolVersion(() -> NetworkHandler.NETVERSION)
 				.simpleChannel();
 
