@@ -2,8 +2,8 @@ package com.sunflow.tutorialmod.data.provider;
 
 import java.util.function.Consumer;
 
-import com.sunflow.tutorialmod.init.ModBlocks;
-import com.sunflow.tutorialmod.init.ModItems;
+import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;

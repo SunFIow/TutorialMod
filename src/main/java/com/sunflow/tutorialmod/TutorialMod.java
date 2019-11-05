@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod;
 
-import com.sunflow.tutorialmod.init.ModCommands;
+import com.sunflow.tutorialmod.network.Networking;
+import com.sunflow.tutorialmod.setup.ModCommands;
 import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
@@ -37,9 +38,10 @@ public class TutorialMod {
 
 	public TutorialMod() {
 		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
-//		Log.info("Loading Network data for FML net version: {}", NetworkHandler.init());
+		Log.info("Loading Network data for TutorialMod net version: {}", Networking.init());
 
 		INSTANCE = this;
+
 		TutorialMod.proxy.preSetup();
 	}
 

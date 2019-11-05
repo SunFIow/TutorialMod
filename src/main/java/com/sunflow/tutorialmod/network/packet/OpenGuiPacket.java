@@ -8,9 +8,10 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 public class OpenGuiPacket {
-	public OpenGuiPacket() {}
 
 	public OpenGuiPacket(PacketBuffer buf) {}
+
+	public OpenGuiPacket() {}
 
 	public void encode(PacketBuffer buf) {}
 

@@ -2,6 +2,8 @@ package com.sunflow.tutorialmod.util.handlers;
 
 import java.util.ArrayList;
 
+import com.sunflow.tutorialmod.network.Networking;
+import com.sunflow.tutorialmod.network.packet.ExplodePacket;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.enums.KeyBindings;
 
@@ -10,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class KeyBindingHandler {
 
-	static {
+	public static void setup() {
 		Log.debug("I am going to register the keybindings now senpai.");
 		KeyBindings.register();
 	}
@@ -28,7 +30,7 @@ public class KeyBindingHandler {
 				switch (key) {
 					case EXPLODE:
 						Log.info("Boom!");
-//						NetworkHandler.sendToServer(new MessageExplode(4711));
+						Networking.sendToServer(new ExplodePacket(4711));
 						break;
 				}
 			}

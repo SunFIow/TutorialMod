@@ -2,9 +2,9 @@ package com.sunflow.tutorialmod.entity.renderer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.blocks.CopperChestBlock;
+import com.sunflow.tutorialmod.block.CopperChestBlock;
 import com.sunflow.tutorialmod.entity.model.CopperChestModel;
-import com.sunflow.tutorialmod.init.ModBlocks;
+import com.sunflow.tutorialmod.setup.ModBlocks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;

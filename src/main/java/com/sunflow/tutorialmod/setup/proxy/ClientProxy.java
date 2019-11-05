@@ -1,12 +1,12 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
-import com.sunflow.tutorialmod.blocks.tile.CopperChestTile;
+import com.sunflow.tutorialmod.block.tile.CopperChestTile;
 import com.sunflow.tutorialmod.entity.CentaurEntity;
 import com.sunflow.tutorialmod.entity.WeirdMobEntity;
 import com.sunflow.tutorialmod.entity.renderer.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.renderer.CopperChestTileRenderer;
 import com.sunflow.tutorialmod.entity.renderer.WeirdMobRenderer;
-import com.sunflow.tutorialmod.setup.ClientRegistrations;
+import com.sunflow.tutorialmod.setup.registration.ClientRegistrations;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.handlers.CustomHandlers;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
@@ -44,15 +44,10 @@ public class ClientProxy extends CommonProxy {
 		super.setup();
 
 		ClientRegistrations.registerScreens();
+		KeyBindingHandler.setup();
 
 		RenderingRegistry.registerEntityRenderingHandler(WeirdMobEntity.class, WeirdMobRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CentaurEntity.class, CentaurRenderer::new);
-
-		try {
-			KeyBindingHandler.class.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
 
 		ClientRegistry.bindTileEntitySpecialRenderer(CopperChestTile.class, new CopperChestTileRenderer<CopperChestTile>());
 

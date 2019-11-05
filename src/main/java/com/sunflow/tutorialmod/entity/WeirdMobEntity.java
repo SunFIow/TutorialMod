@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.entity;
 
-import com.sunflow.tutorialmod.init.ModEntityTypes;
+import com.sunflow.tutorialmod.setup.ModEntityTypes;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;

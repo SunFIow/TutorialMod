@@ -1,9 +1,10 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.init.ModEnchantments;
-import com.sunflow.tutorialmod.network.Networking;
-import com.sunflow.tutorialmod.setup.CommonRegistrations;
+import com.sunflow.tutorialmod.setup.ModBiomes;
+import com.sunflow.tutorialmod.setup.ModEnchantments;
+import com.sunflow.tutorialmod.setup.ModFluids;
+import com.sunflow.tutorialmod.setup.registration.CommonRegistrations;
 import com.sunflow.tutorialmod.util.Config;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +31,8 @@ public abstract class CommonProxy {
 		Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("tutorialmod-client.toml"));
 		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("tutorialmod-common.toml"));
 
-		Networking.registerMessages();
+		ModBiomes.registerBiomes();
+		ModFluids.init();
 	}
 
 	public void setup() {

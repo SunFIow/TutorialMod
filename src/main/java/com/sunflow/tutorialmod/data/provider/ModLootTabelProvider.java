@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.data.provider;
 
-import com.sunflow.tutorialmod.blocks.base.TileBlockBase;
-import com.sunflow.tutorialmod.init.ModBlocks;
+import com.sunflow.tutorialmod.block.base.TileBlockBase;
+import com.sunflow.tutorialmod.setup.ModBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;

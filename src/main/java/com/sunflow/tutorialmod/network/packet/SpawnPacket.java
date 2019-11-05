@@ -41,7 +41,7 @@ public class SpawnPacket {
 			ServerWorld spawnWorld = ctx.get().getSender().world.getServer().getWorld(type);
 			EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
 			if (entityType == null) {
-				throw new IllegalStateException("This cannot happen! Unkon id '" + id + "'!");
+				throw new IllegalStateException("This cannot happen! Unkown id '" + id + "'!");
 			}
 			entityType.spawn(spawnWorld, null, null, pos, SpawnReason.EVENT, true, true);
 		});

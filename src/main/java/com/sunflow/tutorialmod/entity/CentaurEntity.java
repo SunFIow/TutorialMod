@@ -1,8 +1,8 @@
 package com.sunflow.tutorialmod.entity;
 
-import com.sunflow.tutorialmod.init.ModEntityTypes;
-import com.sunflow.tutorialmod.init.ModItems;
-import com.sunflow.tutorialmod.init.ModSounds;
+import com.sunflow.tutorialmod.setup.ModEntityTypes;
+import com.sunflow.tutorialmod.setup.ModItems;
+import com.sunflow.tutorialmod.setup.ModSounds;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;

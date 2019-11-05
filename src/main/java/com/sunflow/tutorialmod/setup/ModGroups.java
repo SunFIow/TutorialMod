@@ -1,8 +1,5 @@
 package com.sunflow.tutorialmod.setup;
 
-import com.sunflow.tutorialmod.init.ModBlocks;
-import com.sunflow.tutorialmod.init.ModItems;
-
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

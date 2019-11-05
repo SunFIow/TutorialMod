@@ -37,8 +37,8 @@ public class SpawnerScreen extends Screen {
 		addButton(new Button(guiLeft + 10, guiTop + 10 + 27 * 4, 160, 20, "Chicken", b -> spawn("minecraft:chicken")));
 	}
 
-	private void spawn(String string) {
-		Networking.INSTANCE.sendToServer(new SpawnPacket(string, minecraft.player.dimension, minecraft.player.getPosition()));
+	private void spawn(String id) {
+		Networking.sendToServer(new SpawnPacket(id, minecraft.player.dimension, minecraft.player.getPosition()));
 		minecraft.displayGuiScreen(null);
 	}
 

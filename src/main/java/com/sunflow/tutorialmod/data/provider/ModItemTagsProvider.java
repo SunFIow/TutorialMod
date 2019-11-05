@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.data.provider;
 
-import com.sunflow.tutorialmod.init.ModItems;
-import com.sunflow.tutorialmod.init.ModTags;
+import com.sunflow.tutorialmod.setup.ModItems;
+import com.sunflow.tutorialmod.setup.ModTags;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
