@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.setup;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.world.biome.BiomeCopper;
 
 import net.minecraft.world.biome.Biome;
@@ -31,7 +30,7 @@ public class ModBiomes {
 
 //		if (ConfigHandler.spawnCopperBiomOverworld) {
 		BiomeManager.addSpawnBiome(biome);
-		Log.info("Added the Biome {} Master.", biome);
+//		Log.info("Added the Biome {} Master.", biome);
 //		}
 		BIOMES.add(biome);
 		return biome;
