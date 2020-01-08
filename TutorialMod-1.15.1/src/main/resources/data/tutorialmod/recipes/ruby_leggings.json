@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tutorialmod",
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "tutorialmod:ruby"
+    }
+  },
+  "result": {
+    "item": "tutorialmod:ruby_leggings"
+  }
+}

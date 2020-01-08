@@ -1,0 +1,129 @@
+{
+	
+	"key.categories.tutorialmod": "Tutorial Mod",	
+	"key.tutorialmod.explode": "Explode",
+	
+"_comment": "Creative Tabs",
+	"itemGroup.tutorialtab": "Tutorial Tab",
+	"itemGroup.tutorialtab2": "Tutorial Tab 2",
+	
+"_comment": "Enchantments",
+	"enchantment.tutorialmod.multijump": "Multijump",
+	
+"_comment": "Entities",
+	"entity.tutorialmod.centaur": "Centaur",
+	
+"_comment": "Items",
+	"item.tutorialmod.firstitem": "First Item",
+	"item.tutorialmod.grenade": "Grenade",
+	"item.tutorialmod.testitem": "Test Item",
+	"item.tutorialmod.energy_wand": "Energy Wand",
+	
+	"item.tutorialmod.fancy_sword": "Fancy Sword",
+	"item.tutorialmod.ruby": "Ruby",
+	"item.tutorialmod.copper_ingot": "Copper Ingot",
+			
+"_comment": "Wands",
+	"item.tutorialmod.wood_wand": "Wood Wand",
+	"item.tutorialmod.stone_wand": "Stone Wand",
+	"item.tutorialmod.gold_wand": "Gold Wand",
+	"item.tutorialmod.iron_wand": "Iron Wand",
+	"item.tutorialmod.ruby_wand": "Ruby Wand",
+	"item.tutorialmod.obsidian_wand": "Obsidian Wand",
+	"item.tutorialmod.diamond_wand": "Diamond Wand",
+	"item.tutorialmod.emerald_wand": "Emerald Wand",
+		
+"_comment": "Tools",
+	"item.tutorialmod.ruby_axe": "Ruby Axe",
+	"item.tutorialmod.ruby_hoe": "Ruby Hoe",
+	"item.tutorialmod.ruby_pickaxe": "Ruby Pickaxe",
+	"item.tutorialmod.ruby_shovel": "Ruby Shovel",
+	"item.tutorialmod.ruby_sword": "Ruby Sword",
+	
+"_comment": "Food",
+	"item.tutorialmod.evil_apple": "Evil Apple",	
+	"item.tutorialmod.rice_bowl": "Bowl of Rice",
+	"item.tutorialmod.rice": "Rice",
+	"item.tutorialmod.rice_plant": "Rice Plant",
+	
+"_comment": "Eggs",
+	"item.tutorialmod.weirdmob_spawn_egg": "Weird Mob Egg",	
+	"item.tutorialmod.centaur_spawn_egg": "Centaur Egg",
+	
+	
+"_comment": "Blocks",
+	"block.tutorialmod.ruby_block": "Block of Ruby",
+	"block.tutorialmod.copper_block": "Block of Copper",
+	"block.tutorialmod.aluminium_block": "Block of Aluminium",
+	
+"_comment": "Ores",
+	"block.tutorialmod.ruby_ore": "Ruby Ore",	
+	"block.tutorialmod.copper_ore": "Copper Ore",
+	"block.tutorialmod.copper_ore_end": "Ender Copper Ore",
+	"block.tutorialmod.copper_ore_nether": "Nether Copper Ore",
+	"block.tutorialmod.aluminium_ore": "Aluminium Ore",
+	"block.tutorialmod.aluminium_ore_end": "Ender Aluminium Ore",
+	"block.tutorialmod.aluminium_ore_nether": "Nether Aluminium Ore",
+	
+"_comment": "Trees",
+	"block.tutorialmod.copper_leaves": "Copper Leaves",
+	"block.tutorialmod.copper_log": "Copper Log",
+	"block.tutorialmod.copper_planks": "Copper Planks",
+	"block.tutorialmod.copper_sapling": "Copper Sapling",
+	
+	"block.tutorialmod.aluminium_leaves": "Aluminium Leaves",
+	"block.tutorialmod.aluminium_log": "Aluminium Log",
+	"block.tutorialmod.aluminium_planks": "Aluminium PLanks",
+	"block.tutorialmod.aluminium_sapling": "Aluminium Sapling",	
+	
+"_comment": "Furniture",
+	"block.tutorialmod.santa_hat": "Santa Hat",
+	"block.tutorialmod.gridless": "Gridless Block",
+		
+"_comment": "Tile Entities",
+	
+	"block.tutorialmod.copper_chest": "Copper Chest",
+	"container.copper_chest": "Copper Chest",
+	
+	"block.tutorialmod.teleporter": "Teleporter",
+
+"_comment": "Machines",
+	"block.tutorialmod.firstblock": "First Block",
+	"container.firstblock": "First Block Generator",
+	"block.tutorialmod.energy_storage": "Energy Storage",
+	"container.energy_storage": "Energy Storage",
+	"block.tutorialmod.sintering_furnace": "Sintering Furnace",
+	"container.sintering_furnace": "Sintering Furnace",
+	"block.tutorialmod.electric_sintering_furnace": "Electric Sintering Furnace",
+	"container.electric_sintering_furnace": "Electric Sintering Furnace",
+	"block.tutorialmod.charger": "Charger",
+	"container.charger": "Charger",
+	
+	
+"_comment": "Armor",
+	"item.tutorialmod.ruby_helmet": "Ruby Helmet",
+	"item.tutorialmod.ruby_chestplate": "Ruby Chestplate",
+	"item.tutorialmod.ruby_leggings": "Ruby Leggings",
+	"item.tutorialmod.ruby_boots": "Ruby Boots",
+	
+"_comment": "SkinArmor",
+	"item.tutorialmod.sunflow_helmet": "SunFlow Helmet",
+	"item.tutorialmod.sunflow_chestplate": "SunFlow Chestplate",
+	"item.tutorialmod.sunflow_leggings": "SunFlow Leggings",
+	"item.tutorialmod.sunflow_boots": "SunFlow Boots",
+	
+	"item.tutorialmod.beke_helmet": "Bekescaba99 Helmet",
+	"item.tutorialmod.beke_chestplate": "Bekescaba99 Chestplate",
+	"item.tutorialmod.beke_leggings": "Bekescaba99 Leggings",
+	"item.tutorialmod.beke_boots": "Bekescaba99 Boots",
+	
+	"item.tutorialmod.phantom_helmet": "Phantom Helmet",
+	"item.tutorialmod.phantom_chestplate": "Phantom Chestplate",
+	"item.tutorialmod.phantom_leggings": "Phantom Leggings",
+	"item.tutorialmod.phantom_boots": "Phantom Boots",
+	
+	"item.tutorialmod.default_skin": "Default Skin",
+	"item.tutorialmod.sunflow_skin": "SunFlow Skin",
+	"item.tutorialmod.beke_skin": "Bekescaba99 Skin",
+	"item.tutorialmod.phantom_skin": "Phantom Skin"
+}

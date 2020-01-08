@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "tutorialmod:block/aluminium_sapling"
+    }
+}
