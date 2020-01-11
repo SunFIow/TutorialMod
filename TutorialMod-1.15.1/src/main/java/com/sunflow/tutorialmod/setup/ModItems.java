@@ -34,6 +34,8 @@ public class ModItems {
 	public static final List<Item> ITEMS = new ArrayList<>();
 	public static final List<MobEggBase> EGGS = new ArrayList<>();
 
+// Tests
+
 // Items
 	public static final Item FIRSTITEM = new FirstItem();
 	public static final Item GRENADE = new GrenadeItem();

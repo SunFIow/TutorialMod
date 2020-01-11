@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.network.packet;
 
-import java.util.function.Supplier;
-
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -9,7 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class ExplodePacket {
+public class ExplodePacket extends BasePacket {
 	private int posX;
 
 	public ExplodePacket(int posX) {
@@ -20,19 +18,17 @@ public class ExplodePacket {
 		this.posX = buf.readInt();
 	}
 
+	@Override
 	public void encode(PacketBuffer buf) {
 		buf.writeInt(posX);
 	}
 
-	public void onMessage(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			if (ctx.get().getDirection().getOriginationSide() == LogicalSide.SERVER) {
-				handleServerSide(ctx.get().getSender());
-			} else {
-				handleClientSide(ctx.get().getSender());
-			}
-		});
-		ctx.get().setPacketHandled(true);
+	@Override
+	protected boolean action(NetworkEvent.Context ctx) {
+		if (ctx.getDirection().getOriginationSide() == LogicalSide.SERVER) handleServerSide(ctx.getSender());
+		else handleClientSide(ctx.getSender());
+
+		return true;
 	}
 
 	public void handleServerSide(ServerPlayerEntity sender) {

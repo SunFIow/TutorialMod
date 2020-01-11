@@ -53,12 +53,8 @@ public class SpawnerScreen extends Screen {
 
 	}
 
-	public static void open() {
-		Minecraft.getInstance().displayGuiScreen(new SpawnerScreen());
-	}
+	public static void open() { Minecraft.getInstance().displayGuiScreen(new SpawnerScreen()); }
 
 	@Override
-	public boolean isPauseScreen() {
-		return false;
-	}
+	public boolean isPauseScreen() { return false; }
 }

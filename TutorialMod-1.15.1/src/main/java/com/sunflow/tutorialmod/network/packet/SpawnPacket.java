@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.network.packet;
 
-import java.util.function.Supplier;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.network.PacketBuffer;
@@ -12,7 +10,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class SpawnPacket {
+public class SpawnPacket extends BasePacket {
 
 	private final String id;
 	private final DimensionType type;
@@ -30,21 +28,21 @@ public class SpawnPacket {
 		this.pos = pos;
 	}
 
+	@Override
 	public void encode(PacketBuffer buf) {
 		buf.writeString(id);
 		buf.writeInt(type.getId());
 		buf.writeBlockPos(pos);
 	}
 
-	public void onMessage(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			ServerWorld spawnWorld = ctx.get().getSender().world.getServer().getWorld(type);
-			EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
-			if (entityType == null) {
-				throw new IllegalStateException("This cannot happen! Unkown id '" + id + "'!");
-			}
-			entityType.spawn(spawnWorld, null, null, pos, SpawnReason.EVENT, true, true);
-		});
-		ctx.get().setPacketHandled(true);
+	@Override
+	public boolean action(NetworkEvent.Context ctx) {
+		ServerWorld spawnWorld = ctx.getSender().world.getServer().getWorld(type);
+		EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
+		if (entityType == null) throw new IllegalStateException("This cannot happen! Unkown id '" + id + "'!");
+
+		entityType.spawn(spawnWorld, null, null, pos, SpawnReason.EVENT, true, true);
+
+		return true;
 	}
 }
