@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import com.sunflow.tutorialmod.util.interfaces.IHasField;
 
-import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
@@ -17,7 +16,7 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public abstract class ContainerBase extends Container implements IGuiEventListener {
+public abstract class ContainerBase extends Container {
 
 	protected final TileEntity tile;
 	protected final IHasField field;
@@ -187,8 +186,5 @@ public abstract class ContainerBase extends Container implements IGuiEventListen
 		addSlotRange(handler, 0, leftCol, topRow, 9, 18);
 	}
 
-	@Override
-	public boolean mouseScrolled(double mouseX, double mouseY, double scrollDir) {
-		return false;
-	}
+	public void mouseScrolled(double mouseX, double mouseY, double scrollDir, int guiLeft, int guiTop) {}
 }

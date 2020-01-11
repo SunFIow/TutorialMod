@@ -14,7 +14,6 @@ public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T> {
 
 	public ScreenBase(T container, PlayerInventory inv, ITextComponent name) {
 		super(container, inv, name);
-		this.children.add(container);
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.network.packet.ExplodePacket;
 import com.sunflow.tutorialmod.network.packet.MultiJumpPacket;
 import com.sunflow.tutorialmod.network.packet.OpenGuiPacket;
+import com.sunflow.tutorialmod.network.packet.PlayerSkinPacket;
+import com.sunflow.tutorialmod.network.packet.ScrollPacket;
 import com.sunflow.tutorialmod.network.packet.SpawnPacket;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -63,6 +65,18 @@ public class Networking {
 				.encoder(MultiJumpPacket::encode)
 				.decoder(MultiJumpPacket::new)
 				.consumer(MultiJumpPacket::onMessage)
+				.add();
+
+		channel.messageBuilder(PlayerSkinPacket.class, nextID())
+				.encoder(PlayerSkinPacket::encode)
+				.decoder(PlayerSkinPacket::new)
+				.consumer(PlayerSkinPacket::onMessage)
+				.add();
+
+		channel.messageBuilder(ScrollPacket.class, nextID())
+				.encoder(ScrollPacket::encode)
+				.decoder(ScrollPacket::new)
+				.consumer(ScrollPacket::onMessage)
 				.add();
 
 		return channel;

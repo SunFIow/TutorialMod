@@ -4,9 +4,11 @@ import java.util.Random;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.item.base.ItemBase;
+import com.sunflow.tutorialmod.network.Networking;
+import com.sunflow.tutorialmod.network.packet.PlayerSkinPacket;
 import com.sunflow.tutorialmod.util.handlers.PlayerSkinHandler;
 
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -26,11 +28,13 @@ public class FancySwordItem extends ItemBase {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		if (player instanceof AbstractClientPlayerEntity) {
-			AbstractClientPlayerEntity clplayer = (AbstractClientPlayerEntity) player;
+		if (player instanceof ClientPlayerEntity) {
+			ClientPlayerEntity clplayer = (ClientPlayerEntity) player;
 			ResourceLocation loc = new ResourceLocation(TutorialMod.MODID, "textures/entity/skins/customplayer_" + clplayer.getSkinType() + "_" + new Random().nextInt(3) + ".png");
-			PlayerSkinHandler.changePlayerSkin(clplayer, loc);
+			PlayerSkinHandler.changePlayerSkin2(clplayer, loc);
 			return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+		} else {
+			Networking.sendToConnected(new PlayerSkinPacket());
 		}
 		return super.onItemRightClick(world, player, hand);
 	}

@@ -34,7 +34,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the blocks now senpai.");
 
 		IForgeRegistry<Block> registry = event.getRegistry();
-//		registry.registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
 		ModBlocks.BLOCKS.forEach((block) -> registry.register(block));
 	}
 
@@ -43,7 +42,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the items now senpai.");
 
 		IForgeRegistry<Item> registry = event.getRegistry();
-//		registry.registerAll(ModItems.ITEMS.toArray(new Item[0]));
 		ModItems.ITEMS.forEach((item) -> registry.register(item));
 
 //		event.getRegistry().register(ModItems.SKIN);
@@ -54,7 +52,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the dimensions now senpai.");
 
 		IForgeRegistry<ModDimension> registry = event.getRegistry();
-//		registry.registerAll(ModDimensions.DIMENSIONS.toArray(new ModDimension[0]));
 		ModDimensions.DIMENSIONS.forEach((dimension) -> registry.register(dimension));
 	}
 
@@ -63,7 +60,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the biomes now senpai.");
 
 		IForgeRegistry<Biome> registry = event.getRegistry();
-//		registry.registerAll(ModBiomes.BIOMES.toArray(new Biome[0]));
 		ModBiomes.BIOMES.forEach((biome) -> registry.register(biome));
 	}
 
@@ -72,7 +68,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the tileentites now senpai.");
 
 		IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
-//		registry.registerAll(ModTileEntitiyTypes.TILE_TYPES.toArray(new TileEntityType[0]));
 		ModTileEntitiyTypes.TILE_TYPES.forEach((tileEntityType) -> registry.register(tileEntityType));
 	}
 
@@ -81,7 +76,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the enchantments now senpai.");
 
 		IForgeRegistry<Enchantment> registry = event.getRegistry();
-//		registry.registerAll(ModEnchantments.ENCHANTMENTS.toArray(new Enchantment[0]));
 		ModEnchantments.ENCHANTMENTS.forEach((enchantment) -> registry.register(enchantment));
 	}
 
@@ -90,7 +84,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the entities now senpai.");
 
 		IForgeRegistry<EntityType<?>> registry = event.getRegistry();
-//		registry.registerAll(ModEntityTypes.ENTITY_TYPES.toArray(new EntityType[0]));
 		ModEntityTypes.ENTITY_TYPES.forEach((entityType) -> registry.register(entityType));
 	}
 
@@ -99,7 +92,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the fluids now senpai.");
 
 		IForgeRegistry<Fluid> registry = event.getRegistry();
-//		registry.registerAll(ModFluids.FLUIDS.toArray(new Fluid[0]));	
 		ModFluids.FLUIDS.forEach((fluid) -> registry.register(fluid));
 	}
 
@@ -108,7 +100,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the containers now senpai.");
 
 		IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
-//		registry.registerAll(ModContainerTypes.CONTAINER_TYPES.toArray(new ContainerType[0]));
 		ModContainerTypes.CONTAINER_TYPES.forEach((containerType) -> registry.register(containerType));
 	}
 
@@ -117,7 +108,6 @@ public class CommonRegistrations {
 		Log.debug("I am going to register the sounds now senpai.");
 
 		IForgeRegistry<SoundEvent> registry = event.getRegistry();
-//		registry.registerAll(ModSounds.SOUNDS.toArray(new SoundEvent[0]));	
 		ModSounds.SOUNDS.forEach((sound) -> registry.register(sound));
 	}
 }

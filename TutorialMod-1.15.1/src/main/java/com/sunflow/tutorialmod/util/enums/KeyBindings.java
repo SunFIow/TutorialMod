@@ -8,7 +8,9 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public enum KeyBindings {
-	EXPLODE("explode", 71);
+	ZOOM("zoom", 70),
+	EXPLODE("explode", 71),
+	OVERLAY("overlay", 74);
 
 	private final KeyBinding keybinding;
 
@@ -16,22 +18,22 @@ public enum KeyBindings {
 		keybinding = new KeyBinding("key." + TutorialMod.MODID + "." + keyName, defaultKeyCode, "key.categories." + TutorialMod.MODID);
 	}
 
-	public KeyBinding getKeybind() {
-		return keybinding;
-	}
+	public KeyBinding getKeybind() { return keybinding; }
 
-	public boolean isPressed() {
-		return keybinding.isPressed();
-	}
+	public boolean isPressed() { return keybinding.isPressed(); }
+
+	public boolean isDown() { return keybinding.isKeyDown(); }
 
 	public static ArrayList<KeyBindings> getPressedKey() {
 		ArrayList<KeyBindings> pressedKeys = new ArrayList<KeyBindings>();
-		for (KeyBindings key : KeyBindings.values()) {
-			if (key.isPressed()) {
-				pressedKeys.add(key);
-			}
-		}
+		for (KeyBindings key : KeyBindings.values()) if (key.isPressed()) pressedKeys.add(key);
 		return pressedKeys;
+	}
+
+	public static ArrayList<KeyBindings> getDownKeys() {
+		ArrayList<KeyBindings> downKeys = new ArrayList<KeyBindings>();
+		for (KeyBindings key : KeyBindings.values()) if (key.isDown()) downKeys.add(key);
+		return downKeys;
 	}
 
 	public static void register() {

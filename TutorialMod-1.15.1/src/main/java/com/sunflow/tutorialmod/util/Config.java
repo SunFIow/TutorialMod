@@ -27,6 +27,8 @@ public class Config {
 	public static ForgeConfigSpec COMMON_CONFIG;
 	public static ForgeConfigSpec CLIENT_CONFIG;
 
+	public static ForgeConfigSpec.BooleanValue CONFIG_SHOW_OVERLAY;
+
 	public static ForgeConfigSpec.IntValue FIRSTBLOCK_GENERATE;
 	public static ForgeConfigSpec.IntValue FIRSTBLOCK_MAXPOWER;
 	public static ForgeConfigSpec.IntValue FIRSTBLOCK_TRANSFER;
@@ -47,6 +49,11 @@ public class Config {
 	public static ForgeConfigSpec.IntValue ENERGY_ITEM_CONSUME;
 
 	static {
+		commonConfig();
+		clientConfig();
+	}
+
+	private static void commonConfig() {
 		COMMON_BUILDER.comment("General Settings").push(CATEGORY_GENERAL);
 		COMMON_BUILDER.pop();
 
@@ -59,6 +66,15 @@ public class Config {
 		COMMON_BUILDER.pop();
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
+	}
+
+	private static void clientConfig() {
+		CLIENT_BUILDER.comment("Client only settings").push("client");
+
+		CONFIG_SHOW_OVERLAY = CLIENT_BUILDER.comment("Show the Overlay InGame")
+				.define("show", false);
+		CLIENT_BUILDER.pop();
+
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
 

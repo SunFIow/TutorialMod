@@ -6,8 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -20,7 +18,7 @@ public class SantaHatBlock extends HorizontalBlockBase {
 
 	public SantaHatBlock() {
 		super("santa_hat", Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH));
-		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
+//		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
 	}
 
 //	@Override

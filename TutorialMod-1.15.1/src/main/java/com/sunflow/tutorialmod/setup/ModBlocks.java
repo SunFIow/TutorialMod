@@ -59,14 +59,16 @@ public class ModBlocks {
 
 // Tree	
 	public static final Block COPPER_LEAVES = new CustomLeavesBlock("copper_leaves");
-	public static final Block COPPER_LOG = new CustomLogBlock("copper_log", MaterialColor.ORANGE_TERRACOTTA);
-	public static final Block COPPER_PLANKS = new BlockBase("copper_planks", Material.WOOD, MaterialColor.ORANGE_TERRACOTTA, 2.0F, 3.0F, SoundType.WOOD);
-	public static final SaplingBlock COPPER_SAPLING = new CustomSaplingBlock("copper_sapling", COPPER_LEAVES, COPPER_LOG, ModBlocks.COPPER_SAPLING);
-
 	public static final Block ALUMINIUM_LEAVES = new CustomLeavesBlock("aluminium_leaves");
+
+	public static final Block COPPER_LOG = new CustomLogBlock("copper_log", MaterialColor.ORANGE_TERRACOTTA);
 	public static final Block ALUMINIUM_LOG = new CustomLogBlock("aluminium_log", MaterialColor.LIGHT_GRAY);
+
+	public static final Block COPPER_PLANKS = new BlockBase("copper_planks", Material.WOOD, MaterialColor.ORANGE_TERRACOTTA, 2.0F, 3.0F, SoundType.WOOD);
 	public static final Block ALUMINIUM_PLANKS = new BlockBase("aluminium_planks", Material.WOOD, MaterialColor.LIGHT_GRAY, 2.0F, 3.0F, SoundType.WOOD);
-	public static final SaplingBlock ALUMINIUM_SAPLING = new CustomSaplingBlock("aluminium_sapling", ALUMINIUM_LEAVES, ALUMINIUM_LOG, ModBlocks.ALUMINIUM_SAPLING);
+
+	public static final SaplingBlock COPPER_SAPLING = new CustomSaplingBlock("copper_sapling", ModBlocks.COPPER_LEAVES, ModBlocks.COPPER_LOG, ModBlocks.COPPER_SAPLING);
+	public static final SaplingBlock ALUMINIUM_SAPLING = new CustomSaplingBlock("aluminium_sapling", ModBlocks.ALUMINIUM_LEAVES, ModBlocks.ALUMINIUM_LOG, ModBlocks.ALUMINIUM_SAPLING);
 
 	public static final Block COPPER_CHEST = new CopperChestBlock();
 

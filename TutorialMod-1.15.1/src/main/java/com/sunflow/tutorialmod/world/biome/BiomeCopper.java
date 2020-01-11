@@ -23,13 +23,15 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 
-public class BiomeCopper extends Biome {
-	private CustomTree COPPER = new CustomTree(ModBlocks.COPPER_LOG, ModBlocks.COPPER_LEAVES, ModBlocks.COPPER_SAPLING);
-	private CustomTree ALUMINIUM = new CustomTree(ModBlocks.ALUMINIUM_LOG, ModBlocks.ALUMINIUM_LEAVES, ModBlocks.ALUMINIUM_SAPLING);
+public class BiomeCopper extends BiomeBase {
+//	private CustomTree COPPER = new CustomTree(ModBlocks.COPPER_LOG, ModBlocks.COPPER_LEAVES, ModBlocks.COPPER_SAPLING);
+//	private CustomTree ALUMINIUM = new CustomTree(ModBlocks.ALUMINIUM_LOG, ModBlocks.ALUMINIUM_LEAVES, ModBlocks.ALUMINIUM_SAPLING);
 
 	public BiomeCopper() {
-		super(BiomeCopper.getBuilder());
+		super("copper", getBuilder(), BiomeType.WARM, Type.HILLS, Type.DRY);
 //		this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
 //		this.addStructure(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F));
 //		this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(true));
@@ -68,11 +70,11 @@ public class BiomeCopper extends Biome {
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.func_225566_b_(
 						new MultipleRandomFeatureConfig(ImmutableList.of(
-								Feature.NORMAL_TREE.func_225566_b_(COPPER.configSmall()).func_227227_a_(0.666F),
-								Feature.FANCY_TREE.func_225566_b_(COPPER.configSmall()).func_227227_a_(0.1F),
-								Feature.NORMAL_TREE.func_225566_b_(ALUMINIUM.configSmall()).func_227227_a_(0.666F),
-								Feature.FANCY_TREE.func_225566_b_(ALUMINIUM.configSmall()).func_227227_a_(0.1F)),
-								Feature.NORMAL_TREE.func_225566_b_(COPPER.configSmall())
+								Feature.NORMAL_TREE.func_225566_b_(CustomTree.COPPER.configSmall()).func_227227_a_(0.666F),
+								Feature.FANCY_TREE.func_225566_b_(CustomTree.COPPER.configSmall()).func_227227_a_(0.1F),
+								Feature.NORMAL_TREE.func_225566_b_(CustomTree.ALUMINIUM.configSmall()).func_227227_a_(0.666F),
+								Feature.FANCY_TREE.func_225566_b_(CustomTree.ALUMINIUM.configSmall()).func_227227_a_(0.1F)),
+								Feature.NORMAL_TREE.func_225566_b_(CustomTree.COPPER.configSmall())
 										.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))))));
 
 //		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,

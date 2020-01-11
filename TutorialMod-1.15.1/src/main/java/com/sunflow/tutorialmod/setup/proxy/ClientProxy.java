@@ -59,12 +59,11 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public World getClientWorld() {
-		return Minecraft.getInstance().world;
-	}
+	public World getClientWorld() { return Minecraft.getInstance().world; }
 
 	@Override
-	public PlayerEntity getClientPlayer() {
-		return Minecraft.getInstance().player;
-	}
+	public PlayerEntity getClientPlayer() { return Minecraft.getInstance().player; }
+
+	@Override
+	public Minecraft getMinecraft() { return Minecraft.getInstance(); }
 }
