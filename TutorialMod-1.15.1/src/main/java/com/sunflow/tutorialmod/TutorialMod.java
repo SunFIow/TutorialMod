@@ -2,12 +2,13 @@ package com.sunflow.tutorialmod;
 
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.setup.ModCommands;
-import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
 import com.sunflow.tutorialmod.util.Log;
+import com.sunflow.tutorialmod.util.MyWorldData;
 
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,19 +23,13 @@ public class TutorialMod {
 	public static final String VERSION = "1.0.5";
 	public static final String ACCEPTED_VERSION = "[1.15.1]"; // "[1.15.1,)
 
-//	public static final Logger LOGGER = LogManager.getLogger(NAME);
-
-//  private static final Marker FORGEMOD = MarkerManager.getMarker("FORGEMOD");
-
 	private static TutorialMod INSTANCE;
 
-	public static TutorialMod getInstance() {
-		return INSTANCE;
-	}
+	public static TutorialMod getInstance() { return INSTANCE; }
 
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
-	public static final ModGroups groups = new ModGroups();
+	public static MyWorldData data;
 
 	public TutorialMod() {
 		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
@@ -55,5 +50,7 @@ public class TutorialMod {
 		Log.info("Preparing the server for u senpai.");
 
 		ModCommands.register(event.getCommandDispatcher());
+		data = event.getServer().getWorld(DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+
 	}
 }

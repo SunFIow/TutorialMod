@@ -6,13 +6,13 @@ import net.minecraft.nbt.CompoundNBT;
 public class SkinUtil {
 	public static ItemStack createSkin(ItemStack stack, SkinType type) {
 		CompoundNBT tag = stack.getOrCreateTag();
-		tag.putString("Skin", type.getName());
+		tag.putString("skin", type.getName());
 		stack.setTag(tag);
 		return stack;
 	}
 
 	public static String getRegistryNameFromNBT(ItemStack stack) {
-		String type = stack.getOrCreateTag().getString("Skin");
+		String type = stack.getOrCreateTag().getString("skin");
 		return type != "" ? type : "error";
 	}
 
@@ -21,12 +21,8 @@ public class SkinUtil {
 
 		private String name;
 
-		private SkinType(String name) {
-			this.name = name;
-		}
+		private SkinType(String name) { this.name = name; }
 
-		public String getName() {
-			return name;
-		}
+		public String getName() { return name; }
 	}
 }

@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.setup;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.item.EnergyWandItem;
 import com.sunflow.tutorialmod.item.FancySwordItem;
 import com.sunflow.tutorialmod.item.FirstItem;
@@ -15,6 +14,8 @@ import com.sunflow.tutorialmod.item.armor.ItemNBTSkin;
 import com.sunflow.tutorialmod.item.armor.SkinUtil.SkinType;
 import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.item.base.MobEggBase;
+import com.sunflow.tutorialmod.item.cbow.CArrowItem;
+import com.sunflow.tutorialmod.item.cbow.CBowItem;
 import com.sunflow.tutorialmod.item.food.FoodItem;
 import com.sunflow.tutorialmod.item.food.SeedItem;
 import com.sunflow.tutorialmod.item.grenade.GrenadeItem;
@@ -35,6 +36,8 @@ public class ModItems {
 	public static final List<MobEggBase> EGGS = new ArrayList<>();
 
 // Tests
+	public static final Item CBOW = new CBowItem();
+	public static final Item CARROW = new CArrowItem();
 
 // Items
 	public static final Item FIRSTITEM = new FirstItem();
@@ -65,7 +68,7 @@ public class ModItems {
 
 // Spawn Eggs
 	public static final MobEggBase WEIRDMOB_SPAWN_EGG = new MobEggBase("weirdmob_spawn_egg", 0xff1111);
-	public static final MobEggBase CENTAUR_SPAWN_EGG = new MobEggBase("centaur_spawn_egg", 0xeecc11, TutorialMod.groups.itemGroup2);
+	public static final MobEggBase CENTAUR_SPAWN_EGG = new MobEggBase("centaur_spawn_egg", 0xeecc11, ModGroups.itemGroup2);
 
 // Armor
 	public static final Item RUBY_HELMET = new ArmorBase("ruby_helmet", CustomArmorMaterial.RUBY, EquipmentSlotType.HEAD);

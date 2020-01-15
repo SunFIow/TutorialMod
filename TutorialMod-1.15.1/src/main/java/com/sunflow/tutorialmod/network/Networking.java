@@ -6,6 +6,8 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.network.packet.ExplodePacket;
 import com.sunflow.tutorialmod.network.packet.MultiJumpPacket;
 import com.sunflow.tutorialmod.network.packet.OpenGuiPacket;
+import com.sunflow.tutorialmod.network.packet.PlayerLoggedInPacket;
+import com.sunflow.tutorialmod.network.packet.PlayerSkinChangedPacket;
 import com.sunflow.tutorialmod.network.packet.PlayerSkinPacket;
 import com.sunflow.tutorialmod.network.packet.ScrollPacket;
 import com.sunflow.tutorialmod.network.packet.SpawnPacket;
@@ -67,16 +69,28 @@ public class Networking {
 				.consumer(MultiJumpPacket::onMessage)
 				.add();
 
+		channel.messageBuilder(ScrollPacket.class, nextID())
+				.encoder(ScrollPacket::encode)
+				.decoder(ScrollPacket::new)
+				.consumer(ScrollPacket::onMessage)
+				.add();
+
 		channel.messageBuilder(PlayerSkinPacket.class, nextID())
 				.encoder(PlayerSkinPacket::encode)
 				.decoder(PlayerSkinPacket::new)
 				.consumer(PlayerSkinPacket::onMessage)
 				.add();
 
-		channel.messageBuilder(ScrollPacket.class, nextID())
-				.encoder(ScrollPacket::encode)
-				.decoder(ScrollPacket::new)
-				.consumer(ScrollPacket::onMessage)
+		channel.messageBuilder(PlayerLoggedInPacket.class, nextID())
+				.encoder(PlayerLoggedInPacket::encode)
+				.decoder(PlayerLoggedInPacket::new)
+				.consumer(PlayerLoggedInPacket::onMessage)
+				.add();
+
+		channel.messageBuilder(PlayerSkinChangedPacket.class, nextID())
+				.encoder(PlayerSkinChangedPacket::encode)
+				.decoder(PlayerSkinChangedPacket::new)
+				.consumer(PlayerSkinChangedPacket::onMessage)
 				.add();
 
 		return channel;
@@ -102,7 +116,7 @@ public class Networking {
 		TUTORIALMOD_CHANNEL.send(PacketDistributor.ALL.noArg(), msg);
 	}
 
-	public static <MSG> void sendTo(MSG packet, NetworkManager manager, NetworkDirection direction) {
-		TUTORIALMOD_CHANNEL.sendTo(packet, manager, direction);
+	public static <MSG> void sendTo(MSG msg, NetworkManager manager, NetworkDirection direction) {
+		TUTORIALMOD_CHANNEL.sendTo(msg, manager, direction);
 	}
 }

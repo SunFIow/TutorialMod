@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.item.armor;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.inventory.EquipmentSlotType;
@@ -12,7 +12,7 @@ public class ArmorBase extends ArmorItem {
 //	protected int renderIndex;
 
 	public ArmorBase(String name, IArmorMaterial armorMaterial, EquipmentSlotType equipmentSlot) {
-		super(armorMaterial, equipmentSlot, new Item.Properties().group(TutorialMod.groups.itemGroup));
+		super(armorMaterial, equipmentSlot, new Item.Properties().group(ModGroups.itemGroup));
 		this.setRegistryName(name);
 //		this.renderIndex = renderIndex;
 

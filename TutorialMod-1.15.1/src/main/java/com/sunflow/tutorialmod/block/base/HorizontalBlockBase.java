@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,7 +27,7 @@ public class HorizontalBlockBase extends BlockBase {
 	}
 
 	public HorizontalBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.groups.itemGroup, properties);
+		this(name, ModGroups.itemGroup, properties);
 	}
 
 	public HorizontalBlockBase(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {

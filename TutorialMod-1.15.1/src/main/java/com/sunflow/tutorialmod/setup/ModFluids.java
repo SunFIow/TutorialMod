@@ -31,7 +31,7 @@ public class ModFluids {
 	public static final FlowingFluid FLOWING_MOLTEN_COPPER = (FlowingFluid) addAndGet(new ForgeFlowingFluid.Flowing(prop).setRegistryName("molten_copper_flowing"), FLUIDS);
 
 	public static final FlowingFluidBlock MOLTEN_COPPER_BLOCK = (FlowingFluidBlock) addAndGet(new FlowingFluidBlock(() -> MOLTEN_COPPER, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("molten_copper_block"), ModBlocks.BLOCKS);
-	public static final Item MOLTEN_COPPER_BUCKET = addAndGet(new BucketItem(() -> MOLTEN_COPPER, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(TutorialMod.groups.itemGroup)).setRegistryName("molten_copper_bucket"), ModItems.ITEMS);
+	public static final Item MOLTEN_COPPER_BUCKET = addAndGet(new BucketItem(() -> MOLTEN_COPPER, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModGroups.itemGroup)).setRegistryName("molten_copper_bucket"), ModItems.ITEMS);
 
 	private static <T> T addAndGet(T obj, List<T> list) {
 		list.add(obj);

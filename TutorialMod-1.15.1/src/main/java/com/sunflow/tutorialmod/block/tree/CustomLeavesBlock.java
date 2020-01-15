@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.block.tree;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.block.Block;
@@ -18,6 +18,6 @@ public class CustomLeavesBlock extends LeavesBlock {
 		this.setRegistryName(name);
 
 		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.groups.itemGroup)).setRegistryName(name));
+		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(ModGroups.itemGroup)).setRegistryName(name));
 	}
 }

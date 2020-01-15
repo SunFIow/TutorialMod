@@ -1,7 +1,9 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
+import com.sunflow.tutorialmod.setup.ModEnchantments;
 import com.sunflow.tutorialmod.setup.registration.ClientRegistrations;
 import com.sunflow.tutorialmod.util.Log;
+import com.sunflow.tutorialmod.util.handlers.ClientForgeEventHandlers;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
 import com.sunflow.tutorialmod.util.handlers.PlayerSkinHandler;
 
@@ -46,9 +48,10 @@ public class ClientProxy extends CommonProxy {
 //		ClientRegistry.bindTileEntityRenderer(ModTileEntitiyTypes.COPPER_CHEST_TILE, new CopperChestTileRenderer<CopperChestTile>());
 
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
+		eventBus.register(ClientForgeEventHandlers.class);
 		eventBus.register(KeyBindingHandler.class);
-//		eventBus.register(ModEnchantments.class);
 		eventBus.register(PlayerSkinHandler.class);
+		eventBus.register(ModEnchantments.ENCHANTMENT_MULTIJUMP);
 
 		Log.info("m...");
 		Log.info("mm...");

@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 
 import net.minecraft.block.BlockState;
@@ -27,7 +27,7 @@ public abstract class TileBlockBase extends OrientableBlockBase {
 	}
 
 	public TileBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.groups.itemGroup, properties);
+		this(name, ModGroups.itemGroup, properties);
 	}
 
 	public TileBlockBase(String name, Material material, SoundType sound, float hardness, float resistance) {

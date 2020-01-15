@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.item.food;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.item.base.ItemBase;
+import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.item.Food;
 import net.minecraft.item.Food.Builder;
@@ -28,7 +28,7 @@ public class FoodItem extends ItemBase {
 		for (EffectInstance effect : effects) {
 			food.effect(effect, 1.0f);
 		}
-		Properties prop = new Item.Properties().group(TutorialMod.groups.itemGroup).food(food.build());
+		Properties prop = new Item.Properties().group(ModGroups.itemGroup).food(food.build());
 		return prop;
 	}
 }

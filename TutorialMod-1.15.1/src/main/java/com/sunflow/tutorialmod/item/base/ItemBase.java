@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.item.base;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.item.Item;
@@ -22,7 +22,7 @@ public class ItemBase extends Item {
 	}
 
 	public ItemBase(String name, int maxDamageIn, Object __) {
-		this(name, new Item.Properties().maxDamage(maxDamageIn).group(TutorialMod.groups.itemGroup));
+		this(name, new Item.Properties().maxDamage(maxDamageIn).group(ModGroups.itemGroup));
 	}
 
 	public ItemBase(String name, int maxStackSizeIn, ItemGroup groupIn) {
@@ -30,10 +30,10 @@ public class ItemBase extends Item {
 	}
 
 	public ItemBase(String name, int maxStackSizeIn) {
-		this(name, new Item.Properties().maxStackSize(maxStackSizeIn).group(TutorialMod.groups.itemGroup));
+		this(name, new Item.Properties().maxStackSize(maxStackSizeIn).group(ModGroups.itemGroup));
 	}
 
 	public ItemBase(String name) {
-		this(name, new Item.Properties().group(TutorialMod.groups.itemGroup));
+		this(name, new Item.Properties().group(ModGroups.itemGroup));
 	}
 }

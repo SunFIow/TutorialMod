@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,7 +24,7 @@ public abstract class PoweredTileBlockBase extends TileBlockBase {
 	}
 
 	public PoweredTileBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.groups.itemGroup, properties);
+		this(name, ModGroups.itemGroup, properties);
 	}
 
 	public PoweredTileBlockBase(String name, Material material, SoundType sound, float hardness, float resistance) {

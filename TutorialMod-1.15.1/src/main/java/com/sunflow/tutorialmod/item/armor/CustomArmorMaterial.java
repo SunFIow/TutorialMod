@@ -34,11 +34,7 @@ public enum CustomArmorMaterial implements IArmorMaterial {
 //		return Ingredient.fromItems(Items.SCUTE);
 //	});
 
-	RUBY("ruby", 15, new int[] { 2, 5, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> {
-		return Ingredient.fromItems(ModItems.RUBY);
-	})
-
-	;
+	RUBY("ruby", 15, new int[] { 2, 5, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ModItems.RUBY));
 
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;

@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ public class BlockBase extends Block {
 	}
 
 	public BlockBase(String name, Properties properties) {
-		this(name, TutorialMod.groups.itemGroup, properties);
+		this(name, ModGroups.itemGroup, properties);
 	}
 
 	public BlockBase(String name, Material material) {

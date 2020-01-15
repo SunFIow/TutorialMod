@@ -2,9 +2,9 @@ package com.sunflow.tutorialmod.block.ore;
 
 import java.util.Random;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.BlockBase;
 import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,7 +19,7 @@ import net.minecraftforge.common.ToolType;
 public class CustomOreBlock extends BlockBase {
 
 	public CustomOreBlock(String name, float hardnessAndResistance, int harvestlevel, int lightlevel) {
-		this(name, TutorialMod.groups.itemGroup, hardnessAndResistance, harvestlevel, lightlevel);
+		this(name, ModGroups.itemGroup, hardnessAndResistance, harvestlevel, lightlevel);
 	}
 
 	public CustomOreBlock(String name, ItemGroup group, float hardnessAndResistance, int harvestlevel, int lightlevel) {

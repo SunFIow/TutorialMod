@@ -1,11 +1,10 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.ModEnchantments;
 import com.sunflow.tutorialmod.setup.ModFluids;
 import com.sunflow.tutorialmod.setup.registration.CommonRegistrations;
 import com.sunflow.tutorialmod.util.Config;
-import com.sunflow.tutorialmod.util.handlers.ForgeEventHandlers;
+import com.sunflow.tutorialmod.util.handlers.CommonForgeEventHandlers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,8 +37,8 @@ public abstract class CommonProxy {
 
 	public void setup() {
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
-		eventBus.register(ModEnchantments.ENCHANTMENT_MULTIJUMP);
-		eventBus.register(ForgeEventHandlers.class);
+		eventBus.register(CommonForgeEventHandlers.class);
+//		eventBus.register(ModEnchantments.ENCHANTMENT_MULTIJUMP);
 	}
 
 	public abstract World getClientWorld();

@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.util.helper.VersionHelper;
 
 import net.minecraft.block.Block;
@@ -26,7 +26,7 @@ public class OrientableBlockBase extends BlockBase {
 	}
 
 	public OrientableBlockBase(String name, Properties properties) {
-		this(name, TutorialMod.groups.itemGroup, properties);
+		this(name, ModGroups.itemGroup, properties);
 	}
 
 	public OrientableBlockBase(String name, Material material) {

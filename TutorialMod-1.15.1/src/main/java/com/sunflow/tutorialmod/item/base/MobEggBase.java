@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.item.base;
 
 import java.util.Objects;
 
-import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.block.Block;
@@ -33,7 +33,7 @@ public class MobEggBase extends ItemBase {
 	}
 
 	public MobEggBase(String name, int eggColor) {
-		this(name, eggColor, TutorialMod.groups.itemGroup);
+		this(name, eggColor, ModGroups.itemGroup);
 	}
 
 	public void setEntityType(EntityType<?> entity) {

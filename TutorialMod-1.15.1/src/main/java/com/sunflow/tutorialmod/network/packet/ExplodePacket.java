@@ -25,8 +25,8 @@ public class ExplodePacket extends BasePacket {
 
 	@Override
 	protected boolean action(NetworkEvent.Context ctx) {
-		if (ctx.getDirection().getOriginationSide() == LogicalSide.SERVER) handleServerSide(ctx.getSender());
-		else handleClientSide(ctx.getSender());
+		if (ctx.getDirection().getOriginationSide() == LogicalSide.SERVER) handleClientSide(ctx.getSender());
+		else handleServerSide(ctx.getSender());
 
 		return true;
 	}

@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.block.Block;
@@ -61,7 +61,7 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 		setRegistryName("copper_chest");
 
 		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.groups.itemGroup)).setRegistryName("copper_chest"));
+		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(ModGroups.itemGroup)).setRegistryName("copper_chest"));
 	}
 
 	@Override
