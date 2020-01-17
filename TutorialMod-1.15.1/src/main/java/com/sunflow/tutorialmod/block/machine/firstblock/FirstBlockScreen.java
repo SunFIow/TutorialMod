@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.firstblock;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ScreenBase;
-import com.sunflow.tutorialmod.util.Config;
+import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;

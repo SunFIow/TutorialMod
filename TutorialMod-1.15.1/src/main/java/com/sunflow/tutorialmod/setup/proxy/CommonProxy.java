@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.setup.proxy;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModFluids;
 import com.sunflow.tutorialmod.setup.registration.CommonRegistrations;
-import com.sunflow.tutorialmod.util.Config;
+import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.handlers.CommonForgeEventHandlers;
 
 import net.minecraft.client.Minecraft;

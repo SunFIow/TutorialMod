@@ -27,7 +27,6 @@ public class ClientRegistrations {
 		Log.debug("I am going to register the item colors now senpai.");
 
 		ItemColors registry = event.getItemColors();
-
 		ModItems.EGGS.forEach((egg) -> registry.register((x, i) -> egg.eggColor, egg));
 	}
 

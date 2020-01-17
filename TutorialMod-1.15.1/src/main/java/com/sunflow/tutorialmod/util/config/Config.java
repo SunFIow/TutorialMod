@@ -1,10 +1,11 @@
-package com.sunflow.tutorialmod.util;
+package com.sunflow.tutorialmod.util.config;
 
 import java.nio.file.Path;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

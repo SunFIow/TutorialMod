@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.item.grenade;
 
-import com.sunflow.tutorialmod.util.helper.VersionHelper;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -25,15 +25,12 @@ public class GrenadeEntity extends SnowballEntity {
 	}
 
 //	@Override
-//	protected Item func_213885_i() {
-//		return ModItems.GRENADE;
-//	}
+//	protected Item func_213885_i() { return ModItems.GRENADE; }
 
 	@Override
 	protected void onImpact(RayTraceResult result) {
-		if (!this.world.isRemote) { // .posX .posY .posZ
-			this.world.createExplosion((Entity) null, VersionHelper.getX(this), VersionHelper.getY(this), VersionHelper.getZ(this), 3.0F, false, Explosion.Mode.DESTROY);
-			this.remove();
-		}
+		if (this.world.isRemote) return; // .posX .posY .posZ
+		this.world.createExplosion((Entity) null, VersionUtils.getX(this), VersionUtils.getY(this), VersionUtils.getZ(this), 3.0F, false, Explosion.Mode.DESTROY);
+		this.remove();
 	}
 }

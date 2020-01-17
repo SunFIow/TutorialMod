@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.util.helper;
+package com.sunflow.tutorialmod.util;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -7,8 +7,8 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 
-public class VersionHelper {
-	private VersionHelper() {}
+public class VersionUtils {
+	private VersionUtils() {}
 
 	public static final double getX(Entity e) { return e.func_226277_ct_(); }
 

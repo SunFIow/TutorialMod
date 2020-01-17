@@ -14,8 +14,6 @@ import com.sunflow.tutorialmod.item.armor.ItemNBTSkin;
 import com.sunflow.tutorialmod.item.armor.SkinUtil.SkinType;
 import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.item.base.MobEggBase;
-import com.sunflow.tutorialmod.item.cbow.CArrowItem;
-import com.sunflow.tutorialmod.item.cbow.CBowItem;
 import com.sunflow.tutorialmod.item.food.FoodItem;
 import com.sunflow.tutorialmod.item.food.SeedItem;
 import com.sunflow.tutorialmod.item.grenade.GrenadeItem;
@@ -36,8 +34,6 @@ public class ModItems {
 	public static final List<MobEggBase> EGGS = new ArrayList<>();
 
 // Tests
-	public static final Item CBOW = new CBowItem();
-	public static final Item CARROW = new CArrowItem();
 
 // Items
 	public static final Item FIRSTITEM = new FirstItem();

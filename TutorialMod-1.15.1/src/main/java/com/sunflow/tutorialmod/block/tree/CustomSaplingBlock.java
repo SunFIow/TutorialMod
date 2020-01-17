@@ -8,6 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.IPlantable;
@@ -20,5 +22,6 @@ public class CustomSaplingBlock extends SaplingBlock {
 
 		ModBlocks.BLOCKS.add(this);
 		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(ModGroups.itemGroup)).setRegistryName(name));
+		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
 	}
 }

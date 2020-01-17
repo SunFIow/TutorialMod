@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.block.base;
 
 import com.sunflow.tutorialmod.setup.ModGroups;
-import com.sunflow.tutorialmod.util.helper.VersionHelper;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -49,6 +49,6 @@ public class OrientableBlockBase extends BlockBase {
 
 //
 	public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity) {
-		return Direction.getFacingFromVector(VersionHelper.getX(entity) - clickedBlock.getX(), VersionHelper.getY(entity) - clickedBlock.getY(), VersionHelper.getZ(entity) - clickedBlock.getZ());
+		return Direction.getFacingFromVector(VersionUtils.getX(entity) - clickedBlock.getX(), VersionUtils.getY(entity) - clickedBlock.getY(), VersionUtils.getZ(entity) - clickedBlock.getZ());
 	}
 }

@@ -10,6 +10,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -46,14 +48,16 @@ public class FoodPlantBlock extends CropsBlock {
 		this.setRegistryName(name);
 		((SeedItem) seed).setPlantBlock(this);
 
-		ModBlocks.BLOCKS.add(this);
-//		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(this.getRegistryName()));
-
 		this.chanceSeed = chanceSeed;
 		this.chanceCrop = chanceCrop;
 		this.seed = seed;
 		this.crop = crop;
 		this.shape = shape;
+
+		ModBlocks.BLOCKS.add(this);
+//		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(this.getRegistryName()));
+
+		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
 	}
 
 	public FoodPlantBlock(String name, Item seed, Item crop, float chanceSeed, float chanceCrop) {
@@ -96,15 +100,9 @@ public class FoodPlantBlock extends CropsBlock {
 	}
 
 	@Override
-	protected IItemProvider getSeedsItem() {
-		return seed;
+	protected IItemProvider getSeedsItem() { return seed; }
 
-	}
-
-	protected IItemProvider getCropItem() {
-		return crop;
-
-	}
+	protected IItemProvider getCropItem() { return crop; }
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

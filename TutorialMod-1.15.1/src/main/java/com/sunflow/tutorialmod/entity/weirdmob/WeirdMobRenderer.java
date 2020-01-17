@@ -1,8 +1,6 @@
-package com.sunflow.tutorialmod.entity.renderer;
+package com.sunflow.tutorialmod.entity.weirdmob;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.entity.WeirdMobEntity;
-import com.sunflow.tutorialmod.entity.model.WeirdMobModel;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -18,5 +16,5 @@ public class WeirdMobRenderer extends MobRenderer<WeirdMobEntity, WeirdMobModel>
 	public WeirdMobRenderer(EntityRendererManager manager) { super(manager, new WeirdMobModel(), 0.5f); }
 
 	@Override
-	protected ResourceLocation getEntityTexture(WeirdMobEntity entity) { return TEXTURE; }
+	public ResourceLocation getEntityTexture(WeirdMobEntity entity) { return TEXTURE; }
 }

@@ -33,21 +33,8 @@ public class ModScreens {
 	public static final ScreenEntry<EnergyStorageContainer, EnergyStorageScreen> ENERGY_STORAGE_SCREEN_ENTRY = new ScreenEntry<>(ModContainerTypes.ENERGY_STORAGE_CONTAINER, EnergyStorageScreen::new);
 	public static final ScreenEntry<SinteringFurnaceContainer, SinteringFurnaceScreen> SINTERING_FURNACE_SCREEN_ENTRY = new ScreenEntry<>(ModContainerTypes.SINTERING_FURNACE_CONTAINER, SinteringFurnaceScreen::new);
 	public static final ScreenEntry<ElectricSinteringFurnaceContainer, ElectricSinteringFurnaceScreen> ELECTRIC_SINTERING_FURNACE_SCREEN_ENTRY = new ScreenEntry<>(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, ElectricSinteringFurnaceScreen::new);
-	public static final ScreenEntry<CopperChestContainer, CopperChestScreen> COPPER_CHEST_SCREEN_ENTRY = new ScreenEntry<>(ModContainerTypes.COPPER_CHEST_CONTAINER, CopperChestScreen::new);
 	public static final ScreenEntry<ChargerContainer, ChargerScreen> CHARGER_SCREEN_ENTRY = new ScreenEntry<>(ModContainerTypes.CHARGER_CONTAINER, ChargerScreen::new);
-
-//	static {
-//		createScreen(ModContainerTypes.FIRSTBLOCK_CONTAINER, FirstBlockScreen::new);
-//		createScreen(ModContainerTypes.ENERGY_STORAGE_CONTAINER, EnergyStorageScreen::new);
-//		createScreen(ModContainerTypes.SINTERING_FURNACE_CONTAINER, SinteringFurnaceScreen::new);
-//		createScreen(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, ElectricSinteringFurnaceScreen::new);
-//		createScreen(ModContainerTypes.COPPER_CHEST_CONTAINER, CopperChestScreen::new);
-//		createScreen(ModContainerTypes.CHARGER_CONTAINER, ChargerScreen::new);
-//	}
-//
-//	public static <M extends Container, U extends Screen & IHasContainer<M>> void createScreen(ContainerType<? extends M> type, ScreenManager.IScreenFactory<M, U> screenFactory) {
-//		SCREENS.add(new ScreenEntry<M, U>(type, screenFactory));
-//	}
+	public static final ScreenEntry<CopperChestContainer, CopperChestScreen> COPPER_CHEST_SCREEN_ENTRY = new ScreenEntry<>(ModContainerTypes.COPPER_CHEST_CONTAINER, CopperChestScreen::new);
 
 	public static class ScreenEntry<M extends Container, U extends Screen & IHasContainer<M>> {
 		public ContainerType<? extends M> type;
@@ -56,6 +43,7 @@ public class ModScreens {
 		public ScreenEntry(ContainerType<? extends M> type, IScreenFactory<M, U> screenFactory) {
 			this.type = type;
 			this.factory = screenFactory;
+			SCREENS.add(this);
 		}
 	}
 }

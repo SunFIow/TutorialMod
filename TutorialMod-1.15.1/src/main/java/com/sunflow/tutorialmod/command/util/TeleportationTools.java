@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.command.util;
 
-import com.sunflow.tutorialmod.util.helper.VersionHelper;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
@@ -79,9 +79,9 @@ public class TeleportationTools {
 		playerlist.updatePermissionLevel(entity);
 		sourceWorld.removeEntity(entity);
 		entity.revive();
-		double d0 = VersionHelper.getX(entity);
-		double d1 = VersionHelper.getY(entity);
-		double d2 = VersionHelper.getZ(entity);
+		double d0 = VersionUtils.getX(entity);
+		double d1 = VersionUtils.getY(entity);
+		double d2 = VersionUtils.getZ(entity);
 		float f0 = entity.rotationPitch;
 		float f1 = entity.rotationYaw;
 		sourceWorld.getProfiler().startSection("moving");
@@ -102,7 +102,7 @@ public class TeleportationTools {
 		sourceWorld.getProfiler().endSection();
 		entity.setWorld(destinationWorld);
 		destinationWorld.func_217447_b(entity);
-		entity.connection.setPlayerLocation(VersionHelper.getX(entity), VersionHelper.getY(entity), VersionHelper.getZ(entity), f1, f0);
+		entity.connection.setPlayerLocation(VersionUtils.getX(entity), VersionUtils.getY(entity), VersionUtils.getZ(entity), f1, f0);
 		entity.interactionManager.setWorld(destinationWorld);
 		entity.connection.sendPacket(new SPlayerAbilitiesPacket(entity.abilities));
 		playerlist.sendWorldInfo(entity, destinationWorld);
