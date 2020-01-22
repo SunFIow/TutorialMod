@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.ExplodePacket;
-import com.sunflow.tutorialmod.util.Config;
 import com.sunflow.tutorialmod.util.Log;
+import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.enums.KeyBindings;
 
 import net.minecraft.entity.player.PlayerEntity;

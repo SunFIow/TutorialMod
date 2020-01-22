@@ -5,7 +5,6 @@ import com.sunflow.tutorialmod.setup.ModTags;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.tags.ItemTags;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
@@ -18,7 +17,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 		this.copy(ModTags.Blocks.TUTORIAL, ModTags.Items.TUTORIAL);
 		this.getBuilder(ModTags.Items.TUTORIAL).add(ModItems.FIRSTITEM);
 		this.getBuilder(ModTags.Items.TUTORIAL).add(ModItems.SKIN);
-		this.getBuilder(ItemTags.ARROWS).add(ModItems.CARROW);
 	}
 
 	@Override

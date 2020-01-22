@@ -1,12 +1,14 @@
 package com.sunflow.tutorialmod.block.copper_chest;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
 import com.sunflow.tutorialmod.setup.ModBlocks;
 import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.setup.ModItems;
+import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -34,6 +36,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -55,8 +58,11 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 	private static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
 	public static final TranslationTextComponent containerName = new TranslationTextComponent("container.copper_chest");
 
+	protected final Supplier<TileEntityType<? extends TileEntity>> field_226859_a_;
+
 	public CopperChestBlock() {
 		super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
+		field_226859_a_ = () -> ModTileEntitiyTypes.COPPER_CHEST_TILE;
 		setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
 		setRegistryName("copper_chest");
 

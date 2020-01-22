@@ -7,6 +7,7 @@ import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.DistExecutor;
@@ -20,14 +21,15 @@ import net.minecraftforge.versions.mcp.MCPVersion;
 public class TutorialMod {
 	public static final String MODID = "tutorialmod";
 	public static final String NAME = "Tutorial Mod";
-	public static final String VERSION = "1.0.5";
+	public static final String VERSION = "1.0.6";
 	public static final String ACCEPTED_VERSION = "[1.15.1]"; // "[1.15.1,)
 
 	private static TutorialMod INSTANCE;
 
 	public static TutorialMod getInstance() { return INSTANCE; }
 
-	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+//	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
 	public static MyWorldData data;
 
@@ -50,7 +52,7 @@ public class TutorialMod {
 		Log.info("Preparing the server for u senpai.");
 
 		ModCommands.register(event.getCommandDispatcher());
-		data = event.getServer().getWorld(DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+		data = VersionUtils.getWorld(event.getServer(), DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
 
 	}
 }

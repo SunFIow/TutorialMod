@@ -4,10 +4,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
-import com.sunflow.tutorialmod.util.Config;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
+import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.block.BlockState;

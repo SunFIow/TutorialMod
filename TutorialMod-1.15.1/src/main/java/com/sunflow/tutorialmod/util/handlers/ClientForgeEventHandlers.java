@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.util.handlers;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.util.Config;
+import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

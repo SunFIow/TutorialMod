@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.world.biome;
 import com.google.common.collect.ImmutableList;
 import com.sunflow.tutorialmod.block.tree.CustomTree;
 import com.sunflow.tutorialmod.setup.ModBlocks;
-import com.sunflow.tutorialmod.util.helper.VersionHelper;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityClassification;
@@ -35,9 +35,9 @@ public class BiomeCopper extends BiomeBase {
 //		this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
 //		this.addStructure(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F));
 //		this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(true));
-		VersionHelper.addStructure(this, VersionHelper.getFeature(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
-		VersionHelper.addStructure(this, VersionHelper.getFeature(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F)));
-		VersionHelper.addStructure(this, VersionHelper.getFeature(Feature.SHIPWRECK, new ShipwreckConfig(true)));
+		VersionUtils.addStructure(this, VersionUtils.getFeature(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
+		VersionUtils.addStructure(this, VersionUtils.getFeature(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F)));
+		VersionUtils.addStructure(this, VersionUtils.getFeature(Feature.SHIPWRECK, new ShipwreckConfig(true)));
 
 //		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
 //				createDecoratedFeature(

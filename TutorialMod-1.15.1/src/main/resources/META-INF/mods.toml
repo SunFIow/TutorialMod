@@ -5,7 +5,7 @@ logoFile="logo.png" #optional
 
 [[mods]] #mandatory
 	modId="tutorialmod" #mandatory
-	version="1.0.5" #mandatory
+	version="1.0.6" #mandatory
 	displayName="Tutorial Mod" #mandatory
 	# displayURL="http://example.com/" #optional
 	# updateJSONURL="http://myurl.me/" #optional

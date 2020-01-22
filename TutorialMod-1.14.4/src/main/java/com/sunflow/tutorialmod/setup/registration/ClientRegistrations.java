@@ -31,32 +31,18 @@ public class ClientRegistrations {
 		Log.debug("I am going to register the item colors now senpai.");
 
 		ItemColors registry = event.getItemColors();
-//		for (MobEggBase egg : ModItems.EGGS) {
-//			registry.register((s, i) -> egg.eggColor, egg);
-//		}
 		ModItems.EGGS.forEach((egg) -> registry.register((x, i) -> egg.eggColor, egg));
 	}
 
 	@SubscribeEvent
 	public static void onTextureStich(TextureStitchEvent.Pre event) {
-		if (!event.getMap().getBasePath().equals("textures")) {
-			return;
-		}
+		if (!event.getMap().getBasePath().equals("textures")) return;
 
-//		for (Block b : ModBlocks.BAKEDMODELBLOCKS) {
-//			event.addSprite(new ResourceLocation(TutorialMod.MODID, "block/" + b.getRegistryName().getPath()));
-//		}
 		ModBlocks.BAKEDMODELBLOCKS.forEach((block) -> event.addSprite(new ResourceLocation(TutorialMod.MODID, "block/" + block.getRegistryName().getPath())));
 	}
 
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent event) {
-//		for (BakedBlockBase b : ModBlocks.BAKEDMODELBLOCKS) {
-//			event.getModelRegistry().put(new ModelResourceLocation(b.getRegistryName(), ""),
-//					new CustomBakedModel(DefaultVertexFormats.BLOCK, b.getRegistryName().getPath(), b.offset, b.length));
-//			event.getModelRegistry().put(new ModelResourceLocation(b.getRegistryName(), "inventory"),
-//					new CustomBakedModel(DefaultVertexFormats.ITEM, b.getRegistryName().getPath(), b.offset, b.length));
-//		}
 		ModBlocks.BAKEDMODELBLOCKS.forEach((block) -> {
 			event.getModelRegistry().put(new ModelResourceLocation(block.getRegistryName(), ""),
 					new CustomBakedModel(DefaultVertexFormats.BLOCK, block.getRegistryName().getPath(), block.offset, block.length));

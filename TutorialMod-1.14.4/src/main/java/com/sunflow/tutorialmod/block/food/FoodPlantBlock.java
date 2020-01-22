@@ -45,14 +45,14 @@ public class FoodPlantBlock extends CropsBlock {
 		this.setRegistryName(name);
 		((SeedItem) seed).setPlantBlock(this);
 
-		ModBlocks.BLOCKS.add(this);
-//		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(this.getRegistryName()));
-
 		this.chanceSeed = chanceSeed;
 		this.chanceCrop = chanceCrop;
 		this.seed = seed;
 		this.crop = crop;
 		this.shape = shape;
+
+		ModBlocks.BLOCKS.add(this);
+//		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(this.getRegistryName()));
 	}
 
 	public FoodPlantBlock(String name, Item seed, Item crop, float chanceSeed, float chanceCrop) {

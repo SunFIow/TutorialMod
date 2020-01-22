@@ -1,6 +1,12 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
+import com.sunflow.tutorialmod.block.copper_chest.CopperChestTile;
+import com.sunflow.tutorialmod.block.copper_chest.CopperChestTileRenderer;
+import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
+import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
 import com.sunflow.tutorialmod.setup.ModEnchantments;
+import com.sunflow.tutorialmod.setup.ModEntityTypes;
+import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
 import com.sunflow.tutorialmod.setup.registration.ClientRegistrations;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.handlers.ClientForgeEventHandlers;
@@ -8,10 +14,13 @@ import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
 import com.sunflow.tutorialmod.util.handlers.PlayerSkinHandler;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ClientProxy extends CommonProxy {
@@ -39,13 +48,11 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistrations.registerScreens();
 		KeyBindingHandler.setup();
 
-//		RenderingRegistry.registerEntityRenderingHandler(WeirdMobEntity.class, WeirdMobRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(CentaurEntity.class, CentaurRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.WEIRDMOB, WeirdMobRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CENTAUR, CentaurRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.WEIRDMOB, WeirdMobRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CENTAUR, CentaurRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GRENADE_ENTITY, (erm) -> new SpriteRenderer<>(erm, getMinecraft().getItemRenderer()));
 
-//		ClientRegistry.bindTileEntitySpecialRenderer(CopperChestTile.class, new CopperChestTileRenderer<CopperChestTile>());
-//		ClientRegistry.bindTileEntityRenderer(ModTileEntitiyTypes.COPPER_CHEST_TILE, new CopperChestTileRenderer<CopperChestTile>());
+		ClientRegistry.bindTileEntityRenderer(ModTileEntitiyTypes.COPPER_CHEST_TILE, (dispatcher) -> new CopperChestTileRenderer<CopperChestTile>(dispatcher));
 
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
 		eventBus.register(ClientForgeEventHandlers.class);

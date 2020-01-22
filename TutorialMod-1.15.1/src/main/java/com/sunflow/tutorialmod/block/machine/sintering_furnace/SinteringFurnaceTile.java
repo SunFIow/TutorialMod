@@ -11,7 +11,7 @@ import com.sunflow.tutorialmod.block.base.InventoryTileEntityBase;
 import com.sunflow.tutorialmod.setup.ModBlocks;
 import com.sunflow.tutorialmod.setup.ModItems;
 import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
-import com.sunflow.tutorialmod.util.Config;
+import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
