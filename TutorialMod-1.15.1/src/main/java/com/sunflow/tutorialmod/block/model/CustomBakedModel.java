@@ -82,7 +82,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 			double x1 = offset.x + 0.25D;
 			double y1 = offset.y;
 			double z1 = offset.z + 0.25D;
-//
+
 			double x2 = x1 + length.x;
 			double y2 = y1 + length.y;
 			double z2 = z1 + length.z;
@@ -95,7 +95,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 			Vec3d v7 = new Vec3d(x2, y1, z2);
 			Vec3d v4 = new Vec3d(x2, y2, z1);
 			Vec3d v3 = new Vec3d(x2, y2, z2);
-//
+
 			quads.add(createQuad(v1, v2, v3, v4, texture));
 			quads.add(createQuad(v5, v6, v7, v8, texture));
 			quads.add(createQuad(v3, v7, v6, v4, texture));
@@ -122,35 +122,35 @@ public class CustomBakedModel implements IDynamicBakedModel {
 			double x, double y, double z, float u, float v, TextureAtlasSprite sprite, float r, float g, float b) {
 
 		ImmutableList<VertexFormatElement> elements = builder.getVertexFormat().func_227894_c_().asList();
-		for (int j = 0; j < elements.size(); j++) {
-			VertexFormatElement e = elements.get(j);
+		for (int i = 0; i < elements.size(); i++) {
+			VertexFormatElement e = elements.get(i);
 			switch (e.getUsage()) {
 				case POSITION:
-					builder.put(j, (float) x, (float) y, (float) z, 1.0f);
+					builder.put(i, (float) x, (float) y, (float) z, 1.0f);
 					break;
 				case COLOR:
-					builder.put(j, r, g, b, 1.0f);
+					builder.put(i, r, g, b, 1.0f);
 					break;
 				case UV:
 					switch (e.getIndex()) {
 						case 0:
 							float iu = sprite.getInterpolatedU(u);
 							float iv = sprite.getInterpolatedV(v);
-							builder.put(j, iu, iv);
+							builder.put(i, iu, iv);
 							break;
 						case 2:
-							builder.put(j, 0f, 1f);
+							builder.put(i, 0f, 1f);
 							break;
 						default:
-							builder.put(j);
+							builder.put(i);
 							break;
 					}
 					break;
 				case NORMAL:
-					builder.put(j, (float) normal.x, (float) normal.y, (float) normal.z);
+					builder.put(i, (float) normal.x, (float) normal.y, (float) normal.z);
 					break;
 				default:
-					builder.put(j);
+					builder.put(i);
 					break;
 			}
 		}

@@ -9,6 +9,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
+import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlock;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
 
@@ -33,7 +34,7 @@ import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
-public class CustomBakedModel2 implements IDynamicBakedModel {
+public class CustomBakedModel3 implements IDynamicBakedModel {
 
 	private final ItemCameraTransforms transforms = getAllTransforms();
 
@@ -42,14 +43,14 @@ public class CustomBakedModel2 implements IDynamicBakedModel {
 	private Vec3d offset;
 	private Vec3d length;
 
-	public CustomBakedModel2(ResourceLocation location, Vec3d offset, Vec3d length) {
+	public CustomBakedModel3(ResourceLocation location, Vec3d offset, Vec3d length) {
 		this.location = location;
 		this.offset = offset;
 		this.length = length;
 	}
 
 	private TextureAtlasSprite getTexture() {
-		return Minecraft.getInstance().func_228015_a_(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(location);
+		return TutorialMod.proxy.getMinecraft().func_228015_a_(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(location);
 	}
 
 	@Nonnull
@@ -138,15 +139,15 @@ public class CustomBakedModel2 implements IDynamicBakedModel {
 							float iv = sprite.getInterpolatedV(v);
 							builder.put(i, iu, iv);// , 0f, 1f);
 							break;
-						case 2:
+						case 1:
 							builder.put(i, 0f, 1f);
 							break;
-						default:
+						case 2:
 							builder.put(i);
 							break;
 					}
 				case NORMAL:
-					builder.put(i, (float) normal.x, (float) normal.y, (float) normal.z);
+					builder.put(i, (float) normal.x, (float) normal.y, (float) normal.z, 0f);
 					break;
 				default:
 					builder.put(i);
