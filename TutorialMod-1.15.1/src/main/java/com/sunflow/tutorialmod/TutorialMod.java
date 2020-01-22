@@ -7,6 +7,7 @@ import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.DistExecutor;
@@ -51,6 +52,7 @@ public class TutorialMod {
 		Log.info("Preparing the server for u senpai.");
 
 		ModCommands.register(event.getCommandDispatcher());
-		data = event.getServer().getWorld(DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+		data = VersionUtils.getWorld(event.getServer(), DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+
 	}
 }

@@ -45,20 +45,23 @@ public class FancyBlockTile extends TileEntity {
 				Constants.BlockFlags.NOTIFY_NEIGHBORS);
 	}
 
-	public Vec3d getOffset() {
-		return offset;
-	}
+	public Vec3d getOffset() { return offset; }
 
 	@Override
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		CompoundNBT tag = new CompoundNBT();
+	public CompoundNBT getUpdateTag() {
+		CompoundNBT tag = super.getUpdateTag();
 		if (mimic != null) {
 			tag.put("mimic", NBTUtil.writeBlockState(mimic));
 		}
 		if (offset != null) {
 			tag.put("offset", writeVec3d(offset));
 		}
-		return new SUpdateTileEntityPacket(pos, 1, tag);
+		return tag;
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
 	}
 
 	@Override

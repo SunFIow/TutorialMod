@@ -8,6 +8,7 @@ import java.util.function.Function;
 
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.block.LogBlock;
 import net.minecraft.util.Direction;
@@ -165,7 +166,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		if (i == -1) {
 			return false;
 		} else {
-			this.func_214584_a(p_225557_1_, p_225557_3_.down());
+			this.func_214584_a(p_225557_1_, VersionUtils.down(p_225557_3_));
 			int j = (int) (i * 0.618D);
 			if (j >= i) {
 				j = i - 1;
@@ -215,7 +216,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 	}
 
 	private int func_227241_b_(IWorldGenerationReader p_227241_1_, Random p_227241_2_, BlockPos p_227241_3_, int p_227241_4_, Set<BlockPos> p_227241_5_, MutableBoundingBox p_227241_6_, TreeFeatureConfig p_227241_7_) {
-		if (!isDirtOrGrassBlockOrFarmland(p_227241_1_, p_227241_3_.down())) {
+		if (!isDirtOrGrassBlockOrFarmland(p_227241_1_, VersionUtils.down(p_227241_3_))) {
 			return -1;
 		} else {
 			int i = this.func_227235_a_(p_227241_1_, p_227241_2_, p_227241_3_, p_227241_3_.up(p_227241_4_ - 1), false, p_227241_5_, p_227241_6_, p_227241_7_);

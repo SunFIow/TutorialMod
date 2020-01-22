@@ -74,7 +74,7 @@ public class CentaurModel extends EntityModel<CentaurEntity> {
 		this.leg2 = new ModelRenderer(this, 0, 16);
 		this.leg2.setRotationPoint(4.0F, 12.0F, 7.0F);
 		this.leg2.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0.0F);
-		this.villagerHead.addChild(this.villagerHeadChild);
+		this.villagerHead.func_78792_a(this.villagerHeadChild);
 	}
 
 	@Override

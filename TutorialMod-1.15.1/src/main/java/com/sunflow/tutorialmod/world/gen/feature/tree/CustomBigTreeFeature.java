@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
+import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +28,7 @@ public class CustomBigTreeFeature extends HugeTreesFeature<HugeTreeFeatureConfig
 		int k = p_225557_3_.getY();
 		int l = p_225557_3_.getZ();
 		if (k >= 1 && k + i + 1 < p_225557_1_.getMaxHeight()) {
-			BlockPos blockpos = p_225557_3_.down();
+			BlockPos blockpos = VersionUtils.down(p_225557_3_);
 			if (!isSoil(p_225557_1_, blockpos, p_225557_7_.getSapling())) {
 				return false;
 			} else if (!this.func_214615_a(p_225557_1_, p_225557_3_, i)) {
@@ -144,7 +145,7 @@ public class CustomBigTreeFeature extends HugeTreesFeature<HugeTreeFeatureConfig
 
 			for (int j1 = -i1; j1 <= i1; ++j1) {
 				for (int k1 = -i1; k1 <= i1; ++k1) {
-					if (!func_214587_a(p_214615_1_, blockpos$mutable.setPos(i + j1, j + l, k + k1))) {
+					if (!func_214587_a(p_214615_1_, VersionUtils.setPos(blockpos$mutable, i + j1, j + l, k + k1))) {
 						return false;
 					}
 				}

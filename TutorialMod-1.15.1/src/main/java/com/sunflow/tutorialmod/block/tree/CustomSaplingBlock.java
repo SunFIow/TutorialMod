@@ -20,8 +20,9 @@ public class CustomSaplingBlock extends SaplingBlock {
 		super(new CustomTree(log, leaves, sapling), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT));
 		this.setRegistryName(name);
 
+		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
+
 		ModBlocks.BLOCKS.add(this);
 		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(ModGroups.itemGroup)).setRegistryName(name));
-		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
 	}
 }
