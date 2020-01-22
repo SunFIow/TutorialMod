@@ -15,13 +15,10 @@ import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.model.ItemOverrideList;
-import net.minecraft.client.renderer.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -34,7 +31,7 @@ import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
 public class CustomBakedModel implements IDynamicBakedModel {
-	private final ItemCameraTransforms transforms = getAllTransforms();
+//	private final ItemCameraTransforms transforms = getAllTransforms();
 
 	private final ResourceLocation location;
 	private List<BakedQuad> quads;
@@ -189,35 +186,35 @@ public class CustomBakedModel implements IDynamicBakedModel {
 		return ItemOverrideList.EMPTY;
 	}
 
-//	@Override
-//	public ItemCameraTransforms getItemCameraTransforms() {
-//		return ItemCameraTransforms.DEFAULT;
-//	}
-
 	@Override
-	public ItemCameraTransforms getItemCameraTransforms() { return transforms; }
-
-	public ItemCameraTransforms getAllTransforms() {
-		ItemTransformVec3f tpLeft = getTransform(TransformType.THIRD_PERSON_LEFT_HAND);
-		ItemTransformVec3f tpRight = getTransform(TransformType.THIRD_PERSON_RIGHT_HAND);
-		ItemTransformVec3f fpLeft = getTransform(TransformType.FIRST_PERSON_LEFT_HAND);
-		ItemTransformVec3f fpRight = getTransform(TransformType.FIRST_PERSON_RIGHT_HAND);
-		ItemTransformVec3f head = getTransform(TransformType.HEAD);
-		ItemTransformVec3f gui = getTransform(TransformType.GUI);
-		ItemTransformVec3f ground = getTransform(TransformType.GROUND);
-		ItemTransformVec3f fixed = getTransform(TransformType.FIXED);
-		return new ItemCameraTransforms(tpLeft, tpRight, fpLeft, fpRight, head, gui, ground, fixed);
+	public ItemCameraTransforms getItemCameraTransforms() {
+		return ItemCameraTransforms.DEFAULT;
 	}
 
-	private ItemTransformVec3f getTransform(TransformType type) {
-		if (type.equals(TransformType.GUI)) {
-			return new ItemTransformVec3f(new Vector3f(33F, 45F, 0F), new Vector3f(), new Vector3f(0.8F, 0.8F, 0.8F));
-		} else if (type.equals(TransformType.FIRST_PERSON_LEFT_HAND) || type.equals(TransformType.FIRST_PERSON_RIGHT_HAND)) {
-			return new ItemTransformVec3f(new Vector3f(0F, 45F, 0F), new Vector3f(), new Vector3f(0.53F, 0.53F, 0.53F));
-		} else if (type.equals(TransformType.THIRD_PERSON_LEFT_HAND) || type.equals(TransformType.THIRD_PERSON_RIGHT_HAND)) {
-			return new ItemTransformVec3f(new Vector3f(-15F, 0F, 45F), new Vector3f(0F, 0.17f, 0F), new Vector3f(0.5F, 0.5F, 0.5F));
-		}
-		return ItemTransformVec3f.DEFAULT;
-	}
+//	@Override
+//	public ItemCameraTransforms getItemCameraTransforms() { return transforms; }
+
+//	public ItemCameraTransforms getAllTransforms() {
+//		ItemTransformVec3f tpLeft = getTransform(TransformType.THIRD_PERSON_LEFT_HAND);
+//		ItemTransformVec3f tpRight = getTransform(TransformType.THIRD_PERSON_RIGHT_HAND);
+//		ItemTransformVec3f fpLeft = getTransform(TransformType.FIRST_PERSON_LEFT_HAND);
+//		ItemTransformVec3f fpRight = getTransform(TransformType.FIRST_PERSON_RIGHT_HAND);
+//		ItemTransformVec3f head = getTransform(TransformType.HEAD);
+//		ItemTransformVec3f gui = getTransform(TransformType.GUI);
+//		ItemTransformVec3f ground = getTransform(TransformType.GROUND);
+//		ItemTransformVec3f fixed = getTransform(TransformType.FIXED);
+//		return new ItemCameraTransforms(tpLeft, tpRight, fpLeft, fpRight, head, gui, ground, fixed);
+//	}
+//
+//	private ItemTransformVec3f getTransform(TransformType type) {
+//		if (type.equals(TransformType.GUI)) {
+//			return new ItemTransformVec3f(new Vector3f(33F, 45F, 0F), new Vector3f(), new Vector3f(0.8F, 0.8F, 0.8F));
+//		} else if (type.equals(TransformType.FIRST_PERSON_LEFT_HAND) || type.equals(TransformType.FIRST_PERSON_RIGHT_HAND)) {
+//			return new ItemTransformVec3f(new Vector3f(0F, 45F, 0F), new Vector3f(), new Vector3f(0.53F, 0.53F, 0.53F));
+//		} else if (type.equals(TransformType.THIRD_PERSON_LEFT_HAND) || type.equals(TransformType.THIRD_PERSON_RIGHT_HAND)) {
+//			return new ItemTransformVec3f(new Vector3f(-15F, 0F, 45F), new Vector3f(0F, 0.17f, 0F), new Vector3f(0.5F, 0.5F, 0.5F));
+//		}
+//		return ItemTransformVec3f.DEFAULT;
+//	}
 
 }

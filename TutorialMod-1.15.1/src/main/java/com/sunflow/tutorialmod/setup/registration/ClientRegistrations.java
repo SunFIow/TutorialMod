@@ -33,8 +33,7 @@ public class ClientRegistrations {
 
 	@SubscribeEvent
 	public static void onTextureStich(TextureStitchEvent.Pre event) {
-//		if (!event.getMap().getBasePath().equals("textures")) return;
-//		if (event.getMap().func_229223_g_() != PlayerContainer.field_226615_c_) return;
+		// ----------------------------------- PlayerContainer.field_226615_c_) return;
 		if (event.getMap().func_229223_g_() != AtlasTexture.LOCATION_BLOCKS_TEXTURE) return;
 
 		ModBlocks.BAKEDMODELBLOCKS.forEach((block) -> event.addSprite(block.location()));

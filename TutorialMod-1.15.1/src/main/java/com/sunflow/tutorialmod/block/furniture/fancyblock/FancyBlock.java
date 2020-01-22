@@ -24,7 +24,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class FancyBlock extends BakedBlockBase {
-	private static final VoxelShape GRIDLESS_AABB = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
+//	private static final VoxelShape GRIDLESS_AABB = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
+	private static final VoxelShape GRIDLESS_AABB = Block.makeCuboidShape(1.0D, 1.0D, 0.0D, 15.0D, 14.0D, 15.0D);
 
 	public FancyBlock() {
 		super("fancyblock", ModGroups.itemGroup, Properties.create(Material.ROCK)
