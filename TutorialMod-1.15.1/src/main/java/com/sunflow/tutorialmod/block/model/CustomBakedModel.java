@@ -33,19 +33,19 @@ import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 public class CustomBakedModel implements IDynamicBakedModel {
 //	private final ItemCameraTransforms transforms = getAllTransforms();
 
-	private final ResourceLocation location;
+	final ResourceLocation texture;
 	private List<BakedQuad> quads;
 	private Vec3d offset;
 	private Vec3d length;
 
-	public CustomBakedModel(ResourceLocation location, Vec3d offset, Vec3d length) {
-		this.location = location;
+	public CustomBakedModel(ResourceLocation texture, Vec3d offset, Vec3d length) {
+		this.texture = texture;
 		this.offset = offset;
 		this.length = length;
 	}
 
 	private TextureAtlasSprite getTexture() {
-		return Minecraft.getInstance().func_228015_a_(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(location);
+		return Minecraft.getInstance().func_228015_a_(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(texture);
 	}
 
 	@Nonnull
