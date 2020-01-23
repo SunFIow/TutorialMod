@@ -8,10 +8,10 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 
-//@Mod.EventBusSubscriber
 public class Config {
 
 	public static final String CATEGORY_GENERAL = "general";
@@ -21,9 +21,6 @@ public class Config {
 	public static final String SUBCATEGORY_ELECTRIC_SINTERING_FURNACE = "electric_sintering_furnace";
 	public static final String SUBCATEGORY_CHARGER = "charger";
 	public static final String SUBCATEGORY_ENERGY_ITEM = "energy_item";
-
-	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
-	private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 
 	public static ForgeConfigSpec COMMON_CONFIG;
 	public static ForgeConfigSpec CLIENT_CONFIG;
@@ -55,21 +52,24 @@ public class Config {
 	}
 
 	private static void commonConfig() {
+		final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+
 		COMMON_BUILDER.comment("General Settings").push(CATEGORY_GENERAL);
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Machine Settings").push(CATEGORY_MACHINES);
-		setupFirstBlockConfig();
-		setupSinteringFurnaceConfig();
-		setupElectricSinteringFurnaceConfig();
-		setupChargerConfig();
-		setupEnergyItemConfig();
+		setupFirstBlockConfig(COMMON_BUILDER);
+		setupSinteringFurnaceConfig(COMMON_BUILDER);
+		setupElectricSinteringFurnaceConfig(COMMON_BUILDER);
+		setupChargerConfig(COMMON_BUILDER);
+		setupEnergyItemConfig(COMMON_BUILDER);
 		COMMON_BUILDER.pop();
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
 	}
 
 	private static void clientConfig() {
+		final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 		CLIENT_BUILDER.comment("Client only settings").push("client");
 
 		CONFIG_SHOW_OVERLAY = CLIENT_BUILDER.comment("Show the Overlay InGame")
@@ -79,7 +79,7 @@ public class Config {
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
 
-	private static void setupFirstBlockConfig() {
+	private static void setupFirstBlockConfig(Builder COMMON_BUILDER) {
 		COMMON_BUILDER.comment("FirstBlock Settings").push(SUBCATEGORY_FIRSTBLOCK);
 		FIRSTBLOCK_GENERATE = COMMON_BUILDER.comment("Power generation per glowstone")
 				.defineInRange("generate", 256, 0, Integer.MAX_VALUE);
@@ -92,14 +92,14 @@ public class Config {
 		COMMON_BUILDER.pop();
 	}
 
-	private static void setupSinteringFurnaceConfig() {
+	private static void setupSinteringFurnaceConfig(Builder COMMON_BUILDER) {
 		COMMON_BUILDER.comment("Sintering Furnace Settings").push(SUBCATEGORY_SINTERING_FURNACE);
 		SINTERING_FURNACE_TICKS = COMMON_BUILDER.comment("Ticks per item")
 				.defineInRange("ticks", 80, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 	}
 
-	private static void setupElectricSinteringFurnaceConfig() {
+	private static void setupElectricSinteringFurnaceConfig(Builder COMMON_BUILDER) {
 		COMMON_BUILDER.comment("Electric Sintering Furnace Settings").push(SUBCATEGORY_ELECTRIC_SINTERING_FURNACE);
 		ELECTRIC_SINTERING_FURNACE_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
@@ -112,7 +112,7 @@ public class Config {
 		COMMON_BUILDER.pop();
 	}
 
-	private static void setupChargerConfig() {
+	private static void setupChargerConfig(Builder COMMON_BUILDER) {
 		COMMON_BUILDER.comment("Charger Settings").push(SUBCATEGORY_CHARGER);
 		CHARGER_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
@@ -123,7 +123,7 @@ public class Config {
 		COMMON_BUILDER.pop();
 	}
 
-	private static void setupEnergyItemConfig() {
+	private static void setupEnergyItemConfig(Builder COMMON_BUILDER) {
 		COMMON_BUILDER.comment("Energy Item Settings").push(SUBCATEGORY_ENERGY_ITEM);
 		ENERGY_ITEM_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 2500, 0, Integer.MAX_VALUE);
@@ -149,6 +149,6 @@ public class Config {
 
 	@SubscribeEvent
 	public static void onReload(ModConfig.ConfigReloading event) {
-		Log.fatal("{} config just got changed on the file system!", TutorialMod.MODID);
+		Log.debug("{} config just got changed on the file system!", TutorialMod.MODID);
 	}
 }

@@ -21,29 +21,26 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preSetup() {
 		Log.info("Welcome home senpai.");
-//		TutorialMod.LOGGER.info("Gimme just a moment senpai while I get some things to tinker with...");
+//		Log.info("Gimme just a moment senpai while I get some things to tinker with...");
 		Log.info("Would you like to have dinner first?");
 		Log.info("Or would you rather take a bath?");
 		Log.info("Or...");
 
 		super.preSetup();
-
-		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		modEventBus.register(ClientRegistrations.class);
 	}
 
 	@Override
-	public void setup() {
+	public void setup(FMLCommonSetupEvent event) {
 		Log.info("perhaps you would like...");
 
-		super.setup();
+		super.setup(event);
 
 		ClientRegistrations.registerScreens();
 		KeyBindingHandler.setup();
