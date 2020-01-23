@@ -1,5 +1,6 @@
 package com.sunflow.tutorialmod.setup.registration;
 
+import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModBiomes;
 import com.sunflow.tutorialmod.setup.ModBlocks;
 import com.sunflow.tutorialmod.setup.ModContainerTypes;
@@ -21,12 +22,14 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
-//@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = TutorialMod.MODID, value = { Dist.CLIENT, Dist.DEDICATED_SERVER }, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonRegistrations {
 
 	@SubscribeEvent
