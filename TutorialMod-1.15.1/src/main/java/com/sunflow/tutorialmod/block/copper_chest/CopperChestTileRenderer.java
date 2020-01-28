@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.block.copper_chest;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,17 +16,13 @@ import net.minecraft.client.renderer.tileentity.DualBrightnessCallback;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.IChestLid;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-@OnlyIn(Dist.CLIENT)
-public class CopperChestTileRenderer<T extends TileEntity & IChestLid> extends TileEntityRenderer<T> {
+public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile> {
 	private static final ResourceLocation TEXTURE_COPPER_CHEST = new ResourceLocation(TutorialMod.MODID, "textures/entity/chest/copper_chest.png");
 //	public static final Material TEXTURE_COPPER_CHEST = new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation("entity/chest/copper_chest.png"));
 	private final CopperChestModel simpleChest;
@@ -35,8 +32,12 @@ public class CopperChestTileRenderer<T extends TileEntity & IChestLid> extends T
 		simpleChest = new CopperChestModel();
 	}
 
+	public static void register() {
+		ClientRegistry.bindTileEntityRenderer(Registration.COPPER_CHEST_TILE.get(), CopperChestTileRenderer::new);
+	}
+
 	@Override
-	public void render(T tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
+	public void render(CopperChestTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
 		World world = tileEntity.getWorld();
 		boolean flag = world != null;
 		BlockState blockstate = flag ? tileEntity.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
@@ -78,7 +79,6 @@ public class CopperChestTileRenderer<T extends TileEntity & IChestLid> extends T
 
 		simpleChest.render(matrixStack, buffer, combinedLight, combinedOverlay);
 	}
-
 //	private CopperChestModel getChestModel(int destroyStage) {
 //		ResourceLocation resourcelocation;
 //		if (destroyStage >= 0) {

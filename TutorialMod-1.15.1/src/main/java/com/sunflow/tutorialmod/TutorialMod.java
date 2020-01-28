@@ -11,6 +11,7 @@ import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
 
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -46,9 +47,7 @@ public class TutorialMod {
 
 		Registration.init();
 
-//		FMLJavaModLoadingContext.get().getModEventBus().addListener(proxy::setup);
-
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup);
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup));
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
 	}
 }

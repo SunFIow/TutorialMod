@@ -58,7 +58,7 @@ public class TutorialModConfig {
 		COMMON_BUILDER.pop();
 
 		COMMON_BUILDER.comment("Machine Settings").push(CATEGORY_MACHINES);
-		setupFirstBlockConfig(COMMON_BUILDER);
+		setupGlowstoneGeneratorConfig(COMMON_BUILDER);
 		setupSinteringFurnaceConfig(COMMON_BUILDER);
 		setupElectricSinteringFurnaceConfig(COMMON_BUILDER);
 		setupChargerConfig(COMMON_BUILDER);
@@ -79,7 +79,7 @@ public class TutorialModConfig {
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
 
-	private static void setupFirstBlockConfig(Builder COMMON_BUILDER) {
+	private static void setupGlowstoneGeneratorConfig(Builder COMMON_BUILDER) {
 		COMMON_BUILDER.comment("Glowstone Generator Settings").push(SUBCATEGORY_GLOWSTONE_GENERATOR);
 		GLOWSTONE_GENERATOR_GENERATE = COMMON_BUILDER.comment("Power generation per glowstone")
 				.defineInRange("generate", 256, 0, Integer.MAX_VALUE);

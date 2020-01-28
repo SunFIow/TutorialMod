@@ -189,7 +189,6 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	@Override
 	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
-//		return new FirstBlockContainer(id, world, pos, inv);
 		return new GlowstoneGeneratorContainer(id, inv, this);
 	}
 

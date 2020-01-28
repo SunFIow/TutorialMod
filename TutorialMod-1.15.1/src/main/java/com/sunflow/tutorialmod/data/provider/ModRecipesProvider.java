@@ -70,8 +70,8 @@ public class ModRecipesProvider extends RecipeProvider {
 				.patternLine(" S")
 				.key('#', Registration.RUBY.get())
 				.key('S', Items.STICK)
-				.setGroup("has_tutorialmod")
-				.addCriterion("ruby", hasItem(Registration.RUBY.get()))
+				.setGroup("tutorialmod")
+				.addCriterion("has_ruby", hasItem(Registration.RUBY.get()))
 				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(Registration.RUBY_PICKAXE.get())
 				.patternLine("###")
