@@ -21,8 +21,8 @@ public class ArmorSkinBase extends ArmorBase {
 	private String skinType;
 	private int renderIndex;
 
-	public ArmorSkinBase(String name, SkinType type, IArmorMaterial armorMaterial, int renderIndex, EquipmentSlotType equipmentSlot) {
-		super(name, armorMaterial, equipmentSlot);
+	public ArmorSkinBase(SkinType type, IArmorMaterial armorMaterial, int renderIndex, EquipmentSlotType equipmentSlot) {
+		super(armorMaterial, equipmentSlot);
 		this.armorTexturePath = TutorialMod.MODID + ":textures/models/armor/" + type.getName() + "_model";
 		this.skinType = "default";
 		this.renderIndex = renderIndex;

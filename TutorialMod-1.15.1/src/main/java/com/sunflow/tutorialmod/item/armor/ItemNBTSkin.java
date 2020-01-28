@@ -15,19 +15,22 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
 
 public class ItemNBTSkin extends ItemBase {
 	private final SkinType skin;
 
 	public ItemNBTSkin(SkinType skin, Item.Properties properties) {
-		super(skin.getName() + "_skin", properties);
+		super(properties);
 		this.skin = skin;
 	}
 
-	public static Item[] create() {
-		Item[] skins = new Item[SkinType.values().length];
+	public static RegistryObject<Item>[] create(DeferredRegister<Item> ITEMS) {
+		@SuppressWarnings("unchecked")
+		RegistryObject<Item>[] skins = new RegistryObject[SkinType.values().length];
 		int i = 0;
-		for (SkinType skin : SkinType.values()) skins[i++] = new ItemNBTSkin(skin, new Item.Properties().group(ModGroups.itemGroup));
+		for (SkinType skin : SkinType.values()) skins[i++] = ITEMS.register(skin.getName() + "_skin", () -> new ItemNBTSkin(skin, new Item.Properties().group(ModGroups.itemGroup)));
 		return skins;
 	}
 

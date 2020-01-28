@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
-import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.config.Config;
 
@@ -61,7 +61,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	private float cookTime;
 
 	public ElectricSinteringFurnaceTile() {
-		super(ModTileEntitiyTypes.ELECTRIC_SINTERING_FURNACE_TILE);
+		super(Registration.ELECTRIC_SINTERING_FURNACE_TILE.get());
 	}
 
 	@Override

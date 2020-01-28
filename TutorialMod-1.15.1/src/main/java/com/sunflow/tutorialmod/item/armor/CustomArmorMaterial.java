@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.item.armor;
 import java.util.function.Supplier;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.ModItems;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
@@ -34,7 +34,7 @@ public enum CustomArmorMaterial implements IArmorMaterial {
 //		return Ingredient.fromItems(Items.SCUTE);
 //	});
 
-	RUBY("ruby", 15, new int[] { 2, 5, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ModItems.RUBY));
+	RUBY("ruby", 15, new int[] { 2, 5, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(Registration.RUBY.get()));
 
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;

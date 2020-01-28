@@ -1,17 +1,13 @@
 package com.sunflow.tutorialmod.block.food;
 
 import java.util.Random;
-
-import com.sunflow.tutorialmod.item.food.SeedItem;
-import com.sunflow.tutorialmod.setup.ModBlocks;
+import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -39,33 +35,21 @@ public class FoodPlantBlock extends CropsBlock {
 
 	private final float chanceSeed;
 	private final float chanceCrop;
-	private final Item seed;
-	private final Item crop;
+	private final Supplier<Item> seed;
+	private final Supplier<Item> crop;
 	private final VoxelShape[] shape;
 
-	public FoodPlantBlock(String name, Item seed, Item crop, float chanceSeed, float chanceCrop, VoxelShape[] shape) {
+	public FoodPlantBlock(Supplier<Item> seed, Supplier<Item> crop, float chanceSeed, float chanceCrop, VoxelShape[] shape) {
 		super(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.CROP));
-		this.setRegistryName(name);
-		((SeedItem) seed).setPlantBlock(this);
-
 		this.chanceSeed = chanceSeed;
 		this.chanceCrop = chanceCrop;
 		this.seed = seed;
 		this.crop = crop;
 		this.shape = shape;
-
-		ModBlocks.BLOCKS.add(this);
-//		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(TutorialMod.setup.itemGroup)).setRegistryName(this.getRegistryName()));
-
-		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
 	}
 
-	public FoodPlantBlock(String name, Item seed, Item crop, float chanceSeed, float chanceCrop) {
-		this(name, seed, crop, chanceSeed, chanceCrop, SHAPES_2_4_6_8_10_10_10_12);
-	}
-
-	public FoodPlantBlock(String name, Item seed, Item crop, float chanceSeed, float chanceCrop, double[] shapeVals) {
-		this(name, seed, crop, chanceSeed, chanceCrop, new VoxelShape[] {
+	public FoodPlantBlock(Supplier<Item> seed, Supplier<Item> crop, float chanceSeed, float chanceCrop, double[] shapeVals) {
+		this(seed, crop, chanceSeed, chanceCrop, new VoxelShape[] {
 				Block.makeCuboidShape(shapeVals[8], 0.0D, shapeVals[8], 16.0D - shapeVals[8], shapeVals[0], 16.0D - shapeVals[8]),
 				Block.makeCuboidShape(shapeVals[8], 0.0D, shapeVals[8], 16.0D - shapeVals[8], shapeVals[1], 16.0D - shapeVals[8]),
 				Block.makeCuboidShape(shapeVals[8], 0.0D, shapeVals[8], 16.0D - shapeVals[8], shapeVals[2], 16.0D - shapeVals[8]),
@@ -76,8 +60,12 @@ public class FoodPlantBlock extends CropsBlock {
 				Block.makeCuboidShape(shapeVals[8], 0.0D, shapeVals[8], 16.0D - shapeVals[8], shapeVals[7], 16.0D - shapeVals[8]) });
 	}
 
-	public FoodPlantBlock(String name, Item seed, Item crop) {
-		this(name, seed, crop, 2f, 1f);
+	public FoodPlantBlock(Supplier<Item> seed, Supplier<Item> crop, float chanceSeed, float chanceCrop) {
+		this(seed, crop, chanceSeed, chanceCrop, SHAPES_2_4_6_8_10_10_10_12);
+	}
+
+	public FoodPlantBlock(Supplier<Item> seed, Supplier<Item> crop) {
+		this(seed, crop, 2f, 1f);
 	}
 
 	@Override
@@ -100,9 +88,9 @@ public class FoodPlantBlock extends CropsBlock {
 	}
 
 	@Override
-	protected IItemProvider getSeedsItem() { return seed; }
+	protected IItemProvider getSeedsItem() { return seed.get(); }
 
-	protected IItemProvider getCropItem() { return crop; }
+	protected IItemProvider getCropItem() { return crop.get(); }
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

@@ -20,7 +20,7 @@ public class TeleporterBlock extends BlockBase {
 	private int dimensionID;
 
 	public TeleporterBlock(int dimensionID) {
-		super("teleporter", Material.ROCK);
+		super(Material.ROCK);
 		this.dimensionID = dimensionID;
 	}
 

@@ -4,9 +4,12 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = TutorialMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientForgeEventHandlers {
 	@SubscribeEvent
 	public static void onRenderOverlayText(RenderGameOverlayEvent.Text event) {

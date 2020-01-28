@@ -1,13 +1,10 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.setup.ModGroups;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -18,33 +15,27 @@ import net.minecraft.world.World;
 public abstract class PoweredTileBlockBase extends TileBlockBase {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-	public PoweredTileBlockBase(String name, ItemGroup group, Properties properties) {
-		super(name, group, properties);
+	public PoweredTileBlockBase(Properties properties) {
+		super(properties);
 		setDefaultState(getDefaultState().with(POWERED, false));
 	}
 
-	public PoweredTileBlockBase(String name, Properties properties) {
-		this(name, ModGroups.itemGroup, properties);
-	}
-
-	public PoweredTileBlockBase(String name, Material material, SoundType sound, float hardness, float resistance) {
-		this(name, Properties.create(material)
+	public PoweredTileBlockBase(Material material, SoundType sound, float hardness, float resistance) {
+		this(Properties.create(material)
 				.sound(sound)
 				.hardnessAndResistance(hardness, resistance));
 	}
 
-	public PoweredTileBlockBase(String name, Material material, float hardnessAndResistance, int lightValue) {
-		this(name, Properties.create(material).hardnessAndResistance(hardnessAndResistance).lightValue(lightValue));
+	public PoweredTileBlockBase(Material material, float hardnessAndResistance, int lightValue) {
+		this(Properties.create(material).hardnessAndResistance(hardnessAndResistance).lightValue(lightValue));
 	}
 
-	public PoweredTileBlockBase(String name, Material material, float hardnessAndResistance) {
-		this(name, Properties.create(material)
+	public PoweredTileBlockBase(Material material, float hardnessAndResistance) {
+		this(Properties.create(material)
 				.hardnessAndResistance(hardnessAndResistance));
 	}
 
-	public PoweredTileBlockBase(String name) {
-		this(name, Material.ROCK, 2.0f);
-	}
+	public PoweredTileBlockBase() { this(Material.ROCK, 2.0f); }
 
 	@Override
 	public int getLightValue(BlockState state) {

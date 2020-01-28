@@ -1,8 +1,6 @@
 package com.sunflow.tutorialmod.entity.centaur;
 
-import com.sunflow.tutorialmod.setup.ModEntityTypes;
-import com.sunflow.tutorialmod.setup.ModItems;
-import com.sunflow.tutorialmod.setup.ModSounds;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -33,7 +31,7 @@ public class CentaurEntity extends CowEntity {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(ModItems.RUBY), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Registration.RUBY.get()), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -51,16 +49,16 @@ public class CentaurEntity extends CowEntity {
 //	public float getEyeHeight(Pose pose) { return 2.6f; }
 
 	@Override
-	protected SoundEvent getAmbientSound() { return ModSounds.ENTITY_CENTAUR_AMBIENT; }
+	protected SoundEvent getAmbientSound() { return Registration.ENTITY_CENTAUR_AMBIENT.get(); }
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) { return ModSounds.ENTITY_CENTAUR_HURT; }
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) { return Registration.ENTITY_CENTAUR_HURT.get(); }
 
 	@Override
-	protected SoundEvent getDeathSound() { return ModSounds.ENTITY_CENTAUR_DEATH; }
+	protected SoundEvent getDeathSound() { return Registration.ENTITY_CENTAUR_DEATH.get(); }
 
 	@Override
-	public CentaurEntity createChild(AgeableEntity ageable) { return ModEntityTypes.CENTAUR.create(this.world); }
+	public CentaurEntity createChild(AgeableEntity ageable) { return Registration.CENTAUR.get().create(this.world); }
 
 //	@Override
 //	protected ResourceLocation getLootTable(){ return LootTableHandler.CENTAUR; }

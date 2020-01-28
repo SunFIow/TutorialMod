@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.block.machine.charger;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
-import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
@@ -42,7 +42,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	@Override
 	protected CustomEnergyStorage getEnergy() { return new CustomEnergyStorage(Config.CHARGER_MAXPOWER.get(), Config.CHARGER_RECEIVE.get(), Config.CHARGER_CHARGE_RATE.get()); }
 
-	public ChargerTile() { super(ModTileEntitiyTypes.CHARGER_TILE); }
+	public ChargerTile() { super(Registration.CHARGER_TILE.get()); }
 
 	@Override
 	public void tick() {

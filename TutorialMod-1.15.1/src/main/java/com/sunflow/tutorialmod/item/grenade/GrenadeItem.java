@@ -15,8 +15,6 @@ import net.minecraft.world.World;
 
 public class GrenadeItem extends ItemBase {
 
-	public GrenadeItem() { super("grenade"); }
-
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);

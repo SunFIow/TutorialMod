@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.charger;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ContainerBase;
-import com.sunflow.tutorialmod.setup.ModContainerTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
@@ -18,7 +18,7 @@ public class ChargerContainer extends ContainerBase {
 	}
 
 	public ChargerContainer(int id, PlayerInventory inv, TileEntity tile) {
-		super(ModContainerTypes.CHARGER_CONTAINER, id, 1, tile);
+		super(Registration.CHARGER_CONTAINER.get(), id, 1, tile);
 
 		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, ChargerTile.CHARGE_SLOT, 80, 35));

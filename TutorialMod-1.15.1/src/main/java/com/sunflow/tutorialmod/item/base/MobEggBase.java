@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.item.base;
 import java.util.Objects;
 
 import com.sunflow.tutorialmod.setup.ModGroups;
-import com.sunflow.tutorialmod.setup.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -26,14 +25,13 @@ public class MobEggBase extends ItemBase {
 	private EntityType<?> entityType;
 	public final int eggColor;
 
-	public MobEggBase(String name, int eggColor, ItemGroup group) {
-		super(name, 1, group);
+	public MobEggBase(int eggColor, ItemGroup group) {
+		super(1, group);
 		this.eggColor = eggColor;
-		ModItems.EGGS.add(this);
 	}
 
-	public MobEggBase(String name, int eggColor) {
-		this(name, eggColor, ModGroups.itemGroup);
+	public MobEggBase(int eggColor) {
+		this(eggColor, ModGroups.itemGroup);
 	}
 
 	public void setEntityType(EntityType<?> entity) {

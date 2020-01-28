@@ -5,10 +5,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.sunflow.tutorialmod.setup.ModBlocks;
-import com.sunflow.tutorialmod.setup.ModGroups;
-import com.sunflow.tutorialmod.setup.ModItems;
-import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -26,9 +23,7 @@ import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
@@ -62,12 +57,8 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 
 	public CopperChestBlock() {
 		super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
-		field_226859_a_ = () -> ModTileEntitiyTypes.COPPER_CHEST_TILE;
+		field_226859_a_ = () -> Registration.COPPER_CHEST_TILE.get();
 		setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
-		setRegistryName("copper_chest");
-
-		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(ModGroups.itemGroup)).setRegistryName("copper_chest"));
 	}
 
 	@Override

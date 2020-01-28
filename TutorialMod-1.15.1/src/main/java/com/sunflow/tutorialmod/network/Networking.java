@@ -28,18 +28,18 @@ public class Networking {
 	public static final int TUTORIALMOD_NETVERSION = 1;
 	public static final String NETVERSION = TUTORIALMOD_NETMARKER + ":" + TUTORIALMOD_NETVERSION;
 
-	public static final ResourceLocation TUTORIALMOD_MAIN_RESOURCE = new ResourceLocation(TutorialMod.MODID, "main");
+	public static final ResourceLocation NAME = new ResourceLocation(TutorialMod.MODID, "tutorialmod");
 	public static final SimpleChannel TUTORIALMOD_CHANNEL = getTutorialModChannel();
 
 	private Networking() {}
 
 	private static int nextID() { return ID++; }
 
-	public static String init() { return NETVERSION; }
+	public static String getVersion() { return NETVERSION; }
 
 	public static SimpleChannel getTutorialModChannel() {
 		SimpleChannel channel = NetworkRegistry.ChannelBuilder
-				.named(TUTORIALMOD_MAIN_RESOURCE)
+				.named(NAME)
 				.networkProtocolVersion(() -> NETVERSION)
 				.clientAcceptedVersions(s -> true)
 				.serverAcceptedVersions(s -> true)

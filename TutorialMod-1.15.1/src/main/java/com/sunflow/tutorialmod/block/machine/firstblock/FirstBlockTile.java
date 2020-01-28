@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.block.machine.firstblock;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
-import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.config.Config;
 
@@ -57,7 +57,7 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 	private float powerLeftOvers;
 
 	public FirstBlockTile() {
-		super(ModTileEntitiyTypes.FIRSTBLOCK_TILE);
+		super(Registration.FIRSTBLOCK_TILE.get());
 	}
 
 	@Override

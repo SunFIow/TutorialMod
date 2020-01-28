@@ -13,12 +13,8 @@ import net.minecraftforge.common.ToolType;
 
 public class RubyBlock extends BlockBase {
 
-	public RubyBlock() {
-		super("ruby_block", Material.IRON, 5.0f, 5.0f, ToolType.PICKAXE, 2, SoundType.METAL, 5);
-	}
+	public RubyBlock() { super(Material.IRON, 5.0f, 5.0f, ToolType.PICKAXE, 2, SoundType.METAL, 5); }
 
 	@Override
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
-		return true;
-	}
+	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) { return true; }
 }

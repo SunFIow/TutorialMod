@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class ServerProxy extends CommonProxy {
+public class ServerProxy implements IProxy {
 
 	@Override
 	public World getClientWorld() { throw new IllegalStateException("Only run this on the client!"); }

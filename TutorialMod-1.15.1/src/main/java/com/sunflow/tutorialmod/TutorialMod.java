@@ -2,13 +2,20 @@ package com.sunflow.tutorialmod;
 
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
-import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
+import com.sunflow.tutorialmod.setup.proxy.IProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
+import com.sunflow.tutorialmod.setup.registration.ClientSetup;
+import com.sunflow.tutorialmod.setup.registration.CommonSetup;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
+import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.versions.mcp.MCPVersion;
 
 @Mod(value = TutorialMod.MODID)
@@ -19,15 +26,29 @@ public class TutorialMod {
 	public static final String VERSION = "1.0.6";
 	public static final String ACCEPTED_VERSION = "[1.15.1,)";
 
-//	public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
-	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+//	public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+	public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
 	public static MyWorldData data;
 
 	public TutorialMod() {
 		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
-		Log.info("Loading Network data for {} net version: {}", NAME, Networking.init());
+		Log.info("Loading Network data for {} net version: {}", NAME, Networking.getVersion());
 
-		proxy.preSetup();
+		Log.info("Welcome home senpai.");
+//		Log.info("Gimme just a moment senpai while I get some things to tinker with...");
+		Log.info("Would you like to have dinner first?");
+		Log.info("Or would you rather take a bath?");
+		Log.info("Or...");
+
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+
+		Registration.init();
+
+//		FMLJavaModLoadingContext.get().getModEventBus().addListener(proxy::setup);
+
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
 	}
 }

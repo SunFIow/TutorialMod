@@ -11,10 +11,6 @@ import net.minecraft.world.World;
 
 public class TestItem extends ItemBase {
 
-	public TestItem() {
-		super("testitem");
-	}
-
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 		player.sendMessage(new StringTextComponent(world.isRemote + ": " + player.fallDistance));

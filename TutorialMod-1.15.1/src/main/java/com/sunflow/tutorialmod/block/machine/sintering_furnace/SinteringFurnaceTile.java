@@ -8,9 +8,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.sunflow.tutorialmod.block.base.InventoryTileEntityBase;
-import com.sunflow.tutorialmod.setup.ModBlocks;
-import com.sunflow.tutorialmod.setup.ModItems;
-import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.block.BlockState;
@@ -70,7 +68,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	private int burnTimeTotal;
 
 	public SinteringFurnaceTile() {
-		super(ModTileEntitiyTypes.SINTERING_FURNACE_TILE);
+		super(Registration.SINTERING_FURNACE_TILE.get());
 	}
 
 	@Override
@@ -324,7 +322,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 		}
 
 		private Recipes() {
-			addSinteringRecipe(new ItemStack(ModBlocks.SANTA_HAT), new ItemStack(ModItems.RUBY), new ItemStack(ModItems.EVIL_APPLE), 5.4f);
+			addSinteringRecipe(new ItemStack(Registration.SANTA_HAT.get()), new ItemStack(Registration.RUBY.get()), new ItemStack(Registration.EVIL_APPLE.get()), 5.4f);
 			addSinteringRecipe(new ItemStack(Blocks.COAL_ORE), new ItemStack(Blocks.IRON_ORE), new ItemStack(Blocks.DIAMOND_ORE), 5.4f);
 		}
 

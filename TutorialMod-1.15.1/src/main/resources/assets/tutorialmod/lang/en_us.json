@@ -9,7 +9,7 @@
 	
 "_comment": "Enchantments",
 	"enchantment.tutorialmod.multijump": "Multijump",
-	
+	 
 "_comment": "Entities",
 	"entity.tutorialmod.centaur": "Centaur",
 	
@@ -43,8 +43,8 @@
 "_comment": "Food",
 	"item.tutorialmod.evil_apple": "Evil Apple",	
 	"item.tutorialmod.rice_bowl": "Bowl of Rice",
+	"block.tutorialmod.rice_plant": "Rice",
 	"item.tutorialmod.rice": "Rice",
-	"item.tutorialmod.rice_plant": "Rice Plant",
 	
 "_comment": "Eggs",
 	"item.tutorialmod.weirdmob_spawn_egg": "Weird Mob Egg",	

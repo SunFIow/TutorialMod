@@ -1,7 +1,8 @@
 package com.sunflow.tutorialmod.data.provider;
 
-import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModTags;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -15,15 +16,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
 	@Override
 	protected void registerTags() {
-		this.getBuilder(ModTags.Blocks.TUTORIAL).add(ModBlocks.FIRSTBLOCK, ModBlocks.RUBY_ORE);
-		this.getBuilder(BlockTags.LOGS).add(ModBlocks.COPPER_LOG, ModBlocks.ALUMINIUM_LOG);
-		this.getBuilder(BlockTags.LEAVES).add(ModBlocks.COPPER_LEAVES, ModBlocks.ALUMINIUM_LEAVES);
-		this.getBuilder(BlockTags.PLANKS).add(ModBlocks.COPPER_PLANKS, ModBlocks.ALUMINIUM_PLANKS);
-		this.getBuilder(BlockTags.SAPLINGS).add(ModBlocks.COPPER_SAPLING, ModBlocks.ALUMINIUM_SAPLING);
+		this.getBuilder(ModTags.Blocks.TUTORIAL).add(Registration.FIRSTBLOCK.get(), Registration.RUBY_ORE.get());
+		this.getBuilder(BlockTags.LOGS).add(Registration.COPPER_LOG.get(), Registration.ALUMINIUM_LOG.get());
+		this.getBuilder(BlockTags.LEAVES).add(Registration.COPPER_LEAVES.get(), Registration.ALUMINIUM_LEAVES.get());
+		this.getBuilder(BlockTags.PLANKS).add(Registration.COPPER_PLANKS.get(), Registration.ALUMINIUM_PLANKS.get());
+		this.getBuilder(BlockTags.SAPLINGS).add(Registration.COPPER_SAPLING.get(), Registration.ALUMINIUM_SAPLING.get());
 	}
 
 	@Override
-	public String getName() {
-		return "TutorialMod " + super.getName();
-	}
+	public String getName() { return TutorialMod.NAME + super.getName(); }
 }

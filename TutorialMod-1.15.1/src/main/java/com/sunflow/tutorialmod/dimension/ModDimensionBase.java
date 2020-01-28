@@ -3,9 +3,6 @@ package com.sunflow.tutorialmod.dimension;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.ModDimensions;
-
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
@@ -19,34 +16,27 @@ public class ModDimensionBase extends ModDimension {
 	private boolean hasSkyLight;
 	private Consumer<DimensionType> dimensionType;
 
-	public ModDimensionBase(String name, BiFunction<World, DimensionType, ? extends Dimension> factory, Consumer<DimensionType> type) {
-		this(name, factory, type, null, true);
+	public ModDimensionBase(BiFunction<World, DimensionType, ? extends Dimension> factory) {
+		this(factory, null, null, true);
 	}
 
-	public ModDimensionBase(String name, BiFunction<World, DimensionType, ? extends Dimension> factory, Consumer<DimensionType> type, PacketBuffer data, boolean hasSkyLight) {
+	public ModDimensionBase(BiFunction<World, DimensionType, ? extends Dimension> factory, Consumer<DimensionType> type) {
+		this(factory, type, null, true);
+	}
+
+	public ModDimensionBase(BiFunction<World, DimensionType, ? extends Dimension> factory, Consumer<DimensionType> type, PacketBuffer data, boolean hasSkyLight) {
 		this.factory = factory;
 		this.data = data;
 		this.hasSkyLight = hasSkyLight;
 		this.dimensionType = type;
-
-		setRegistryName(TutorialMod.MODID, name);
-		ModDimensions.DIMENSIONS.add(this);
 	}
 
 	@Override
-	public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-		return factory;
-	}
+	public BiFunction<World, DimensionType, ? extends Dimension> getFactory() { return factory; }
 
-	public PacketBuffer getData() {
-		return data;
-	}
+	public PacketBuffer getData() { return data; }
 
-	public boolean hasSkyLight() {
-		return hasSkyLight;
-	}
+	public boolean hasSkyLight() { return hasSkyLight; }
 
-	public void setDimensionType(DimensionType type) {
-		dimensionType.accept(type);
-	}
+	public void setDimensionType(DimensionType type) { dimensionType.accept(type); }
 }

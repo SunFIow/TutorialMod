@@ -5,10 +5,10 @@ import java.util.List;
 import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
-import com.sunflow.tutorialmod.util.config.Config;
+import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.VersionUtils;
-import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
+import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,9 +22,7 @@ import net.minecraft.world.World;
 
 public class EnergyWandItem extends ItemBase implements IEnergyItem {
 
-	public EnergyWandItem() {
-		super("energy_wand", 1);
-	}
+	public EnergyWandItem() { super(1); }
 
 	@Override
 	public CustomEnergyStorage createEnergy() {

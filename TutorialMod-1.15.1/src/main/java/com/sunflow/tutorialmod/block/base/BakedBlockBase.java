@@ -2,10 +2,8 @@ package com.sunflow.tutorialmod.block.base;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
-import com.sunflow.tutorialmod.setup.ModBlocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -22,8 +20,8 @@ public class BakedBlockBase extends BlockBase {
 	protected Vec3d length;
 	protected ResourceLocation location;
 
-	public BakedBlockBase(String name, ItemGroup group, Properties properties, VoxelShape shape) {
-		super(name, group, properties);
+	public BakedBlockBase(String name, Properties properties, VoxelShape shape) {
+		super(properties);
 		this.shape = shape;
 
 		AxisAlignedBB bb = shape.getBoundingBox();
@@ -31,8 +29,6 @@ public class BakedBlockBase extends BlockBase {
 		length = new Vec3d(bb.maxX - bb.minX, bb.maxY - bb.minY, bb.maxZ - bb.minZ);
 
 		location = new ResourceLocation(TutorialMod.MODID, "block/" + name);
-
-		ModBlocks.BAKEDMODELBLOCKS.add(this);
 	}
 
 	@Override

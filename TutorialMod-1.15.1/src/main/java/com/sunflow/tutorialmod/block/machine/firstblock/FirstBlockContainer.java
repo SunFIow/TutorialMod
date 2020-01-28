@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.firstblock;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ContainerBase;
-import com.sunflow.tutorialmod.setup.ModContainerTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
@@ -20,7 +20,7 @@ public class FirstBlockContainer extends ContainerBase {
 
 	// SERVER
 	public FirstBlockContainer(int windowId, PlayerInventory inv, TileEntity tile) {
-		super(ModContainerTypes.FIRSTBLOCK_CONTAINER, windowId, 1, tile);
+		super(Registration.FIRSTBLOCK_CONTAINER.get(), windowId, 1, tile);
 
 		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, FirstBlockTile.FUEL_SLOT, 80, 35));
