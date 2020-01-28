@@ -5,8 +5,7 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sunflow.tutorialmod.command.util.TeleportationTools;
-import com.sunflow.tutorialmod.setup.ModDimensions;
-import com.sunflow.tutorialmod.util.VersionUtils;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -27,12 +26,14 @@ public class TpDimCommand extends CommandBase implements Command<CommandSource> 
 	@Override
 	public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
 		ServerPlayerEntity player = context.getSource().asPlayer();
-		if (player.dimension.equals(ModDimensions.BADLANDS_TYPE))
-			TeleportationTools.teleportToDimension(player, DimensionType.OVERWORLD, new BlockPos(VersionUtils.getX(player), 200, VersionUtils.getZ(player)));
-		else if (player.dimension.equals(DimensionType.OVERWORLD))
-			TeleportationTools.teleportToDimension(player, DimensionType.THE_NETHER, new BlockPos(VersionUtils.getX(player), 200, VersionUtils.getZ(player)));
-		else
-			TeleportationTools.teleportToDimension(player, ModDimensions.BADLANDS_TYPE, new BlockPos(VersionUtils.getX(player), 200, VersionUtils.getZ(player)));
+		BlockPos blockPos = new BlockPos(player.getPosX(), 140, player.getPosZ());
+
+		DimensionType dimType;
+		if (player.dimension.equals(Registration.BADLANDS_TYPE)) dimType = DimensionType.OVERWORLD;
+		else if (player.dimension.equals(DimensionType.OVERWORLD)) dimType = DimensionType.THE_NETHER;
+		else dimType = Registration.BADLANDS_TYPE;
+
+		TeleportationTools.teleportToDimension(player, dimType, blockPos);
 
 		return 0;
 	}

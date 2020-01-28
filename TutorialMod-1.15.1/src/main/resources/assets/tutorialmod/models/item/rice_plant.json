@@ -1,3 +1,6 @@
 {
-   "parent": "tutorialmod:item/rice"
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "tutorialmod:item/rice"
+   }
 }

@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.enchantment;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.MultiJumpPacket;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,13 +13,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class EnchantmentMultiJump extends EnchantmentBase {
+public class EnchantmentMultiJump extends Enchantment {
 
 	private int jumpNum = 0;
 	private boolean spaceStillDown = false;
 
 	public EnchantmentMultiJump() {
-		super("multijump", Rarity.RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[] { EquipmentSlotType.FEET });
+		super(Rarity.RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[] { EquipmentSlotType.FEET });
 	}
 
 	@Override

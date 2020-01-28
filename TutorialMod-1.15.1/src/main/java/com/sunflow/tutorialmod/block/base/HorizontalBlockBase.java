@@ -1,13 +1,10 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.setup.ModGroups;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -17,21 +14,17 @@ import net.minecraftforge.common.ToolType;
 public class HorizontalBlockBase extends BlockBase {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public HorizontalBlockBase(String name, ItemGroup group, Properties properties) {
-		super(name, group, properties);
+	public HorizontalBlockBase(Properties properties) {
+		super(properties);
 		setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
 	}
 
-	public HorizontalBlockBase(String name, Material material) {
-		this(name, Block.Properties.create(material).hardnessAndResistance(2.5f));
+	public HorizontalBlockBase(Material material) {
+		this(Block.Properties.create(material).hardnessAndResistance(2.5f));
 	}
 
-	public HorizontalBlockBase(String name, Properties properties) {
-		this(name, ModGroups.itemGroup, properties);
-	}
-
-	public HorizontalBlockBase(String name, Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {
-		this(name, Block.Properties.create(material).hardnessAndResistance(hardness, resistance).harvestTool(tooltype).harvestLevel(harvestlevel).sound(soundtype).lightValue(lightlevel));
+	public HorizontalBlockBase(Material material, float hardness, float resistance, ToolType tooltype, int harvestlevel, SoundType soundtype, int lightlevel) {
+		this(Block.Properties.create(material).hardnessAndResistance(hardness, resistance).harvestTool(tooltype).harvestLevel(harvestlevel).sound(soundtype).lightValue(lightlevel));
 	}
 
 	@Override

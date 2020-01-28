@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.item.tools;
 
 import java.util.function.Supplier;
 
-import com.sunflow.tutorialmod.setup.ModItems;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
@@ -25,11 +25,7 @@ public enum ToolMaterial implements IItemTier {
 //		return Ingredient.fromItems(Items.GOLD_INGOT);
 //	});
 
-	RUBY(2, 250, 6.0F, 2.0F, 14, () -> {
-		return Ingredient.fromItems(ModItems.RUBY);
-	})
-
-	;
+	RUBY(2, 250, 6.0F, 2.0F, 14, () -> Ingredient.fromItems(Registration.RUBY.get()));
 
 	private final int harvestLevel;
 	private final int maxUses;

@@ -21,7 +21,7 @@ public class BadlandsBiomeProvider extends BiomeProvider {
 	}
 
 	@Override
-	public Biome func_225526_b_(int x, int y, int z) { return biome; }
+	public Biome getNoiseBiome(int x, int y, int z) { return biome; }
 
 	@Override
 	public List<Biome> getBiomesToSpawnIn() { return SPAWNABLE; }

@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockReader;
 public class EnergyStorageBlock extends EnergyTileBlockBase {
 
 	public EnergyStorageBlock() {
-		super("energy_storage", Properties.create(Material.ROCK)
+		super(Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
 				.lightValue(14));
 	}

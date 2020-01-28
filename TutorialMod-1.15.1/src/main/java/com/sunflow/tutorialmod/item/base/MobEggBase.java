@@ -1,9 +1,7 @@
 package com.sunflow.tutorialmod.item.base;
 
 import java.util.Objects;
-
-import com.sunflow.tutorialmod.setup.ModGroups;
-import com.sunflow.tutorialmod.setup.ModItems;
+import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -23,21 +21,14 @@ import net.minecraft.world.spawner.AbstractSpawner;
 
 public class MobEggBase extends ItemBase {
 
-	private EntityType<?> entityType;
+	private Supplier<EntityType<?>> entityType;
 	public final int eggColor;
 
-	public MobEggBase(String name, int eggColor, ItemGroup group) {
-		super(name, 1, group);
+	public MobEggBase(int eggColor, ItemGroup group, Supplier<EntityType<?>> entityType) {
+		super(1, group);
 		this.eggColor = eggColor;
-		ModItems.EGGS.add(this);
-	}
+		this.entityType = entityType;
 
-	public MobEggBase(String name, int eggColor) {
-		this(name, eggColor, ModGroups.itemGroup);
-	}
-
-	public void setEntityType(EntityType<?> entity) {
-		this.entityType = entity;
 	}
 
 	@Override
@@ -55,7 +46,7 @@ public class MobEggBase extends ItemBase {
 				TileEntity tileentity = world.getTileEntity(blockpos);
 				if (tileentity instanceof MobSpawnerTileEntity) {
 					AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic();
-					abstractspawner.setEntityType(entityType);
+					abstractspawner.setEntityType(entityType.get());
 					tileentity.markDirty();
 					world.notifyBlockUpdate(blockpos, blockstate, blockstate, 3);
 					itemstack.shrink(1);
@@ -70,7 +61,7 @@ public class MobEggBase extends ItemBase {
 				blockpos1 = blockpos.offset(direction);
 			}
 
-			if (entityType.spawn(world, itemstack, context.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
+			if (entityType.get().spawn(world, itemstack, context.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
 				itemstack.shrink(1);
 			}
 

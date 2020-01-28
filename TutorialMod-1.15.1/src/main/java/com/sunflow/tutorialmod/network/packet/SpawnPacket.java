@@ -37,7 +37,7 @@ public class SpawnPacket extends BasePacket {
 
 	@Override
 	public boolean action(NetworkEvent.Context ctx) {
-		ServerWorld spawnWorld = ctx.getSender().world.getServer().func_71218_a(type);
+		ServerWorld spawnWorld = ctx.getSender().world.getServer().getWorld(type);
 		EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
 		if (entityType == null) throw new IllegalStateException("This cannot happen! Unkown id '" + id + "'!");
 

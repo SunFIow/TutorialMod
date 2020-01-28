@@ -15,10 +15,6 @@ import net.minecraft.world.World;
 
 public class FancySwordItem extends ItemBase {
 
-	public FancySwordItem() {
-		super("fancy_sword");
-	}
-
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 		if (world.isRemote) return super.onItemRightClick(world, player, hand);

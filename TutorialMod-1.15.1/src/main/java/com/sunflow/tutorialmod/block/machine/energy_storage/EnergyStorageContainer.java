@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.energy_storage;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ContainerBase;
-import com.sunflow.tutorialmod.setup.ModContainerTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
@@ -16,7 +16,7 @@ public class EnergyStorageContainer extends ContainerBase {
 	}
 
 	public EnergyStorageContainer(int id, PlayerInventory inv, TileEntity tile) {
-		super(ModContainerTypes.ENERGY_STORAGE_CONTAINER, id, 1, tile);
+		super(Registration.ENERGY_STORAGE_CONTAINER.get(), id, 1, tile);
 
 		layoutPlayerInventorySlots(new InvWrapper(inv), 8, 84);
 

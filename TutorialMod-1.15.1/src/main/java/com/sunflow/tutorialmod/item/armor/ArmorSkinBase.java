@@ -21,8 +21,8 @@ public class ArmorSkinBase extends ArmorBase {
 	private String skinType;
 	private int renderIndex;
 
-	public ArmorSkinBase(String name, SkinType type, IArmorMaterial armorMaterial, int renderIndex, EquipmentSlotType equipmentSlot) {
-		super(name, armorMaterial, equipmentSlot);
+	public ArmorSkinBase(SkinType type, IArmorMaterial armorMaterial, int renderIndex, EquipmentSlotType equipmentSlot) {
+		super(armorMaterial, equipmentSlot);
 		this.armorTexturePath = TutorialMod.MODID + ":textures/models/armor/" + type.getName() + "_model";
 		this.skinType = "default";
 		this.renderIndex = renderIndex;
@@ -49,8 +49,7 @@ public class ArmorSkinBase extends ArmorBase {
 			model.bipedRightLeg.showModel = armorSlot == EquipmentSlotType.LEGS;
 
 			model.isChild = _default.isChild;
-			// .isSneak
-			model.field_228270_o_ = _default.field_228270_o_;
+			model.isSneak = _default.isSneak;
 			model.isSitting = _default.isSitting;
 			model.rightArmPose = _default.rightArmPose;
 			model.leftArmPose = _default.leftArmPose;

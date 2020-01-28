@@ -10,8 +10,8 @@ import net.minecraft.potion.EffectInstance;
 
 public class FoodItem extends ItemBase {
 
-	public FoodItem(String name, int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible, EffectInstance... effects) {
-		super(name, getProperties(hunger, saturation, meat, fastEat, alwaysEdible, effects));
+	public FoodItem(int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible, EffectInstance... effects) {
+		super(getProperties(hunger, saturation, meat, fastEat, alwaysEdible, effects));
 	}
 
 	private static Properties getProperties(int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible, EffectInstance... effects) {

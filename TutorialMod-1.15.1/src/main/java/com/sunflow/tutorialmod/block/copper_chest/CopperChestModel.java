@@ -15,21 +15,21 @@ public class CopperChestModel {
 
 	public CopperChestModel() {
 		this.chestBelow = new ModelRenderer(64, 64, 0, 19);
-		this.chestBelow.func_228301_a_(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
+		this.chestBelow.addBox(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
 
 		this.chestLid = new ModelRenderer(64, 64, 0, 0);
-		this.chestLid.func_228301_a_(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
+		this.chestLid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
 		this.chestLid.rotationPointY = 9.0F;
 		this.chestLid.rotationPointZ = 1.0F;
 		this.chestKnob = new ModelRenderer(64, 64, 0, 0);
-		this.chestKnob.func_228301_a_(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
+		this.chestKnob.addBox(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
 		this.chestKnob.rotationPointY = 8.0F;
 	}
 
-	public void render(MatrixStack p_228871_1_, IVertexBuilder p_228871_2_, int p_228871_7_, int p_228871_8_) {
-		chestLid.func_228308_a_(p_228871_1_, p_228871_2_, p_228871_7_, p_228871_8_);
-		chestKnob.func_228308_a_(p_228871_1_, p_228871_2_, p_228871_7_, p_228871_8_);
-		chestBelow.func_228308_a_(p_228871_1_, p_228871_2_, p_228871_7_, p_228871_8_);
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay) {
+		chestLid.render(matrixStack, buffer, packedLight, packedOverlay);
+		chestKnob.render(matrixStack, buffer, packedLight, packedOverlay);
+		chestBelow.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 
 	public void applyRotation(float p_228871_6_) {

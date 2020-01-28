@@ -2,13 +2,12 @@ package com.sunflow.tutorialmod.item;
 
 import java.util.List;
 
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
-import com.sunflow.tutorialmod.util.config.Config;
-import com.sunflow.tutorialmod.util.Log;
-import com.sunflow.tutorialmod.util.VersionUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
+import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,13 +21,11 @@ import net.minecraft.world.World;
 
 public class EnergyWandItem extends ItemBase implements IEnergyItem {
 
-	public EnergyWandItem() {
-		super("energy_wand", 1);
-	}
+	public EnergyWandItem() { super(1); }
 
 	@Override
 	public CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(Config.ENERGY_ITEM_MAXPOWER.get());
+		return new CustomEnergyStorage(TutorialModConfig.ENERGY_ITEM_MAXPOWER.get());
 	}
 
 	@Override
@@ -37,7 +34,7 @@ public class EnergyWandItem extends ItemBase implements IEnergyItem {
 			ItemStack stack = player.getHeldItem(hand);
 			CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(stack, EnergyUnit.DEFAULT);
 
-			if (VersionUtils.isSneaking(player)) {
+			if (player.isShiftKeyDown()) {
 				itemEnergy.receiveEnergy(100, false);
 			}
 //			tag.put(EnergyUnit.DEFAULT.name, itemEnergy.serializeNBT());

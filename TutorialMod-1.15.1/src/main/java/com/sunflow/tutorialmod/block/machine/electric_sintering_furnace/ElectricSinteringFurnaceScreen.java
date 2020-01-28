@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.electric_sintering_furnace;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ScreenBase;
-import com.sunflow.tutorialmod.util.config.Config;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -30,7 +30,7 @@ public class ElectricSinteringFurnaceScreen extends ScreenBase<ElectricSintering
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-		int l = getProgressScaled(container.getCookTime(), Config.ELECTRIC_SINTERING_FURNACE_TICKS.get(), 24);
+		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get(), 24);
 		this.blit(guiLeft + 79, guiTop + 34, 176, 14, l, 17);
 
 		int k = getProgressScaled(container.getEnergy(), container.getEnergyMax(), 76);

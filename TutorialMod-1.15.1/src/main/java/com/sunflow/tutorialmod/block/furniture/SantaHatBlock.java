@@ -16,15 +16,7 @@ public class SantaHatBlock extends HorizontalBlockBase {
 
 	private static final VoxelShape SANTA_HAT_AABB = Block.makeCuboidShape(2D, 0, 2D, 14D, 13D, 14D);
 
-	public SantaHatBlock() {
-		super("santa_hat", Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH));
-//		RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
-	}
-
-//	@Override
-//	public BlockRenderLayer getRenderLayer() {
-//		return BlockRenderLayer.CUTOUT;
-//	}
+	public SantaHatBlock() { super(Block.Properties.create(Material.WOOL).sound(SoundType.CLOTH)); }
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -33,6 +25,6 @@ public class SantaHatBlock extends HorizontalBlockBase {
 
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.func_177977_b()).getMaterial().isSolid();
+		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
 	}
 }

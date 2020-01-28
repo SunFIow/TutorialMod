@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tutorialmod:firstblock",
+    "tutorialmod:glowstone_generator",
     "tutorialmod:ruby_ore"
   ]
 }

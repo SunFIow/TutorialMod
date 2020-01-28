@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockReader;
 
 public class ElectricSinteringFurnaceBlock extends EnergyTileBlockBase {
 	public ElectricSinteringFurnaceBlock() {
-		super("electric_sintering_furnace", Material.ROCK, 2.0F, 14);
+		super(Material.ROCK, 2.0F, 14);
 	}
 
 	@Override

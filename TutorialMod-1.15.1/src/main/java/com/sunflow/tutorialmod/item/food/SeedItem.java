@@ -17,28 +17,25 @@ public class SeedItem extends FoodItem implements IPlantable {
 
 	private Block plantBlock;
 
-	public SeedItem(String name, int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible) {
-		super(name, hunger, saturation, meat, fastEat, alwaysEdible);
+	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible) {
+		super(hunger, saturation, meat, fastEat, alwaysEdible);
+		this.plantBlock = plantBlock;
 	}
 
-	public SeedItem(String name, int hunger, float saturation, boolean meat, boolean fastEat) {
-		super(name, hunger, saturation, meat, fastEat, false);
+	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat) {
+		this(plantBlock, hunger, saturation, meat, fastEat, false);
 	}
 
-	public SeedItem(String name, int hunger, float saturation, boolean meat) {
-		super(name, hunger, saturation, meat, false, false);
+	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat) {
+		this(plantBlock, hunger, saturation, meat, false, false);
 	}
 
-	public SeedItem(String name, int hunger, float saturation) {
-		super(name, hunger, saturation, false, false, false);
+	public SeedItem(Block plantBlock, int hunger, float saturation) {
+		this(plantBlock, hunger, saturation, false, false, false);
 	}
 
-	public SeedItem(String name, int hunger) {
-		super(name, hunger, 0.6f, false, false, false);
-	}
-
-	public void setPlantBlock(Block block) {
-		this.plantBlock = block;
+	public SeedItem(Block plantBlock, int hunger) {
+		this(plantBlock, hunger, 0.6f, false, false, false);
 	}
 
 	@Override
@@ -51,24 +48,17 @@ public class SeedItem extends FoodItem implements IPlantable {
 		final BlockState state = world.getBlockState(pos);
 
 		if (facing == Direction.UP && player.canPlayerEdit(pos.offset(facing), facing, stack) && state.getBlock().canSustainPlant(state, world, pos, Direction.UP, this) && world.isAirBlock(pos.up())) {
-			world.setBlockState(pos.up(), this.plantBlock.getDefaultState());
+			world.setBlockState(pos.up(), plantBlock.getDefaultState());
 			stack.shrink(1);
 			return ActionResultType.SUCCESS;
 		} else {
 			return ActionResultType.FAIL;
 		}
-
 	}
 
 	@Override
-	public PlantType getPlantType(IBlockReader world, BlockPos pos) {
-		return PlantType.Crop;
-
-	}
+	public PlantType getPlantType(IBlockReader world, BlockPos pos) { return PlantType.Crop; }
 
 	@Override
-	public BlockState getPlant(IBlockReader world, BlockPos pos) {
-		return this.plantBlock.getDefaultState();
-	}
-
+	public BlockState getPlant(IBlockReader world, BlockPos pos) { return plantBlock.getDefaultState(); }
 }

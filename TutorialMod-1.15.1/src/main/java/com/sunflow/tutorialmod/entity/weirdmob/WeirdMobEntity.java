@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.entity.weirdmob;
 
-import com.sunflow.tutorialmod.setup.ModEntityTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -12,5 +12,5 @@ public class WeirdMobEntity extends AnimalEntity {
 	public WeirdMobEntity(EntityType<? extends AnimalEntity> type, World worldIn) { super(type, worldIn); }
 
 	@Override
-	public WeirdMobEntity createChild(AgeableEntity ageable) { return ModEntityTypes.WEIRDMOB.create(this.world); }
+	public WeirdMobEntity createChild(AgeableEntity ageable) { return Registration.WEIRDMOB.get().create(this.world); }
 }

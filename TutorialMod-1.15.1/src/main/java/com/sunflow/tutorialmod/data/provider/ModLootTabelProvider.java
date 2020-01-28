@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.data.provider;
 
 import com.sunflow.tutorialmod.block.base.TileBlockBase;
-import com.sunflow.tutorialmod.setup.ModBlocks;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
@@ -14,16 +14,15 @@ public class ModLootTabelProvider extends BaseLootTableProvider {
 
 	@Override
 	protected void addTables() {
-		lootTables.put(ModBlocks.FIRSTBLOCK, createStandardTableNBT(ModBlocks.FIRSTBLOCK.getRegistryName().getPath(), ModBlocks.FIRSTBLOCK, "inv", "energy", "cooktime", "currentfuel"));
-		lootTables.put(ModBlocks.ENERGY_STORAGE, createStandardTableNBT(ModBlocks.ENERGY_STORAGE.getRegistryName().getPath(), ModBlocks.ENERGY_STORAGE, "energy"));
-		lootTables.put(ModBlocks.SINTERING_FURNACE, createStandardTableNBT(ModBlocks.SINTERING_FURNACE.getRegistryName().getPath(), ModBlocks.SINTERING_FURNACE, "inv", "cooktime", "burntime", "burntimetotal"));
-		lootTables.put(ModBlocks.ELECTRIC_SINTERING_FURNACE, createStandardTableNBT(ModBlocks.ELECTRIC_SINTERING_FURNACE.getRegistryName().getPath(), ModBlocks.ELECTRIC_SINTERING_FURNACE, "inv", "energy", "cooktime"));
+		lootTables.put(Registration.GLOWSTONE_GENERATOR_BLOCK.get(), createStandardTableNBT(Registration.GLOWSTONE_GENERATOR_BLOCK.get().getRegistryName().getPath(), Registration.GLOWSTONE_GENERATOR_BLOCK.get(), "inv", "energy", "cooktime", "currentfuel"));
+		lootTables.put(Registration.ENERGY_STORAGE.get(), createStandardTableNBT(Registration.ENERGY_STORAGE.get().getRegistryName().getPath(), Registration.ENERGY_STORAGE.get(), "energy"));
+		lootTables.put(Registration.SINTERING_FURNACE.get(), createStandardTableNBT(Registration.SINTERING_FURNACE.get().getRegistryName().getPath(), Registration.SINTERING_FURNACE.get(), "inv", "cooktime", "burntime", "burntimetotal"));
+		lootTables.put(Registration.ELECTRIC_SINTERING_FURNACE.get(), createStandardTableNBT(Registration.ELECTRIC_SINTERING_FURNACE.get().getRegistryName().getPath(), Registration.ELECTRIC_SINTERING_FURNACE.get(), "inv", "energy", "cooktime"));
 
-		for (Block block : ModBlocks.BLOCKS) {
-			if (!(block instanceof TileBlockBase) && block != ModBlocks.RICE_PLANT) {
-				addStandartBlock(block);
-			}
-		}
+		Registration.BLOCKS.getEntries().forEach((block) -> {
+			if (!(block.get() instanceof TileBlockBase) && block.get() != Registration.RICE_PLANT.get())
+				addStandartBlock(block.get());
+		});
 	}
 
 	private void addStandartBlock(Block block) {

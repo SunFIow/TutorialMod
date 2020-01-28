@@ -1,8 +1,7 @@
 package com.sunflow.tutorialmod.block.tree;
 
 import java.util.Random;
-
-import com.sunflow.tutorialmod.setup.ModBlocks;
+import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,14 +15,12 @@ import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraftforge.common.IPlantable;
 
 public class CustomTree extends BigTree {
-	public static CustomTree COPPER = new CustomTree(ModBlocks.COPPER_LOG, ModBlocks.COPPER_LEAVES, ModBlocks.COPPER_SAPLING);
-	public static CustomTree ALUMINIUM = new CustomTree(ModBlocks.ALUMINIUM_LOG, ModBlocks.ALUMINIUM_LEAVES, ModBlocks.ALUMINIUM_SAPLING);
 
 	private final BlockState leaves;
 	private final BlockState log;
-	private final IPlantable sapling;
+	private final Supplier<IPlantable> sapling;
 
-	public CustomTree(Block log, Block leaves, IPlantable sapling) {
+	public CustomTree(Block log, Block leaves, Supplier<IPlantable> sapling) {
 		this.log = log.getDefaultState();
 		this.leaves = leaves.getDefaultState();
 		this.sapling = sapling;
@@ -32,20 +29,20 @@ public class CustomTree extends BigTree {
 	@Override
 	public ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random random) {
 		return random.nextInt(10) == 0
-				? Feature.FANCY_TREE.func_225566_b_(configSmall())
-				: Feature.NORMAL_TREE.func_225566_b_(configSmall());
+				? Feature.FANCY_TREE.withConfiguration(configSmall())
+				: Feature.NORMAL_TREE.withConfiguration(configSmall());
 	}
 
 	@Override
 	public ConfiguredFeature<HugeTreeFeatureConfig, ?> func_225547_a_(Random random) {
-		return Feature.DARK_OAK_TREE.func_225566_b_(configBig());
+		return Feature.DARK_OAK_TREE.withConfiguration(configBig());
 	}
 
 	public TreeFeatureConfig configSmall() {
-		return (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves), new BlobFoliagePlacer(0, 0))).setSapling(sapling).func_225568_b_();
+		return (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves), new BlobFoliagePlacer(0, 0))).setSapling(sapling.get()).build();
 	}
 
 	public HugeTreeFeatureConfig configBig() {
-		return (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves))).func_225569_d_(6).setSapling(sapling).func_225568_b_();
+		return (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves))).baseHeight(6).setSapling(sapling.get()).build();
 	}
 }

@@ -8,7 +8,6 @@ import java.util.function.Function;
 
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
-import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.block.LogBlock;
 import net.minecraft.util.Direction;
@@ -73,29 +72,28 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		}
 	}
 
-	private void func_227236_a_(IWorldGenerationReader p_227236_1_, Random p_227236_2_, BlockPos p_227236_3_, Set<BlockPos> p_227236_4_, MutableBoundingBox p_227236_5_, TreeFeatureConfig p_227236_6_) {
+	private void func_227236_a_(IWorldGenerationReader generationReader, Random random, BlockPos pos, Set<BlockPos> posSet1, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeature) {
 		for (int i = 0; i < 5; ++i) {
-			this.func_227233_a_(p_227236_1_, p_227236_2_, p_227236_3_.up(i), this.func_227230_a_(i), p_227236_4_, p_227236_5_, p_227236_6_);
+			this.func_227233_a_(generationReader, random, pos.up(i), this.func_227230_a_(i), posSet1, boundingBox, treeFeature);
 		}
-
 	}
 
-	private int func_227235_a_(IWorldGenerationReader p_227235_1_, Random p_227235_2_, BlockPos p_227235_3_, BlockPos p_227235_4_, boolean p_227235_5_, Set<BlockPos> p_227235_6_, MutableBoundingBox p_227235_7_, TreeFeatureConfig p_227235_8_) {
-		if (!p_227235_5_ && Objects.equals(p_227235_3_, p_227235_4_)) {
+	private int func_227235_a_(IWorldGenerationReader generationReader, Random random, BlockPos pos1, BlockPos pos2, boolean b0, Set<BlockPos> blockSet1, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeature) {
+		if (!b0 && Objects.equals(pos1, pos2)) {
 			return -1;
 		} else {
-			BlockPos blockpos = p_227235_4_.add(-p_227235_3_.getX(), -p_227235_3_.getY(), -p_227235_3_.getZ());
+			BlockPos blockpos = pos2.add(-pos1.getX(), -pos1.getY(), -pos1.getZ());
 			int i = this.func_227237_a_(blockpos);
 			float f = (float) blockpos.getX() / (float) i;
 			float f1 = (float) blockpos.getY() / (float) i;
 			float f2 = (float) blockpos.getZ() / (float) i;
 
 			for (int j = 0; j <= i; ++j) {
-				BlockPos blockpos1 = p_227235_3_.add(0.5F + j * f, 0.5F + j * f1, 0.5F + j * f2);
-				if (p_227235_5_) {
-					this.func_227217_a_(p_227235_1_, blockpos1, p_227235_8_.field_227368_m_.func_225574_a_(p_227235_2_, blockpos1).with(LogBlock.AXIS, this.func_227238_a_(p_227235_3_, blockpos1)), p_227235_7_);
-					p_227235_6_.add(blockpos1);
-				} else if (!func_214587_a(p_227235_1_, blockpos1)) {
+				BlockPos blockpos1 = pos1.add(0.5F + j * f, 0.5F + j * f1, 0.5F + j * f2);
+				if (b0) {
+					this.func_227217_a_(generationReader, blockpos1, treeFeature.trunkProvider.func_225574_a_(random, blockpos1).with(LogBlock.AXIS, this.func_227238_a_(pos1, blockpos1)), boundingBox);
+					blockSet1.add(blockpos1);
+				} else if (!func_214587_a(generationReader, blockpos1)) {
 					return j;
 				}
 			}
@@ -104,10 +102,10 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		}
 	}
 
-	private int func_227237_a_(BlockPos p_227237_1_) {
-		int i = MathHelper.abs(p_227237_1_.getX());
-		int j = MathHelper.abs(p_227237_1_.getY());
-		int k = MathHelper.abs(p_227237_1_.getZ());
+	private int func_227237_a_(BlockPos pos) {
+		int i = MathHelper.abs(pos.getX());
+		int j = MathHelper.abs(pos.getY());
+		int k = MathHelper.abs(pos.getZ());
 		if (k > i && k > j) {
 			return k;
 		} else {
@@ -166,7 +164,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		if (i == -1) {
 			return false;
 		} else {
-			this.func_214584_a(p_225557_1_, VersionUtils.down(p_225557_3_));
+			this.func_214584_a(p_225557_1_, p_225557_3_.down());
 			int j = (int) (i * 0.618D);
 			if (j >= i) {
 				j = i - 1;
@@ -216,7 +214,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 	}
 
 	private int func_227241_b_(IWorldGenerationReader p_227241_1_, Random p_227241_2_, BlockPos p_227241_3_, int p_227241_4_, Set<BlockPos> p_227241_5_, MutableBoundingBox p_227241_6_, TreeFeatureConfig p_227241_7_) {
-		if (!isDirtOrGrassBlockOrFarmland(p_227241_1_, VersionUtils.down(p_227241_3_))) {
+		if (!isDirtOrGrassBlockOrFarmland(p_227241_1_, p_227241_3_.down())) {
 			return -1;
 		} else {
 			int i = this.func_227235_a_(p_227241_1_, p_227241_2_, p_227241_3_, p_227241_3_.up(p_227241_4_ - 1), false, p_227241_5_, p_227241_6_, p_227241_7_);

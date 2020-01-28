@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.electric_sintering_furnace;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ContainerBase;
-import com.sunflow.tutorialmod.setup.ModContainerTypes;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
@@ -18,7 +18,7 @@ public class ElectricSinteringFurnaceContainer extends ContainerBase {
 	}
 
 	public ElectricSinteringFurnaceContainer(int id, PlayerInventory inv, TileEntity tile) {
-		super(ModContainerTypes.ELECTRIC_SINTERING_FURNACE_CONTAINER, id, 3, tile);
+		super(Registration.ELECTRIC_SINTERING_FURNACE_CONTAINER.get(), id, 3, tile);
 
 		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 //			addSlot(new SlotItemHandler(h, 0, 81, 35));

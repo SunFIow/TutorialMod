@@ -1,7 +1,6 @@
 package com.sunflow.tutorialmod.block.furniture.fancyblock;
 
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
-import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,7 +27,7 @@ public class FancyBlock extends BakedBlockBase {
 	private static final VoxelShape GRIDLESS_AABB = Block.makeCuboidShape(1.0D, 1.0D, 0.0D, 15.0D, 14.0D, 15.0D);
 
 	public FancyBlock() {
-		super("fancyblock", ModGroups.itemGroup, Properties.create(Material.ROCK)
+		super("fancyblock", Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f), GRIDLESS_AABB);
 	}
 
@@ -43,7 +42,7 @@ public class FancyBlock extends BakedBlockBase {
 	}
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
 			if (!world.isRemote) {

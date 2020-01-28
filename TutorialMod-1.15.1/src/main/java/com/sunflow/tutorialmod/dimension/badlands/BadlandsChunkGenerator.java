@@ -30,7 +30,7 @@ public class BadlandsChunkGenerator extends ChunkGenerator<BadlandsChunkGenerato
 		int x, z;
 		for (x = 0; x < 16; x++) {
 			for (z = 0; z < 16; z++) {
-				chunk.setBlockState(pos.func_181079_c(x, 0, z), bedrock, false);
+				chunk.setBlockState(pos.setPos(x, 0, z), bedrock, false);
 			}
 		}
 
@@ -40,7 +40,7 @@ public class BadlandsChunkGenerator extends ChunkGenerator<BadlandsChunkGenerato
 				int realZ = chunkpos.z * 16 + z;
 				int height = (int) (65 + Math.sin(realX / 20.0D) * 10 + Math.cos(realZ / 20.0D) * 10);
 				for (int y = 1; y < height; y++) {
-					chunk.setBlockState(pos.func_181079_c(x, y, z), stone, false);
+					chunk.setBlockState(pos.setPos(x, y, z), stone, false);
 				}
 			}
 		}

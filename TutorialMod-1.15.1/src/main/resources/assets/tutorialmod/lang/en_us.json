@@ -9,7 +9,7 @@
 	
 "_comment": "Enchantments",
 	"enchantment.tutorialmod.multijump": "Multijump",
-	
+	 
 "_comment": "Entities",
 	"entity.tutorialmod.centaur": "Centaur",
 	
@@ -18,6 +18,8 @@
 	"item.tutorialmod.grenade": "Grenade",
 	"item.tutorialmod.testitem": "Test Item",
 	"item.tutorialmod.energy_wand": "Energy Wand",
+	
+	"item.tutorialmod.molten_copper_bucket": "Molten Copper Bucket",
 	
 	"item.tutorialmod.fancy_sword": "Fancy Sword",
 	"item.tutorialmod.ruby": "Ruby",
@@ -43,8 +45,8 @@
 "_comment": "Food",
 	"item.tutorialmod.evil_apple": "Evil Apple",	
 	"item.tutorialmod.rice_bowl": "Bowl of Rice",
+	"block.tutorialmod.rice_plant": "Rice",
 	"item.tutorialmod.rice": "Rice",
-	"item.tutorialmod.rice_plant": "Rice Plant",
 	
 "_comment": "Eggs",
 	"item.tutorialmod.weirdmob_spawn_egg": "Weird Mob Egg",	
@@ -88,8 +90,8 @@
 	"block.tutorialmod.teleporter": "Teleporter",
 
 "_comment": "Machines",
-	"block.tutorialmod.firstblock": "First Block",
-	"container.firstblock": "First Block Generator",
+	"block.tutorialmod.glowstone_generator": "Glowstone Generator",
+	"container.glowstone_generator": "Glowstone Generator",
 	"block.tutorialmod.energy_storage": "Energy Storage",
 	"container.energy_storage": "Energy Storage",
 	"block.tutorialmod.sintering_furnace": "Sintering Furnace",

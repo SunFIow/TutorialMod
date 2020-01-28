@@ -14,7 +14,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class ChargerBlock extends EnergyTileBlockBase {
 	public ChargerBlock() {
-		super("charger", Material.ROCK, 2.0F, 14);
+		super(Material.ROCK, 2.0F, 14);
 	}
 
 	@Override

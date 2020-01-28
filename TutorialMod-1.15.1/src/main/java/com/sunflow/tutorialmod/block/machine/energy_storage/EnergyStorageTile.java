@@ -1,9 +1,9 @@
 package com.sunflow.tutorialmod.block.machine.energy_storage;
 
 import com.sunflow.tutorialmod.block.base.EnergyTileEntityBase;
-import com.sunflow.tutorialmod.setup.ModTileEntitiyTypes;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
+import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
-import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,11 +15,11 @@ public class EnergyStorageTile extends EnergyTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage getEnergy() {
-		return new CustomEnergyStorage(Config.FIRSTBLOCK_MAXPOWER.get(), Config.FIRSTBLOCK_TRANSFER.get());
+		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
 	}
 
 	public EnergyStorageTile() {
-		super(ModTileEntitiyTypes.ENERGY_STORAGE_TILE);
+		super(Registration.ENERGY_STORAGE_TILE.get());
 	}
 
 	@Override
