@@ -1,11 +1,11 @@
-package com.sunflow.tutorialmod.block.machine.firstblock;
+package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
-import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,12 +24,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class FirstBlockTile extends EnergyInvTileEntityBase {
+public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 	public static final int FUEL_SLOT = 0;
 	public static final int COOKTIME_ID = 2;
+	private static final Item FUEL_ITEM = Items.GLOWSTONE_DUST;
 
 	@Override
 	protected ItemStackHandler getHandler() {
@@ -48,7 +49,7 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage getEnergy() {
-		return new CustomEnergyStorage(Config.FIRSTBLOCK_MAXPOWER.get(), Config.FIRSTBLOCK_TRANSFER.get());
+		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
 	}
 
 	private Item currentFuel = ItemStack.EMPTY.getItem();
@@ -56,8 +57,8 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 	private float cookTime;
 	private float powerLeftOvers;
 
-	public FirstBlockTile() {
-		super(Registration.FIRSTBLOCK_TILE.get());
+	public GlowstoneGeneratorTile() {
+		super(Registration.GLOWSTONE_GENERATOR_TILE.get());
 	}
 
 	@Override
@@ -119,7 +120,7 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 					if (tile != null) {
 						tile.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
 							if (e.canReceive()) {
-								int maxEExt = energy.extractEnergy(Config.FIRSTBLOCK_TRANSFER.get(), true);
+								int maxEExt = energy.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
 								int eReceived = e.receiveEnergy(maxEExt, false);
 //								if (eReceived > 0) {
 								energy.extractEnergy(eReceived, false);
@@ -137,22 +138,16 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 		});
 	}
 
-	private boolean isItemFuel(Item item) {
-		return getFuelValue(item) > 0;
-	}
+	private boolean isItemFuel(Item item) { return getFuelValue(item) > 0; }
 
 	private int getFuelValue(Item item) {
-		if (item == Items.GLOWSTONE_DUST)
-			return Config.FIRSTBLOCK_GENERATE.get();
-		else
-			return 0;
+		if (item == FUEL_ITEM) return TutorialModConfig.GLOWSTONE_GENERATOR_GENERATE.get();
+		else return 0;
 	}
 
 	private int getFuelTicks(Item item) {
-		if (item == Items.GLOWSTONE_DUST)
-			return Config.FIRSTBLOCK_TICKS.get();
-		else
-			return 0;
+		if (item == FUEL_ITEM) return TutorialModConfig.GLOWSTONE_GENERATOR_TICKS.get();
+		else return 0;
 	}
 
 	@Override
@@ -195,11 +190,11 @@ public class FirstBlockTile extends EnergyInvTileEntityBase {
 	@Override
 	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
 //		return new FirstBlockContainer(id, world, pos, inv);
-		return new FirstBlockContainer(id, inv, this);
+		return new GlowstoneGeneratorContainer(id, inv, this);
 	}
 
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.firstblock");
+		return new TranslationTextComponent("container.glowstone_generator");
 	}
 }

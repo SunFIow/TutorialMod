@@ -21,12 +21,13 @@ import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.Electric
 import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageBlock;
 import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageContainer;
 import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageTile;
-import com.sunflow.tutorialmod.block.machine.firstblock.FirstBlock;
-import com.sunflow.tutorialmod.block.machine.firstblock.FirstBlockContainer;
-import com.sunflow.tutorialmod.block.machine.firstblock.FirstBlockTile;
+import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorBlock;
+import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorContainer;
+import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorTile;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceBlock;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceContainer;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
+import com.sunflow.tutorialmod.block.magicblock.MagicBlock;
 import com.sunflow.tutorialmod.block.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.block.ore.RubyBlock;
 import com.sunflow.tutorialmod.block.ore.RubyOre;
@@ -123,15 +124,15 @@ public class Registration {
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public static final RegistryObject<TileBlockBase> FIRSTBLOCK = BLOCKS.register("firstblock", FirstBlock::new);
-	public static final RegistryObject<Item> FIRSTBLOCK_ITEM = ITEMS.register("firstblock", () -> new BlockItem(FIRSTBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup2)));
-	public static final RegistryObject<TileEntityType<FirstBlockTile>> FIRSTBLOCK_TILE = TILEENTITIES.register("fistblock", () -> TileEntityType.Builder.create(FirstBlockTile::new, FIRSTBLOCK.get()).build(null));
-	public static final RegistryObject<ContainerType<FirstBlockContainer>> FIRSTBLOCK_CONTAINER = CONTAINERS.register("firstblock", () -> IForgeContainerType.create(FirstBlockContainer::new));
-	public static final RegistryObject<ContainerType<EnergyStorageContainer>> ENERGY_STORAGE_CONTAINER = CONTAINERS.register("energy_storage", () -> IForgeContainerType.create(EnergyStorageContainer::new));
+	public static final RegistryObject<TileBlockBase> GLOWSTONE_GENERATOR_BLOCK = BLOCKS.register("glowstone_generator", GlowstoneGeneratorBlock::new);
+	public static final RegistryObject<Item> GLOWSTONE_GENERATOR_ITEM = ITEMS.register("glowstone_generator", () -> new BlockItem(GLOWSTONE_GENERATOR_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<GlowstoneGeneratorTile>> GLOWSTONE_GENERATOR_TILE = TILEENTITIES.register("glowstone_generator", () -> TileEntityType.Builder.create(GlowstoneGeneratorTile::new, GLOWSTONE_GENERATOR_BLOCK.get()).build(null));
+	public static final RegistryObject<ContainerType<GlowstoneGeneratorContainer>> GLOWSTONE_GENERATOR_CONTAINER = CONTAINERS.register("glowstone_generator", () -> IForgeContainerType.create(GlowstoneGeneratorContainer::new));
 
 	public static final RegistryObject<TileBlockBase> ENERGY_STORAGE = BLOCKS.register("energy_storage", EnergyStorageBlock::new);
 	public static final RegistryObject<Item> ENERGY_STORAGE_ITEM = ITEMS.register("energy_storage", () -> new BlockItem(ENERGY_STORAGE.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<TileEntityType<EnergyStorageTile>> ENERGY_STORAGE_TILE = TILEENTITIES.register("energy_storage", () -> TileEntityType.Builder.create(EnergyStorageTile::new, ENERGY_STORAGE.get()).build(null));
+	public static final RegistryObject<ContainerType<EnergyStorageContainer>> ENERGY_STORAGE_CONTAINER = CONTAINERS.register("energy_storage", () -> IForgeContainerType.create(EnergyStorageContainer::new));
 
 	public static final RegistryObject<TileBlockBase> SINTERING_FURNACE = BLOCKS.register("sintering_furnace", SinteringFurnaceBlock::new);
 	public static final RegistryObject<Item> SINTERING_FURNACE_ITEM = ITEMS.register("sintering_furnace", () -> new BlockItem(SINTERING_FURNACE.get(), new Item.Properties().group(ModGroups.itemGroup)));
@@ -153,18 +154,34 @@ public class Registration {
 	public static final RegistryObject<TileEntityType<CopperChestTile>> COPPER_CHEST_TILE = TILEENTITIES.register("copper_chest", () -> TileEntityType.Builder.create(CopperChestTile::new, COPPER_CHEST.get()).build(null));
 	public static final RegistryObject<ContainerType<CopperChestContainer>> COPPER_CHEST_CONTAINER = CONTAINERS.register("copper_chest", () -> IForgeContainerType.create(CopperChestContainer::new));
 
-	public static final RegistryObject<BakedBlockBase> FANCY_BLOCK = BLOCKS.register("fancyblock", FancyBlock::new);
-	public static final RegistryObject<Item> FANCY_BLOCK_ITEM = ITEMS.register("fancyblock", () -> new BlockItem(FANCY_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<TileEntityType<FancyBlockTile>> FANCY_BLOCK_TILE = TILEENTITIES.register("fancyblock", () -> TileEntityType.Builder.create(FancyBlockTile::new, FANCY_BLOCK.get()).build(null));
+	public static final RegistryObject<BakedBlockBase> FANCYBLOCK = BLOCKS.register("fancyblock", FancyBlock::new);
+	public static final RegistryObject<Item> FANCYBLOCK_ITEM = ITEMS.register("fancyblock", () -> new BlockItem(FANCYBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup2)));
+	public static final RegistryObject<TileEntityType<FancyBlockTile>> FANCY_BLOCK_TILE = TILEENTITIES.register("fancyblock", () -> TileEntityType.Builder.create(FancyBlockTile::new, FANCYBLOCK.get()).build(null));
+
+	public static final RegistryObject<Block> MAGICBLOCK = BLOCKS.register("magicblock", MagicBlock::new);
+	public static final RegistryObject<Item> MAGICBLOCK_ITEM = ITEMS.register("magicblock", () -> new BlockItem(MAGICBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup2)));
+	public static final RegistryObject<TileEntityType<FancyBlockTile>> MAGICBLOCK_TILE = TILEENTITIES.register("magicblock", () -> TileEntityType.Builder.create(FancyBlockTile::new, MAGICBLOCK.get()).build(null));
 
 	public static final RegistryObject<Item> GRENADE = ITEMS.register("grenade", GrenadeItem::new);
-	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> createEntity("grenade", 0.5F, 0.5F, true, EntityClassification.MISC, GrenadeEntity::new));
+//	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> createEntity("grenade", 0.5F, 0.5F, true, EntityClassification.MISC, GrenadeEntity::new));
+	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> EntityType.Builder.<GrenadeEntity>create(GrenadeEntity::new, EntityClassification.MISC)
+			.size(0.5F, 0.5F)
+			.setShouldReceiveVelocityUpdates(true)
+			.build("grenade"));
 
-	public static final RegistryObject<MobEggBase> WEIRDMOB_SPAWN_EGG = ITEMS.register("weirdmob_spawn_egg", () -> new MobEggBase(0xff1111));
-	public static final RegistryObject<EntityType<WeirdMobEntity>> WEIRDMOB = ENTITIES.register("weirdmob", () -> createEntity("weirdmob", 1.0F, 1.0F, false, EntityClassification.CREATURE, WeirdMobEntity::new, WEIRDMOB_SPAWN_EGG.get()));
+	public static final RegistryObject<MobEggBase> WEIRDMOB_SPAWN_EGG = ITEMS.register("weirdmob_spawn_egg", () -> new MobEggBase(0xff1111, ModGroups.itemGroup, Registration.WEIRDMOB::get));
+//	public static final RegistryObject<EntityType<?>> WEIRDMOB = ENTITIES.register("weirdmob", () -> createEntity("weirdmob", 1.0F, 1.0F, false, EntityClassification.CREATURE, WeirdMobEntity::new));
+	public static final RegistryObject<EntityType<WeirdMobEntity>> WEIRDMOB = ENTITIES.register("weirdmob", () -> EntityType.Builder.create(WeirdMobEntity::new, EntityClassification.CREATURE)
+			.size(1.0F, 1.0F)
+			.setShouldReceiveVelocityUpdates(false)
+			.build("weirdmob"));
 
-	public static final RegistryObject<MobEggBase> CENTAUR_SPAWN_EGG = ITEMS.register("centaur_spawn_egg", () -> new MobEggBase(0xeecc11, ModGroups.itemGroup2));
-	public static final RegistryObject<EntityType<CentaurEntity>> CENTAUR = ENTITIES.register("centaur", () -> createEntity("centaur", 0.9F, 2.8F, false, EntityClassification.CREATURE, CentaurEntity::new, CENTAUR_SPAWN_EGG.get()));
+	public static final RegistryObject<MobEggBase> CENTAUR_SPAWN_EGG = ITEMS.register("centaur_spawn_egg", () -> new MobEggBase(0xeecc11, ModGroups.itemGroup2, Registration.CENTAUR::get));
+//	public static final RegistryObject<EntityType<?>> CENTAUR = ENTITIES.register("centaur", () -> createEntity("centaur", 0.9F, 2.8F, false, EntityClassification.CREATURE, CentaurEntity::new));
+	public static final RegistryObject<EntityType<CentaurEntity>> CENTAUR = ENTITIES.register("centaur", () -> EntityType.Builder.create(CentaurEntity::new, EntityClassification.CREATURE)
+			.size(0.9F, 2.8F)
+			.setShouldReceiveVelocityUpdates(false)
+			.build("centaur"));
 	public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_AMBIENT = SOUNDS.register("entity.centaur.ambient", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.ambient")));
 	public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_HURT = SOUNDS.register("entity.centaur.hurt", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.hurt")));
 	public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_DEATH = SOUNDS.register("entity.centaur.death", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.death")));
@@ -328,14 +345,11 @@ public class Registration {
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // SOUNDS
 
-	public static <T extends Entity> EntityType<T> createEntity(String name, float w, float h, boolean receiveVelocityUpdates, EntityClassification classification, EntityType.IFactory<T> factory, MobEggBase... eggs) {
+	public static <T extends Entity> EntityType<T> createEntity(String name, float w, float h, boolean receiveVelocityUpdates, EntityClassification classification, EntityType.IFactory<T> factory) {
 		EntityType<T> type = EntityType.Builder.<T>create(factory, classification)
 				.size(w, h)
 				.setShouldReceiveVelocityUpdates(receiveVelocityUpdates)
 				.build(name);
-		for (MobEggBase egg : eggs) {
-			egg.setEntityType(type);
-		}
 		return type;
 	}
 }

@@ -2,10 +2,10 @@ package com.sunflow.tutorialmod.util.handlers;
 
 import java.util.ArrayList;
 
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.ExplodePacket;
 import com.sunflow.tutorialmod.util.Log;
-import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.enums.KeyBindings;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,8 +24,8 @@ public class KeyBindingHandler {
 	public static void handleKeyInputEvent(KeyInputEvent event) {
 		if (KeyBindings.EXPLODE.isPressed()) Networking.sendToServer(new ExplodePacket(4711));
 		if (KeyBindings.OVERLAY.isPressed()) {
-			Config.CONFIG_SHOW_OVERLAY.set(!Config.CONFIG_SHOW_OVERLAY.get());
-			Config.CONFIG_SHOW_OVERLAY.save();
+			TutorialModConfig.CONFIG_SHOW_OVERLAY.set(!TutorialModConfig.CONFIG_SHOW_OVERLAY.get());
+			TutorialModConfig.CONFIG_SHOW_OVERLAY.save();
 		}
 	}
 

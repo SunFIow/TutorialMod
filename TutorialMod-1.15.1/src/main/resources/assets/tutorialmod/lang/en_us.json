@@ -19,6 +19,8 @@
 	"item.tutorialmod.testitem": "Test Item",
 	"item.tutorialmod.energy_wand": "Energy Wand",
 	
+	"item.tutorialmod.molten_copper_bucket": "Molten Copper Bucket",
+	
 	"item.tutorialmod.fancy_sword": "Fancy Sword",
 	"item.tutorialmod.ruby": "Ruby",
 	"item.tutorialmod.copper_ingot": "Copper Ingot",
@@ -88,8 +90,8 @@
 	"block.tutorialmod.teleporter": "Teleporter",
 
 "_comment": "Machines",
-	"block.tutorialmod.firstblock": "First Block",
-	"container.firstblock": "First Block Generator",
+	"block.tutorialmod.glowstone_generator": "Glowstone Generator",
+	"container.glowstone_generator": "Glowstone Generator",
 	"block.tutorialmod.energy_storage": "Energy Storage",
 	"container.energy_storage": "Energy Storage",
 	"block.tutorialmod.sintering_furnace": "Sintering Furnace",

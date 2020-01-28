@@ -22,7 +22,7 @@ public class ModRecipesProvider extends RecipeProvider {
 
 	@Override
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shapedRecipe(Registration.FIRSTBLOCK.get())
+		ShapedRecipeBuilder.shapedRecipe(Registration.GLOWSTONE_GENERATOR_BLOCK.get())
 				.patternLine(" R ")
 				.patternLine("R#R")
 				.patternLine(" R ")

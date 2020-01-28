@@ -8,8 +8,8 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.sunflow.tutorialmod.block.base.InventoryTileEntityBase;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.registration.Registration;
-import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -83,7 +83,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 				if (isBurning()) {
 					cookTime++;
 
-					if (cookTime >= Config.SINTERING_FURNACE_TICKS.get()) {
+					if (cookTime >= TutorialModConfig.SINTERING_FURNACE_TICKS.get()) {
 						cookTime = 0;
 //						this.totalCookTime = this.getCookTime((ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT1_ID), (ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT2_ID));
 						smeltItem();
@@ -99,7 +99,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 				}
 			}
 			if (!isBurning() || !canSmelt() && cookTime > 0) {
-				cookTime = MathHelper.clamp(cookTime - 2, 0, Config.SINTERING_FURNACE_TICKS.get());
+				cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.SINTERING_FURNACE_TICKS.get());
 			}
 		});
 

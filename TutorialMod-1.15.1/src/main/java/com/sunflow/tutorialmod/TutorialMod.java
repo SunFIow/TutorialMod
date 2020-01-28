@@ -1,5 +1,6 @@
 package com.sunflow.tutorialmod;
 
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.IProxy;
@@ -9,7 +10,6 @@ import com.sunflow.tutorialmod.setup.registration.CommonSetup;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
-import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -41,8 +41,8 @@ public class TutorialMod {
 		Log.info("Or would you rather take a bath?");
 		Log.info("Or...");
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TutorialModConfig.CLIENT_CONFIG);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.COMMON_CONFIG);
 
 		Registration.init();
 

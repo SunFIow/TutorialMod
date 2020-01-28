@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.block.machine.firstblock;
+package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ContainerBase;
@@ -11,19 +11,19 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class FirstBlockContainer extends ContainerBase {
+public class GlowstoneGeneratorContainer extends ContainerBase {
 
 	// CLIENT
-	public FirstBlockContainer(int id, PlayerInventory inv, PacketBuffer data) {
+	public GlowstoneGeneratorContainer(int id, PlayerInventory inv, PacketBuffer data) {
 		this(id, inv, TutorialMod.proxy.getClientWorld().getTileEntity(data.readBlockPos()));
 	}
 
 	// SERVER
-	public FirstBlockContainer(int windowId, PlayerInventory inv, TileEntity tile) {
-		super(Registration.FIRSTBLOCK_CONTAINER.get(), windowId, 1, tile);
+	public GlowstoneGeneratorContainer(int windowId, PlayerInventory inv, TileEntity tile) {
+		super(Registration.GLOWSTONE_GENERATOR_CONTAINER.get(), windowId, 1, tile);
 
 		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
-			addSlot(new SlotItemHandler(h, FirstBlockTile.FUEL_SLOT, 80, 35));
+			addSlot(new SlotItemHandler(h, GlowstoneGeneratorTile.FUEL_SLOT, 80, 35));
 		});
 
 		layoutPlayerInventorySlots(new InvWrapper(inv), 8, 84);
@@ -32,14 +32,14 @@ public class FirstBlockContainer extends ContainerBase {
 	}
 
 	public int getCookTime() {
-		return field.getField(FirstBlockTile.COOKTIME_ID);
+		return field.getField(GlowstoneGeneratorTile.COOKTIME_ID);
 	}
 
 	public int getEnergy() {
-		return field.getField(FirstBlockTile.ENERGY_ID);
+		return field.getField(GlowstoneGeneratorTile.ENERGY_ID);
 	}
 
 	public int getEnergyMax() {
-		return field.getField(FirstBlockTile.ENERGY_MAX_ID);
+		return field.getField(GlowstoneGeneratorTile.ENERGY_MAX_ID);
 	}
 }

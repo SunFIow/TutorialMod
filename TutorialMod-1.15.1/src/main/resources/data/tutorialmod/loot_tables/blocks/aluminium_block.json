@@ -2,12 +2,12 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "copper_leaves",
+      "name": "aluminium_block",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:copper_leaves"
+          "name": "tutorialmod:aluminium_block"
         }
       ],
       "conditions": [

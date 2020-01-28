@@ -16,7 +16,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
 	@Override
 	protected void registerTags() {
-		this.getBuilder(ModTags.Blocks.TUTORIAL).add(Registration.FIRSTBLOCK.get(), Registration.RUBY_ORE.get());
+		this.getBuilder(ModTags.Blocks.TUTORIAL).add(Registration.GLOWSTONE_GENERATOR_BLOCK.get(), Registration.RUBY_ORE.get());
 		this.getBuilder(BlockTags.LOGS).add(Registration.COPPER_LOG.get(), Registration.ALUMINIUM_LOG.get());
 		this.getBuilder(BlockTags.LEAVES).add(Registration.COPPER_LEAVES.get(), Registration.ALUMINIUM_LEAVES.get());
 		this.getBuilder(BlockTags.PLANKS).add(Registration.COPPER_PLANKS.get(), Registration.ALUMINIUM_PLANKS.get());

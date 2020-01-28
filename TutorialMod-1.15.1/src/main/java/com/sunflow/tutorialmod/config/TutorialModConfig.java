@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.util.config;
+package com.sunflow.tutorialmod.config;
 
 import java.nio.file.Path;
 
@@ -12,11 +12,11 @@ import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 
-public class Config {
+public class TutorialModConfig {
 
 	public static final String CATEGORY_GENERAL = "general";
 	public static final String CATEGORY_MACHINES = "machines";
-	public static final String SUBCATEGORY_FIRSTBLOCK = "firstblock";
+	public static final String SUBCATEGORY_GLOWSTONE_GENERATOR = "glowstone_generator";
 	public static final String SUBCATEGORY_SINTERING_FURNACE = "sintering_furnace";
 	public static final String SUBCATEGORY_ELECTRIC_SINTERING_FURNACE = "electric_sintering_furnace";
 	public static final String SUBCATEGORY_CHARGER = "charger";
@@ -27,10 +27,10 @@ public class Config {
 
 	public static ForgeConfigSpec.BooleanValue CONFIG_SHOW_OVERLAY;
 
-	public static ForgeConfigSpec.IntValue FIRSTBLOCK_GENERATE;
-	public static ForgeConfigSpec.IntValue FIRSTBLOCK_MAXPOWER;
-	public static ForgeConfigSpec.IntValue FIRSTBLOCK_TRANSFER;
-	public static ForgeConfigSpec.IntValue FIRSTBLOCK_TICKS;
+	public static ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_GENERATE;
+	public static ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_MAXPOWER;
+	public static ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_TRANSFER;
+	public static ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_TICKS;
 
 	public static ForgeConfigSpec.IntValue SINTERING_FURNACE_TICKS;
 
@@ -80,14 +80,14 @@ public class Config {
 	}
 
 	private static void setupFirstBlockConfig(Builder COMMON_BUILDER) {
-		COMMON_BUILDER.comment("FirstBlock Settings").push(SUBCATEGORY_FIRSTBLOCK);
-		FIRSTBLOCK_GENERATE = COMMON_BUILDER.comment("Power generation per glowstone")
+		COMMON_BUILDER.comment("Glowstone Generator Settings").push(SUBCATEGORY_GLOWSTONE_GENERATOR);
+		GLOWSTONE_GENERATOR_GENERATE = COMMON_BUILDER.comment("Power generation per glowstone")
 				.defineInRange("generate", 256, 0, Integer.MAX_VALUE);
-		FIRSTBLOCK_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
+		GLOWSTONE_GENERATOR_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
-		FIRSTBLOCK_TRANSFER = COMMON_BUILDER.comment("Maximum power to transfer per tick")
+		GLOWSTONE_GENERATOR_TRANSFER = COMMON_BUILDER.comment("Maximum power to transfer per tick")
 				.defineInRange("transfer", 100, 0, Integer.MAX_VALUE);
-		FIRSTBLOCK_TICKS = COMMON_BUILDER.comment("Ticks per glowstone")
+		GLOWSTONE_GENERATOR_TICKS = COMMON_BUILDER.comment("Ticks per glowstone")
 				.defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 	}

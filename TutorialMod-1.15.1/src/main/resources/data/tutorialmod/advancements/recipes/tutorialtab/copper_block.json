@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "copper_ingot": {
+    "has_copper_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "copper_ingot",
+      "has_copper_ingot",
       "has_the_recipe"
     ]
   ]

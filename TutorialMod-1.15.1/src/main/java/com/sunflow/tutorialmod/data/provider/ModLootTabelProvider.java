@@ -14,7 +14,7 @@ public class ModLootTabelProvider extends BaseLootTableProvider {
 
 	@Override
 	protected void addTables() {
-		lootTables.put(Registration.FIRSTBLOCK.get(), createStandardTableNBT(Registration.FIRSTBLOCK.get().getRegistryName().getPath(), Registration.FIRSTBLOCK.get(), "inv", "energy", "cooktime", "currentfuel"));
+		lootTables.put(Registration.GLOWSTONE_GENERATOR_BLOCK.get(), createStandardTableNBT(Registration.GLOWSTONE_GENERATOR_BLOCK.get().getRegistryName().getPath(), Registration.GLOWSTONE_GENERATOR_BLOCK.get(), "inv", "energy", "cooktime", "currentfuel"));
 		lootTables.put(Registration.ENERGY_STORAGE.get(), createStandardTableNBT(Registration.ENERGY_STORAGE.get().getRegistryName().getPath(), Registration.ENERGY_STORAGE.get(), "energy"));
 		lootTables.put(Registration.SINTERING_FURNACE.get(), createStandardTableNBT(Registration.SINTERING_FURNACE.get().getRegistryName().getPath(), Registration.SINTERING_FURNACE.get(), "inv", "cooktime", "burntime", "burntimetotal"));
 		lootTables.put(Registration.ELECTRIC_SINTERING_FURNACE.get(), createStandardTableNBT(Registration.ELECTRIC_SINTERING_FURNACE.get().getRegistryName().getPath(), Registration.ELECTRIC_SINTERING_FURNACE.get(), "inv", "energy", "cooktime"));

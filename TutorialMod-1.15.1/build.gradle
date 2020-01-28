@@ -16,7 +16,6 @@ apply plugin: 'maven-publish'
 // version = modMinecraftVersion + "-" + modVersion
 version = modVersion
 group = modGroup
-// archivesBaseName = modFileName
 archivesBaseName = modFileName + "-" + modMinecraftVersion
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -77,7 +76,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             args '--mod', modId, '--all', '--output', '\"' + file('src/generated/resources/').toString() + '\"'
+ 			// args '--mod', 'tutorialmod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
 
+            // environment 'target', 'fmluserdevdata'
+            
             mods {
                 examplemod {
                     source sourceSets.main

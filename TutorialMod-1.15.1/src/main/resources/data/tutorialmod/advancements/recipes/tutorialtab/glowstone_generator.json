@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "tutorialmod:firstblock"
+      "tutorialmod:glowstone_generator"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "tutorialmod:firstblock"
+        "recipe": "tutorialmod:glowstone_generator"
       }
     }
   },

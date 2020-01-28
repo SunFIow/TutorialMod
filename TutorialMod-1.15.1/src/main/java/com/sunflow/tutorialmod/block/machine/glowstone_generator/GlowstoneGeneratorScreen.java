@@ -1,16 +1,16 @@
-package com.sunflow.tutorialmod.block.machine.firstblock;
+package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ScreenBase;
-import com.sunflow.tutorialmod.util.config.Config;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class FirstBlockScreen extends ScreenBase<FirstBlockContainer> {
+public class GlowstoneGeneratorScreen extends ScreenBase<GlowstoneGeneratorContainer> {
 
-	public FirstBlockScreen(FirstBlockContainer container, PlayerInventory inv, ITextComponent name) {
+	public GlowstoneGeneratorScreen(GlowstoneGeneratorContainer container, PlayerInventory inv, ITextComponent name) {
 		super(container, inv, name);
 		GUI = new ResourceLocation(TutorialMod.MODID, "textures/gui/container/glowstone_generator.png");
 	}
@@ -30,7 +30,7 @@ public class FirstBlockScreen extends ScreenBase<FirstBlockContainer> {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-		int l = getProgressScaled(container.getCookTime(), Config.FIRSTBLOCK_TICKS.get(), 24);
+		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.GLOWSTONE_GENERATOR_TICKS.get(), 24);
 		this.blit(guiLeft + 113, guiTop + 34, 176, 14, l, 17);
 
 		int k = getProgressScaled(container.getEnergy(), container.getEnergyMax(), 76);

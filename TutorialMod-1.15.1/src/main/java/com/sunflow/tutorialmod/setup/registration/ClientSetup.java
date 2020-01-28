@@ -8,7 +8,7 @@ import com.sunflow.tutorialmod.block.copper_chest.CopperChestTileRenderer;
 import com.sunflow.tutorialmod.block.machine.charger.ChargerScreen;
 import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.ElectricSinteringFurnaceScreen;
 import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageScreen;
-import com.sunflow.tutorialmod.block.machine.firstblock.FirstBlockScreen;
+import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorScreen;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceScreen;
 import com.sunflow.tutorialmod.block.model.CustomBakedModel;
 import com.sunflow.tutorialmod.block.model.CustomModelLoader;
@@ -49,7 +49,7 @@ public class ClientSetup {
 		registerScreens();
 		KeyBindingHandler.setup();
 
-		BakedBlockBase block = Registration.FANCY_BLOCK.get();
+		BakedBlockBase block = Registration.FANCYBLOCK.get();
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(TutorialMod.MODID, "customloader"), new CustomModelLoader(() -> new CustomBakedModel(block.location(), block.offset(), block.length())));
 
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
@@ -68,7 +68,7 @@ public class ClientSetup {
 	public static <M extends Container, U extends Screen & IHasContainer<M>> void registerScreens() {
 		Log.debug("I am going to register the screens now senpai.");
 
-		ScreenManager.registerFactory(Registration.FIRSTBLOCK_CONTAINER.get(), FirstBlockScreen::new);
+		ScreenManager.registerFactory(Registration.GLOWSTONE_GENERATOR_CONTAINER.get(), GlowstoneGeneratorScreen::new);
 		ScreenManager.registerFactory(Registration.ENERGY_STORAGE_CONTAINER.get(), EnergyStorageScreen::new);
 		ScreenManager.registerFactory(Registration.SINTERING_FURNACE_CONTAINER.get(), SinteringFurnaceScreen::new);
 		ScreenManager.registerFactory(Registration.ELECTRIC_SINTERING_FURNACE_CONTAINER.get(), ElectricSinteringFurnaceScreen::new);

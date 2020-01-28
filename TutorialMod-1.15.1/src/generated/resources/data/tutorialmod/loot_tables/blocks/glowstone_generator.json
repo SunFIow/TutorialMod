@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "firstblock",
+      "name": "glowstone_generator",
       "rolls": 1,
       "entries": [
         {
@@ -48,7 +48,7 @@
               ]
             }
           ],
-          "name": "tutorialmod:firstblock"
+          "name": "tutorialmod:glowstone_generator"
         }
       ],
       "conditions": [

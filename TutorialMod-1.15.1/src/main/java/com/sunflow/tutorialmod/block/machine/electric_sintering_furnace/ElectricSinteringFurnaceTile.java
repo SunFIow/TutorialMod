@@ -4,9 +4,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
-import com.sunflow.tutorialmod.util.config.Config;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,7 +31,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 
-	private static final int ENERGY_USE = Config.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / Config.ELECTRIC_SINTERING_FURNACE_TICKS.get();
+	private static final int ENERGY_USE = TutorialModConfig.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get();
 
 	@Override
 	protected ItemStackHandler getHandler() {
@@ -55,7 +55,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage getEnergy() {
-		return new CustomEnergyStorage(Config.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), Config.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000);
+		return new CustomEnergyStorage(TutorialModConfig.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000);
 	}
 
 	private float cookTime;
@@ -74,7 +74,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 						cookTime++;
 						e.extractEnergy(ENERGY_USE, false);
 
-						if (cookTime >= Config.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
+						if (cookTime >= TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
 							cookTime = 0;
 //							h.insertItem(OUTPUT_ID, smelting, false);
 							smeltItem();
@@ -83,7 +83,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 					}
 				}
 				if (!canBurn() || !canSmelt() && cookTime > 0) {
-					cookTime = MathHelper.clamp(cookTime - 2, 0, Config.ELECTRIC_SINTERING_FURNACE_TICKS.get());
+					cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get());
 				}
 			});
 		});

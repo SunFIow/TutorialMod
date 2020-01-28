@@ -17,7 +17,7 @@ public class ModGroups {
 	public static final ItemGroup itemGroup2 = new ItemGroup("tutorialtab2") {
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(Registration.FIRSTBLOCK.get());
+			return new ItemStack(Registration.GLOWSTONE_GENERATOR_BLOCK.get());
 		}
 	};
 

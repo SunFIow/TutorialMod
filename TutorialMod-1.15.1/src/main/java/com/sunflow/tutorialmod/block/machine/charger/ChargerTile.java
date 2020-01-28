@@ -3,11 +3,11 @@ package com.sunflow.tutorialmod.block.machine.charger;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
-import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.block.BlockState;
@@ -40,7 +40,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	protected CustomEnergyStorage getEnergy() { return new CustomEnergyStorage(Config.CHARGER_MAXPOWER.get(), Config.CHARGER_RECEIVE.get(), Config.CHARGER_CHARGE_RATE.get()); }
+	protected CustomEnergyStorage getEnergy() { return new CustomEnergyStorage(TutorialModConfig.CHARGER_MAXPOWER.get(), TutorialModConfig.CHARGER_RECEIVE.get(), TutorialModConfig.CHARGER_CHARGE_RATE.get()); }
 
 	public ChargerTile() { super(Registration.CHARGER_TILE.get()); }
 
@@ -56,7 +56,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 					if (!chargeSlot.isEmpty()) {
 						CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(chargeSlot, EnergyUnit.DEFAULT);
 						if (itemEnergy.canReceive()) {
-							int maxEExt = tileEnergy.extractEnergy(Config.CHARGER_CHARGE_RATE.get(), true);
+							int maxEExt = tileEnergy.extractEnergy(TutorialModConfig.CHARGER_CHARGE_RATE.get(), true);
 							int eReceived = itemEnergy.receiveEnergy(maxEExt, false);
 							if (eReceived > 0) {
 								tileEnergy.extractEnergy(eReceived, false);

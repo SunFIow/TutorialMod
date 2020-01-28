@@ -2,12 +2,12 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "copper_chest",
+      "name": "fancyblock",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:copper_chest"
+          "name": "tutorialmod:fancyblock"
         }
       ],
       "conditions": [
