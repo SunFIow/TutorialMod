@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.world.biome;
 import com.google.common.collect.ImmutableList;
 import com.sunflow.tutorialmod.block.tree.CustomTree;
 import com.sunflow.tutorialmod.setup.registration.Registration;
-import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityClassification;
@@ -34,12 +33,9 @@ public class CopperBiome extends BiomeBase {
 
 	public CopperBiome() {
 		super(getBuilder(), BiomeType.WARM, Type.HILLS, Type.DRY);
-//		this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
-//		this.addStructure(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F));
-//		this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(true));
-		VersionUtils.addStructure(this, VersionUtils.getFeature(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
-		VersionUtils.addStructure(this, VersionUtils.getFeature(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F)));
-		VersionUtils.addStructure(this, VersionUtils.getFeature(Feature.SHIPWRECK, new ShipwreckConfig(true)));
+		addStructure(Feature.MINESHAFT.withConfiguration(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
+		addStructure(Feature.BURIED_TREASURE.withConfiguration(new BuriedTreasureConfig(0.01F)));
+		addStructure(Feature.SHIPWRECK.withConfiguration(new ShipwreckConfig(true)));
 
 //		this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
 //				createDecoratedFeature(
@@ -70,13 +66,13 @@ public class CopperBiome extends BiomeBase {
 //			CustomTree ALUMINIUM = new CustomTree(ModBlocks.ALUMINIUM_LOG, ModBlocks.ALUMINIUM_LEAVES, ModBlocks.ALUMINIUM_SAPLING);
 //		}
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.RANDOM_SELECTOR.func_225566_b_(
+				Feature.RANDOM_SELECTOR.withConfiguration(
 						new MultipleRandomFeatureConfig(ImmutableList.of(
-								Feature.NORMAL_TREE.func_225566_b_(COPPER.configSmall()).func_227227_a_(0.666F),
-								Feature.FANCY_TREE.func_225566_b_(COPPER.configSmall()).func_227227_a_(0.1F),
-								Feature.NORMAL_TREE.func_225566_b_(ALUMINIUM.configSmall()).func_227227_a_(0.666F),
-								Feature.FANCY_TREE.func_225566_b_(ALUMINIUM.configSmall()).func_227227_a_(0.1F)),
-								Feature.NORMAL_TREE.func_225566_b_(COPPER.configSmall())
+								Feature.NORMAL_TREE.withConfiguration(COPPER.configSmall()).func_227227_a_(0.666F),
+								Feature.FANCY_TREE.withConfiguration(COPPER.configSmall()).func_227227_a_(0.1F),
+								Feature.NORMAL_TREE.withConfiguration(ALUMINIUM.configSmall()).func_227227_a_(0.666F),
+								Feature.FANCY_TREE.withConfiguration(ALUMINIUM.configSmall()).func_227227_a_(0.1F)),
+								Feature.NORMAL_TREE.withConfiguration(COPPER.configSmall())
 										.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))))));
 
 //		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -89,7 +85,7 @@ public class CopperBiome extends BiomeBase {
 //						Placement.COUNT_RANGE,
 //						new CountRangeConfig(20, 32, 32, 80)));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-				Feature.ORE.func_225566_b_(
+				Feature.ORE.withConfiguration(
 						new OreFeatureConfig(
 								OreFeatureConfig.FillerBlockType.NATURAL_STONE,
 								Registration.ALUMINIUM_ORE_END.get().getDefaultState(),

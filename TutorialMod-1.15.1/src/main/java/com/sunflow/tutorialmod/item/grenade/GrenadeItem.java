@@ -1,7 +1,6 @@
 package com.sunflow.tutorialmod.item.grenade;
 
 import com.sunflow.tutorialmod.item.base.ItemBase;
-import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,7 +19,7 @@ public class GrenadeItem extends ItemBase {
 		ItemStack itemstack = player.getHeldItem(hand);
 		if (!player.abilities.isCreativeMode) itemstack.shrink(1);
 
-		world.playSound((PlayerEntity) null, VersionUtils.getX(player), VersionUtils.getY(player), VersionUtils.getZ(player), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+		world.playSound((PlayerEntity) null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 		if (!world.isRemote) {
 			GrenadeEntity grenadeentity = new GrenadeEntity(world, player);
 			grenadeentity.setItem(itemstack);

@@ -49,8 +49,7 @@ public class ArmorSkinBase extends ArmorBase {
 			model.bipedRightLeg.showModel = armorSlot == EquipmentSlotType.LEGS;
 
 			model.isChild = _default.isChild;
-			// .isSneak
-			model.field_228270_o_ = _default.field_228270_o_;
+			model.isSneak = _default.isSneak;
 			model.isSitting = _default.isSitting;
 			model.rightArmPose = _default.rightArmPose;
 			model.leftArmPose = _default.leftArmPose;

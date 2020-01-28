@@ -29,20 +29,20 @@ public class CustomTree extends BigTree {
 	@Override
 	public ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random random) {
 		return random.nextInt(10) == 0
-				? Feature.FANCY_TREE.func_225566_b_(configSmall())
-				: Feature.NORMAL_TREE.func_225566_b_(configSmall());
+				? Feature.FANCY_TREE.withConfiguration(configSmall())
+				: Feature.NORMAL_TREE.withConfiguration(configSmall());
 	}
 
 	@Override
 	public ConfiguredFeature<HugeTreeFeatureConfig, ?> func_225547_a_(Random random) {
-		return Feature.DARK_OAK_TREE.func_225566_b_(configBig());
+		return Feature.DARK_OAK_TREE.withConfiguration(configBig());
 	}
 
 	public TreeFeatureConfig configSmall() {
-		return (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves), new BlobFoliagePlacer(0, 0))).setSapling(sapling.get()).func_225568_b_();
+		return (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves), new BlobFoliagePlacer(0, 0))).setSapling(sapling.get()).build();
 	}
 
 	public HugeTreeFeatureConfig configBig() {
-		return (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves))).func_225569_d_(6).setSapling(sapling.get()).func_225568_b_();
+		return (new HugeTreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves))).baseHeight(6).setSapling(sapling.get()).build();
 	}
 }

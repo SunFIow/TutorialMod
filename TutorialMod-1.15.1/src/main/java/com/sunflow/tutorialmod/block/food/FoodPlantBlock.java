@@ -69,7 +69,7 @@ public class FoodPlantBlock extends CropsBlock {
 	}
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if (!world.isRemote) {
 			if (this.isMaxAge(state)) {
 				float cSeed = new Random().nextFloat() * chanceSeed, cCrop = new Random().nextFloat() * chanceCrop;

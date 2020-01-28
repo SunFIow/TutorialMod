@@ -7,7 +7,6 @@ import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
 import com.sunflow.tutorialmod.util.Log;
-import com.sunflow.tutorialmod.util.VersionUtils;
 import com.sunflow.tutorialmod.util.config.Config;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
@@ -35,7 +34,7 @@ public class EnergyWandItem extends ItemBase implements IEnergyItem {
 			ItemStack stack = player.getHeldItem(hand);
 			CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(stack, EnergyUnit.DEFAULT);
 
-			if (VersionUtils.isSneaking(player)) {
+			if (player.isShiftKeyDown()) {
 				itemEnergy.receiveEnergy(100, false);
 			}
 //			tag.put(EnergyUnit.DEFAULT.name, itemEnergy.serializeNBT());

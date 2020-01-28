@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.command.util;
 
-import com.sunflow.tutorialmod.util.VersionUtils;
-
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.network.play.server.SPlaySoundEventPacket;
@@ -30,19 +28,14 @@ public class TeleportationTools {
 	}
 
 	public static void teleportToDimension(ServerPlayerEntity player, DimensionType dimensionType, BlockPos pos) {
-		final ServerWorld world = VersionUtils.getWorld(player.getServer(), dimensionType);
+		final ServerWorld world = player.getServer().getWorld(dimensionType);
 
-		world.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, new ChunkPos(pos), 1, player.getEntityId());
-		if (player.isSleeping()) {
-			player.wakeUp();
-		}
+		world.getChunkProvider().registerTicket(TicketType.POST_TELEPORT, new ChunkPos(pos), 1, player.getEntityId());
+		if (player.isSleeping()) player.wakeUp();
 		player.detach();
-		if (world == player.world) {
-			player.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
-		} else {
-//			player.teleport(world, pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
-			player.func_200619_a(world, pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
-		}
+		if (world == player.world) player.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
+		else player.teleport(world, pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
+
 //		player.setRotationYawHead(player.rotationYaw);
 	}
 
@@ -55,22 +48,22 @@ public class TeleportationTools {
 			return null;
 		}
 		DimensionType sourceDim = entity.dimension;
-		ServerWorld sourceWorld = VersionUtils.getWorld(entity.server, sourceDim);
+		ServerWorld sourceWorld = entity.server.getWorld(sourceDim);
 
 		entity.dimension = destinationDim;
-		ServerWorld destinationWorld = VersionUtils.getWorld(entity.server, destinationDim);
+		ServerWorld destinationWorld = entity.server.getWorld(destinationDim);
 
 		WorldInfo worldinfo = entity.world.getWorldInfo();
 		NetworkHooks.sendDimensionDataPacket(entity.connection.netManager, entity);
-		entity.connection.sendPacket(new SRespawnPacket(destinationDim, WorldInfo.func_227498_c_(worldinfo.getSeed()), worldinfo.getGenerator(), entity.interactionManager.getGameType()));
+		entity.connection.sendPacket(new SRespawnPacket(destinationDim, WorldInfo.byHashing(worldinfo.getSeed()), worldinfo.getGenerator(), entity.interactionManager.getGameType()));
 		entity.connection.sendPacket(new SServerDifficultyPacket(worldinfo.getDifficulty(), worldinfo.isDifficultyLocked()));
 		PlayerList playerlist = entity.server.getPlayerList();
 		playerlist.updatePermissionLevel(entity);
 		sourceWorld.removeEntity(entity);
 		entity.revive();
-		double d0 = VersionUtils.getX(entity);
-		double d1 = VersionUtils.getY(entity);
-		double d2 = VersionUtils.getZ(entity);
+		double d0 = entity.getPosX();
+		double d1 = entity.getPosY();
+		double d2 = entity.getPosZ();
 		float f0 = entity.rotationPitch;
 		float f1 = entity.rotationYaw;
 		sourceWorld.getProfiler().startSection("moving");
@@ -91,10 +84,10 @@ public class TeleportationTools {
 		sourceWorld.getProfiler().endSection();
 		entity.setWorld(destinationWorld);
 		destinationWorld.func_217447_b(entity);
-		entity.connection.setPlayerLocation(VersionUtils.getX(entity), VersionUtils.getY(entity), VersionUtils.getZ(entity), f1, f0);
-		entity.interactionManager.func_73080_a(destinationWorld);
+		entity.connection.setPlayerLocation(entity.getPosX(), entity.getPosY(), entity.getPosZ(), f1, f0);
+		entity.interactionManager.setWorld(destinationWorld);
 		entity.connection.sendPacket(new SPlayerAbilitiesPacket(entity.abilities));
-		playerlist.func_72354_b(entity, destinationWorld);
+		playerlist.sendWorldInfo(entity, destinationWorld);
 		playerlist.sendInventory(entity);
 
 		for (EffectInstance effect : entity.getActivePotionEffects()) {

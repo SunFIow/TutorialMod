@@ -36,41 +36,47 @@ public class CopperChestTileRenderer<T extends TileEntity & IChestLid> extends T
 	}
 
 	@Override
-	public void func_225616_a_(T p_225616_1_, float p_225616_2_, MatrixStack p_225616_3_, IRenderTypeBuffer p_225616_4_, int p_225616_5_, int p_225616_6_) {
-		World world = p_225616_1_.getWorld();
+	public void render(T tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
+		World world = tileEntity.getWorld();
 		boolean flag = world != null;
-		BlockState blockstate = flag ? p_225616_1_.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockstate = flag ? tileEntity.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
 		Block block = blockstate.getBlock();
 		if (block instanceof CopperChestBlock) {
-			p_225616_3_.func_227860_a_();
+			matrixStack.push();
 			float f = blockstate.get(ChestBlock.FACING).getHorizontalAngle();
-			p_225616_3_.func_227861_a_(0.5D, 0.5D, 0.5D);
-			p_225616_3_.func_227863_a_(Vector3f.field_229181_d_.func_229187_a_(-f));
-			p_225616_3_.func_227861_a_(-0.5D, -0.5D, -0.5D);
+			matrixStack.translate(0.5D, 0.5D, 0.5D);
+			matrixStack.rotate(Vector3f.YP.rotationDegrees(-f));
+			matrixStack.translate(-0.5D, -0.5D, -0.5D);
 			TileEntityMerger.ICallbackWrapper<? extends ChestTileEntity> icallbackwrapper;
 			icallbackwrapper = TileEntityMerger.ICallback::func_225537_b_;
 
-			float f1 = icallbackwrapper.apply(ChestBlock.func_226917_a_(p_225616_1_)).get(p_225616_2_);
+			float f1 = icallbackwrapper.apply(ChestBlock.func_226917_a_(tileEntity)).get(partialTicks);
 			f1 = 1.0F - f1;
 			f1 = 1.0F - f1 * f1 * f1;
-			int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(p_225616_5_);
+			int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLight);
 //			Material material = Atlases.field_228758_q_;
 //			Material material = Atlases.field_228761_t_;
 //			Material material = new Material(Atlases.field_228747_f_, new ResourceLocation("entity/chest/" + "copper"));
 //			Material material = new Material(Atlases.field_228747_f_, new ResourceLocation("entity/chest/" + "copper_chest"));
 //			IVertexBuilder ivertexbuilder = material.func_229311_a_(p_225616_4_, RenderType::func_228638_b_);
 
-			IVertexBuilder ivertexbuilder = p_225616_4_.getBuffer(RenderType.func_228637_a_(TEXTURE_COPPER_CHEST, false));
+//			ChestType chesttype = blockstate.has(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
+//			boolean isChristmas = false;
+//			Material material = Atlases.getChestMaterial(tileEntity, chesttype, isChristmas);
+//			IVertexBuilder ivertexbuilder = material.getBuffer(buffer, RenderType::entityCutout);
 
-			this.func_228871_a_(p_225616_3_, ivertexbuilder, f1, i, p_225616_6_);
-			p_225616_3_.func_227865_b_();
+//			IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.func_228637_a_(TEXTURE_COPPER_CHEST, false));
+			IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.entityCutout(TEXTURE_COPPER_CHEST));
+
+			this.render(matrixStack, ivertexbuilder, f1, i, combinedOverlay);
+			matrixStack.pop();
 		}
 	}
 
-	private void func_228871_a_(MatrixStack p_228871_1_, IVertexBuilder p_228871_2_, float p_228871_6_, int p_228871_7_, int p_228871_8_) {
-		simpleChest.applyRotation(p_228871_6_);
+	private void render(MatrixStack matrixStack, IVertexBuilder buffer, float rotation, int combinedLight, int combinedOverlay) {
+		simpleChest.applyRotation(rotation);
 
-		simpleChest.render(p_228871_1_, p_228871_2_, p_228871_7_, p_228871_8_);
+		simpleChest.render(matrixStack, buffer, combinedLight, combinedOverlay);
 	}
 
 //	private CopperChestModel getChestModel(int destroyStage) {

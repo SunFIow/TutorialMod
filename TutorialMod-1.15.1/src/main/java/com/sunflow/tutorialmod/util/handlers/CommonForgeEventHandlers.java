@@ -5,7 +5,6 @@ import com.sunflow.tutorialmod.setup.ModCommands;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
-import com.sunflow.tutorialmod.util.VersionUtils;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.DimensionType;
@@ -23,7 +22,7 @@ public class CommonForgeEventHandlers {
 
 		Registration.COPPER.get().register();
 		ModCommands.register(event.getCommandDispatcher());
-		TutorialMod.data = VersionUtils.getWorld(event.getServer(), DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+		TutorialMod.data = event.getServer().getWorld(DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
 	}
 
 	@SubscribeEvent

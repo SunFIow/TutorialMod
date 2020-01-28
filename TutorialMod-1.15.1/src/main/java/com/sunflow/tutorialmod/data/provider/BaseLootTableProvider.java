@@ -46,9 +46,9 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 	protected abstract void addTables();
 
 	protected LootTable.Builder createStandardTableNBT(String name, Block block, String... nbtStrings) {
-		Builder nbts = CopyNbt.func_215881_a(CopyNbt.Source.BLOCK_ENTITY);
+		Builder nbts = CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY);
 		for (String nbt : nbtStrings) {
-			nbts.func_216055_a(nbt, "BlockEntityTag." + nbt, CopyNbt.Action.REPLACE);
+			nbts.addOperation(nbt, "BlockEntityTag." + nbt, CopyNbt.Action.REPLACE);
 		}
 		LootPool.Builder builder = LootPool.builder()
 				.name(name)

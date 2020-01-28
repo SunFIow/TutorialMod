@@ -45,7 +45,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 	}
 
 	private TextureAtlasSprite getTexture() {
-		return Minecraft.getInstance().func_228015_a_(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(texture);
+		return Minecraft.getInstance().getTextureGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(texture);
 	}
 
 	@Nonnull
@@ -118,7 +118,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 	private void putVertex(BakedQuadBuilder builder, Vec3d normal,
 			double x, double y, double z, float u, float v, TextureAtlasSprite sprite, float r, float g, float b) {
 
-		ImmutableList<VertexFormatElement> elements = builder.getVertexFormat().func_227894_c_().asList();
+		ImmutableList<VertexFormatElement> elements = builder.getVertexFormat().getElements();// .asList();
 		for (int i = 0; i < elements.size(); i++) {
 			VertexFormatElement e = elements.get(i);
 			switch (e.getUsage()) {

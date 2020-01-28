@@ -29,9 +29,9 @@ public class TeleporterBlock extends BlockBase {
 	}
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if (!worldIn.isRemote && hand == Hand.MAIN_HAND) {
-			if (player.func_226271_bk_()) {
+			if (player.isShiftKeyDown()) {
 				dimensionID++;
 				if (dimensionID > 1) {
 					dimensionID = -1;

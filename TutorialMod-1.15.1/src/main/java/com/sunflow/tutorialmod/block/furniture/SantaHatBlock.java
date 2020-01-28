@@ -25,6 +25,6 @@ public class SantaHatBlock extends HorizontalBlockBase {
 
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.func_177977_b()).getMaterial().isSolid();
+		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
 	}
 }

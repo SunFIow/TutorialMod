@@ -67,7 +67,7 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 	};
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if (!world.isRemote) {
 			CopperChestTile tile = getTile(state, world, pos, false);
 			if (tile != null) {

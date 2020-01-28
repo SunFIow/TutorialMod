@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.block.base;
 
-import com.sunflow.tutorialmod.util.VersionUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -43,6 +41,6 @@ public class OrientableBlockBase extends BlockBase {
 
 //
 	public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity) {
-		return Direction.getFacingFromVector(VersionUtils.getX(entity) - clickedBlock.getX(), VersionUtils.getY(entity) - clickedBlock.getY(), VersionUtils.getZ(entity) - clickedBlock.getZ());
+		return Direction.getFacingFromVector(entity.getPosX() - clickedBlock.getX(), entity.getPosY() - clickedBlock.getY(), entity.getPosZ() - clickedBlock.getZ());
 	}
 }

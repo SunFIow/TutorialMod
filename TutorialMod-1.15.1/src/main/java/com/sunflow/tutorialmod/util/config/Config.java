@@ -148,7 +148,7 @@ public class Config {
 	}
 
 	@SubscribeEvent
-	public static void onReload(ModConfig.ConfigReloading event) {
+	public static void onReload(ModConfig.Reloading event) {
 		Log.debug("{} config just got changed on the file system!", TutorialMod.MODID);
 	}
 }

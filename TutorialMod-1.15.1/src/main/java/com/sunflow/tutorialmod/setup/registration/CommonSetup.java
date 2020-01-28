@@ -10,9 +10,11 @@ public class CommonSetup {
 	public static void setup(FMLCommonSetupEvent event) {
 
 //		TODO: RenderTypeLookup.setRenderLayer(this, RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(Registration.SANTA_HAT.get(), RenderType.func_228643_e_());
-		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.func_228643_e_());
+		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(Registration.SANTA_HAT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(Registration.COPPER_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.cutout());
 	}
 }
