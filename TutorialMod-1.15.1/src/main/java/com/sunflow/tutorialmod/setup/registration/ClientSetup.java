@@ -9,6 +9,7 @@ import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.Electric
 import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageScreen;
 import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorScreen;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceScreen;
+import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
 import com.sunflow.tutorialmod.block.model.CustomBakedModel;
 import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
@@ -21,14 +22,17 @@ import com.sunflow.tutorialmod.util.handlers.PlayerSkinHandler;
 import net.minecraft.client.gui.IHasContainer;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -59,6 +63,7 @@ public class ClientSetup {
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(TutorialMod.MODID, "customloader"), new CustomModelLoader(() -> new CustomBakedModel(block.location(), block.offset(), block.length())));
 
 		CopperChestTileRenderer.register();
+		MagicBockTileRenderer.register();
 
 		Log.debug("I am going to register the keybindings now senpai.");
 		KeyBindings.register();
@@ -95,4 +100,15 @@ public class ClientSetup {
 		registry.register((stack, i) -> Registration.CENTAUR_SPAWN_EGG.get().eggColor, Registration.CENTAUR_SPAWN_EGG.get());
 		registry.register((stack, i) -> Registration.WEIRDMOB_SPAWN_EGG.get().eggColor, Registration.WEIRDMOB_SPAWN_EGG.get());
 	}
+
+	@SubscribeEvent
+	public static void onTextureStitch(final TextureStitchEvent.Pre event) {
+		ResourceLocation atlas = event.getMap().getBasePath();
+		if (atlas.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
+			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
+		} else if (atlas.equals(Atlases.CHEST_ATLAS)) {
+			CopperChestTileRenderer.stitch(event);
+		}
+	}
+
 }

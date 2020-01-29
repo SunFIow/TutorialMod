@@ -24,7 +24,7 @@ public class MagicBlock extends Block {
 	public boolean hasTileEntity(BlockState state) { return true; }
 
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) { return new MagicTile(); }
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) { return new MagicBlockTile(); }
 
 	@Override
 	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) { return RENDER_SHAPE; }
