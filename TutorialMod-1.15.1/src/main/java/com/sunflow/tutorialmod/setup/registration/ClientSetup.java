@@ -12,8 +12,12 @@ import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceS
 import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
 import com.sunflow.tutorialmod.block.model.CustomBakedModel;
 import com.sunflow.tutorialmod.block.model.CustomModelLoader;
+import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
+import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
+import com.sunflow.tutorialmod.rendering.RenderMobPositions;
+import com.sunflow.tutorialmod.rendering.RenderModOverlay;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.enums.KeyBindings;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
@@ -70,8 +74,14 @@ public class ClientSetup {
 
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
 		eventBus.register(KeyBindingHandler.class);
-		eventBus.register(PlayerSkinHandler.class);
-		eventBus.register(Registration.ENCHANTMENT_MULTIJUMP.get());
+
+		eventBus.addListener(PlayerSkinHandler::playerJoined);
+		eventBus.addListener(RenderMobPositions::render);
+
+		eventBus.addListener(RenderModOverlay::render);
+		eventBus.addListener(RenderTileOverlays::render);
+
+		eventBus.addListener(EnchantmentMultiJump::enchantmentFunction);
 
 		Log.info("m...");
 		Log.info("mm...");
