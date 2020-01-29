@@ -9,13 +9,13 @@ import com.sunflow.tutorialmod.util.enums.KeyBindings;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class KeyBindingHandler {
 
 	@SubscribeEvent
-	public static void handleKeyInputEvent(KeyInputEvent event) {
+	public static void handleKeyInputEvent(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.EXPLODE.isPressed()) Networking.sendToServer(new ExplodePacket(4711));
 		if (KeyBindings.OVERLAY.isPressed()) {
 			TutorialModConfig.CONFIG_SHOW_OVERLAY.set(!TutorialModConfig.CONFIG_SHOW_OVERLAY.get());

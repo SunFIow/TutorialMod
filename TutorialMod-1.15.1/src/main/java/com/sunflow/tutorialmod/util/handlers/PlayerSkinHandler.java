@@ -13,14 +13,11 @@ import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class PlayerSkinHandler {
-	@SubscribeEvent
-	public static void playerJoined(ClientPlayerNetworkEvent.LoggedInEvent event) {
-		Networking.sendToServer(new PlayerLoggedInPacket());
-	}
+
+	public static void playerJoined(ClientPlayerNetworkEvent.LoggedInEvent event) { Networking.sendToServer(new PlayerLoggedInPacket()); }
 
 	public static final void changePlayerSkin(AbstractClientPlayerEntity player, ResourceLocation location) {
 		if (!player.hasPlayerInfo()) throw new IllegalAccessError("The player needs to have Player Info");

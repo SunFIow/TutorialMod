@@ -28,6 +28,7 @@ import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceB
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceContainer;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.block.magicblock.MagicBlock;
+import com.sunflow.tutorialmod.block.magicblock.MagicBlockTile;
 import com.sunflow.tutorialmod.block.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.block.ore.RubyBlock;
 import com.sunflow.tutorialmod.block.ore.RubyOre;
@@ -160,7 +161,7 @@ public class Registration {
 
 	public static final RegistryObject<Block> MAGICBLOCK = BLOCKS.register("magicblock", MagicBlock::new);
 	public static final RegistryObject<Item> MAGICBLOCK_ITEM = ITEMS.register("magicblock", () -> new BlockItem(MAGICBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup2)));
-	public static final RegistryObject<TileEntityType<FancyBlockTile>> MAGICBLOCK_TILE = TILEENTITIES.register("magicblock", () -> TileEntityType.Builder.create(FancyBlockTile::new, MAGICBLOCK.get()).build(null));
+	public static final RegistryObject<TileEntityType<MagicBlockTile>> MAGICBLOCK_TILE = TILEENTITIES.register("magicblock", () -> TileEntityType.Builder.create(MagicBlockTile::new, MAGICBLOCK.get()).build(null));
 
 	public static final RegistryObject<Item> GRENADE = ITEMS.register("grenade", GrenadeItem::new);
 //	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> createEntity("grenade", 0.5F, 0.5F, true, EntityClassification.MISC, GrenadeEntity::new));

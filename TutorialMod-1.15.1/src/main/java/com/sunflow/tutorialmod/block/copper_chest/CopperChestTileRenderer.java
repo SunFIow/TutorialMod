@@ -9,9 +9,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
+import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.model.Material;
 import net.minecraft.client.renderer.tileentity.DualBrightnessCallback;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -20,11 +22,13 @@ import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile> {
-	private static final ResourceLocation TEXTURE_COPPER_CHEST = new ResourceLocation(TutorialMod.MODID, "textures/entity/chest/copper_chest.png");
-//	public static final Material TEXTURE_COPPER_CHEST = new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation("entity/chest/copper_chest.png"));
+	public static final ResourceLocation COPPER_CHEST_TEXTURE = new ResourceLocation(TutorialMod.MODID, "entity/chest/copper_chest");
+	public static final Material COPPER_CHEST_MATERIAL = new Material(Atlases.CHEST_ATLAS, COPPER_CHEST_TEXTURE);
+
 	private final CopperChestModel simpleChest;
 
 	public CopperChestTileRenderer(TileEntityRendererDispatcher dispatcher) {
@@ -34,6 +38,10 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 
 	public static void register() {
 		ClientRegistry.bindTileEntityRenderer(Registration.COPPER_CHEST_TILE.get(), CopperChestTileRenderer::new);
+	}
+
+	public static void stitch(TextureStitchEvent.Pre event) {
+		event.addSprite(COPPER_CHEST_TEXTURE);
 	}
 
 	@Override
@@ -55,38 +63,23 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 			f1 = 1.0F - f1;
 			f1 = 1.0F - f1 * f1 * f1;
 			int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLight);
-//			Material material = Atlases.field_228758_q_;
-//			Material material = Atlases.field_228761_t_;
-//			Material material = new Material(Atlases.field_228747_f_, new ResourceLocation("entity/chest/" + "copper"));
-//			Material material = new Material(Atlases.field_228747_f_, new ResourceLocation("entity/chest/" + "copper_chest"));
-//			IVertexBuilder ivertexbuilder = material.func_229311_a_(p_225616_4_, RenderType::func_228638_b_);
 
-//			ChestType chesttype = blockstate.has(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
-//			boolean isChristmas = false;
-//			Material material = Atlases.getChestMaterial(tileEntity, chesttype, isChristmas);
-//			IVertexBuilder ivertexbuilder = material.getBuffer(buffer, RenderType::entityCutout);
+			IVertexBuilder ivertexbuilder = COPPER_CHEST_MATERIAL.getBuffer(buffer, RenderType::entityCutout);
 
-//			IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.func_228637_a_(TEXTURE_COPPER_CHEST, false));
-			IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.entityCutout(TEXTURE_COPPER_CHEST));
+			simpleChest.applyRotation(f1);
+			simpleChest.render(matrixStack, ivertexbuilder, i, combinedOverlay);
 
-			this.render(matrixStack, ivertexbuilder, f1, i, combinedOverlay);
 			matrixStack.pop();
 		}
 	}
 
-	private void render(MatrixStack matrixStack, IVertexBuilder buffer, float rotation, int combinedLight, int combinedOverlay) {
-		simpleChest.applyRotation(rotation);
+//	private void render(MatrixStack matrixStack, IVertexBuilder buffer, float rotation, int combinedLight, int combinedOverlay) {
+//		simpleChest.applyRotation(rotation);
+//		simpleChest.render(matrixStack, buffer, combinedLight, combinedOverlay);
+//	}
 
-		simpleChest.render(matrixStack, buffer, combinedLight, combinedOverlay);
-	}
 //	private CopperChestModel getChestModel(int destroyStage) {
-//		ResourceLocation resourcelocation;
-//		if (destroyStage >= 0) {
-//			resourcelocation = DESTROY_STAGES[destroyStage];
-//		} else {
-//			resourcelocation = TEXTURE_COPPER_CHEST;
-//		}
-//
+//		ResourceLocation resourcelocation = destroyStage >= 0 ? DESTROY_STAGES[destroyStage] :  TEXTURE_COPPER_CHEST;
 //		bindTexture(resourcelocation);
 //		return simpleChest;
 //	}
