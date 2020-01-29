@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 public class EnergyWandItem extends ItemBase implements IEnergyItem {
 
-	public EnergyWandItem() { super(1); }
+	public EnergyWandItem() { super(Stackable(1)); }
 
 	@Override
 	public CustomEnergyStorage createEnergy() {

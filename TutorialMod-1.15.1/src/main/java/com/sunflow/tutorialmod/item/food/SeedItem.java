@@ -1,5 +1,7 @@
 package com.sunflow.tutorialmod.item.food;
 
+import com.sunflow.tutorialmod.item.base.ItemBase;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,30 +15,24 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 
-public class SeedItem extends FoodItem implements IPlantable {
+public class SeedItem extends ItemBase implements IPlantable {
 
 	private Block plantBlock;
 
+	public SeedItem(Block plantBlock) { this.plantBlock = plantBlock; }
+
 	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible) {
-		super(hunger, saturation, meat, fastEat, alwaysEdible);
+		super(Food(hunger, saturation, meat, fastEat, alwaysEdible));
 		this.plantBlock = plantBlock;
 	}
 
-	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat) {
-		this(plantBlock, hunger, saturation, meat, fastEat, false);
-	}
+	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat) { this(plantBlock, hunger, saturation, meat, fastEat, false); }
 
-	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat) {
-		this(plantBlock, hunger, saturation, meat, false, false);
-	}
+	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat) { this(plantBlock, hunger, saturation, meat, false, false); }
 
-	public SeedItem(Block plantBlock, int hunger, float saturation) {
-		this(plantBlock, hunger, saturation, false, false, false);
-	}
+	public SeedItem(Block plantBlock, int hunger, float saturation) { this(plantBlock, hunger, saturation, false, false, false); }
 
-	public SeedItem(Block plantBlock, int hunger) {
-		this(plantBlock, hunger, 0.6f, false, false, false);
-	}
+	public SeedItem(Block plantBlock, int hunger) { this(plantBlock, hunger, 0.6f, false, false, false); }
 
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {

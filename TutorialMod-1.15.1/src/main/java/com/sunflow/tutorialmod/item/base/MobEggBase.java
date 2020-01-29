@@ -25,10 +25,9 @@ public class MobEggBase extends ItemBase {
 	public final int eggColor;
 
 	public MobEggBase(int eggColor, ItemGroup group, Supplier<EntityType<?>> entityType) {
-		super(1, group);
+		super(group);
 		this.eggColor = eggColor;
 		this.entityType = entityType;
-
 	}
 
 	@Override
