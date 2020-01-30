@@ -191,6 +191,11 @@ public class CustomBakedModel implements IDynamicBakedModel {
 		return ItemCameraTransforms.DEFAULT;
 	}
 
+	@Override
+	public boolean func_230044_c_() {
+		return false;
+	}
+
 //	@Override
 //	public ItemCameraTransforms getItemCameraTransforms() { return transforms; }
 
