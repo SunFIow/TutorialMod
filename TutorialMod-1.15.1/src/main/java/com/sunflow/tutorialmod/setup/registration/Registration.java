@@ -49,7 +49,6 @@ import com.sunflow.tutorialmod.item.armor.ItemNBTSkin;
 import com.sunflow.tutorialmod.item.armor.SkinUtil.SkinType;
 import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.item.base.MobEggBase;
-import com.sunflow.tutorialmod.item.food.FoodItem;
 import com.sunflow.tutorialmod.item.food.SeedItem;
 import com.sunflow.tutorialmod.item.grenade.GrenadeEntity;
 import com.sunflow.tutorialmod.item.grenade.GrenadeItem;
@@ -151,7 +150,7 @@ public class Registration {
 	public static final RegistryObject<ContainerType<ChargerContainer>> CHARGER_CONTAINER = CONTAINERS.register("charger", () -> IForgeContainerType.create(ChargerContainer::new));
 
 	public static final RegistryObject<Block> COPPER_CHEST = BLOCKS.register("copper_chest", CopperChestBlock::new);
-	public static final RegistryObject<Item> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<Item> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), ItemBase.ISTER(COPPER_CHEST::get, CopperChestTile::new)));
 	public static final RegistryObject<TileEntityType<CopperChestTile>> COPPER_CHEST_TILE = TILEENTITIES.register("copper_chest", () -> TileEntityType.Builder.create(CopperChestTile::new, COPPER_CHEST.get()).build(null));
 	public static final RegistryObject<ContainerType<CopperChestContainer>> COPPER_CHEST_CONTAINER = CONTAINERS.register("copper_chest", () -> IForgeContainerType.create(CopperChestContainer::new));
 
@@ -247,7 +246,7 @@ public class Registration {
 	public static final RegistryObject<Block> RICE_PLANT = BLOCKS.register("rice_plant", () -> new FoodPlantBlock(() -> RICE.get(), () -> RICE.get(), 3f, 2f));
 //	public static final RegistryObject<Item> RICE = ITEMS.register("rice_plant", () -> new BlockItem(RICE_PLANT.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Item> RICE_BOWL = ITEMS.register("rice_bowl", () -> new FoodItem(8, 2, false, false, false));
+	public static final RegistryObject<Item> RICE_BOWL = ITEMS.register("rice_bowl", () -> new Item(ItemBase.Food(8, 2)));
 
 	// Machines
 	public static final RegistryObject<Block> TELEPORTER = BLOCKS.register("teleporter", () -> new TeleporterBlock(1));
@@ -303,9 +302,9 @@ public class Registration {
 	public static final RegistryObject<Item>[] SKIN = ItemNBTSkin.create(ITEMS);
 
 	// Food
-	public static final RegistryObject<Item> EVIL_APPLE = ITEMS.register("evil_apple", () -> new FoodItem(6, 4, false, false, true,
+	public static final RegistryObject<Item> EVIL_APPLE = ITEMS.register("evil_apple", () -> new Item(ItemBase.Food(6, 4, false, false, true,
 			new EffectInstance(Effects.INSTANT_HEALTH, 1, 1),
-			new EffectInstance(Effects.REGENERATION, 20 * 4, 0)));
+			new EffectInstance(Effects.REGENERATION, 20 * 4, 0))));
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // DIMENSIONS

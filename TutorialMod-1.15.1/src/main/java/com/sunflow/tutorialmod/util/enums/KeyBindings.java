@@ -37,8 +37,6 @@ public enum KeyBindings {
 	}
 
 	public static void register() {
-		for (KeyBindings key : KeyBindings.values()) {
-			ClientRegistry.registerKeyBinding(key.getKeybind());
-		}
+		for (KeyBindings key : KeyBindings.values()) ClientRegistry.registerKeyBinding(key.getKeybind());
 	}
 }

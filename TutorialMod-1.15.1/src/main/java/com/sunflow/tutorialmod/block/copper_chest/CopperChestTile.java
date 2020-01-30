@@ -47,19 +47,13 @@ public class CopperChestTile extends LockableLootTileEntity implements IChestLid
 	private int ticksSinceSync;
 	private LazyOptional<IItemHandlerModifiable> chestHandler;
 
-	public CopperChestTile() {
-		super(Registration.COPPER_CHEST_TILE.get());
-	}
+	public CopperChestTile() { super(Registration.COPPER_CHEST_TILE.get()); }
 
 	@Override
-	public int getSizeInventory() {
-		return SIZE;
-	}
+	public int getSizeInventory() { return SIZE; }
 
 	@Override
-	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.copper_chest");
-	}
+	protected ITextComponent getDefaultName() { return new TranslationTextComponent("container.copper_chest"); }
 
 	@Override
 	protected Container createMenu(int id, PlayerInventory playerInv) {
@@ -68,12 +62,7 @@ public class CopperChestTile extends LockableLootTileEntity implements IChestLid
 
 	@Override
 	public boolean isEmpty() {
-		for (ItemStack itemstack : this.chestContents) {
-			if (!itemstack.isEmpty()) {
-				return false;
-			}
-		}
-
+		for (ItemStack itemstack : this.chestContents) if (!itemstack.isEmpty()) return false;
 		return true;
 	}
 
@@ -275,8 +264,7 @@ public class CopperChestTile extends LockableLootTileEntity implements IChestLid
 	@Override
 	public void remove() {
 		super.remove();
-		if (chestHandler != null)
-			chestHandler.invalidate();
+		if (chestHandler != null) chestHandler.invalidate();
 	}
 
 }
