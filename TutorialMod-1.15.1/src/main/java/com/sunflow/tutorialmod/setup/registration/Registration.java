@@ -150,7 +150,7 @@ public class Registration {
 	public static final RegistryObject<ContainerType<ChargerContainer>> CHARGER_CONTAINER = CONTAINERS.register("charger", () -> IForgeContainerType.create(ChargerContainer::new));
 
 	public static final RegistryObject<Block> COPPER_CHEST = BLOCKS.register("copper_chest", CopperChestBlock::new);
-	public static final RegistryObject<Item> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<Item> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), ItemBase.ISTER(COPPER_CHEST::get, CopperChestTile::new)));
 	public static final RegistryObject<TileEntityType<CopperChestTile>> COPPER_CHEST_TILE = TILEENTITIES.register("copper_chest", () -> TileEntityType.Builder.create(CopperChestTile::new, COPPER_CHEST.get()).build(null));
 	public static final RegistryObject<ContainerType<CopperChestContainer>> COPPER_CHEST_CONTAINER = CONTAINERS.register("copper_chest", () -> IForgeContainerType.create(CopperChestContainer::new));
 

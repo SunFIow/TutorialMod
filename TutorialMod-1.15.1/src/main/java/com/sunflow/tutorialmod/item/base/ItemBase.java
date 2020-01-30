@@ -1,12 +1,21 @@
 package com.sunflow.tutorialmod.item.base;
 
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
+
+import com.sunflow.tutorialmod.rendering.ModISTER;
 import com.sunflow.tutorialmod.setup.ModGroups;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.Food;
 import net.minecraft.item.Food.Builder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 public class ItemBase extends Item {
 
@@ -35,7 +44,7 @@ public class ItemBase extends Item {
 						.build());
 	}
 
-	public static Properties Food(int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible, EffectInstance... effects) {
+	public static Item.Properties Food(int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible, EffectInstance... effects) {
 		Builder food = new Food.Builder()
 				.hunger(hunger)
 				.saturation(saturation);
@@ -48,4 +57,9 @@ public class ItemBase extends Item {
 				.food(food.build());
 	}
 
+	public static Item.Properties ISTER(Supplier<Block> block, Supplier<TileEntity> tileEntity) {
+		Object tmp = DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> new ModISTER(block, tileEntity));
+		Supplier<Callable<ItemStackTileEntityRenderer>> ister = tmp == null ? null : () -> () -> (ItemStackTileEntityRenderer) tmp;
+		return new Item.Properties().group(ModGroups.itemGroup).setISTER(ister);
+	}
 }

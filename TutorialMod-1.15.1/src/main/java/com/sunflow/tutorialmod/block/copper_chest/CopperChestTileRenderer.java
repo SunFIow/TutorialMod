@@ -7,7 +7,6 @@ import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -48,7 +47,7 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 	public void render(CopperChestTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
 		World world = tileEntity.getWorld();
 		boolean flag = world != null;
-		BlockState blockstate = flag ? tileEntity.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockstate = flag ? tileEntity.getBlockState() : Registration.COPPER_CHEST.get().getDefaultState().with(CopperChestBlock.FACING, Direction.SOUTH);
 		Block block = blockstate.getBlock();
 		if (block instanceof CopperChestBlock) {
 			matrixStack.push();
@@ -72,15 +71,4 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 			matrixStack.pop();
 		}
 	}
-
-//	private void render(MatrixStack matrixStack, IVertexBuilder buffer, float rotation, int combinedLight, int combinedOverlay) {
-//		simpleChest.applyRotation(rotation);
-//		simpleChest.render(matrixStack, buffer, combinedLight, combinedOverlay);
-//	}
-
-//	private CopperChestModel getChestModel(int destroyStage) {
-//		ResourceLocation resourcelocation = destroyStage >= 0 ? DESTROY_STAGES[destroyStage] :  TEXTURE_COPPER_CHEST;
-//		bindTexture(resourcelocation);
-//		return simpleChest;
-//	}
 }

@@ -25,6 +25,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.TextureStitchEvent.Pre;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -38,6 +39,10 @@ public class MagicBockTileRenderer extends TileEntityRenderer<MagicBlockTile> {
 
 	public static void register() {
 		ClientRegistry.bindTileEntityRenderer(Registration.MAGICBLOCK_TILE.get(), MagicBockTileRenderer::new);
+	}
+
+	public static void stitch(Pre event) {
+		event.addSprite(MAGICBLOCK_TEXTURE);
 	}
 
 	private void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u, float v) {

@@ -15,9 +15,9 @@ import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
-import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
 import com.sunflow.tutorialmod.rendering.RenderMobPositions;
 import com.sunflow.tutorialmod.rendering.RenderModOverlay;
+import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.enums.KeyBindings;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
@@ -115,7 +115,7 @@ public class ClientSetup {
 	public static void onTextureStitch(final TextureStitchEvent.Pre event) {
 		ResourceLocation atlas = event.getMap().getBasePath();
 		if (atlas.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
-			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
+			MagicBockTileRenderer.stitch(event);
 		} else if (atlas.equals(Atlases.CHEST_ATLAS)) {
 			CopperChestTileRenderer.stitch(event);
 		}
