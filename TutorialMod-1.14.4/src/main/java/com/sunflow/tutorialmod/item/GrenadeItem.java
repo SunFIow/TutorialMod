@@ -29,7 +29,7 @@ public class GrenadeItem extends ItemBase {
 		world.playSound((PlayerEntity) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 		if (!world.isRemote) {
 			GrenadeEntity grenadeentity = new GrenadeEntity(world, player);
-			grenadeentity.func_213884_b(itemstack);
+			grenadeentity.setItem(itemstack);
 			grenadeentity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
 			world.addEntity(grenadeentity);
 		}
