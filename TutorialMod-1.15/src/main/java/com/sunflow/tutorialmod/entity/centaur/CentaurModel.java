@@ -77,8 +77,11 @@ public class CentaurModel extends EntityModel<CentaurEntity> {
 		this.villagerHead.addChild(this.villagerHeadChild);
 	}
 
+	/**
+	 * Sets this entity's model rotation angles
+	 */
 	@Override
-	public void render(CentaurEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setRotationAngles(CentaurEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.villagerHead.rotateAngleX = headPitch * 0.017453292F;
 		this.villagerHead.rotateAngleY = netHeadYaw * 0.017453292F;
 

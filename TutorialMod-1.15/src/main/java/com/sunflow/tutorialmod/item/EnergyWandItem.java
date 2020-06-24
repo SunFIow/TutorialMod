@@ -34,7 +34,7 @@ public class EnergyWandItem extends ItemBase implements IEnergyItem {
 			ItemStack stack = player.getHeldItem(hand);
 			CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(stack, EnergyUnit.DEFAULT);
 
-			if (player.isShiftKeyDown()) {
+			if (player.isSneaking()) {
 				itemEnergy.receiveEnergy(100, false);
 			}
 //			tag.put(EnergyUnit.DEFAULT.name, itemEnergy.serializeNBT());

@@ -19,8 +19,7 @@ public class BadlandsChunkGenerator extends ChunkGenerator<BadlandsChunkGenerato
 	}
 
 	@Override
-//	public void generateSurface(IChunk chunk) {
-	public void func_225551_a_(WorldGenRegion worldGenRegion, IChunk chunk) {
+	public void generateSurface(WorldGenRegion worldGenRegion, IChunk chunk) {
 		BlockState bedrock = Blocks.BEDROCK.getDefaultState();
 		BlockState stone = Blocks.STONE.getDefaultState();
 		ChunkPos chunkpos = chunk.getPos();

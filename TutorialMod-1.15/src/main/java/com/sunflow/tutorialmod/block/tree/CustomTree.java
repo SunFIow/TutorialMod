@@ -27,14 +27,14 @@ public class CustomTree extends BigTree {
 	}
 
 	@Override
-	public ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random random, boolean p_225546_2_) {
+	public ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean p_225546_2_) {
 		return random.nextInt(10) == 0
 				? Feature.FANCY_TREE.withConfiguration(configSmall())
 				: Feature.NORMAL_TREE.withConfiguration(configSmall());
 	}
 
 	@Override
-	public ConfiguredFeature<HugeTreeFeatureConfig, ?> func_225547_a_(Random random) {
+	public ConfiguredFeature<HugeTreeFeatureConfig, ?> getHugeTreeFeature(Random random) {
 		return Feature.DARK_OAK_TREE.withConfiguration(configBig());
 	}
 

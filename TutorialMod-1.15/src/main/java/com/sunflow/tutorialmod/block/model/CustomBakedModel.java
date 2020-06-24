@@ -45,7 +45,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 	}
 
 	private TextureAtlasSprite getTexture() {
-		return Minecraft.getInstance().getTextureGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(texture);
+		return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(texture);
 	}
 
 	@Nonnull

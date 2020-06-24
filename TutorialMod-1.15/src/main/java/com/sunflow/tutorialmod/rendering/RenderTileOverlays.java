@@ -35,7 +35,7 @@ public class RenderTileOverlays {
 
 	private static void locateTileEntities(ClientPlayerEntity player, MatrixStack matrixStack) {
 		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-		IVertexBuilder builder = buffer.getBuffer(ModRenderTypes.OVERLAY_LINES);
+		IVertexBuilder builder = buffer.getBuffer(ModRenderTypes.getOverlayLines());
 
 		BlockPos playerPos = player.getPosition();
 		int px = playerPos.getX();
@@ -48,7 +48,7 @@ public class RenderTileOverlays {
 		Vec3d projectedView = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
 		matrixStack.translate(-projectedView.x, -projectedView.y, -projectedView.z);
 
-		Matrix4f positionMatrix = matrixStack.getLast().getPositionMatrix();
+		Matrix4f positionMatrix = matrixStack.getLast().getMatrix();
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		for (int dx = -10; dx <= 10; dx++) {
@@ -78,6 +78,6 @@ public class RenderTileOverlays {
 		matrixStack.pop();
 
 		RenderSystem.disableDepthTest();
-		buffer.finish(ModRenderTypes.OVERLAY_LINES);
+		buffer.finish(ModRenderTypes.getOverlayLines());
 	}
 }

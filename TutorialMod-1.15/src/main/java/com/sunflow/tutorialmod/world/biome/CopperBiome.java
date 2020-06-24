@@ -68,12 +68,12 @@ public class CopperBiome extends BiomeBase {
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.withConfiguration(
 						new MultipleRandomFeatureConfig(ImmutableList.of(
-								Feature.NORMAL_TREE.withConfiguration(COPPER.configSmall()).func_227227_a_(0.666F),
-								Feature.FANCY_TREE.withConfiguration(COPPER.configSmall()).func_227227_a_(0.1F),
-								Feature.NORMAL_TREE.withConfiguration(ALUMINIUM.configSmall()).func_227227_a_(0.666F),
-								Feature.FANCY_TREE.withConfiguration(ALUMINIUM.configSmall()).func_227227_a_(0.1F)),
+								Feature.NORMAL_TREE.withConfiguration(COPPER.configSmall()).withChance(0.666F),
+								Feature.FANCY_TREE.withConfiguration(COPPER.configSmall()).withChance(0.1F),
+								Feature.NORMAL_TREE.withConfiguration(ALUMINIUM.configSmall()).withChance(0.666F),
+								Feature.FANCY_TREE.withConfiguration(ALUMINIUM.configSmall()).withChance(0.1F)),
 								Feature.NORMAL_TREE.withConfiguration(COPPER.configSmall())
-										.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))))));
+										.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1))))));
 
 //		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 //				createDecoratedFeature(
@@ -90,7 +90,7 @@ public class CopperBiome extends BiomeBase {
 								OreFeatureConfig.FillerBlockType.NATURAL_STONE,
 								Registration.ALUMINIUM_ORE_END.get().getDefaultState(),
 								9))
-						.func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(20, 32, 32, 80))));
+						.withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(20, 32, 32, 80))));
 
 		DefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addStructures(this);

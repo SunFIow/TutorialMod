@@ -37,63 +37,63 @@ public class Networking {
 
 	public static String getVersion() { return NETVERSION; }
 
-	public static SimpleChannel getTutorialModChannel() {
-		SimpleChannel channel = NetworkRegistry.ChannelBuilder
+	private static SimpleChannel getTutorialModChannel() {
+		return NetworkRegistry.ChannelBuilder
 				.named(NAME)
 				.networkProtocolVersion(() -> NETVERSION)
 				.clientAcceptedVersions(s -> true)
 				.serverAcceptedVersions(s -> true)
 				.simpleChannel();
+	}
 
-		channel.registerMessage(nextID(),
+	public static void registerMessages() {
+		TUTORIALMOD_CHANNEL.registerMessage(nextID(),
 				OpenGuiPacket.class,
 				OpenGuiPacket::encode,
 				OpenGuiPacket::new,
 				OpenGuiPacket::onMessage);
 
-		channel.registerMessage(nextID(),
+		TUTORIALMOD_CHANNEL.registerMessage(nextID(),
 				SpawnPacket.class,
 				SpawnPacket::encode,
 				SpawnPacket::new,
 				SpawnPacket::onMessage);
 
-		channel.messageBuilder(ExplodePacket.class, nextID())
+		TUTORIALMOD_CHANNEL.messageBuilder(ExplodePacket.class, nextID())
 				.encoder(ExplodePacket::encode)
 				.decoder(ExplodePacket::new)
 				.consumer(ExplodePacket::onMessage)
 				.add();
 
-		channel.messageBuilder(MultiJumpPacket.class, nextID())
+		TUTORIALMOD_CHANNEL.messageBuilder(MultiJumpPacket.class, nextID())
 				.encoder(MultiJumpPacket::encode)
 				.decoder(MultiJumpPacket::new)
 				.consumer(MultiJumpPacket::onMessage)
 				.add();
 
-		channel.messageBuilder(ScrollPacket.class, nextID())
+		TUTORIALMOD_CHANNEL.messageBuilder(ScrollPacket.class, nextID())
 				.encoder(ScrollPacket::encode)
 				.decoder(ScrollPacket::new)
 				.consumer(ScrollPacket::onMessage)
 				.add();
 
-		channel.messageBuilder(PlayerSkinPacket.class, nextID())
+		TUTORIALMOD_CHANNEL.messageBuilder(PlayerSkinPacket.class, nextID())
 				.encoder(PlayerSkinPacket::encode)
 				.decoder(PlayerSkinPacket::new)
 				.consumer(PlayerSkinPacket::onMessage)
 				.add();
 
-		channel.messageBuilder(PlayerLoggedInPacket.class, nextID())
+		TUTORIALMOD_CHANNEL.messageBuilder(PlayerLoggedInPacket.class, nextID())
 				.encoder(PlayerLoggedInPacket::encode)
 				.decoder(PlayerLoggedInPacket::new)
 				.consumer(PlayerLoggedInPacket::onMessage)
 				.add();
 
-		channel.messageBuilder(PlayerSkinChangedPacket.class, nextID())
+		TUTORIALMOD_CHANNEL.messageBuilder(PlayerSkinChangedPacket.class, nextID())
 				.encoder(PlayerSkinChangedPacket::encode)
 				.decoder(PlayerSkinChangedPacket::new)
 				.consumer(PlayerSkinChangedPacket::onMessage)
 				.add();
-
-		return channel;
 	}
 
 	// Sending to Server
@@ -119,4 +119,5 @@ public class Networking {
 	public static <MSG> void sendTo(MSG msg, NetworkManager manager, NetworkDirection direction) {
 		TUTORIALMOD_CHANNEL.sendTo(msg, manager, direction);
 	}
+
 }

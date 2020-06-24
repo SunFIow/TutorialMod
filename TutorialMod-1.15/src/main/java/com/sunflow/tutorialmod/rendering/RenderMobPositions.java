@@ -23,9 +23,9 @@ public class RenderMobPositions {
 
 	private static void showMobs(MatrixStack matrixStack, LivingEntity entity) {
 		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-		IVertexBuilder builder = buffer.getBuffer(ModRenderTypes.OVERLAY_LINES);
+		IVertexBuilder builder = buffer.getBuffer(ModRenderTypes.getOverlayLines());
 
-		Matrix4f positionMatrix = matrixStack.getLast().getPositionMatrix();
+		Matrix4f positionMatrix = matrixStack.getLast().getMatrix();
 
 		if (entity instanceof IMob) {
 			redLine(builder, positionMatrix, 0, .5f, 0, 0, 6, 0);

@@ -29,7 +29,8 @@ public class ModISTER extends ItemStackTileEntityRenderer {
 		if (item instanceof BlockItem) {
 			Block block = ((BlockItem) item).getBlock();
 			if (block != this.block.get()) return;
-			TileEntityRendererDispatcher.instance.renderNullable(this.tileEntity.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+//			TileEntityRendererDispatcher.instance.renderNullable(this.tileEntity.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+			TileEntityRendererDispatcher.instance.renderItem(this.tileEntity.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
 		}
 	}
 }

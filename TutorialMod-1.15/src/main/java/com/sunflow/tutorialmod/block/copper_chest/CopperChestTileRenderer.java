@@ -63,7 +63,8 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 			f1 = 1.0F - f1 * f1 * f1;
 			int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLight);
 
-			IVertexBuilder ivertexbuilder = COPPER_CHEST_MATERIAL.getBuffer(buffer, RenderType::entityCutout);
+//			IVertexBuilder ivertexbuilder = COPPER_CHEST_MATERIAL.getBuffer(buffer, RenderType::entityCutout);
+			IVertexBuilder ivertexbuilder = COPPER_CHEST_MATERIAL.getBuffer(buffer, RenderType::getEntityCutout);
 
 			simpleChest.applyRotation(f1);
 			simpleChest.render(matrixStack, ivertexbuilder, i, combinedOverlay);

@@ -83,7 +83,8 @@ public class TeleportationTools {
 
 		sourceWorld.getProfiler().endSection();
 		entity.setWorld(destinationWorld);
-		destinationWorld.func_217447_b(entity);
+//		destinationWorld.func_217447_b(entity);
+		destinationWorld.addDuringCommandTeleport(entity);
 		entity.connection.setPlayerLocation(entity.getPosX(), entity.getPosY(), entity.getPosZ(), f1, f0);
 		entity.interactionManager.setWorld(destinationWorld);
 		entity.connection.sendPacket(new SPlayerAbilitiesPacket(entity.abilities));

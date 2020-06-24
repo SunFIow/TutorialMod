@@ -56,8 +56,8 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 				.addEntry(ItemLootEntry.builder(block)
 						.acceptFunction(CopyName.builder(CopyName.Source.BLOCK_ENTITY))
 						.acceptFunction(nbts)
-						.acceptFunction(SetContents.func_215920_b()
-								.func_216075_a(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents")))))
+						.acceptFunction(SetContents.builder()
+								.addLootEntry(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents")))))
 				.acceptCondition(SurvivesExplosion.builder());
 		return LootTable.builder().addLootPool(builder);
 	}

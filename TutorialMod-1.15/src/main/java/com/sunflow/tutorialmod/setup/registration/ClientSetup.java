@@ -52,12 +52,12 @@ public class ClientSetup {
 
 		registerScreens();
 
-		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.cutoutMipped());
-		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.cutoutMipped());
-		RenderTypeLookup.setRenderLayer(Registration.SANTA_HAT.get(), RenderType.cutout());
-		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.cutout());
-		RenderTypeLookup.setRenderLayer(Registration.COPPER_SAPLING.get(), RenderType.cutout());
-		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(Registration.SANTA_HAT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registration.COPPER_SAPLING.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.getCutout());
 
 		RenderingRegistry.registerEntityRenderingHandler(Registration.WEIRDMOB.get(), WeirdMobRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(Registration.CENTAUR.get(), CentaurRenderer::new);
@@ -113,7 +113,8 @@ public class ClientSetup {
 
 	@SubscribeEvent
 	public static void onTextureStitch(final TextureStitchEvent.Pre event) {
-		ResourceLocation atlas = event.getMap().getBasePath();
+//		ResourceLocation atlas = event.getMap().getBasePath();
+		ResourceLocation atlas = event.getMap().getTextureLocation();
 		if (atlas.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
 			MagicBockTileRenderer.stitch(event);
 		} else if (atlas.equals(Atlases.CHEST_ATLAS)) {

@@ -41,7 +41,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		for (int j = -i; j <= i; ++j) {
 			for (int k = -i; k <= i; ++k) {
 				if (Math.pow(Math.abs(j) + 0.5D, 2.0D) + Math.pow(Math.abs(k) + 0.5D, 2.0D) <= p_227233_4_ * p_227233_4_) {
-					this.func_227219_b_(p_227233_1_, p_227233_2_, p_227233_3_.add(j, 0, k), p_227233_5_, p_227233_6_, p_227233_7_);
+					this.setLeaf(p_227233_1_, p_227233_2_, p_227233_3_.add(j, 0, k), p_227233_5_, p_227233_6_, p_227233_7_);
 				}
 			}
 		}
@@ -78,7 +78,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		}
 	}
 
-	private int func_227235_a_(IWorldGenerationReader generationReader, Random random, BlockPos pos1, BlockPos pos2, boolean b0, Set<BlockPos> blockSet1, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeature) {
+	private int makeBranch(IWorldGenerationReader generationReader, Random random, BlockPos pos1, BlockPos pos2, boolean b0, Set<BlockPos> blockSet1, MutableBoundingBox boundingBox, TreeFeatureConfig treeFeature) {
 		if (!b0 && Objects.equals(pos1, pos2)) {
 			return -1;
 		} else {
@@ -91,9 +91,9 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 			for (int j = 0; j <= i; ++j) {
 				BlockPos blockpos1 = pos1.add(0.5F + j * f, 0.5F + j * f1, 0.5F + j * f2);
 				if (b0) {
-					this.func_227217_a_(generationReader, blockpos1, treeFeature.trunkProvider.func_225574_a_(random, blockpos1).with(LogBlock.AXIS, this.func_227238_a_(pos1, blockpos1)), boundingBox);
+					this.setBlockState(generationReader, blockpos1, treeFeature.trunkProvider.getBlockState(random, blockpos1).with(LogBlock.AXIS, this.func_227238_a_(pos1, blockpos1)), boundingBox);
 					blockSet1.add(blockpos1);
-				} else if (!func_214587_a(generationReader, blockpos1)) {
+				} else if (!canBeReplacedByLogs(generationReader, blockpos1)) {
 					return j;
 				}
 			}
@@ -135,7 +135,6 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 				this.func_227236_a_(p_227232_1_, p_227232_2_, fancytreefeature$extendedpos, p_227232_6_, p_227232_7_, p_227232_8_);
 			}
 		}
-
 	}
 
 	private boolean func_227239_b_(int p_227239_1_, int p_227239_2_) {
@@ -143,7 +142,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 	}
 
 	private void func_227234_a_(IWorldGenerationReader p_227234_1_, Random p_227234_2_, BlockPos p_227234_3_, int p_227234_4_, Set<BlockPos> p_227234_5_, MutableBoundingBox p_227234_6_, TreeFeatureConfig p_227234_7_) {
-		this.func_227235_a_(p_227234_1_, p_227234_2_, p_227234_3_, p_227234_3_.up(p_227234_4_), true, p_227234_5_, p_227234_6_, p_227234_7_);
+		this.makeBranch(p_227234_1_, p_227234_2_, p_227234_3_, p_227234_3_.up(p_227234_4_), true, p_227234_5_, p_227234_6_, p_227234_7_);
 	}
 
 	private void func_227240_b_(IWorldGenerationReader p_227240_1_, Random p_227240_2_, int p_227240_3_, BlockPos p_227240_4_, List<ExtendedPos> p_227240_5_, Set<BlockPos> p_227240_6_, MutableBoundingBox p_227240_7_, TreeFeatureConfig p_227240_8_) {
@@ -151,20 +150,20 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 			int i = fancytreefeature$extendedpos.func_227243_r_();
 			BlockPos blockpos = new BlockPos(p_227240_4_.getX(), i, p_227240_4_.getZ());
 			if (!blockpos.equals(fancytreefeature$extendedpos) && this.func_227239_b_(p_227240_3_, i - p_227240_4_.getY())) {
-				this.func_227235_a_(p_227240_1_, p_227240_2_, blockpos, fancytreefeature$extendedpos, true, p_227240_6_, p_227240_7_, p_227240_8_);
+				this.makeBranch(p_227240_1_, p_227240_2_, blockpos, fancytreefeature$extendedpos, true, p_227240_6_, p_227240_7_, p_227240_8_);
 			}
 		}
 
 	}
 
 	@Override
-	public boolean func_225557_a_(IWorldGenerationReader p_225557_1_, Random p_225557_2_, BlockPos p_225557_3_, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_225557_6_, TreeFeatureConfig p_225557_7_) {
-		Random random = new Random(p_225557_2_.nextLong());
-		int i = this.func_227241_b_(p_225557_1_, p_225557_2_, p_225557_3_, 5 + random.nextInt(12), p_225557_4_, p_225557_6_, p_225557_7_);
+	public boolean place(IWorldGenerationReader generationReader, Random rand, BlockPos positionIn, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBoxIn, TreeFeatureConfig configIn) {
+		Random random = new Random(rand.nextLong());
+		int i = this.func_227241_b_(generationReader, rand, positionIn, 5 + random.nextInt(12), p_225557_4_, boundingBoxIn, configIn);
 		if (i == -1) {
 			return false;
 		} else {
-			this.func_214584_a(p_225557_1_, p_225557_3_.down());
+			this.setDirt(generationReader, positionIn.down());
 			int j = (int) (i * 0.618D);
 			if (j >= i) {
 				j = i - 1;
@@ -176,10 +175,10 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 				k = 1;
 			}
 
-			int l = p_225557_3_.getY() + j;
+			int l = positionIn.getY() + j;
 			int i1 = i - 5;
 			List<ExtendedPos> list = Lists.newArrayList();
-			list.add(new ExtendedPos(p_225557_3_.up(i1), l));
+			list.add(new ExtendedPos(positionIn.up(i1), l));
 
 			for (; i1 >= 0; --i1) {
 				float f = this.func_227231_a_(i, i1);
@@ -190,15 +189,15 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 						double d3 = random.nextFloat() * 2.0F * Math.PI;
 						double d4 = d2 * Math.sin(d3) + 0.5D;
 						double d5 = d2 * Math.cos(d3) + 0.5D;
-						BlockPos blockpos = p_225557_3_.add(d4, i1 - 1, d5);
+						BlockPos blockpos = positionIn.add(d4, i1 - 1, d5);
 						BlockPos blockpos1 = blockpos.up(5);
-						if (this.func_227235_a_(p_225557_1_, p_225557_2_, blockpos, blockpos1, false, p_225557_4_, p_225557_6_, p_225557_7_) == -1) {
-							int k1 = p_225557_3_.getX() - blockpos.getX();
-							int l1 = p_225557_3_.getZ() - blockpos.getZ();
+						if (this.makeBranch(generationReader, rand, blockpos, blockpos1, false, p_225557_4_, boundingBoxIn, configIn) == -1) {
+							int k1 = positionIn.getX() - blockpos.getX();
+							int l1 = positionIn.getZ() - blockpos.getZ();
 							double d6 = blockpos.getY() - Math.sqrt(k1 * k1 + l1 * l1) * 0.381D;
 							int i2 = d6 > l ? l : (int) d6;
-							BlockPos blockpos2 = new BlockPos(p_225557_3_.getX(), i2, p_225557_3_.getZ());
-							if (this.func_227235_a_(p_225557_1_, p_225557_2_, blockpos2, blockpos, false, p_225557_4_, p_225557_6_, p_225557_7_) == -1) {
+							BlockPos blockpos2 = new BlockPos(positionIn.getX(), i2, positionIn.getZ());
+							if (this.makeBranch(generationReader, rand, blockpos2, blockpos, false, p_225557_4_, boundingBoxIn, configIn) == -1) {
 								list.add(new ExtendedPos(blockpos, blockpos2.getY()));
 							}
 						}
@@ -206,9 +205,9 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 				}
 			}
 
-			this.func_227232_a_(p_225557_1_, p_225557_2_, i, p_225557_3_, list, p_225557_5_, p_225557_6_, p_225557_7_);
-			this.func_227234_a_(p_225557_1_, p_225557_2_, p_225557_3_, j, p_225557_4_, p_225557_6_, p_225557_7_);
-			this.func_227240_b_(p_225557_1_, p_225557_2_, i, p_225557_3_, list, p_225557_4_, p_225557_6_, p_225557_7_);
+			this.func_227232_a_(generationReader, rand, i, positionIn, list, p_225557_5_, boundingBoxIn, configIn);
+			this.func_227234_a_(generationReader, rand, positionIn, j, p_225557_4_, boundingBoxIn, configIn);
+			this.func_227240_b_(generationReader, rand, i, positionIn, list, p_225557_4_, boundingBoxIn, configIn);
 			return true;
 		}
 	}
@@ -217,7 +216,7 @@ public class CustomTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		if (!isDirtOrGrassBlockOrFarmland(p_227241_1_, p_227241_3_.down())) {
 			return -1;
 		} else {
-			int i = this.func_227235_a_(p_227241_1_, p_227241_2_, p_227241_3_, p_227241_3_.up(p_227241_4_ - 1), false, p_227241_5_, p_227241_6_, p_227241_7_);
+			int i = this.makeBranch(p_227241_1_, p_227241_2_, p_227241_3_, p_227241_3_.up(p_227241_4_ - 1), false, p_227241_5_, p_227241_6_, p_227241_7_);
 			if (i == -1) {
 				return p_227241_4_;
 			} else {
