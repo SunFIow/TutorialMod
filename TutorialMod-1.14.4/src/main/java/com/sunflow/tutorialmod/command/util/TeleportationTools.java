@@ -24,6 +24,7 @@ public class TeleportationTools {
 	private TeleportationTools() {}
 
 	public static void teleportToDimension(ServerPlayerEntity player, int dimensionID, BlockPos pos) {
+//		final ServerWorld world = player.getServer().getWorld(DimensionType.getById(dimensionID));
 		final ServerWorld world = player.getServer().func_71218_a(DimensionType.getById(dimensionID));
 
 		world.getChunkProvider().func_217228_a(TicketType.POST_TELEPORT, new ChunkPos(pos), 1, player.getEntityId());
@@ -34,6 +35,7 @@ public class TeleportationTools {
 		if (world == player.world) {
 			player.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
 		} else {
+//			player.teleport(world, pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
 			player.func_200619_a(world, pos.getX(), pos.getY(), pos.getZ(), player.rotationYaw, player.rotationPitch);
 		}
 //		player.setRotationYawHead(player.rotationYaw);
@@ -101,8 +103,10 @@ public class TeleportationTools {
 		entity.setWorld(destinationWorld);
 		destinationWorld.func_217447_b(entity);
 		entity.connection.setPlayerLocation(entity.posX, entity.posY, entity.posZ, f1, f0);
+//		entity.interactionManager.setWorld(destinationWorld);
 		entity.interactionManager.func_73080_a(destinationWorld);
 		entity.connection.sendPacket(new SPlayerAbilitiesPacket(entity.abilities));
+//		playerlist.sendWorldInfo(entity, destinationWorld);
 		playerlist.func_72354_b(entity, destinationWorld);
 		playerlist.sendInventory(entity);
 

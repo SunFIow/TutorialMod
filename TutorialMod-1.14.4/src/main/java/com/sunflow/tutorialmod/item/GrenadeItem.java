@@ -30,6 +30,7 @@ public class GrenadeItem extends ItemBase {
 		if (!world.isRemote) {
 			GrenadeEntity grenadeentity = new GrenadeEntity(world, player);
 			grenadeentity.setItem(itemstack);
+//			grenadeentity.func_213884_b(itemstack);
 			grenadeentity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
 			world.addEntity(grenadeentity);
 		}

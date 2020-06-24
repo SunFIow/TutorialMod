@@ -38,6 +38,7 @@ public class SlimeChunkCommand extends CommandBase { // implements ICommand {
 
 	private static int check(CommandSource source, BlockPos pos) throws CommandSyntaxException {
 		ChunkPos chunk = new ChunkPos(pos);
+//		long seed = source.getServer().getWorld(DimensionType.OVERWORLD).getSeed();
 		long seed = source.getServer().func_71218_a(DimensionType.OVERWORLD).getSeed();
 		boolean isSlimeChunk = checkChunk(seed, chunk.x, chunk.z);
 		source.asPlayer().sendMessage(new TranslationTextComponent("This is " + (!isSlimeChunk ? "not" : "") + " a Slime Chunk"));
@@ -46,6 +47,7 @@ public class SlimeChunkCommand extends CommandBase { // implements ICommand {
 
 	private static int find(CommandSource source, int radius) throws CommandSyntaxException {
 		ChunkPos chunk = new ChunkPos(source.asPlayer().getPosition());
+//		long seed = source.getServer().getWorld(DimensionType.OVERWORLD).getSeed();
 		long seed = source.getServer().func_71218_a(DimensionType.OVERWORLD).getSeed();
 		ChunkPos closest;
 		if (checkChunk(seed, chunk.x, chunk.z)) {
