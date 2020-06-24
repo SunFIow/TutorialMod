@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-/*
+
 repositories {
 	maven { // JEI
 		url "https://dvs1.progwml6.com/files/maven"
@@ -22,7 +22,7 @@ repositories {
 		url "http://maven.tterag.com/"
 	}
 }
-*/
+
 
 // version = modMinecraftVersion + "-" + modVersion
 version = modVersion
@@ -134,14 +134,14 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-/*
+
 	compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
 	runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
 
 	compile fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-${top_version}"){
 		transitive = true
 	})
-*/
+
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

@@ -3,20 +3,16 @@ package com.sunflow.tutorialmod;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
-import com.sunflow.tutorialmod.setup.proxy.IProxy;
+import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
-import com.sunflow.tutorialmod.setup.registration.ClientSetup;
-import com.sunflow.tutorialmod.setup.registration.CommonSetup;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
 
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.versions.mcp.MCPVersion;
 
 @Mod(value = TutorialMod.MODID)
@@ -28,7 +24,7 @@ public class TutorialMod {
 	public static final String ACCEPTED_VERSION = "[1.15.1,)";
 
 //	public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
-	public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
 	public static MyWorldData data;
 
@@ -47,7 +43,8 @@ public class TutorialMod {
 
 		Registration.init();
 
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup));
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
+//		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
+//		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup));
+		proxy.setup();
 	}
 }

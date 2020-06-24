@@ -61,7 +61,8 @@ public class ClientSetup {
 
 		RenderingRegistry.registerEntityRenderingHandler(Registration.WEIRDMOB.get(), WeirdMobRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(Registration.CENTAUR.get(), CentaurRenderer::new);
-		RenderingRegistry.registerEntityRenderingHandler(Registration.GRENADE_ENTITY.get(), (erm) -> new SpriteRenderer<>(erm, TutorialMod.proxy.getMinecraft().getItemRenderer()));
+		RenderingRegistry.registerEntityRenderingHandler(Registration.GRENADE_ENTITY.get(),
+				(erm) -> new SpriteRenderer<>(erm, TutorialMod.proxy.getMinecraft().getItemRenderer()));
 
 		BakedBlockBase block = Registration.FANCYBLOCK.get();
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(TutorialMod.MODID, "customloader"), new CustomModelLoader(() -> new CustomBakedModel(block.location(), block.offset(), block.length())));
@@ -69,7 +70,7 @@ public class ClientSetup {
 		CopperChestTileRenderer.register();
 		MagicBockTileRenderer.register();
 
-		Log.debug("I am going to register the keybindings now senpai.");
+		Log.debug("Registering the keybindings for u senpai.");
 		KeyBindings.register();
 
 		final IEventBus eventBus = MinecraftForge.EVENT_BUS;
@@ -92,7 +93,7 @@ public class ClientSetup {
 	}
 
 	public static <M extends Container, U extends Screen & IHasContainer<M>> void registerScreens() {
-		Log.debug("I am going to register the screens now senpai.");
+		Log.debug("Registering the screens for u senpai.");
 
 		ScreenManager.registerFactory(Registration.GLOWSTONE_GENERATOR_CONTAINER.get(), GlowstoneGeneratorScreen::new);
 		ScreenManager.registerFactory(Registration.ENERGY_STORAGE_CONTAINER.get(), EnergyStorageScreen::new);
@@ -104,7 +105,7 @@ public class ClientSetup {
 
 	@SubscribeEvent
 	public static void onItemColor(final ColorHandlerEvent.Item event) {
-		Log.debug("I am going to register the item colors now senpai.");
+		Log.debug("Registering the item colors for u senpai.");
 
 		ItemColors registry = event.getItemColors();
 		registry.register((stack, i) -> Registration.CENTAUR_SPAWN_EGG.get().eggColor, Registration.CENTAUR_SPAWN_EGG.get());
@@ -116,10 +117,18 @@ public class ClientSetup {
 //		ResourceLocation atlas = event.getMap().getBasePath();
 		ResourceLocation atlas = event.getMap().getTextureLocation();
 		if (atlas.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
+//			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
 			MagicBockTileRenderer.stitch(event);
 		} else if (atlas.equals(Atlases.CHEST_ATLAS)) {
 			CopperChestTileRenderer.stitch(event);
 		}
 	}
+
+//	@SubscribeEvent
+//	public void onTooltipPre(RenderTooltipEvent.Pre event) {
+//		Item item = event.getStack().getItem();
+//		if (item.getRegistryName().getNamespace().equals(TutorialMod.MODID))
+//			event.setMaxWidth(200);
+//	}
 
 }

@@ -20,14 +20,14 @@ public class CommonForgeEventHandlers {
 	public static void serverStarting(FMLServerStartingEvent event) {
 		Log.info("Preparing the server for u senpai.");
 
-		Registration.COPPER.get().register();
+//		Registration.COPPER.get().register();
 		ModCommands.register(event.getCommandDispatcher());
 		TutorialMod.data = event.getServer().getWorld(DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
 	}
 
 	@SubscribeEvent
 	public static void onDimensionRegistry(RegisterDimensionsEvent event) {
-		Log.info("-registerDimensions-");
+		Log.debug("Registering the dimensions for u senpai.");
 
 		Registration.BADLANDS_TYPE = DimensionManager.registerOrGetDimension(new ResourceLocation(TutorialMod.MODID, "badlands"), Registration.BADLANDS.get(), null, true);
 	}
