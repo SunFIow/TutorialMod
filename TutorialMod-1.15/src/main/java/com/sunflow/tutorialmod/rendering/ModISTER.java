@@ -1,8 +1,8 @@
 package com.sunflow.tutorialmod.rendering;
 
-import java.util.function.Supplier;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
+import com.sunflow.tutorialmod.block.copper_chest.CopperChestTile;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -15,12 +15,11 @@ import net.minecraft.tileentity.TileEntity;
 
 public class ModISTER extends ItemStackTileEntityRenderer {
 
-	private Supplier<Block> block;
-	private Supplier<TileEntity> tileEntity;
+	public static final ModISTER instance = new ModISTER();
+	private CopperChestTile chestCopper;
 
-	public ModISTER(Supplier<Block> block, Supplier<TileEntity> tileEntity) {
-		this.block = block;
-		this.tileEntity = tileEntity;
+	public void setup() {
+		chestCopper = new CopperChestTile();
 	}
 
 	@Override
@@ -28,9 +27,13 @@ public class ModISTER extends ItemStackTileEntityRenderer {
 		Item item = itemStackIn.getItem();
 		if (item instanceof BlockItem) {
 			Block block = ((BlockItem) item).getBlock();
-			if (block != this.block.get()) return;
-//			TileEntityRendererDispatcher.instance.renderNullable(this.tileEntity.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
-			TileEntityRendererDispatcher.instance.renderItem(this.tileEntity.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+			TileEntity tileentity;
+			if (block instanceof CopperChestBlock) {
+				tileentity = this.chestCopper;
+			} else {
+				return;
+			}
+			TileEntityRendererDispatcher.instance.renderItem(tileentity, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
 		}
 	}
 }

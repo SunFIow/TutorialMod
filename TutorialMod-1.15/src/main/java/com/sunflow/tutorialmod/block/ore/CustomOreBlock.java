@@ -2,27 +2,17 @@ package com.sunflow.tutorialmod.block.ore;
 
 import java.util.Random;
 
-import com.sunflow.tutorialmod.block.base.BlockBase;
 import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorldReader;
-import net.minecraftforge.common.ToolType;
 
-public class CustomOreBlock extends BlockBase {
+public class CustomOreBlock extends Block {
 
-	public CustomOreBlock(float hardnessAndResistance, int harvestlevel, int lightlevel) {
-		this(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(hardnessAndResistance).harvestLevel(harvestlevel).lightValue(lightlevel));
-	}
-
-	public CustomOreBlock(Properties properties) {
-		super(properties);
-	}
+	public CustomOreBlock(Properties properties) { super(properties); }
 
 	protected int getExperience(Random rand) {
 		if (this == Registration.RUBY_ORE.get()) {

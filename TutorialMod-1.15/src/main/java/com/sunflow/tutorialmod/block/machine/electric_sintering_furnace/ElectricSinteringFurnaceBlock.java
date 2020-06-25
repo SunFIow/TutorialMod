@@ -8,12 +8,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
 public class ElectricSinteringFurnaceBlock extends EnergyTileBlockBase {
+	private final int lightAmountPowered;
+	private final int lightAmountStorage;
+
 	public ElectricSinteringFurnaceBlock() {
-		super(Material.ROCK, 2.0F, 14);
+		super(Properties.create(Material.ROCK)
+				.hardnessAndResistance(2.0f)
+				.lightValue(14));
+		lightAmountPowered = lightValue / 2;
+		lightAmountStorage = (lightValue - lightAmountPowered) / 15;
 	}
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new ElectricSinteringFurnaceTile();
+	}
+
+	@Override
+	public int getLightValue(BlockState state) {
+		return state.get(FILLLEVEL) * lightAmountStorage
+				+ (state.get(POWERED) ? lightAmountPowered : 0);
 	}
 }

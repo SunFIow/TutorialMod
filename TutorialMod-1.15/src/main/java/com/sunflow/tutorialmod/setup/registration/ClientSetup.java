@@ -15,6 +15,7 @@ import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
+import com.sunflow.tutorialmod.rendering.ModISTER;
 import com.sunflow.tutorialmod.rendering.RenderMobPositions;
 import com.sunflow.tutorialmod.rendering.RenderModOverlay;
 import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
@@ -51,6 +52,7 @@ public class ClientSetup {
 		Log.info("perhaps you would like...");
 
 		registerScreens();
+		ModISTER.instance.setup();
 
 		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.getCutoutMipped());

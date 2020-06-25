@@ -14,13 +14,14 @@ import net.minecraftforge.items.IItemHandler;
 
 public class ChargerBlock extends EnergyTileBlockBase {
 	public ChargerBlock() {
-		super(Material.ROCK, 2.0F, 14);
+		super(Properties.create(Material.ROCK)
+				.hardnessAndResistance(2.0f)
+				.lightValue(14));
 	}
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new ChargerTile();
-
 	}
 
 	@Override

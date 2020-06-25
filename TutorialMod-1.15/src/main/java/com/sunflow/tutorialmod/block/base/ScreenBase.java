@@ -32,7 +32,6 @@ public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T> {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-//		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		minecraft.getTextureManager().bindTexture(GUI);

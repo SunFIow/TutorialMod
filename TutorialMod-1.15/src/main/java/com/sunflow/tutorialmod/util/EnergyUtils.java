@@ -36,7 +36,7 @@ public class EnergyUtils {
 		return getEnergyUnit(stack, unit).getInt("Capacity");
 	}
 
-	public static double getEnergyStored(ItemStack stack, EnergyUnit unit) {
+	public static int getEnergyStored(ItemStack stack, EnergyUnit unit) {
 		return getEnergyUnit(stack, unit).getInt("Energy");
 	}
 

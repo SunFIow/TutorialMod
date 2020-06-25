@@ -107,7 +107,7 @@ public class TutorialModConfig {
 				.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
 		ELECTRIC_SINTERING_FURNACE_TICKS = COMMON_BUILDER.comment("Ticks per item")
 				.defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
-		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = COMMON_BUILDER.comment("Energy consumption per item")
+		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = COMMON_BUILDER.comment("Energy consumption per tick")
 				.defineInRange("consumption", 200, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 	}
@@ -118,7 +118,7 @@ public class TutorialModConfig {
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
 		CHARGER_RECEIVE = COMMON_BUILDER.comment("Maximum power to transfer per tick")
 				.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
-		CHARGER_CHARGE_RATE = COMMON_BUILDER.comment("Rate at which item get charged per tick")
+		CHARGER_CHARGE_RATE = COMMON_BUILDER.comment("Rate at which items get charged per tick")
 				.defineInRange("chargeRate", 10, 0, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 	}

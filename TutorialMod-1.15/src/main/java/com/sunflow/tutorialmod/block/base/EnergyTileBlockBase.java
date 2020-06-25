@@ -2,8 +2,6 @@ package com.sunflow.tutorialmod.block.base;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -18,23 +16,6 @@ public abstract class EnergyTileBlockBase extends PoweredTileBlockBase {
 		super(properties);
 		setDefaultState(getDefaultState().with(FILLLEVEL, Integer.valueOf(0)));
 	}
-
-	public EnergyTileBlockBase(Material material, SoundType sound, float hardness, float resistance) {
-		this(Properties.create(material)
-				.sound(sound)
-				.hardnessAndResistance(hardness, resistance));
-	}
-
-	public EnergyTileBlockBase(Material material, float hardnessAndResistance, int lightValue) {
-		this(Properties.create(material).hardnessAndResistance(hardnessAndResistance).lightValue(lightValue));
-	}
-
-	public EnergyTileBlockBase(Material material, float hardnessAndResistance) {
-		this(Properties.create(material)
-				.hardnessAndResistance(hardnessAndResistance));
-	}
-
-	public EnergyTileBlockBase() { this(Material.ROCK, 2.0f); }
 
 	@Override
 	public int getLightValue(BlockState state) {

@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.block.machine.charger;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.registration.Registration;
@@ -29,7 +27,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	public static final int ITEM_ENERGY_ID = 2, ITEM_ENERGY_MAX_ID = 3;
 
 	@Override
-	protected ItemStackHandler getHandler() {
+	protected ItemStackHandler createHandler() {
 		return new ItemStackHandler(1) {
 			@Override
 			public boolean isItemValid(int slot, ItemStack stack) { return stack.getItem() instanceof IEnergyItem; }
@@ -40,41 +38,37 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	protected CustomEnergyStorage getEnergy() { return new CustomEnergyStorage(TutorialModConfig.CHARGER_MAXPOWER.get(), TutorialModConfig.CHARGER_RECEIVE.get(), TutorialModConfig.CHARGER_CHARGE_RATE.get()); }
+	protected CustomEnergyStorage createEnergy() { return new CustomEnergyStorage(TutorialModConfig.CHARGER_MAXPOWER.get(), TutorialModConfig.CHARGER_RECEIVE.get(), TutorialModConfig.CHARGER_CHARGE_RATE.get()); }
 
 	public ChargerTile() { super(Registration.CHARGER_TILE.get()); }
 
 	@Override
 	public void tick() {
 		super.tick();
-		AtomicBoolean isCharging = new AtomicBoolean(false);
+		boolean isCharging = false;
 
-		handler.ifPresent(handler -> {
-			energy.ifPresent(tileEnergy -> {
-				if (tileEnergy.getEnergyStored() > 0) {
-					ItemStack chargeSlot = handler.getStackInSlot(CHARGE_SLOT);
-					if (!chargeSlot.isEmpty()) {
-						CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(chargeSlot, EnergyUnit.DEFAULT);
-						if (itemEnergy.canReceive()) {
-							int maxEExt = tileEnergy.extractEnergy(TutorialModConfig.CHARGER_CHARGE_RATE.get(), true);
-							int eReceived = itemEnergy.receiveEnergy(maxEExt, false);
-							if (eReceived > 0) {
-								tileEnergy.extractEnergy(eReceived, false);
-								markDirty();
+		if (energyHandler.getEnergyStored() > 0) {
+			ItemStack chargeSlot = itemHandler.getStackInSlot(CHARGE_SLOT);
+			if (!chargeSlot.isEmpty()) {
+				CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(chargeSlot, EnergyUnit.DEFAULT);
+				if (itemEnergy.canReceive()) {
+					int maxEExt = energyHandler.extractEnergy(TutorialModConfig.CHARGER_CHARGE_RATE.get(), true);
+					int eReceived = itemEnergy.receiveEnergy(maxEExt, false);
+					if (eReceived > 0) {
+						energyHandler.extractEnergy(eReceived, false);
+						markDirty();
 
-								isCharging.set(true);
-							}
-							EnergyUtils.writeStorage(chargeSlot, EnergyUnit.DEFAULT, itemEnergy);
-						}
+						isCharging = true;
 					}
+					EnergyUtils.writeStorage(chargeSlot, EnergyUnit.DEFAULT, itemEnergy);
 				}
-			});
-		});
+			}
+		}
 
 		if (!world.isRemote) {
 			BlockState state = world.getBlockState(pos);
-			if (state.get(POWERED) != isCharging.get()) {
-				world.setBlockState(pos, state.with(POWERED, isCharging.get()), 3);
+			if (state.get(POWERED) != isCharging) {
+				world.setBlockState(pos, state.with(POWERED, isCharging), 3);
 			}
 		}
 	}
@@ -104,14 +98,14 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	private CustomEnergyStorage getChargeItemEnergy() {
-		if (!handler.isPresent())
-			throw new RuntimeException("Item Handler of " + this + " is not present");
+//		if (!handler.isPresent())
+//			throw new RuntimeException("Item Handler of " + this + " is not present");
 
 //		return CustomEnergyStorage.fromNBT(handler.orElse(null)
 //				.getStackInSlot(CHARGE_SLOT)
 //				.getOrCreateChildTag(TutorialMod.MODID)
 //				.getCompound(EnergyUnit.DEFAULT.name));
-		ItemStack stack = handler.orElse(null).getStackInSlot(CHARGE_SLOT);
+		ItemStack stack = itemHandler.getStackInSlot(CHARGE_SLOT);
 		return EnergyUtils.readStorage(stack, EnergyUnit.DEFAULT);
 	}
 

@@ -10,7 +10,9 @@ import net.minecraft.world.IBlockReader;
 public class SinteringFurnaceBlock extends PoweredTileBlockBase {
 
 	public SinteringFurnaceBlock() {
-		super(Material.ROCK, 2.0f, 14);
+		super(Properties.create(Material.ROCK)
+				.hardnessAndResistance(2.0f)
+				.lightValue(14));
 	}
 
 	@Override

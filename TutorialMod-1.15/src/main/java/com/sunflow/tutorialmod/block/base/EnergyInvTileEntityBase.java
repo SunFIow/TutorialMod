@@ -6,13 +6,15 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class EnergyInvTileEntityBase extends EnergyTileEntityBase {
 
-	protected LazyOptional<ItemStackHandler> handler = LazyOptional.of(this::getHandler);
+	protected ItemStackHandler itemHandler = createHandler();
+	private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
-	protected abstract ItemStackHandler getHandler();
+	protected abstract ItemStackHandler createHandler();
 
 	public EnergyInvTileEntityBase(TileEntityType<?> type) {
 		super(type);
@@ -20,13 +22,13 @@ public abstract class EnergyInvTileEntityBase extends EnergyTileEntityBase {
 
 	@Override
 	public void read(CompoundNBT tag) {
-		handler.ifPresent(h -> h.deserializeNBT(tag.getCompound("inv")));
+		itemHandler.deserializeNBT(tag.getCompound("inv"));
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		handler.ifPresent(h -> tag.put("inv", h.serializeNBT()));
+		tag.put("inv", itemHandler.serializeNBT());
 
 		return super.write(tag);
 	}

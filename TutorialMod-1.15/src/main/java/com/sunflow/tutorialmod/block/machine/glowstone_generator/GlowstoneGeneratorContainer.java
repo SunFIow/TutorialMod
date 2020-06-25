@@ -7,6 +7,8 @@ import com.sunflow.tutorialmod.setup.registration.Registration;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -22,7 +24,7 @@ public class GlowstoneGeneratorContainer extends ContainerBase {
 	public GlowstoneGeneratorContainer(int windowId, PlayerInventory inv, TileEntity tile) {
 		super(Registration.GLOWSTONE_GENERATOR_CONTAINER.get(), windowId, 1, tile);
 
-		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
+		this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, GlowstoneGeneratorTile.FUEL_SLOT, 80, 35));
 		});
 
@@ -36,10 +38,12 @@ public class GlowstoneGeneratorContainer extends ContainerBase {
 	}
 
 	public int getEnergy() {
-		return field.getField(GlowstoneGeneratorTile.ENERGY_ID);
+		return tileentity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
+//		return field.getField(GlowstoneGeneratorTile.ENERGY_ID);
 	}
 
 	public int getEnergyMax() {
-		return field.getField(GlowstoneGeneratorTile.ENERGY_MAX_ID);
+		return tileentity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
+//		return field.getField(GlowstoneGeneratorTile.ENERGY_MAX_ID);
 	}
 }

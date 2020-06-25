@@ -14,7 +14,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 public class EnergyStorageTile extends EnergyTileEntityBase {
 
 	@Override
-	protected CustomEnergyStorage getEnergy() {
+	protected CustomEnergyStorage createEnergy() {
 		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
 	}
 

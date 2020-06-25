@@ -41,10 +41,10 @@ public class SinteringFurnaceContainer extends ContainerBase {
 	}
 
 	public int getBurnTime() {
-		return ((SinteringFurnaceTile) tile).getField(SinteringFurnaceTile.BURNTIME_ID);
+		return ((SinteringFurnaceTile) tileentity).getField(SinteringFurnaceTile.BURNTIME_ID);
 	}
 
 	public int getBurnTimeTotal() {
-		return ((SinteringFurnaceTile) tile).getField(SinteringFurnaceTile.BURNTIME_TOTAL_ID);
+		return ((SinteringFurnaceTile) tileentity).getField(SinteringFurnaceTile.BURNTIME_TOTAL_ID);
 	}
 }

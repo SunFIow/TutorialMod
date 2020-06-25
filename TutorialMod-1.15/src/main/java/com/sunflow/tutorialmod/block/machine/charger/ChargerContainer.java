@@ -20,7 +20,7 @@ public class ChargerContainer extends ContainerBase {
 	public ChargerContainer(int id, PlayerInventory inv, TileEntity tile) {
 		super(Registration.CHARGER_CONTAINER.get(), id, 1, tile);
 
-		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
+		this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, ChargerTile.CHARGE_SLOT, 80, 35));
 		});
 

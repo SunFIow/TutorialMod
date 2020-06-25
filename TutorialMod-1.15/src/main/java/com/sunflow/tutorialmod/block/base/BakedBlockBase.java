@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.block.base;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +14,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public class BakedBlockBase extends BlockBase {
+public class BakedBlockBase extends Block {
 
 	protected VoxelShape shape;
 	protected Vec3d offset;

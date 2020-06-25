@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.item.base.ItemBase;
+import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
@@ -12,6 +13,7 @@ import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -21,7 +23,7 @@ import net.minecraft.world.World;
 
 public class EnergyWandItem extends ItemBase implements IEnergyItem {
 
-	public EnergyWandItem() { super(Stackable(1)); }
+	public EnergyWandItem() { super(new Item.Properties().group(ModGroups.itemGroup).maxStackSize(1)); }
 
 	@Override
 	public CustomEnergyStorage createEnergy() {

@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.item.food;
 
 import com.sunflow.tutorialmod.item.base.ItemBase;
+import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,10 +20,10 @@ public class SeedItem extends ItemBase implements IPlantable {
 
 	private Block plantBlock;
 
-	public SeedItem(Block plantBlock) { this.plantBlock = plantBlock; }
+//	public SeedItem(Block plantBlock) { super(new Item.Properties().group(ModGroups.itemGroup)); this.plantBlock = plantBlock; }
 
 	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible) {
-		super(Food(hunger, saturation, meat, fastEat, alwaysEdible));
+		super(Food(ModGroups.itemGroup, hunger, saturation, meat, fastEat, alwaysEdible));
 		this.plantBlock = plantBlock;
 	}
 

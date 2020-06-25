@@ -29,8 +29,8 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		capacity = value;
 	}
 
-	public double getFillLevel() {
-		return (double) energy / capacity;
+	public float getFillLevel() {
+		return (float) energy / capacity;
 	}
 
 	@Override

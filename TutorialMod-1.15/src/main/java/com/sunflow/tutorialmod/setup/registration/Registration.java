@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.setup.registration;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.TeleporterBlock;
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
-import com.sunflow.tutorialmod.block.base.BlockBase;
 import com.sunflow.tutorialmod.block.base.TileBlockBase;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
@@ -88,6 +87,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.ModDimension;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -150,7 +150,7 @@ public class Registration {
 	public static final RegistryObject<ContainerType<ChargerContainer>> CHARGER_CONTAINER = CONTAINERS.register("charger", () -> IForgeContainerType.create(ChargerContainer::new));
 
 	public static final RegistryObject<Block> COPPER_CHEST = BLOCKS.register("copper_chest", CopperChestBlock::new);
-	public static final RegistryObject<Item> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), ItemBase.ISTER(COPPER_CHEST::get, CopperChestTile::new)));
+	public static final RegistryObject<Item> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), ItemBase.ISTER(ModGroups.itemGroup)));
 	public static final RegistryObject<TileEntityType<CopperChestTile>> COPPER_CHEST_TILE = TILEENTITIES.register("copper_chest", () -> TileEntityType.Builder.create(CopperChestTile::new, COPPER_CHEST.get()).build(null));
 	public static final RegistryObject<ContainerType<CopperChestContainer>> COPPER_CHEST_CONTAINER = CONTAINERS.register("copper_chest", () -> IForgeContainerType.create(CopperChestContainer::new));
 
@@ -193,37 +193,38 @@ public class Registration {
 	// Tree
 // TODO: Looking for improvments
 	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", ItemBase::new);
-	public static final RegistryObject<Block> COPPER_BLOCK = BLOCKS.register("copper_block", () -> new BlockBase(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f)));
+	public static final RegistryObject<Block> COPPER_BLOCK = BLOCKS.register("copper_block", () -> new Block(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f)));
 	public static final RegistryObject<Item> COPPER_BLOCK_ITEM = ITEMS.register("copper_block", () -> new BlockItem(COPPER_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> COPPER_ORE_OVERWORLD = BLOCKS.register("copper_ore", () -> new CustomOreBlock(3f, 2, 0));
+	public static final RegistryObject<Block> COPPER_ORE_OVERWORLD = BLOCKS.register("copper_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
 	public static final RegistryObject<Item> COPPER_ORE_OVERWORLD_ITEM = ITEMS.register("copper_ore", () -> new BlockItem(COPPER_ORE_OVERWORLD.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> COPPER_ORE_END = BLOCKS.register("copper_ore_end", () -> new CustomOreBlock(3f, 2, 0));
+	public static final RegistryObject<Block> COPPER_ORE_END = BLOCKS.register("copper_ore_end", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
 	public static final RegistryObject<Item> COPPER_ORE_END_ITEM = ITEMS.register("copper_ore_end", () -> new BlockItem(COPPER_ORE_END.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> COPPER_ORE_NETHER = BLOCKS.register("copper_ore_nether", () -> new CustomOreBlock(3f, 2, 0));
+	public static final RegistryObject<Block> COPPER_ORE_NETHER = BLOCKS.register("copper_ore_nether", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
 	public static final RegistryObject<Item> COPPER_ORE_NETHER_ITEM = ITEMS.register("copper_ore_nether", () -> new BlockItem(COPPER_ORE_NETHER.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<Block> COPPER_LEAVES = BLOCKS.register("copper_leaves", CustomLeavesBlock::new);
 	public static final RegistryObject<Item> COPPER_LEAVES_ITEM = ITEMS.register("copper_leaves", () -> new BlockItem(COPPER_LEAVES.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<Block> COPPER_LOG = BLOCKS.register("copper_log", () -> new LogBlock(MaterialColor.ORANGE_TERRACOTTA, Block.Properties.create(Material.WOOD, MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(2F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Item> COPPER_LOG_ITEM = ITEMS.register("copper_log", () -> new BlockItem(COPPER_LOG.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> COPPER_PLANKS = BLOCKS.register("copper_planks", () -> new BlockBase(Material.WOOD, MaterialColor.ORANGE_TERRACOTTA, 2.0F, 3.0F, SoundType.WOOD));
+	public static final RegistryObject<Block> COPPER_PLANKS = BLOCKS.register("copper_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+
 	public static final RegistryObject<Item> COPPER_PLANKS_ITEM = ITEMS.register("copper_planks", () -> new BlockItem(COPPER_PLANKS.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<SaplingBlock> COPPER_SAPLING = BLOCKS.register("copper_sapling", () -> new CustomSaplingBlock(COPPER_LEAVES.get(), COPPER_LOG.get(), Registration.COPPER_SAPLING::get));
 	public static final RegistryObject<Item> COPPER_SAPLING_ITEM = ITEMS.register("copper_sapling", () -> new BlockItem(COPPER_SAPLING.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Block> ALUMINIUM_BLOCK = BLOCKS.register("aluminium_block", () -> new BlockBase(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f)));
+	public static final RegistryObject<Block> ALUMINIUM_BLOCK = BLOCKS.register("aluminium_block", () -> new Block(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f)));
 	public static final RegistryObject<Item> ALUMINIUM_BLOCK_ITEM = ITEMS.register("aluminium_block", () -> new BlockItem(ALUMINIUM_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Block> ALUMINIUM_ORE_OVERWORLD = BLOCKS.register("aluminium_ore", () -> new CustomOreBlock(3f, 2, 0));
+	public static final RegistryObject<Block> ALUMINIUM_ORE_OVERWORLD = BLOCKS.register("aluminium_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
 	public static final RegistryObject<Item> ALUMINIUM_ORE_OVERWORLD_ITEM = ITEMS.register("aluminium_ore", () -> new BlockItem(ALUMINIUM_ORE_OVERWORLD.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> ALUMINIUM_ORE_END = BLOCKS.register("aluminium_ore_end", () -> new CustomOreBlock(3f, 2, 0));
+	public static final RegistryObject<Block> ALUMINIUM_ORE_END = BLOCKS.register("aluminium_ore_end", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
 	public static final RegistryObject<Item> ALUMINIUM_ORE_END_ITEM = ITEMS.register("aluminium_ore_end", () -> new BlockItem(ALUMINIUM_ORE_END.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> ALUMINIUM_ORE_NETHER = BLOCKS.register("aluminium_ore_nether", () -> new CustomOreBlock(3f, 2, 0));
+	public static final RegistryObject<Block> ALUMINIUM_ORE_NETHER = BLOCKS.register("aluminium_ore_nether", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
 	public static final RegistryObject<Item> ALUMINIUM_ORE_NETHER_ITEM = ITEMS.register("aluminium_ore_nether", () -> new BlockItem(ALUMINIUM_ORE_NETHER.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<Block> ALUMINIUM_LEAVES = BLOCKS.register("aluminium_leaves", CustomLeavesBlock::new);
 	public static final RegistryObject<Item> ALUMINIUM_LEAVES_ITEM = ITEMS.register("aluminium_leaves", () -> new BlockItem(ALUMINIUM_LEAVES.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<Block> ALUMINIUM_LOG = BLOCKS.register("aluminium_log", () -> new LogBlock(MaterialColor.LIGHT_GRAY, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY).hardnessAndResistance(2F).sound(SoundType.WOOD)))));
 	public static final RegistryObject<Item> ALUMINIUM_LOG_ITEM = ITEMS.register("aluminium_log", () -> new BlockItem(ALUMINIUM_LOG.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<Block> ALUMINIUM_PLANKS = BLOCKS.register("aluminium_planks", () -> new BlockBase(Material.WOOD, MaterialColor.LIGHT_GRAY, 2.0F, 3.0F, SoundType.WOOD));
+	public static final RegistryObject<Block> ALUMINIUM_PLANKS = BLOCKS.register("aluminium_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Item> ALUMINIUM_PLANKS_ITEM = ITEMS.register("aluminium_planks", () -> new BlockItem(ALUMINIUM_PLANKS.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<SaplingBlock> ALUMINIUM_SAPLING = BLOCKS.register("aluminium_sapling", () -> new CustomSaplingBlock(ALUMINIUM_LEAVES.get(), ALUMINIUM_LOG.get(), Registration.ALUMINIUM_SAPLING::get));
 	public static final RegistryObject<Item> ALUMINIUM_SAPLING_ITEM = ITEMS.register("aluminium_sapling", () -> new BlockItem(ALUMINIUM_SAPLING.get(), new Item.Properties().group(ModGroups.itemGroup)));
@@ -246,7 +247,7 @@ public class Registration {
 	public static final RegistryObject<Block> RICE_PLANT = BLOCKS.register("rice_plant", () -> new FoodPlantBlock(() -> RICE.get(), () -> RICE.get(), 3f, 2f));
 //	public static final RegistryObject<Item> RICE = ITEMS.register("rice_plant", () -> new BlockItem(RICE_PLANT.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Item> RICE_BOWL = ITEMS.register("rice_bowl", () -> new Item(ItemBase.Food(8, 2)));
+	public static final RegistryObject<Item> RICE_BOWL = ITEMS.register("rice_bowl", () -> new Item(ItemBase.Food(ModGroups.itemGroup, 8, 2)));
 
 	// Machines
 	public static final RegistryObject<Block> TELEPORTER = BLOCKS.register("teleporter", () -> new TeleporterBlock(1));
@@ -302,7 +303,7 @@ public class Registration {
 	public static final RegistryObject<Item>[] SKIN = ItemNBTSkin.create(ITEMS);
 
 	// Food
-	public static final RegistryObject<Item> EVIL_APPLE = ITEMS.register("evil_apple", () -> new Item(ItemBase.Food(6, 4, false, false, true,
+	public static final RegistryObject<Item> EVIL_APPLE = ITEMS.register("evil_apple", () -> new Item(ItemBase.Food(ModGroups.itemGroup, 6, 4, false, false, true,
 			new EffectInstance(Effects.INSTANT_HEALTH, 1, 1),
 			new EffectInstance(Effects.REGENERATION, 20 * 4, 0))));
 

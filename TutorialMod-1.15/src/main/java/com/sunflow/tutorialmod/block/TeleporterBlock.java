@@ -1,9 +1,9 @@
 package com.sunflow.tutorialmod.block;
 
-import com.sunflow.tutorialmod.block.base.BlockBase;
 import com.sunflow.tutorialmod.command.util.TeleportationTools;
 import com.sunflow.tutorialmod.util.Log;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,12 +15,12 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
-public class TeleporterBlock extends BlockBase {
+public class TeleporterBlock extends Block {
 
 	private int dimensionID;
 
 	public TeleporterBlock(int dimensionID) {
-		super(Material.ROCK);
+		super(Properties.create(Material.ROCK));
 		this.dimensionID = dimensionID;
 	}
 

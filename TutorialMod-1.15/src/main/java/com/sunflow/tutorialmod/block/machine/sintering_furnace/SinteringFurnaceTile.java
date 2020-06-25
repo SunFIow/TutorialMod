@@ -2,7 +2,6 @@ package com.sunflow.tutorialmod.block.machine.sintering_furnace;
 
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
@@ -42,7 +41,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 
 	@Override
-	protected ItemStackHandler getHandler() {
+	protected ItemStackHandler createHandler() {
 		return new ItemStackHandler(4) {
 			@Override
 			public boolean isItemValid(int slot, ItemStack stack) {
@@ -73,35 +72,31 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 
 	@Override
 	public void tick() {
-		handler.ifPresent(h -> {
-
+		if (isBurning()) {
+			--burnTime;
+		}
+		if (canSmelt()) {
 			if (isBurning()) {
-				--burnTime;
-			}
-			ItemStack fuel = h.getStackInSlot(FUEL_ID);
-			if (canSmelt()) {
-				if (isBurning()) {
-					cookTime++;
+				cookTime++;
 
-					if (cookTime >= TutorialModConfig.SINTERING_FURNACE_TICKS.get()) {
-						cookTime = 0;
-//						this.totalCookTime = this.getCookTime((ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT1_ID), (ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT2_ID));
-						smeltItem();
-						markDirty();
-					}
-
-				} else {
-					if (!fuel.isEmpty()) {
-						burnTimeTotal = getBurnTime(fuel);
-						burnTime = burnTimeTotal;
-						h.extractItem(FUEL_ID, 1, false);
-					}
+				if (cookTime >= TutorialModConfig.SINTERING_FURNACE_TICKS.get()) {
+					cookTime = 0;
+//					this.totalCookTime = this.getCookTime((ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT1_ID), (ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT2_ID));
+					smeltItem();
+					markDirty();
+				}
+			} else {
+				ItemStack fuelSlot = itemHandler.getStackInSlot(FUEL_ID);
+				if (!fuelSlot.isEmpty()) {
+					burnTimeTotal = getBurnTime(fuelSlot);
+					burnTime = burnTimeTotal;
+					itemHandler.extractItem(FUEL_ID, 1, false);
 				}
 			}
-			if (!isBurning() || !canSmelt() && cookTime > 0) {
-				cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.SINTERING_FURNACE_TICKS.get());
-			}
-		});
+		}
+		if (!isBurning() || !canSmelt() && cookTime > 0) {
+			cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.SINTERING_FURNACE_TICKS.get());
+		}
 
 		if (!world.isRemote) {
 			BlockState state = world.getBlockState(pos);
@@ -117,50 +112,42 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 
 	public void smeltItem() {
 		if (this.canSmelt()) {
-			handler.ifPresent(h -> {
+			ItemStack input1 = itemHandler.getStackInSlot(INPUT1_ID);
+			ItemStack input2 = itemHandler.getStackInSlot(INPUT2_ID);
+			ItemStack result = Recipes.getInstance().getSinteringResult(input1, input2);
+			ItemStack output = itemHandler.getStackInSlot(OUTPUT_ID);
 
-				ItemStack input1 = h.getStackInSlot(INPUT1_ID);
-				ItemStack input2 = h.getStackInSlot(INPUT2_ID);
-				ItemStack result = Recipes.getInstance().getSinteringResult(input1, input2);
-				ItemStack output = h.getStackInSlot(OUTPUT_ID);
+			if (output.isEmpty()) {
+				itemHandler.setStackInSlot(OUTPUT_ID, result.copy());
+			} else if (output.getItem() == result.getItem()) {
+				output.grow(result.getCount());
+			}
 
-				if (output.isEmpty()) {
-					h.setStackInSlot(OUTPUT_ID, result.copy());
-				} else if (output.getItem() == result.getItem()) {
-					output.grow(result.getCount());
-				}
+			itemHandler.extractItem(INPUT1_ID, 1, false);
+			itemHandler.extractItem(INPUT2_ID, 1, false);
 
-//				input1.shrink(1);
-//				input2.shrink(1);
-				h.extractItem(INPUT1_ID, 1, false);
-				h.extractItem(INPUT2_ID, 1, false);
-			});
 		}
 	}
 
 	private boolean canSmelt() {
-		AtomicBoolean canSmelt = new AtomicBoolean(false);
+		ItemStack input1 = itemHandler.getStackInSlot(INPUT1_ID);
+		ItemStack input2 = itemHandler.getStackInSlot(INPUT2_ID);
 
-		handler.ifPresent(h -> {
-			ItemStack input1 = h.getStackInSlot(INPUT1_ID);
-			ItemStack input2 = h.getStackInSlot(INPUT2_ID);
-
-			if (!input1.isEmpty() && !input2.isEmpty()) {
-				ItemStack result = Recipes.getInstance().getSinteringResult(input1, input2);
-				if (!result.isEmpty()) {
-					ItemStack output = h.getStackInSlot(OUTPUT_ID);
-					if (output.isEmpty()) {
-						canSmelt.set(true);
-					} else {
-						if (output.isItemEqual(result)) {
-							int res = output.getCount() + result.getCount();
-							canSmelt.set(res <= h.getSlotLimit(OUTPUT_ID) && res <= output.getMaxStackSize());
-						}
+		if (!input1.isEmpty() && !input2.isEmpty()) {
+			ItemStack result = Recipes.getInstance().getSinteringResult(input1, input2);
+			if (!result.isEmpty()) {
+				ItemStack output = itemHandler.getStackInSlot(OUTPUT_ID);
+				if (output.isEmpty()) {
+					return true;
+				} else {
+					if (output.isItemEqual(result)) {
+						int res = output.getCount() + result.getCount();
+						return res <= itemHandler.getSlotLimit(OUTPUT_ID) && res <= output.getMaxStackSize();
 					}
 				}
 			}
-		});
-		return canSmelt.get();
+		}
+		return false;
 	}
 
 	public static boolean isFuel(ItemStack stack) {
@@ -341,6 +328,14 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 							return ent.getValue();
 						}
 					}
+				} else {
+					if (compareItemStacks(input2, entry.getKey())) {
+						for (Entry<ItemStack, ItemStack> ent : entry.getValue().entrySet()) {
+							if (compareItemStacks(input1, ent.getKey())) {
+								return ent.getValue();
+							}
+						}
+					}
 				}
 			}
 			return ItemStack.EMPTY;
@@ -349,10 +344,6 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 		private boolean compareItemStacks(ItemStack stack1, ItemStack stack2) {
 //			return stack1.getItem() == stack2.getItem() && (stack1.getMetadata() == stack2.getMetadata() || stack2.getMetadata() == 32767);
 			return stack1.isItemEqual(stack2);
-		}
-
-		public Table<ItemStack, ItemStack, ItemStack> getDuelSmeltingList() {
-			return smeltingList;
 		}
 
 		public float getSinteringExperience(ItemStack stack) {

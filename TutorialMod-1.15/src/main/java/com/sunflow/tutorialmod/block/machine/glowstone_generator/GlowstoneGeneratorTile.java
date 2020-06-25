@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.registration.Registration;
@@ -21,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -33,7 +32,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	private static final Item FUEL_ITEM = Items.GLOWSTONE_DUST;
 
 	@Override
-	protected ItemStackHandler getHandler() {
+	protected ItemStackHandler createHandler() {
 		return new ItemStackHandler(1) {
 			@Override
 			public boolean isItemValid(int slot, ItemStack stack) {
@@ -48,7 +47,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	protected CustomEnergyStorage getEnergy() {
+	protected CustomEnergyStorage createEnergy() {
 		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
 	}
 
@@ -69,73 +68,71 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	@Override
 	public void tick() {
-//		System.out.println("h");
 		super.tick();
-		AtomicBoolean receivedEnergy = new AtomicBoolean(false);
+		if (world.isRemote) return;
 
-		handler.ifPresent((handler) -> {
-			energy.ifPresent((energy) -> {
-				if (currentFuel != EMPTY) {
-					int fuelValue = getFuelValue(currentFuel.getItem());
-					int fuelTicks = getFuelTicks(currentFuel.getItem());
-					int partialValue = fuelValue / fuelTicks;
-					powerLeftOvers += (float) fuelValue / fuelTicks - partialValue;
-					partialValue += Math.round(powerLeftOvers);
-					powerLeftOvers -= Math.round(powerLeftOvers);
-					if (energy.receiveEnergy(partialValue, true) > 0) {
-						receivedEnergy.set(true);
-						cookTime += energy.receiveEnergy(partialValue, false) / partialValue;
-						if (cookTime >= fuelTicks) {
-							currentFuel = EMPTY;
-							cookTime = 0;
-						}
-						markDirty();
-					}
-				}
-			});
-			if (currentFuel == EMPTY) {
-				ItemStack fuelSlot = handler.getStackInSlot(FUEL_SLOT);
-				if (!fuelSlot.isEmpty() && isItemFuel(fuelSlot.getItem())) {
-					currentFuel = fuelSlot.getItem();
-					handler.extractItem(FUEL_SLOT, 1, false);
-				}
-			}
-		});
+		boolean producedEnergy = false;
 
-		if (!world.isRemote) {
-			BlockState state = world.getBlockState(pos);
-			boolean generating = currentFuel != EMPTY && receivedEnergy.get();
-			if (state.get(POWERED) != generating) {
-				world.setBlockState(pos, state.with(POWERED, generating), 3);
+		if (currentFuel != EMPTY) {
+			int fuelValue = getFuelValue(currentFuel.getItem());
+			int fuelTicks = getFuelTicks(currentFuel.getItem());
+			int partialValue = fuelValue / fuelTicks;
+			powerLeftOvers += (float) fuelValue / fuelTicks - partialValue;
+			partialValue += Math.round(powerLeftOvers);
+			powerLeftOvers -= Math.round(powerLeftOvers);
+
+			if (energyHandler.receiveEnergy(partialValue, true) > 0) {
+				producedEnergy = true;
+				cookTime += energyHandler.receiveEnergy(partialValue, false) / partialValue;
+
+				if (cookTime >= fuelTicks) {
+					currentFuel = EMPTY;
+					cookTime = 0;
+				}
+				markDirty();
 			}
 		}
+		if (currentFuel == EMPTY) {
+			ItemStack fuelSlot = itemHandler.getStackInSlot(FUEL_SLOT);
+			if (!fuelSlot.isEmpty() && isItemFuel(fuelSlot.getItem())) {
+				currentFuel = fuelSlot.getItem();
+				itemHandler.extractItem(FUEL_SLOT, 1, false);
+			}
+		}
+
+		BlockState state = world.getBlockState(pos);
+		if (state.get(POWERED) != producedEnergy) {
+			world.setBlockState(pos, state.with(POWERED, producedEnergy),
+					Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
+		}
+
 		sendOutPower();
 	}
 
 	private void sendOutPower() {
-		energy.ifPresent(energy -> {
-			if (energy.getEnergyStored() > 0) {
-				for (Direction dir : Direction.values()) {
-					TileEntity tile = world.getTileEntity(pos.offset(dir));
-					if (tile != null) {
-						tile.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
-							if (e.canReceive()) {
-								int maxEExt = energy.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
-								int eReceived = e.receiveEnergy(maxEExt, false);
-//								if (eReceived > 0) {
-								energy.extractEnergy(eReceived, false);
-								tile.markDirty();
-								this.markDirty();
-//								}
-							}
-						});
-					}
-					if (energy.getEnergyStored() <= 0) {
-						return;
-					}
+		if (energyHandler.getEnergyStored() > 0) {
+			for (Direction dir : Direction.values()) {
+				TileEntity tileentity = world.getTileEntity(pos.offset(dir));
+				if (tileentity != null) {
+					tileentity.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
+						if (e.canReceive()) {
+//							int maxEExt = energyHandler.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
+//							int eReceived = e.receiveEnergy(maxEExt, false);
+//							energyHandler.extractEnergy(eReceived, false);							
+//							tileentity.markDirty();	
+
+							int received = e.receiveEnergy(Math.min(energyHandler.getEnergyStored(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get()), false);
+							energyHandler.extractEnergy(received, false);
+
+							this.markDirty();
+						}
+					});
+				}
+				if (energyHandler.getEnergyStored() <= 0) {
+					return;
 				}
 			}
-		});
+		}
 	}
 
 	private boolean isItemFuel(Item item) { return getFuelValue(item) > 0; }

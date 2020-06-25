@@ -3,8 +3,6 @@ package com.sunflow.tutorialmod.block.base;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -21,18 +19,6 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public abstract class TileBlockBase extends OrientableBlockBase {
 
 	public TileBlockBase(Properties properties) { super(properties); }
-
-	public TileBlockBase() { this(Material.ROCK, 2.0f); }
-
-	public TileBlockBase(Material material, SoundType sound, float hardness, float resistance) {
-		this(Properties.create(material)
-				.sound(sound)
-				.hardnessAndResistance(hardness, resistance));
-	}
-
-	public TileBlockBase(Material material, float hardnessAndResistance) {
-		this(Properties.create(material).hardnessAndResistance(hardnessAndResistance));
-	}
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {

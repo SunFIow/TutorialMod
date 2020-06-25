@@ -20,7 +20,7 @@ public class ElectricSinteringFurnaceContainer extends ContainerBase {
 	public ElectricSinteringFurnaceContainer(int id, PlayerInventory inv, TileEntity tile) {
 		super(Registration.ELECTRIC_SINTERING_FURNACE_CONTAINER.get(), id, 3, tile);
 
-		this.tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
+		this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 //			addSlot(new SlotItemHandler(h, 0, 81, 35));
 			addSlot(new SlotItemHandler(h, ElectricSinteringFurnaceTile.INPUT1_ID, 56, 17));
 			addSlot(new SlotItemHandler(h, ElectricSinteringFurnaceTile.INPUT2_ID, 56, 53));

@@ -18,7 +18,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public abstract class ContainerBase extends Container {
 
-	protected final TileEntity tile;
+	protected final TileEntity tileentity;
 	protected final IHasField field;
 	protected final int containerSlotCount;
 	public IIntArray data;
@@ -27,7 +27,7 @@ public abstract class ContainerBase extends Container {
 	public ContainerBase(ContainerType<?> type, int id, int containerSlotCount, TileEntity tile) {
 		super(type, id);
 		this.containerSlotCount = containerSlotCount;
-		this.tile = tile;
+		this.tileentity = tile;
 		if (tile instanceof IHasField) {
 			field = (IHasField) tile;
 		} else {
@@ -40,16 +40,30 @@ public abstract class ContainerBase extends Container {
 			@Override
 			public int size() {
 				return num;
+//				return num * 2;
 			}
 
 			@Override
 			public int get(int index) {
 				return field.getField(index);
+//				if (index % 2 == 0) {
+//					return field.getField(index / 2) & 0xffff;
+//				} else {
+//					return (field.getField(index / 2) >> 16) & 0xffff;
+//				}
 			}
 
 			@Override
 			public void set(int index, int value) {
 				field.setField(index, value);
+//				if (index % 2 == 0) {
+//					int energyStored = field.getField(index / 2) & 0xffff0000;
+//					value = energyStored + (value & 0xffff);
+//				} else {
+//					int energyStored = field.getField(index / 2) & 0x0000ffff;
+//					value = energyStored | (value << 16);
+//				}
+//				field.setField(index / 2, value);
 			}
 		};
 
@@ -58,7 +72,7 @@ public abstract class ContainerBase extends Container {
 
 	@Override
 	public boolean canInteractWith(PlayerEntity player) {
-		return isWithinUsableDistance(IWorldPosCallable.of(tile.getWorld(), tile.getPos()), player, tile.getBlockState().getBlock());
+		return isWithinUsableDistance(IWorldPosCallable.of(tileentity.getWorld(), tileentity.getPos()), player, tileentity.getBlockState().getBlock());
 	}
 
 	@Override

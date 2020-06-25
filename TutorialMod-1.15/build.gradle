@@ -13,19 +13,19 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-
+/*
 repositories {
-	maven { // JEI
-		url "https://dvs1.progwml6.com/files/maven"
-	}
-	maven { // The One Probe
-		url "http://maven.tterag.com/"
-	}
+    maven { // JEI
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven { // TOP
+        name 'tterrag maven'
+        url "http://maven.tterrag.com/"
+    }
 }
+*/
 
-
-// version = modMinecraftVersion + "-" + modVersion
-version = modVersion
+version = modVersion // version = modMinecraftVersion + "-" + modVersion
 group = modGroup
 archivesBaseName = modFileName + "-" + modMinecraftVersion
 
@@ -86,10 +86,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', modId, '--all', '--output', '\"' + file('src/generated/resources/').toString() + '\"'
- 			// args '--mod', 'tutorialmod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+          //  args '--mod', modId, '--all', '--output', '\"' + file('src/generated/resources/').toString() + '\"'
+ 			args '--mod', 'tutorialmod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
 
-            // environment 'target', 'fmluserdevdata'
+            environment 'target', 'fmluserdevdata'
             
             mods {
                 examplemod {
@@ -100,6 +100,7 @@ minecraft {
     }
 }
 
+/*
 sourceSets {
 	main {
 		java
@@ -107,8 +108,8 @@ sourceSets {
 			srcDirs += 'src/generated/resources'
 		}
 	}
-	
 }
+*/
 
 dependencies {    
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
@@ -134,13 +135,14 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-
+/*
 	compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-	runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
 
-	compile fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-${top_version}"){
-		transitive = true
-	})
+    compile fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-${top_version}") {
+        transitive = false
+    })
+*/
 
 }
 

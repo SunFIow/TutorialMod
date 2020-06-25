@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.block.machine.electric_sintering_furnace;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
@@ -34,7 +32,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	private static final int ENERGY_USE = TutorialModConfig.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get();
 
 	@Override
-	protected ItemStackHandler getHandler() {
+	protected ItemStackHandler createHandler() {
 		return new ItemStackHandler(3) {
 			@Override
 			public boolean isItemValid(int slot, ItemStack stack) {
@@ -54,7 +52,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	protected CustomEnergyStorage getEnergy() {
+	protected CustomEnergyStorage createEnergy() {
 		return new CustomEnergyStorage(TutorialModConfig.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000);
 	}
 
@@ -67,88 +65,72 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	@Override
 	public void tick() {
 		super.tick();
-		handler.ifPresent(h -> {
-			energy.ifPresent(e -> {
-				if (canBurn() && canSmelt()) {
-					if (canBurn()) {
-						cookTime++;
-						e.extractEnergy(ENERGY_USE, false);
+		boolean usedEnergy = false;
+		if (canBurn() && canSmelt()) {
+			cookTime++;
+			energyHandler.extractEnergy(ENERGY_USE, false);
+			usedEnergy = true;
 
-						if (cookTime >= TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
-							cookTime = 0;
-//							h.insertItem(OUTPUT_ID, smelting, false);
-							smeltItem();
-							markDirty();
-						}
-					}
-				}
-				if (!canBurn() || !canSmelt() && cookTime > 0) {
-					cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get());
-				}
-			});
-		});
+			if (cookTime >= TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
+				cookTime = 0;
+				smeltItem();
+			}
+			markDirty();
+		}
+		if (!canBurn() || !canSmelt() && cookTime > 0) {
+			cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get());
+		}
 
 		if (!world.isRemote) {
 			BlockState state = world.getBlockState(pos);
-			if (state.get(POWERED) != cookTime > 0) {
-				world.setBlockState(pos, state.with(POWERED, cookTime > 0), 3);
+			if (state.get(POWERED) != usedEnergy) {
+				world.setBlockState(pos, state.with(POWERED, usedEnergy), 3);
 			}
 		}
-//		System.out.println(Config.ELECTRIC_SINTERING_FURNACE_TICKS.get() + ", " + world.isRemote + ", " + cookTime);
-//		System.out.println(energyUse);
 	}
 
 	private boolean canBurn() {
-		if (!energy.isPresent())
-			return false;
-
-		return energy.orElse(null).getEnergyStored() >= ENERGY_USE;
+		return energyHandler.getEnergyStored() >= ENERGY_USE;
 	}
 
 	public void smeltItem() {
 		if (this.canSmelt()) {
-			handler.ifPresent(h -> {
+			ItemStack input1 = itemHandler.getStackInSlot(INPUT1_ID);
+			ItemStack input2 = itemHandler.getStackInSlot(INPUT2_ID);
+			ItemStack result = SinteringFurnaceTile.Recipes.getInstance().getSinteringResult(input1, input2);
+			ItemStack output = itemHandler.getStackInSlot(OUTPUT_ID);
 
-				ItemStack input1 = h.getStackInSlot(INPUT1_ID);
-				ItemStack input2 = h.getStackInSlot(INPUT2_ID);
-				ItemStack result = SinteringFurnaceTile.Recipes.getInstance().getSinteringResult(input1, input2);
-				ItemStack output = h.getStackInSlot(OUTPUT_ID);
+			if (output.isEmpty()) {
+				itemHandler.setStackInSlot(OUTPUT_ID, result.copy());
+			} else if (output.getItem() == result.getItem()) {
+				output.grow(result.getCount());
+			}
 
-				if (output.isEmpty()) {
-					h.setStackInSlot(OUTPUT_ID, result.copy());
-				} else if (output.getItem() == result.getItem()) {
-					output.grow(result.getCount());
-				}
-
-				h.extractItem(INPUT1_ID, 1, false);
-				h.extractItem(INPUT2_ID, 1, false);
-			});
+			itemHandler.extractItem(INPUT1_ID, 1, false);
+			itemHandler.extractItem(INPUT2_ID, 1, false);
 		}
+
 	}
 
 	private boolean canSmelt() {
-		AtomicBoolean canSmelt = new AtomicBoolean(false);
+		ItemStack input1 = itemHandler.getStackInSlot(INPUT1_ID);
+		ItemStack input2 = itemHandler.getStackInSlot(INPUT2_ID);
 
-		handler.ifPresent(h -> {
-			ItemStack input1 = h.getStackInSlot(INPUT1_ID);
-			ItemStack input2 = h.getStackInSlot(INPUT2_ID);
-
-			if (!input1.isEmpty() && !input2.isEmpty()) {
-				ItemStack result = SinteringFurnaceTile.Recipes.getInstance().getSinteringResult(input1, input2);
-				if (!result.isEmpty()) {
-					ItemStack output = h.getStackInSlot(OUTPUT_ID);
-					if (output.isEmpty()) {
-						canSmelt.set(true);
-					} else {
-						if (output.isItemEqual(result)) {
-							int res = output.getCount() + result.getCount();
-							canSmelt.set(res <= h.getSlotLimit(OUTPUT_ID) && res <= output.getMaxStackSize());
-						}
+		if (!input1.isEmpty() && !input2.isEmpty()) {
+			ItemStack result = SinteringFurnaceTile.Recipes.getInstance().getSinteringResult(input1, input2);
+			if (!result.isEmpty()) {
+				ItemStack output = itemHandler.getStackInSlot(OUTPUT_ID);
+				if (output.isEmpty()) {
+					return true;
+				} else {
+					if (output.isItemEqual(result)) {
+						int res = output.getCount() + result.getCount();
+						return res <= itemHandler.getSlotLimit(OUTPUT_ID) && res <= output.getMaxStackSize();
 					}
 				}
 			}
-		});
-		return canSmelt.get();
+		}
+		return false;
 	}
 
 	@Override

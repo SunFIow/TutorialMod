@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -25,7 +26,7 @@ public class MobEggBase extends ItemBase {
 	public final int eggColor;
 
 	public MobEggBase(int eggColor, ItemGroup group, Supplier<EntityType<?>> entityType) {
-		super(group);
+		super(new Item.Properties().group(group));
 		this.eggColor = eggColor;
 		this.entityType = entityType;
 	}

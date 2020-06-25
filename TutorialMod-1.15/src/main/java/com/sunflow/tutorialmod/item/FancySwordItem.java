@@ -5,8 +5,10 @@ import java.util.Random;
 import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.PlayerSkinPacket;
+import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
@@ -14,6 +16,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class FancySwordItem extends ItemBase {
+
+	public FancySwordItem() { super(new Item.Properties().group(ModGroups.itemGroup)); }
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {

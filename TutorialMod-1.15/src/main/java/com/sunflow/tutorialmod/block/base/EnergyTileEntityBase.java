@@ -17,14 +17,16 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 
 public abstract class EnergyTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable, IHasField, ITickableTileEntity {
 
 	public static final int ENERGY_ID = 0, ENERGY_MAX_ID = 1;
 
-	protected LazyOptional<CustomEnergyStorage> energy = LazyOptional.of(this::getEnergy);
+	protected CustomEnergyStorage energyHandler = createEnergy();
+	private LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyHandler);
 
-	protected abstract CustomEnergyStorage getEnergy();
+	protected abstract CustomEnergyStorage createEnergy();
 
 	private ITextComponent customName;
 
@@ -45,14 +47,11 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 
 	@Override
 	public int getField(int id) {
-		CustomEnergyStorage s;
 		switch (id) {
 			case ENERGY_ID:
-				s = energy.orElse(null);
-				return s != null ? s.getEnergyStored() : -1;
+				return energyHandler != null ? energyHandler.getEnergyStored() : -1;
 			case ENERGY_MAX_ID:
-				s = energy.orElse(null);
-				return s != null ? s.getMaxEnergyStored() : -1;
+				return energyHandler != null ? energyHandler.getMaxEnergyStored() : -1;
 			default:
 				return -1;
 		}
@@ -62,30 +61,27 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 	public void setField(int id, int value) {
 		switch (id) {
 			case ENERGY_ID:
-				energy.ifPresent(e -> e.setEnergy(value));
+				energyHandler.setEnergy(value);
 				break;
 			case ENERGY_MAX_ID:
-				energy.ifPresent(e -> e.setMaxEnergy(value));
+				energyHandler.setMaxEnergy(value);
 				break;
 		}
 	}
 
-	public double getFillLevel() {
-		if (!energy.isPresent())
-			throw new RuntimeException("Energy Storage of " + this + " is not present");
-		return energy.orElse(null).getFillLevel();
+	public float getFillLevel() {
+		return energyHandler.getFillLevel();
 	}
 
 	@Override
 	public void read(CompoundNBT tag) {
-		energy.ifPresent(e -> e.deserializeNBT(tag.getCompound("energy")));
-
+		energyHandler.deserializeNBT(tag.getCompound("energy"));
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		energy.ifPresent(e -> tag.put("energy", e.serializeNBT()));
+		tag.put("energy", energyHandler.serializeNBT());
 
 		return super.write(tag);
 	}
