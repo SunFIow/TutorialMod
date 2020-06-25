@@ -48,7 +48,12 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
+		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get()) {
+			@Override
+			protected void onEnergyChanged() {
+				markDirty();
+			}
+		};
 	}
 
 	private Item currentFuel = ItemStack.EMPTY.getItem();

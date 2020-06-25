@@ -38,13 +38,22 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	protected CustomEnergyStorage createEnergy() { return new CustomEnergyStorage(TutorialModConfig.CHARGER_MAXPOWER.get(), TutorialModConfig.CHARGER_RECEIVE.get(), TutorialModConfig.CHARGER_CHARGE_RATE.get()); }
+	protected CustomEnergyStorage createEnergy() {
+		return new CustomEnergyStorage(TutorialModConfig.CHARGER_MAXPOWER.get(), TutorialModConfig.CHARGER_RECEIVE.get(), TutorialModConfig.CHARGER_CHARGE_RATE.get()) {
+			@Override
+			protected void onEnergyChanged() {
+				markDirty();
+			}
+		};
+	}
 
 	public ChargerTile() { super(Registration.CHARGER_TILE.get()); }
 
 	@Override
 	public void tick() {
 		super.tick();
+		if (world.isRemote) return;
+
 		boolean isCharging = false;
 
 		if (energyHandler.getEnergyStored() > 0) {
@@ -65,12 +74,12 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 			}
 		}
 
-		if (!world.isRemote) {
-			BlockState state = world.getBlockState(pos);
-			if (state.get(POWERED) != isCharging) {
-				world.setBlockState(pos, state.with(POWERED, isCharging), 3);
-			}
+//		if (!world.isRemote) {
+		BlockState state = world.getBlockState(pos);
+		if (state.get(POWERED) != isCharging) {
+			world.setBlockState(pos, state.with(POWERED, isCharging), 3);
 		}
+//		}
 	}
 
 	@Override

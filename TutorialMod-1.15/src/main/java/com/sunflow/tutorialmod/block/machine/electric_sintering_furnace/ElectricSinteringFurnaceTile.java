@@ -53,7 +53,12 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000);
+		return new CustomEnergyStorage(TutorialModConfig.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000) {
+			@Override
+			protected void onEnergyChanged() {
+				markDirty();
+			}
+		};
 	}
 
 	private float cookTime;
@@ -65,6 +70,8 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	@Override
 	public void tick() {
 		super.tick();
+		if (world.isRemote) return;
+
 		boolean usedEnergy = false;
 		if (canBurn() && canSmelt()) {
 			cookTime++;
@@ -81,12 +88,12 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 			cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get());
 		}
 
-		if (!world.isRemote) {
-			BlockState state = world.getBlockState(pos);
-			if (state.get(POWERED) != usedEnergy) {
-				world.setBlockState(pos, state.with(POWERED, usedEnergy), 3);
-			}
+//		if (!world.isRemote) {
+		BlockState state = world.getBlockState(pos);
+		if (state.get(POWERED) != usedEnergy) {
+			world.setBlockState(pos, state.with(POWERED, usedEnergy), 3);
 		}
+//		}
 	}
 
 	private boolean canBurn() {

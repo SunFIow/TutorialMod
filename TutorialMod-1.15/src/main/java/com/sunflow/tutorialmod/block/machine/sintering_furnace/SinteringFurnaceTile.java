@@ -72,6 +72,8 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 
 	@Override
 	public void tick() {
+		if (world.isRemote) return;
+
 		if (isBurning()) {
 			--burnTime;
 		}
@@ -98,12 +100,12 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 			cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.SINTERING_FURNACE_TICKS.get());
 		}
 
-		if (!world.isRemote) {
-			BlockState state = world.getBlockState(pos);
-			if (state.get(POWERED) != isBurning()) {
-				world.setBlockState(pos, state.with(POWERED, isBurning()), 3);
-			}
+//		if (!world.isRemote) {
+		BlockState state = world.getBlockState(pos);
+		if (state.get(POWERED) != isBurning()) {
+			world.setBlockState(pos, state.with(POWERED, isBurning()), 3);
 		}
+//		}
 	}
 
 	private boolean isBurning() {

@@ -21,12 +21,30 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		super(capacity, maxReceive, maxExtract, energy);
 	}
 
+	protected void onEnergyChanged() {}
+
 	public void setEnergy(int value) {
 		energy = value;
+		onEnergyChanged();
 	}
 
 	public void setMaxEnergy(int value) {
 		capacity = value;
+		onEnergyChanged();
+	}
+
+	@Override
+	public int receiveEnergy(int maxReceive, boolean simulate) {
+		int energyReceived = super.receiveEnergy(maxReceive, simulate);
+		if (energyReceived != 0) onEnergyChanged();
+		return energyReceived;
+	}
+
+	@Override
+	public int extractEnergy(int maxExtract, boolean simulate) {
+		int energyExtracted = super.extractEnergy(maxExtract, simulate);
+		if (energyExtracted != 0) onEnergyChanged();
+		return energyExtracted;
 	}
 
 	public float getFillLevel() {
@@ -61,4 +79,5 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		CustomEnergyStorage energyStorage = new CustomEnergyStorage(capacity, maxReceive, maxExtract, energy);
 		return energyStorage;
 	}
+
 }

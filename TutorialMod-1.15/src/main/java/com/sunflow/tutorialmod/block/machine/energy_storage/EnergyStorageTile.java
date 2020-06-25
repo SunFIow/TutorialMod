@@ -25,6 +25,7 @@ public class EnergyStorageTile extends EnergyTileEntityBase {
 	@Override
 	public void tick() {
 		super.tick();
+
 		if (world != null && !world.isRemote && world.getGameTime() % 20L == 0L) {
 			boolean powered = getFillLevel() > 0;
 			if (getBlockState().get(EnergyStorageBlock.POWERED) != powered) {
