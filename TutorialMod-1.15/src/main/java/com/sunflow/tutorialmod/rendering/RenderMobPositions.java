@@ -2,6 +2,7 @@ package com.sunflow.tutorialmod.rendering;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.sunflow.tutorialmod.TutorialMod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -15,7 +16,8 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 public class RenderMobPositions {
 
 	public static void render(RenderLivingEvent.Post<?, ?> event) {
-		ClientPlayerEntity player = Minecraft.getInstance().player;
+		@SuppressWarnings("resource")
+		ClientPlayerEntity player = TutorialMod.proxy.getMinecraft().player;
 
 		if (player.getHeldItemMainhand().getItem() == Items.GHAST_TEAR)
 			showMobs(event.getMatrixStack(), event.getEntity());

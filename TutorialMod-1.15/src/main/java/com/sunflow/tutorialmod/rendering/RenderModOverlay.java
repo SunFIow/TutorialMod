@@ -8,6 +8,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class RenderModOverlay {
 
+	@SuppressWarnings("resource")
 	public static void render(RenderGameOverlayEvent.Text event) {
 		if (!TutorialMod.proxy.getMinecraft().gameSettings.showDebugInfo && TutorialModConfig.CONFIG_SHOW_OVERLAY.get()) {
 			BlockPos pos = TutorialMod.proxy.getClientPlayer().getPosition();

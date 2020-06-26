@@ -57,6 +57,7 @@ public class FancyBlock extends BakedBlockBase {
 		return ActionResultType.FAIL;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		if (!context.getWorld().isRemote && context.getFace() == Direction.UP) {

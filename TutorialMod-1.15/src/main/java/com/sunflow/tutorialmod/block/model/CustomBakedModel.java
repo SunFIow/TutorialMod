@@ -44,6 +44,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 		this.length = length;
 	}
 
+	@SuppressWarnings("deprecation")
 	private TextureAtlasSprite getTexture() {
 		return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(texture);
 	}

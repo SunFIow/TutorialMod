@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.rendering;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.sunflow.tutorialmod.TutorialMod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -17,7 +18,8 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 public class RenderTileOverlays {
 
 	public static void render(RenderWorldLastEvent event) {
-		ClientPlayerEntity player = Minecraft.getInstance().player;
+		@SuppressWarnings("resource")
+		ClientPlayerEntity player = TutorialMod.proxy.getMinecraft().player;
 
 		if (player.getHeldItemMainhand().getItem() == Items.NETHER_STAR) {
 			locateTileEntities(player, event.getMatrixStack());
@@ -45,7 +47,8 @@ public class RenderTileOverlays {
 
 		matrixStack.push();
 
-		Vec3d projectedView = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
+		@SuppressWarnings("resource")
+		Vec3d projectedView = TutorialMod.proxy.getMinecraft().gameRenderer.getActiveRenderInfo().getProjectedView();
 		matrixStack.translate(-projectedView.x, -projectedView.y, -projectedView.z);
 
 		Matrix4f positionMatrix = matrixStack.getLast().getMatrix();

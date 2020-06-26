@@ -31,6 +31,7 @@ public class CustomModelGeometry implements IModelGeometry<CustomModelGeometry> 
 		return bakedModel.get();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
 		return Collections.singletonList(new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, bakedModel.get().texture));

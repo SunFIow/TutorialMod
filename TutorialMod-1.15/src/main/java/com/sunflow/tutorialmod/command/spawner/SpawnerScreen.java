@@ -5,7 +5,6 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.SpawnPacket;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
@@ -53,7 +52,7 @@ public class SpawnerScreen extends Screen {
 
 	}
 
-	public static void open() { Minecraft.getInstance().displayGuiScreen(new SpawnerScreen()); }
+	public static void open() { TutorialMod.proxy.getMinecraft().displayGuiScreen(new SpawnerScreen()); }
 
 	@Override
 	public boolean isPauseScreen() { return false; }

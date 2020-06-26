@@ -15,9 +15,11 @@ public class ClientProxy extends CommonProxy {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup);
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public World getClientWorld() { return Minecraft.getInstance().world; }
 
+	@SuppressWarnings("resource")
 	@Override
 	public PlayerEntity getClientPlayer() { return Minecraft.getInstance().player; }
 

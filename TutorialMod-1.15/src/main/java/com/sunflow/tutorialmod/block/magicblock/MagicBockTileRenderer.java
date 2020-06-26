@@ -8,7 +8,6 @@ import com.sunflow.tutorialmod.TutorialMod;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -53,7 +52,8 @@ public class MagicBockTileRenderer extends TileEntityRenderer<MagicBlockTile> {
 
 	@Override
 	public void render(MagicBlockTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
-		TextureAtlasSprite sprite = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(MAGICBLOCK_TEXTURE);
+		@SuppressWarnings("deprecation")
+		TextureAtlasSprite sprite = TutorialMod.proxy.getMinecraft().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(MAGICBLOCK_TEXTURE);
 		IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
 
 		Random rnd = new Random(tileEntity.getPos().getX() * 337L + tileEntity.getPos().getY() * 37L + tileEntity.getPos().getZ() * 13L);
@@ -96,14 +96,14 @@ public class MagicBockTileRenderer extends TileEntityRenderer<MagicBlockTile> {
 
 		// Render a Diamond above the Block
 		matrixStack.translate(0.5, 1.5, 0.5);
-		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+		ItemRenderer itemRenderer = TutorialMod.proxy.getMinecraft().getItemRenderer();
 		ItemStack stack = new ItemStack(Items.DIAMOND);
 		IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(stack, tileEntity.getWorld(), null);
 		itemRenderer.renderItem(stack, ItemCameraTransforms.TransformType.FIXED, true, matrixStack, buffer, combinedLight, combinedOverlay, ibakedmodel);
 
 		// Render a EnderChest above the Block
 		matrixStack.translate(-.5, 1, -.5);
-		BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRendererDispatcher();
+		BlockRendererDispatcher blockRenderer = TutorialMod.proxy.getMinecraft().getBlockRendererDispatcher();
 		BlockState state = Blocks.ENDER_CHEST.getDefaultState();
 		blockRenderer.renderBlock(state, matrixStack, buffer, combinedLight, combinedOverlay, EmptyModelData.INSTANCE);
 
