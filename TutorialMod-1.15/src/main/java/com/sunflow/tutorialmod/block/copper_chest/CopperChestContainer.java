@@ -14,8 +14,8 @@ import net.minecraft.network.PacketBuffer;
 public class CopperChestContainer extends Container {
 	private final IInventory chestInventory;
 
-	public CopperChestContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, inv, new Inventory(CopperChestTile.SIZE));
+	public CopperChestContainer(int id, PlayerInventory inv, PacketBuffer data) {
+		this(id, inv, new Inventory(CopperChestTile.SIZE));
 	}
 
 	public CopperChestContainer(int id, PlayerInventory playerInv, IInventory chestInv) {

@@ -1,6 +1,5 @@
 package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ContainerBase;
 import com.sunflow.tutorialmod.setup.Registration;
 
@@ -17,12 +16,12 @@ public class GlowstoneGeneratorContainer extends ContainerBase {
 
 	// CLIENT
 	public GlowstoneGeneratorContainer(int id, PlayerInventory inv, PacketBuffer data) {
-		this(id, inv, TutorialMod.proxy.getClientWorld().getTileEntity(data.readBlockPos()));
+		this(id, inv, inv.player.getEntityWorld().getTileEntity(data.readBlockPos()));
 	}
 
 	// SERVER
-	public GlowstoneGeneratorContainer(int windowId, PlayerInventory inv, TileEntity tile) {
-		super(Registration.GLOWSTONE_GENERATOR_CONTAINER.get(), windowId, 1, tile);
+	public GlowstoneGeneratorContainer(int id, PlayerInventory inv, TileEntity tile) {
+		super(Registration.GLOWSTONE_GENERATOR_CONTAINER.get(), id, 1, tile);
 
 		this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, GlowstoneGeneratorTile.FUEL_SLOT, 80, 35));

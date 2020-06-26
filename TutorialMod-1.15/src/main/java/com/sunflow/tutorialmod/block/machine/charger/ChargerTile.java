@@ -119,8 +119,8 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public Container createMenu(int i, PlayerInventory inv, PlayerEntity player) {
-		return new ChargerContainer(i, inv, this);
+	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
+		return new ChargerContainer(id, inv, this);
 	}
 
 	@Override

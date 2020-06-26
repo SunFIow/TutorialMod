@@ -291,8 +291,8 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	}
 
 	@Override
-	public Container createMenu(int i, PlayerInventory inv, PlayerEntity player) {
-		return new SinteringFurnaceContainer(i, inv, this);
+	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
+		return new SinteringFurnaceContainer(id, inv, this);
 	}
 
 	@Override

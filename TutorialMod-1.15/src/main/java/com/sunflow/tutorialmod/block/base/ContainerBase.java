@@ -24,12 +24,12 @@ public abstract class ContainerBase extends Container {
 	public IIntArray data;
 	private int dragType;
 
-	public ContainerBase(ContainerType<?> type, int id, int containerSlotCount, TileEntity tile) {
-		super(type, id);
+	public ContainerBase(ContainerType<?> type, int windowId, int containerSlotCount, TileEntity tileentity) {
+		super(type, windowId);
 		this.containerSlotCount = containerSlotCount;
-		this.tileentity = tile;
-		if (tile instanceof IHasField) {
-			field = (IHasField) tile;
+		this.tileentity = tileentity;
+		if (tileentity instanceof IHasField) {
+			field = (IHasField) tileentity;
 		} else {
 			field = null;
 		}

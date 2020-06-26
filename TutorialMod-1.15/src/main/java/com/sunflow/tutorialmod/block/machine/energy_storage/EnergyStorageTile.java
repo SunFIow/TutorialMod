@@ -35,8 +35,8 @@ public class EnergyStorageTile extends EnergyTileEntityBase {
 	}
 
 	@Override
-	public Container createMenu(int i, PlayerInventory inv, PlayerEntity player) {
-		return new EnergyStorageContainer(i, inv, this);
+	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
+		return new EnergyStorageContainer(id, inv, this);
 	}
 
 	@Override
