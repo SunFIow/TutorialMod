@@ -1,6 +1,5 @@
 package com.sunflow.tutorialmod.data;
 
-import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.data.provider.ModBlockTagsProvider;
 import com.sunflow.tutorialmod.data.provider.ModItemTagsProvider;
 import com.sunflow.tutorialmod.data.provider.ModLootTabelProvider;
@@ -8,13 +7,12 @@ import com.sunflow.tutorialmod.data.provider.ModRecipesProvider;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
-@EventBusSubscriber(modid = TutorialMod.MODID, bus = Bus.MOD)
+//@Mod.EventBusSubscriber(modid = TutorialMod.MODID, bus = Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
-
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		final DataGenerator generator = event.getGenerator();

@@ -24,6 +24,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 	}
 
 	@Override
-	public String getName() { return TutorialMod.NAME + super.getName(); }
+	public String getName() { return TutorialMod.NAME + " " + super.getName(); }
 
 }

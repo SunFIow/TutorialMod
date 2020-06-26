@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sunflow.tutorialmod.TutorialMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
@@ -45,6 +46,14 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 
 	protected abstract void addTables();
 
+	protected void addNBTBlock(Block block, String... nbtStrings) {
+		lootTables.put(block, createStandardTableNBT(block.getRegistryName().getPath(), block, nbtStrings));
+	}
+
+	protected void addStandartBlock(Block block) {
+		lootTables.put(block, createStandardTable(block.getRegistryName().getPath(), block));
+	}
+
 	protected LootTable.Builder createStandardTableNBT(String name, Block block, String... nbtStrings) {
 		Builder nbts = CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY);
 		for (String nbt : nbtStrings) {
@@ -62,9 +71,9 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 		return LootTable.builder().addLootPool(builder);
 	}
 
-	protected LootTable.Builder createStandardTable(Block block) {
+	protected LootTable.Builder createStandardTable(String name, Block block) {
 		LootPool.Builder builder = LootPool.builder()
-				.name(block.getRegistryName().getPath())
+				.name(name)
 				.rolls(ConstantRange.of(1))
 				.addEntry(ItemLootEntry.builder(block))
 				.acceptCondition(SurvivesExplosion.builder());
@@ -96,6 +105,6 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 
 	@Override
 	public String getName() {
-		return "TutorialMod " + super.getName();
+		return TutorialMod.NAME + " " + super.getName();
 	}
 }

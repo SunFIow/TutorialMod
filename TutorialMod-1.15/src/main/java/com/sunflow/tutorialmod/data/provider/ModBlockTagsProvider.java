@@ -24,5 +24,5 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 	}
 
 	@Override
-	public String getName() { return TutorialMod.NAME + super.getName(); }
+	public String getName() { return TutorialMod.NAME + " " + super.getName(); }
 }

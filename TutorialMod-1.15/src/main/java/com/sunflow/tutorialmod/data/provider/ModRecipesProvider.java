@@ -133,5 +133,5 @@ public class ModRecipesProvider extends RecipeProvider {
 	}
 
 	@Override
-	public String getName() { return TutorialMod.NAME + super.getName(); }
+	public String getName() { return TutorialMod.NAME + " " + super.getName(); }
 }
