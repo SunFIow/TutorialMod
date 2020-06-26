@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sunflow.tutorialmod.command.util.TeleportationTools;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;

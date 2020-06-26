@@ -1,6 +1,5 @@
 package com.sunflow.tutorialmod.item;
 
-import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +10,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
-public class TestItem extends ItemBase {
+public class TestItem extends Item {
 
 	public TestItem() { super(new Item.Properties().group(ModGroups.itemGroup)); }
 

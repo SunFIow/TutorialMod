@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.item.armor;
 import java.util.function.Supplier;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;

@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.setup.registration;
+package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.network.Networking;
 

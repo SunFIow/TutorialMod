@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.charger;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
 import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
@@ -56,15 +56,15 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 
 		boolean isCharging = false;
 
-		if (energyHandler.getEnergyStored() > 0) {
+		if (energyStorage.getEnergyStored() > 0) {
 			ItemStack chargeSlot = itemHandler.getStackInSlot(CHARGE_SLOT);
 			if (!chargeSlot.isEmpty()) {
 				CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(chargeSlot, EnergyUnit.DEFAULT);
 				if (itemEnergy.canReceive()) {
-					int maxEExt = energyHandler.extractEnergy(TutorialModConfig.CHARGER_CHARGE_RATE.get(), true);
+					int maxEExt = energyStorage.extractEnergy(TutorialModConfig.CHARGER_CHARGE_RATE.get(), true);
 					int eReceived = itemEnergy.receiveEnergy(maxEExt, false);
 					if (eReceived > 0) {
-						energyHandler.extractEnergy(eReceived, false);
+						energyStorage.extractEnergy(eReceived, false);
 						markDirty();
 
 						isCharging = true;

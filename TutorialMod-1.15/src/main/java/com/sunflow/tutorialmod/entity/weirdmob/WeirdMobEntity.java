@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.entity.weirdmob;
 
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;

@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.spawner.AbstractSpawner;
 
-public class MobEggBase extends ItemBase {
+public class MobEggBase extends Item {
 
 	private Supplier<EntityType<?>> entityType;
 	public final int eggColor;

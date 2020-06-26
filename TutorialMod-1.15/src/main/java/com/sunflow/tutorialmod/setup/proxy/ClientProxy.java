@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
-import com.sunflow.tutorialmod.setup.registration.ClientSetup;
+import com.sunflow.tutorialmod.setup.ClientSetup;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,5 +23,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public Minecraft getMinecraft() { return Minecraft.getInstance(); }
+
+	@Override
+	public boolean isClient() { return true; }
 
 }

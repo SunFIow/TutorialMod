@@ -8,7 +8,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.sunflow.tutorialmod.block.base.InventoryTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

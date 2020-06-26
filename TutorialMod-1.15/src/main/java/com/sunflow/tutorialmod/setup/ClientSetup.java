@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.setup.registration;
+package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
@@ -15,7 +15,6 @@ import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
-import com.sunflow.tutorialmod.rendering.ModISTER;
 import com.sunflow.tutorialmod.rendering.RenderMobPositions;
 import com.sunflow.tutorialmod.rendering.RenderModOverlay;
 import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
@@ -42,6 +41,7 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -52,7 +52,6 @@ public class ClientSetup {
 		Log.info("perhaps you would like...");
 
 		registerScreens();
-		ModISTER.instance.setup();
 
 		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.getCutoutMipped());
@@ -69,8 +68,8 @@ public class ClientSetup {
 		BakedBlockBase block = Registration.FANCYBLOCK.get();
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(TutorialMod.MODID, "customloader"), new CustomModelLoader(() -> new CustomBakedModel(block.location(), block.offset(), block.length())));
 
-		CopperChestTileRenderer.register();
-		MagicBockTileRenderer.register();
+		ClientRegistry.bindTileEntityRenderer(Registration.COPPER_CHEST_TILE.get(), CopperChestTileRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(Registration.MAGICBLOCK_TILE.get(), MagicBockTileRenderer::new);
 
 		Log.debug("Registering the keybindings for u senpai.");
 		KeyBindings.register();
@@ -114,15 +113,14 @@ public class ClientSetup {
 		registry.register((stack, i) -> Registration.WEIRDMOB_SPAWN_EGG.get().eggColor, Registration.WEIRDMOB_SPAWN_EGG.get());
 	}
 
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onTextureStitch(final TextureStitchEvent.Pre event) {
-//		ResourceLocation atlas = event.getMap().getBasePath();
 		ResourceLocation atlas = event.getMap().getTextureLocation();
 		if (atlas.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
-//			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
-			MagicBockTileRenderer.stitch(event);
+			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
 		} else if (atlas.equals(Atlases.CHEST_ATLAS)) {
-			CopperChestTileRenderer.stitch(event);
+			event.addSprite(CopperChestTileRenderer.COPPER_CHEST_TEXTURE);
 		}
 	}
 

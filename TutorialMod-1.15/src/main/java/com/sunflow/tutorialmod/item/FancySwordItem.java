@@ -2,7 +2,6 @@ package com.sunflow.tutorialmod.item;
 
 import java.util.Random;
 
-import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.PlayerSkinPacket;
 import com.sunflow.tutorialmod.setup.ModGroups;
@@ -15,7 +14,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class FancySwordItem extends ItemBase {
+public class FancySwordItem extends Item {
 
 	public FancySwordItem() { super(new Item.Properties().group(ModGroups.itemGroup)); }
 

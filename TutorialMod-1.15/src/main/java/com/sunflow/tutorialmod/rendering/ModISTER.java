@@ -15,12 +15,9 @@ import net.minecraft.tileentity.TileEntity;
 
 public class ModISTER extends ItemStackTileEntityRenderer {
 
-	public static final ModISTER instance = new ModISTER();
-	private CopperChestTile chestCopper;
+	public static final ItemStackTileEntityRenderer instance = new ModISTER();
 
-	public void setup() {
-		chestCopper = new CopperChestTile();
-	}
+	private CopperChestTile chestCopper = new CopperChestTile();
 
 	@Override
 	public void render(ItemStack itemStackIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {

@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.item.tools;
 
 import java.util.function.Supplier;
 
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;

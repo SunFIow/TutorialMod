@@ -23,8 +23,8 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 
 	public static final int ENERGY_ID = 0, ENERGY_MAX_ID = 1;
 
-	protected CustomEnergyStorage energyHandler = createEnergy();
-	private LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyHandler);
+	protected CustomEnergyStorage energyStorage = createEnergy();
+	private LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
 
 	protected abstract CustomEnergyStorage createEnergy();
 
@@ -49,9 +49,9 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 	public int getField(int id) {
 		switch (id) {
 			case ENERGY_ID:
-				return energyHandler != null ? energyHandler.getEnergyStored() : -1;
+				return energyStorage != null ? energyStorage.getEnergyStored() : -1;
 			case ENERGY_MAX_ID:
-				return energyHandler != null ? energyHandler.getMaxEnergyStored() : -1;
+				return energyStorage != null ? energyStorage.getMaxEnergyStored() : -1;
 			default:
 				return -1;
 		}
@@ -61,27 +61,27 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 	public void setField(int id, int value) {
 		switch (id) {
 			case ENERGY_ID:
-				energyHandler.setEnergy(value);
+				energyStorage.setEnergy(value);
 				break;
 			case ENERGY_MAX_ID:
-				energyHandler.setMaxEnergy(value);
+				energyStorage.setMaxEnergy(value);
 				break;
 		}
 	}
 
 	public float getFillLevel() {
-		return energyHandler.getFillLevel();
+		return energyStorage.getFillLevel();
 	}
 
 	@Override
 	public void read(CompoundNBT tag) {
-		energyHandler.deserializeNBT(tag.getCompound("energy"));
+		energyStorage.deserializeNBT(tag.getCompound("energy"));
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		tag.put("energy", energyHandler.serializeNBT());
+		tag.put("energy", energyStorage.serializeNBT());
 
 		return super.write(tag);
 	}

@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.block.copper_chest;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -21,8 +21,6 @@ import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile> {
 	public static final ResourceLocation COPPER_CHEST_TEXTURE = new ResourceLocation(TutorialMod.MODID, "entity/chest/copper_chest");
@@ -33,14 +31,6 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 	public CopperChestTileRenderer(TileEntityRendererDispatcher dispatcher) {
 		super(dispatcher);
 		simpleChest = new CopperChestModel();
-	}
-
-	public static void register() {
-		ClientRegistry.bindTileEntityRenderer(Registration.COPPER_CHEST_TILE.get(), CopperChestTileRenderer::new);
-	}
-
-	public static void stitch(TextureStitchEvent.Pre event) {
-		event.addSprite(COPPER_CHEST_TEXTURE);
 	}
 
 	@Override

@@ -2,10 +2,10 @@ package com.sunflow.tutorialmod;
 
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.network.Networking;
+import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
-import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
 
@@ -41,10 +41,11 @@ public class TutorialMod {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TutorialModConfig.CLIENT_CONFIG);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.COMMON_CONFIG);
 
-		Registration.init();
-
 //		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
 //		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup));
 		proxy.setup();
+
+		Log.warn("Registration#init");
+		Registration.init();
 	}
 }

@@ -1,11 +1,12 @@
 package com.sunflow.tutorialmod.item.food;
 
-import com.sunflow.tutorialmod.item.base.ItemBase;
+import com.sunflow.tutorialmod.item.ItemUtil;
 import com.sunflow.tutorialmod.setup.ModGroups;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
@@ -16,14 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 
-public class SeedItem extends ItemBase implements IPlantable {
+public class SeedItem extends Item implements IPlantable {
 
 	private Block plantBlock;
 
 //	public SeedItem(Block plantBlock) { super(new Item.Properties().group(ModGroups.itemGroup)); this.plantBlock = plantBlock; }
 
 	public SeedItem(Block plantBlock, int hunger, float saturation, boolean meat, boolean fastEat, boolean alwaysEdible) {
-		super(Food(ModGroups.itemGroup, hunger, saturation, meat, fastEat, alwaysEdible));
+		super(ItemUtil.Food(ModGroups.itemGroup, hunger, saturation, meat, fastEat, alwaysEdible));
 		this.plantBlock = plantBlock;
 	}
 

@@ -5,7 +5,6 @@ import java.util.Random;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.registration.Registration;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,9 +24,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.TextureStitchEvent.Pre;
 import net.minecraftforge.client.model.data.EmptyModelData;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class MagicBockTileRenderer extends TileEntityRenderer<MagicBlockTile> {
 
@@ -35,14 +32,6 @@ public class MagicBockTileRenderer extends TileEntityRenderer<MagicBlockTile> {
 
 	public MagicBockTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
-	}
-
-	public static void register() {
-		ClientRegistry.bindTileEntityRenderer(Registration.MAGICBLOCK_TILE.get(), MagicBockTileRenderer::new);
-	}
-
-	public static void stitch(Pre event) {
-		event.addSprite(MAGICBLOCK_TEXTURE);
 	}
 
 	private void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u, float v) {

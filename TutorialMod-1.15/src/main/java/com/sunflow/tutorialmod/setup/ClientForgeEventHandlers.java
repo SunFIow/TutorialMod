@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.util.handlers;
+package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
 

@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.item;
 import java.util.List;
 
 import com.sunflow.tutorialmod.config.TutorialModConfig;
-import com.sunflow.tutorialmod.item.base.ItemBase;
 import com.sunflow.tutorialmod.setup.ModGroups;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.EnergyUtils;
@@ -21,7 +20,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
-public class EnergyWandItem extends ItemBase implements IEnergyItem {
+public class EnergyWandItem extends Item implements IEnergyItem {
 
 	public EnergyWandItem() { super(new Item.Properties().group(ModGroups.itemGroup).maxStackSize(1)); }
 

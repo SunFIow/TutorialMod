@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.furniture.fancyblock;
 
 import java.util.Objects;
 
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;

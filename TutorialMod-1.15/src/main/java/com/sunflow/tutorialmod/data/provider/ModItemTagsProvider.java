@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.data.provider;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModTags;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;

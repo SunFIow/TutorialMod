@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.copper_chest;
 
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

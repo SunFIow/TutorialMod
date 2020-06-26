@@ -1,7 +1,8 @@
-package com.sunflow.tutorialmod.item.base;
+package com.sunflow.tutorialmod.item;
 
 import com.sunflow.tutorialmod.rendering.ModISTER;
 import com.sunflow.tutorialmod.setup.ModGroups;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.item.Food;
 import net.minecraft.item.Food.Builder;
@@ -11,13 +12,9 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
-public class ItemBase extends Item {
+public class ItemUtil {
 
-//	protected String customName;
-
-	public ItemBase() { super(new Item.Properties().group(ModGroups.itemGroup)); }
-
-	public ItemBase(Item.Properties properties) { super(properties); }
+	public static Item Default() { return new Item(new Item.Properties().group(ModGroups.itemGroup)); }
 
 	public static Item.Properties Food(ItemGroup group, int hunger, float saturation) {
 		return new Item.Properties()
@@ -42,6 +39,7 @@ public class ItemBase extends Item {
 	}
 
 	public static Item.Properties ISTER(ItemGroup group) {
+		Log.warn("ISTER");
 		Item.Properties properties = new Item.Properties().group(group);
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> properties.setISTER(() -> () -> ModISTER.instance));
 		return properties;

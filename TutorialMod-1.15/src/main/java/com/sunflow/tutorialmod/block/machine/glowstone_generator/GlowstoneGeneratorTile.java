@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 
 import net.minecraft.block.BlockState;
@@ -86,9 +86,9 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 			partialValue += Math.round(powerLeftOvers);
 			powerLeftOvers -= Math.round(powerLeftOvers);
 
-			if (energyHandler.receiveEnergy(partialValue, true) > 0) {
+			if (energyStorage.receiveEnergy(partialValue, true) > 0) {
 				producedEnergy = true;
-				cookTime += energyHandler.receiveEnergy(partialValue, false) / partialValue;
+				cookTime += energyStorage.receiveEnergy(partialValue, false) / partialValue;
 
 				if (cookTime >= fuelTicks) {
 					currentFuel = EMPTY;
@@ -115,7 +115,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	}
 
 	private void sendOutPower() {
-		if (energyHandler.getEnergyStored() > 0) {
+		if (energyStorage.getEnergyStored() > 0) {
 			for (Direction dir : Direction.values()) {
 				TileEntity tileentity = world.getTileEntity(pos.offset(dir));
 				if (tileentity != null) {
@@ -124,16 +124,17 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 //							int maxEExt = energyHandler.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
 //							int eReceived = e.receiveEnergy(maxEExt, false);
 //							energyHandler.extractEnergy(eReceived, false);							
-//							tileentity.markDirty();	
+//							tileentity.markDirty();
 
-							int received = e.receiveEnergy(Math.min(energyHandler.getEnergyStored(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get()), false);
-							energyHandler.extractEnergy(received, false);
+							int maxExtracted = Math.min(energyStorage.getEnergyStored(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
+							int received = e.receiveEnergy(maxExtracted, false);
+							energyStorage.extractEnergy(received, false);
 
 							this.markDirty();
 						}
 					});
 				}
-				if (energyHandler.getEnergyStored() <= 0) {
+				if (energyStorage.getEnergyStored() <= 0) {
 					return;
 				}
 			}

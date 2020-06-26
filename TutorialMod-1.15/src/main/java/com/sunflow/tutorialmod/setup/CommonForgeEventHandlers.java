@@ -1,12 +1,9 @@
-package com.sunflow.tutorialmod.util.handlers;
+package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.ModCommands;
-import com.sunflow.tutorialmod.setup.registration.Registration;
 import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
@@ -29,6 +26,6 @@ public class CommonForgeEventHandlers {
 	public static void onDimensionRegistry(RegisterDimensionsEvent event) {
 		Log.debug("Registering the dimensions for u senpai.");
 
-		Registration.BADLANDS_TYPE = DimensionManager.registerOrGetDimension(new ResourceLocation(TutorialMod.MODID, "badlands"), Registration.BADLANDS.get(), null, true);
+		Registration.BADLANDS_TYPE = DimensionManager.registerOrGetDimension(Registration.BADLANDS_ID, Registration.BADLANDS.get(), null, true);
 	}
 }

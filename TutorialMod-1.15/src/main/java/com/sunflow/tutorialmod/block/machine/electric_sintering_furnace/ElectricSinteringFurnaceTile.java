@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.block.machine.electric_sintering_furnace;
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.CustomEnergyStorage;
 
 import net.minecraft.block.BlockState;
@@ -75,7 +75,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 		boolean usedEnergy = false;
 		if (canBurn() && canSmelt()) {
 			cookTime++;
-			energyHandler.extractEnergy(ENERGY_USE, false);
+			energyStorage.extractEnergy(ENERGY_USE, false);
 			usedEnergy = true;
 
 			if (cookTime >= TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
@@ -97,7 +97,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	}
 
 	private boolean canBurn() {
-		return energyHandler.getEnergyStored() >= ENERGY_USE;
+		return energyStorage.getEnergyStored() >= ENERGY_USE;
 	}
 
 	public void smeltItem() {

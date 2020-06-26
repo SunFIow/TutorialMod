@@ -1,7 +1,5 @@
 package com.sunflow.tutorialmod.setup;
 
-import com.sunflow.tutorialmod.setup.registration.Registration;
-
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

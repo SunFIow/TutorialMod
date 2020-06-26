@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.data.provider;
 import java.util.function.Consumer;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;

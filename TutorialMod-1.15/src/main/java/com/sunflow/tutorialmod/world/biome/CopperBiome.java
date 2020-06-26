@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.world.biome;
 
 import com.google.common.collect.ImmutableList;
 import com.sunflow.tutorialmod.block.tree.CustomTree;
-import com.sunflow.tutorialmod.setup.registration.Registration;
+import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityClassification;
