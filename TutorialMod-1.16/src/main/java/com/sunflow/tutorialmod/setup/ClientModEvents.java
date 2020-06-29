@@ -10,6 +10,8 @@ import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageScreen;
 import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorScreen;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceScreen;
 import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
+import com.sunflow.tutorialmod.block.model.CustomBakedModel;
+import com.sunflow.tutorialmod.block.model.CustomModelGeometry;
 import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
@@ -90,7 +92,13 @@ public class ClientModEvents {
 		BakedBlockBase block = Registration.FANCYBLOCK.get();
 		ModelLoaderRegistry.registerLoader(
 				new ResourceLocation(TutorialMod.MODID, "customloader"),
-				new CustomModelLoader(block.location(), block.offset(), block.length()));
+//				new CustomModelLoader(block.location(), block.offset(), block.length()));
+				new CustomModelLoader(
+						() -> new CustomModelGeometry(block.location(),
+								() -> new CustomBakedModel(
+										block.location(),
+										block.offset(),
+										block.length()))));
 	}
 
 	private static void bindTileEntityRenderers() {

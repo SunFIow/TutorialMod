@@ -137,7 +137,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 							builder.put(i, iu, iv);
 							break;
 						case 2:
-							builder.put(i, 0f, 1f);
+							builder.put(i, 0, 0);
 							break;
 						default:
 							builder.put(i);

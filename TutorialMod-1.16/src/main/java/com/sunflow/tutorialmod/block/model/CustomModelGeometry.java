@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.function.Function;
 
+import com.google.common.base.Supplier;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.client.renderer.model.IBakedModel;
@@ -16,31 +17,29 @@ import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 
 public class CustomModelGeometry implements IModelGeometry<CustomModelGeometry> {
 
-	private final CustomBakedModel bakedModel;
+	private final ResourceLocation texture;
 
-	public CustomModelGeometry(CustomBakedModel bakedModel) {
-		this.bakedModel = bakedModel;
-	}
+	private Supplier<CustomBakedModel> supplier;
 
-	public CustomModelGeometry(ResourceLocation texture, Vector3d offset, Vector3d length) {
-		this.bakedModel = new CustomBakedModel(texture, offset, length);
+	public CustomModelGeometry(ResourceLocation texture, Supplier<CustomBakedModel> supplier) {
+		this.texture = texture;
+		this.supplier = supplier;
 	}
 
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		return bakedModel;
+		return supplier.get();
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
-		return Collections.singletonList(new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, bakedModel.texture));
+		return Collections.singletonList(new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, texture));
 	}
 
 }
