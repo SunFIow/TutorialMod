@@ -42,6 +42,7 @@ public class ItemUtil {
 		Log.warn("ISTER");
 		Item.Properties properties = new Item.Properties().group(group);
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> properties.setISTER(() -> () -> ModISTER.instance));
+//		if (TutorialMod.proxy.isClient()) properties.setISTER(() -> () -> ModISTER.instance);
 		return properties;
 	}
 }

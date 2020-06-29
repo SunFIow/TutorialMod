@@ -84,10 +84,10 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -104,17 +104,17 @@ public class Registration {
 	public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, TutorialMod.MODID);
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, TutorialMod.MODID);
 
-	public static void init() {
-		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		TILEENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+	public static void registerAll(IEventBus modEventBus) {
+		BLOCKS.register(modEventBus);
+		ITEMS.register(modEventBus);
+		DIMENSIONS.register(modEventBus);
+		BIOMES.register(modEventBus);
+		TILEENTITIES.register(modEventBus);
+		ENCHANTMENTS.register(modEventBus);
+		ENTITIES.register(modEventBus);
+		FLUIDS.register(modEventBus);
+		CONTAINERS.register(modEventBus);
+		SOUNDS.register(modEventBus);
 	}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

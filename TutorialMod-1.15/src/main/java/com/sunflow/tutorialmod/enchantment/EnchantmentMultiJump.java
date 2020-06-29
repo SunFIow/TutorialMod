@@ -24,7 +24,6 @@ public class EnchantmentMultiJump extends Enchantment {
 	@Override
 	public int getMaxLevel() { return 3; }
 
-//	@OnlyIn(Dist.CLIENT)
 	public static void enchantmentFunction(InputUpdateEvent event) {
 		PlayerEntity player = event.getPlayer();
 		int jumpNum = player.getPersistentData().getInt("jumpNum");

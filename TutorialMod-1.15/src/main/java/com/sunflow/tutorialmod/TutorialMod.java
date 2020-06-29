@@ -13,6 +13,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.versions.mcp.MCPVersion;
 
 @Mod(value = TutorialMod.MODID)
@@ -41,11 +42,12 @@ public class TutorialMod {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TutorialModConfig.CLIENT_CONFIG);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.COMMON_CONFIG);
 
+		proxy.registerEvents();
+
 //		FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
 //		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::setup));
-		proxy.setup();
 
 		Log.warn("Registration#init");
-		Registration.init();
+		Registration.registerAll(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 }
