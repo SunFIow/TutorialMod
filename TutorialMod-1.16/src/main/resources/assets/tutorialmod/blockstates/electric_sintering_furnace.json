@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "powered=false,facing=north": { "model": "tutorialmod:block/electric_sintering_furnace", "y": 0 },
+        "powered=false,facing=east": { "model": "tutorialmod:block/electric_sintering_furnace", "y": 90 },
+        "powered=false,facing=south": { "model": "tutorialmod:block/electric_sintering_furnace", "y": 180 },
+        "powered=false,facing=west": { "model": "tutorialmod:block/electric_sintering_furnace", "y": 270 },
+        "powered=false,facing=up": { "model": "tutorialmod:block/electric_sintering_furnace", "x": -90 },
+        "powered=false,facing=down": { "model": "tutorialmod:block/electric_sintering_furnace", "x": 90 },
+        
+        "powered=true,facing=north": { "model": "tutorialmod:block/electric_sintering_furnace_powered", "y": 0 },
+        "powered=true,facing=east": { "model": "tutorialmod:block/electric_sintering_furnace_powered", "y": 90 },
+        "powered=true,facing=south": { "model": "tutorialmod:block/electric_sintering_furnace_powered", "y": 180 },
+        "powered=true,facing=west": { "model": "tutorialmod:block/electric_sintering_furnace_powered", "y": 270 },
+        "powered=true,facing=up": { "model": "tutorialmod:block/electric_sintering_furnace_powered", "x": -90 },
+        "powered=true,facing=down": { "model": "tutorialmod:block/electric_sintering_furnace_powered", "x": 90 }
+    }
+}

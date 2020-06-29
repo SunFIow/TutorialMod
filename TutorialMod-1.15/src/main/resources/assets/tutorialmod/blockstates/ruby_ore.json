@@ -1,5 +1,21 @@
 {
-    "variants": {
-        "": { "model": "tutorialmod:block/ruby_ore" }
-    }
+  "variants": {
+    "": [
+      {
+        "model": "tutorialmod:block/ruby_ore"
+      },
+      {
+        "model": "tutorialmod:block/ruby_ore",
+        "y": 90
+      },
+      {
+        "model": "tutorialmod:block/ruby_ore",
+        "y": 180
+      },
+      {
+        "model": "tutorialmod:block/ruby_ore",
+        "y": 270
+      }
+    ]
+  }
 }

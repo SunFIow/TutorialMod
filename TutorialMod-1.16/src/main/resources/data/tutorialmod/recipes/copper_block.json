@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tutorialmod",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "tutorialmod:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "tutorialmod:copper_block"
+  }
+}
