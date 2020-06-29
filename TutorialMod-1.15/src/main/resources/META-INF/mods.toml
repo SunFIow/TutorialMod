@@ -1,11 +1,11 @@
 modLoader="javafml" #mandatory
-loaderVersion="[31,)" #mandatory 
+loaderVersion="[30,)" #mandatory 
 # issueTrackerURL="http://my.issue.tracker/" #option
 logoFile="logo.png" #optional
 
 [[mods]] #mandatory
 	modId="tutorialmod" #mandatory
-	version="${file.jarVersion}" #mandatory
+	version="1.2.0" #mandatory
 	displayName="Tutorial Mod" #mandatory
 	# displayURL="http://example.com/" #optional
 	# updateJSONURL="http://myurl.me/" #optional
@@ -21,12 +21,12 @@ logoFile="logo.png" #optional
 [[dependencies.tutorialmod]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[31,)" #mandatory
+    versionRange="[30,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.tutorialmod]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2]"
+    versionRange="[1.15.1,)"
     ordering="NONE"
     side="BOTH"

@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "tutorialmod:block/aluminium_log_top",
-        "side": "tutorialmod:block/aluminium_log"
-    }
-}

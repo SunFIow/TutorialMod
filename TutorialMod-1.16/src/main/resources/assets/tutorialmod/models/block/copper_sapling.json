@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "tutorialmod:block/copper_sapling"
-    }
-}

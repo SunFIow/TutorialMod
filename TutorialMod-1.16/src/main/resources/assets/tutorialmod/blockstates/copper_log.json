@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "axis=y":    { "model": "tutorialmod:block/copper_log" },
-        "axis=z":     { "model": "tutorialmod:block/copper_log", "x": 90 },
-        "axis=x":     { "model": "tutorialmod:block/copper_log", "x": 90, "y": 90 }
-    }
-}
