@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "tutorialmod:block/copper_log_top",
+        "side": "tutorialmod:block/copper_log"
+    }
+}
