@@ -1,8 +1,8 @@
 package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.data.MyWorldData;
 import com.sunflow.tutorialmod.util.Log;
-import com.sunflow.tutorialmod.util.MyWorldData;
 
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;

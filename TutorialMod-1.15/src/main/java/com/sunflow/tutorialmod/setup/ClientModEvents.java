@@ -17,7 +17,6 @@ import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
 import com.sunflow.tutorialmod.rendering.ModISTER;
 import com.sunflow.tutorialmod.util.Log;
-import com.sunflow.tutorialmod.util.enums.KeyBindings;
 
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.Atlases;

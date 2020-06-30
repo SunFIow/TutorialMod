@@ -1,9 +1,9 @@
-package com.sunflow.tutorialmod.data;
+package com.sunflow.tutorialmod.data.generator;
 
-import com.sunflow.tutorialmod.data.provider.ModBlockTagsProvider;
-import com.sunflow.tutorialmod.data.provider.ModItemTagsProvider;
-import com.sunflow.tutorialmod.data.provider.ModLootTabelProvider;
-import com.sunflow.tutorialmod.data.provider.ModRecipesProvider;
+import com.sunflow.tutorialmod.data.generator.provider.ModBlockTagsProvider;
+import com.sunflow.tutorialmod.data.generator.provider.ModItemTagsProvider;
+import com.sunflow.tutorialmod.data.generator.provider.ModLootTabelProvider;
+import com.sunflow.tutorialmod.data.generator.provider.ModRecipesProvider;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;

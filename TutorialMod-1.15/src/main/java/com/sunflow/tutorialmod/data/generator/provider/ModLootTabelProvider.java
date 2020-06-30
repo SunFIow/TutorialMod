@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.data.provider;
+package com.sunflow.tutorialmod.data.generator.provider;
 
 import com.sunflow.tutorialmod.block.base.TileBlockBase;
 import com.sunflow.tutorialmod.setup.Registration;

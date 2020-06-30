@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.data.provider;
+package com.sunflow.tutorialmod.data.generator.provider;
 
 import java.io.IOException;
 import java.nio.file.Path;

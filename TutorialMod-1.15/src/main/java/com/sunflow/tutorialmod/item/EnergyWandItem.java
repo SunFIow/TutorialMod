@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.ModGroups;
-import com.sunflow.tutorialmod.util.CustomEnergyStorage;
-import com.sunflow.tutorialmod.util.EnergyUtils;
-import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
 import com.sunflow.tutorialmod.util.Log;
+import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
+import com.sunflow.tutorialmod.util.energy.EnergyUtils;
+import com.sunflow.tutorialmod.util.energy.EnergyUtils.EnergyUnit;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.client.util.ITooltipFlag;

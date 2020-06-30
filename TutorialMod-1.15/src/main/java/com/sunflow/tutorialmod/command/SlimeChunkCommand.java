@@ -6,6 +6,7 @@ import java.util.Random;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.sunflow.tutorialmod.util.interfaces.ICommand;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -16,11 +17,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.dimension.DimensionType;
 
-public class SlimeChunkCommand extends CommandBase { // implements ICommand {
-
-//	public SlimeChunkCommand() {
-//		ModCommands.COMMANDS.add(this);
-//	}
+public class SlimeChunkCommand implements ICommand {
 
 	@Override
 	public ArgumentBuilder<CommandSource, ?> getBuilder() {

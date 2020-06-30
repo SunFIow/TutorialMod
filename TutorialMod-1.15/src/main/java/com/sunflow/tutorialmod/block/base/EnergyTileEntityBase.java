@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.base;
 
 import javax.annotation.Nullable;
 
-import com.sunflow.tutorialmod.util.CustomEnergyStorage;
+import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 import com.sunflow.tutorialmod.util.interfaces.IHasField;
 

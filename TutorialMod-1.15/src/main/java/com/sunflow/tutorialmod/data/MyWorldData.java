@@ -1,6 +1,7 @@
-package com.sunflow.tutorialmod.util;
+package com.sunflow.tutorialmod.data;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.storage.WorldSavedData;

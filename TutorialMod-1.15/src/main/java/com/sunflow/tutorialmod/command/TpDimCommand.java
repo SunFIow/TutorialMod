@@ -6,6 +6,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sunflow.tutorialmod.command.util.TeleportationTools;
 import com.sunflow.tutorialmod.setup.Registration;
+import com.sunflow.tutorialmod.util.interfaces.ICommand;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -13,7 +14,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.dimension.DimensionType;
 
-public class TpDimCommand extends CommandBase implements Command<CommandSource> {
+public class TpDimCommand implements ICommand, Command<CommandSource> {
 
 	@Override
 	public ArgumentBuilder<CommandSource, ?> getBuilder() {

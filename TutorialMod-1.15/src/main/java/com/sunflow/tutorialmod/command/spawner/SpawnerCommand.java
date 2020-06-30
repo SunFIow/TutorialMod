@@ -4,17 +4,17 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.sunflow.tutorialmod.command.CommandBase;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.OpenGuiPacket;
 import com.sunflow.tutorialmod.util.Log;
+import com.sunflow.tutorialmod.util.interfaces.ICommand;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.network.NetworkDirection;
 
-public class SpawnerCommand extends CommandBase implements Command<CommandSource> {
+public class SpawnerCommand implements ICommand, Command<CommandSource> {
 
 //	private static final SpawnerCommand CMD = new SpawnerCommand();
 

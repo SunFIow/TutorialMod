@@ -3,7 +3,7 @@ package com.sunflow.tutorialmod.block.machine.energy_storage;
 import com.sunflow.tutorialmod.block.base.EnergyTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
-import com.sunflow.tutorialmod.util.CustomEnergyStorage;
+import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

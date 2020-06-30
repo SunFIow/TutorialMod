@@ -3,9 +3,9 @@ package com.sunflow.tutorialmod.block.machine.charger;
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
-import com.sunflow.tutorialmod.util.CustomEnergyStorage;
-import com.sunflow.tutorialmod.util.EnergyUtils;
-import com.sunflow.tutorialmod.util.EnergyUtils.EnergyUnit;
+import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
+import com.sunflow.tutorialmod.util.energy.EnergyUtils;
+import com.sunflow.tutorialmod.util.energy.EnergyUtils.EnergyUnit;
 import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.block.BlockState;

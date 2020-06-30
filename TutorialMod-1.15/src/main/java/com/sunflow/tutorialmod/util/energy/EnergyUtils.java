@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.util;
+package com.sunflow.tutorialmod.util.energy;
 
 import javax.annotation.Nullable;
 

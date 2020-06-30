@@ -1,13 +1,13 @@
 package com.sunflow.tutorialmod;
 
 import com.sunflow.tutorialmod.config.TutorialModConfig;
+import com.sunflow.tutorialmod.data.MyWorldData;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
 import com.sunflow.tutorialmod.util.Log;
-import com.sunflow.tutorialmod.util.MyWorldData;
 
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;

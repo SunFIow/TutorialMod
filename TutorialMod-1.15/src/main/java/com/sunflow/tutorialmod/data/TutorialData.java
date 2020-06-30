@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.world.data;
+package com.sunflow.tutorialmod.data;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.Log;

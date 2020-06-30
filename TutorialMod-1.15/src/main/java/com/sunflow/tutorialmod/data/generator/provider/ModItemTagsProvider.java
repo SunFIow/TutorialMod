@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.data.provider;
+package com.sunflow.tutorialmod.data.generator.provider;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.ModTags;

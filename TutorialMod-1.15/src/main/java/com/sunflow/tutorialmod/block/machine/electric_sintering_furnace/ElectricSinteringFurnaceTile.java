@@ -4,7 +4,7 @@ import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
-import com.sunflow.tutorialmod.util.CustomEnergyStorage;
+import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

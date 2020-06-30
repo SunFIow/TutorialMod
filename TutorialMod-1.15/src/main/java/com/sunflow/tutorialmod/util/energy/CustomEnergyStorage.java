@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.util;
+package com.sunflow.tutorialmod.util.energy;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;

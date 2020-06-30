@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.util.enums;
+package com.sunflow.tutorialmod.setup;
 
 import java.util.ArrayList;
 
