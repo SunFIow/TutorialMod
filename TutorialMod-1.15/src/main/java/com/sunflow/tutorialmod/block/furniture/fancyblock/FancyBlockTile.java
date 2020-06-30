@@ -36,6 +36,10 @@ public class FancyBlockTile extends TileEntity {
 				Constants.BlockFlags.NOTIFY_NEIGHBORS);
 	}
 
+	public BlockState getMimic() {
+		return mimic;
+	}
+
 	public void setOffset(Vec3d offset) {
 		this.offset = new Vec3d(offset.x, offset.y, offset.z);
 //		this.offset = offset;

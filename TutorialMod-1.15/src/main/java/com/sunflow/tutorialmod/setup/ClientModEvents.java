@@ -4,6 +4,7 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestScreen;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestTileRenderer;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockColor;
 import com.sunflow.tutorialmod.block.machine.charger.ChargerScreen;
 import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.ElectricSinteringFurnaceScreen;
 import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageScreen;
@@ -41,13 +42,15 @@ public class ClientModEvents {
 
 		registerScreens();
 
-		setRenderLayers();
-
 		registerEntityRenderingHandlers();
 
 		registerModelLoaders();
 
 		bindTileEntityRenderers();
+
+		setRenderLayers();
+
+		registerBlockColors();
 
 		Log.debug("Registering the keybindings for u senpai.");
 		KeyBindings.register();
@@ -71,15 +74,6 @@ public class ClientModEvents {
 		ScreenManager.registerFactory(Registration.COPPER_CHEST_CONTAINER.get(), CopperChestScreen::new);
 	}
 
-	private static void setRenderLayers() {
-		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(Registration.SANTA_HAT.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(Registration.COPPER_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.getCutout());
-	}
-
 	private static void registerEntityRenderingHandlers() {
 		RenderingRegistry.registerEntityRenderingHandler(Registration.WEIRDMOB.get(), WeirdMobRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(Registration.CENTAUR.get(), CentaurRenderer::new);
@@ -95,6 +89,19 @@ public class ClientModEvents {
 	private static void bindTileEntityRenderers() {
 		ClientRegistry.bindTileEntityRenderer(Registration.COPPER_CHEST_TILE.get(), CopperChestTileRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(Registration.MAGICBLOCK_TILE.get(), MagicBockTileRenderer::new);
+	}
+
+	private static void setRenderLayers() {
+		RenderTypeLookup.setRenderLayer(Registration.COPPER_LEAVES.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_LEAVES.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(Registration.SANTA_HAT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registration.COPPER_SAPLING.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.getCutout());
+	}
+
+	private static void registerBlockColors() {
+		TutorialMod.proxy.getMinecraft().getBlockColors().register(new FancyBlockColor(), Registration.FANCYBLOCK.get());
 	}
 
 	public static void onItemColor(final ColorHandlerEvent.Item event) {

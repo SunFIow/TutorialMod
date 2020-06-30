@@ -1,10 +1,16 @@
 package com.sunflow.tutorialmod.block.furniture.fancyblock;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -18,7 +24,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -29,6 +38,40 @@ public class FancyBlock extends BakedBlockBase {
 	public FancyBlock() {
 		super("fancyblock", Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f), GRIDLESS_AABB);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable IBlockReader reader, List<ITextComponent> list, ITooltipFlag flags) {
+		list.add(new TranslationTextComponent("message.fancyblock"));
+	}
+
+	@Override
+	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile instanceof FancyBlockTile) {
+			BlockState mimic = ((FancyBlockTile) tile).getMimic();
+			if (mimic != null) {
+				return mimic.getLightValue(world, pos);
+			}
+		}
+		return super.getLightValue(state, world, pos);
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile instanceof FancyBlockTile) {
+			BlockState mimic = ((FancyBlockTile) tile).getMimic();
+			if (mimic != null) {
+				return mimic.getShape(world, pos, context);
+			}
+
+			Vec3d offset = ((FancyBlockTile) tile).getOffset();
+			if (offset != null) {
+				return shape.withOffset(offset.x, offset.y, offset.z);
+			}
+		}
+		return shape.withOffset(offset.x, offset.y, offset.z);
 	}
 
 	@Override
@@ -43,6 +86,7 @@ public class FancyBlock extends BakedBlockBase {
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		Log.info("gm");
 		ItemStack stack = player.getHeldItem(hand);
 		if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
 			if (!world.isRemote) {
