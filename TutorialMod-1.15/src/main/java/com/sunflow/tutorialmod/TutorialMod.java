@@ -40,7 +40,8 @@ public class TutorialMod {
 		Log.info("Or...");
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TutorialModConfig.CLIENT_CONFIG);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.COMMON_CONFIG);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, TutorialModConfig.SERVER_CONFIG);
+//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.COMMON_CONFIG);
 
 		proxy.registerEvents();
 

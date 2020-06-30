@@ -1,9 +1,5 @@
 package com.sunflow.tutorialmod.config;
 
-import java.nio.file.Path;
-
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.io.WritingMode;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.Log;
 
@@ -22,10 +18,13 @@ public class TutorialModConfig {
 	public static final String SUBCATEGORY_CHARGER = "charger";
 	public static final String SUBCATEGORY_ENERGY_ITEM = "energy_item";
 
-	public static ForgeConfigSpec COMMON_CONFIG;
+	// CLIENT_CONFIG
 	public static ForgeConfigSpec CLIENT_CONFIG;
 
 	public static ForgeConfigSpec.BooleanValue CONFIG_SHOW_OVERLAY;
+
+	// SERVER_CONFIG
+	public static ForgeConfigSpec SERVER_CONFIG;
 
 	public static ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_GENERATE;
 	public static ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_MAXPOWER;
@@ -46,26 +45,13 @@ public class TutorialModConfig {
 	public static ForgeConfigSpec.IntValue ENERGY_ITEM_MAXPOWER;
 	public static ForgeConfigSpec.IntValue ENERGY_ITEM_CONSUME;
 
+	// COMMON_CONFIG
+//	public static ForgeConfigSpec COMMON_CONFIG;
+
 	static {
-		commonConfig();
 		clientConfig();
-	}
-
-	private static void commonConfig() {
-		final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
-
-		COMMON_BUILDER.comment("General Settings").push(CATEGORY_GENERAL);
-		COMMON_BUILDER.pop();
-
-		COMMON_BUILDER.comment("Machine Settings").push(CATEGORY_MACHINES);
-		setupGlowstoneGeneratorConfig(COMMON_BUILDER);
-		setupSinteringFurnaceConfig(COMMON_BUILDER);
-		setupElectricSinteringFurnaceConfig(COMMON_BUILDER);
-		setupChargerConfig(COMMON_BUILDER);
-		setupEnergyItemConfig(COMMON_BUILDER);
-		COMMON_BUILDER.pop();
-
-		COMMON_CONFIG = COMMON_BUILDER.build();
+		serverConfig();
+//		commonConfig();
 	}
 
 	private static void clientConfig() {
@@ -79,68 +65,102 @@ public class TutorialModConfig {
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
 	}
 
-	private static void setupGlowstoneGeneratorConfig(Builder COMMON_BUILDER) {
-		COMMON_BUILDER.comment("Glowstone Generator Settings").push(SUBCATEGORY_GLOWSTONE_GENERATOR);
-		GLOWSTONE_GENERATOR_GENERATE = COMMON_BUILDER.comment("Power generation per glowstone")
+	private static void serverConfig() {
+		final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
+
+		SERVER_BUILDER.comment("General Settings").push(CATEGORY_GENERAL);
+		SERVER_BUILDER.pop();
+
+		SERVER_BUILDER.comment("Machine Settings").push(CATEGORY_MACHINES);
+		setupGlowstoneGeneratorConfig(SERVER_BUILDER);
+		setupSinteringFurnaceConfig(SERVER_BUILDER);
+		setupElectricSinteringFurnaceConfig(SERVER_BUILDER);
+		setupChargerConfig(SERVER_BUILDER);
+		setupEnergyItemConfig(SERVER_BUILDER);
+		SERVER_BUILDER.pop();
+
+		SERVER_CONFIG = SERVER_BUILDER.build();
+	}
+
+//	private static void commonConfig() {
+//		final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+//
+//		COMMON_BUILDER.comment("General Settings").push(CATEGORY_GENERAL);
+//		COMMON_BUILDER.pop();
+//
+//		COMMON_BUILDER.comment("Machine Settings").push(CATEGORY_MACHINES);
+//		setupGlowstoneGeneratorConfig(COMMON_BUILDER);
+//		setupSinteringFurnaceConfig(COMMON_BUILDER);
+//		setupElectricSinteringFurnaceConfig(COMMON_BUILDER);
+//		setupChargerConfig(COMMON_BUILDER);
+//		setupEnergyItemConfig(COMMON_BUILDER);
+//		COMMON_BUILDER.pop();
+//
+//		COMMON_CONFIG = COMMON_BUILDER.build();
+//	}
+
+	private static void setupGlowstoneGeneratorConfig(Builder builder) {
+		builder.comment("Glowstone Generator Settings").push(SUBCATEGORY_GLOWSTONE_GENERATOR);
+		GLOWSTONE_GENERATOR_GENERATE = builder.comment("Power generation per glowstone")
 				.defineInRange("generate", 256, 0, Integer.MAX_VALUE);
-		GLOWSTONE_GENERATOR_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
+		GLOWSTONE_GENERATOR_MAXPOWER = builder.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
-		GLOWSTONE_GENERATOR_TRANSFER = COMMON_BUILDER.comment("Maximum power to transfer per tick")
+		GLOWSTONE_GENERATOR_TRANSFER = builder.comment("Maximum power to transfer per tick")
 				.defineInRange("transfer", 100, 0, Integer.MAX_VALUE);
-		GLOWSTONE_GENERATOR_TICKS = COMMON_BUILDER.comment("Ticks per glowstone")
+		GLOWSTONE_GENERATOR_TICKS = builder.comment("Ticks per glowstone")
 				.defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
-		COMMON_BUILDER.pop();
+		builder.pop();
 	}
 
-	private static void setupSinteringFurnaceConfig(Builder COMMON_BUILDER) {
-		COMMON_BUILDER.comment("Sintering Furnace Settings").push(SUBCATEGORY_SINTERING_FURNACE);
-		SINTERING_FURNACE_TICKS = COMMON_BUILDER.comment("Ticks per item")
+	private static void setupSinteringFurnaceConfig(Builder builder) {
+		builder.comment("Sintering Furnace Settings").push(SUBCATEGORY_SINTERING_FURNACE);
+		SINTERING_FURNACE_TICKS = builder.comment("Ticks per item")
 				.defineInRange("ticks", 80, 0, Integer.MAX_VALUE);
-		COMMON_BUILDER.pop();
+		builder.pop();
 	}
 
-	private static void setupElectricSinteringFurnaceConfig(Builder COMMON_BUILDER) {
-		COMMON_BUILDER.comment("Electric Sintering Furnace Settings").push(SUBCATEGORY_ELECTRIC_SINTERING_FURNACE);
-		ELECTRIC_SINTERING_FURNACE_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
+	private static void setupElectricSinteringFurnaceConfig(Builder builder) {
+		builder.comment("Electric Sintering Furnace Settings").push(SUBCATEGORY_ELECTRIC_SINTERING_FURNACE);
+		ELECTRIC_SINTERING_FURNACE_MAXPOWER = builder.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
-		ELECTRIC_SINTERING_FURNACE_RECEIVE = COMMON_BUILDER.comment("Maximum power to receive per tick")
+		ELECTRIC_SINTERING_FURNACE_RECEIVE = builder.comment("Maximum power to receive per tick")
 				.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
-		ELECTRIC_SINTERING_FURNACE_TICKS = COMMON_BUILDER.comment("Ticks per item")
+		ELECTRIC_SINTERING_FURNACE_TICKS = builder.comment("Ticks per item")
 				.defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
-		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = COMMON_BUILDER.comment("Energy consumption per tick")
+		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = builder.comment("Energy consumption per tick")
 				.defineInRange("consumption", 200, 0, Integer.MAX_VALUE);
-		COMMON_BUILDER.pop();
+		builder.pop();
 	}
 
-	private static void setupChargerConfig(Builder COMMON_BUILDER) {
-		COMMON_BUILDER.comment("Charger Settings").push(SUBCATEGORY_CHARGER);
-		CHARGER_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
+	private static void setupChargerConfig(Builder builder) {
+		builder.comment("Charger Settings").push(SUBCATEGORY_CHARGER);
+		CHARGER_MAXPOWER = builder.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
-		CHARGER_RECEIVE = COMMON_BUILDER.comment("Maximum power to transfer per tick")
+		CHARGER_RECEIVE = builder.comment("Maximum power to transfer per tick")
 				.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
-		CHARGER_CHARGE_RATE = COMMON_BUILDER.comment("Rate at which items get charged per tick")
+		CHARGER_CHARGE_RATE = builder.comment("Rate at which items get charged per tick")
 				.defineInRange("chargeRate", 10, 0, Integer.MAX_VALUE);
-		COMMON_BUILDER.pop();
+		builder.pop();
 	}
 
-	private static void setupEnergyItemConfig(Builder COMMON_BUILDER) {
-		COMMON_BUILDER.comment("Energy Item Settings").push(SUBCATEGORY_ENERGY_ITEM);
-		ENERGY_ITEM_MAXPOWER = COMMON_BUILDER.comment("Maximum power that can be stored")
+	private static void setupEnergyItemConfig(Builder builder) {
+		builder.comment("Energy Item Settings").push(SUBCATEGORY_ENERGY_ITEM);
+		ENERGY_ITEM_MAXPOWER = builder.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 2500, 0, Integer.MAX_VALUE);
-		ENERGY_ITEM_CONSUME = COMMON_BUILDER.comment("Power that is consumed per operation")
+		ENERGY_ITEM_CONSUME = builder.comment("Power that is consumed per operation")
 				.defineInRange("consume", 50, 0, Integer.MAX_VALUE);
-		COMMON_BUILDER.pop();
+		builder.pop();
 	}
 
-	public static void loadConfig(ForgeConfigSpec spec, Path path) {
-		final CommentedFileConfig configData = CommentedFileConfig.builder(path)
-				.sync()
-				.autosave()
-				.writingMode(WritingMode.REPLACE)
-				.build();
-		configData.load();
-		spec.setConfig(configData);
-	}
+//	public static void loadConfig(ForgeConfigSpec spec, Path path) {
+//		final CommentedFileConfig configData = CommentedFileConfig.builder(path)
+//				.sync()
+//				.autosave()
+//				.writingMode(WritingMode.REPLACE)
+//				.build();
+//		configData.load();
+//		spec.setConfig(configData);
+//	}
 
 	@SubscribeEvent
 	public static void onLoad(ModConfig.Loading event) {
