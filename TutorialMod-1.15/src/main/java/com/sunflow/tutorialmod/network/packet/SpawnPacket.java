@@ -12,17 +12,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class SpawnPacket extends BasePacket {
 
-	private final String id;
+	private final ResourceLocation id;
 	private final DimensionType type;
 	private final BlockPos pos;
 
 	public SpawnPacket(PacketBuffer buf) {
-		this.id = buf.readString();
+		this.id = buf.readResourceLocation();
 		this.type = DimensionType.getById(buf.readInt());
 		this.pos = buf.readBlockPos();
 	}
 
-	public SpawnPacket(String id, DimensionType type, BlockPos pos) {
+	public SpawnPacket(ResourceLocation id, DimensionType type, BlockPos pos) {
 		this.id = id;
 		this.type = type;
 		this.pos = pos;
@@ -30,7 +30,7 @@ public class SpawnPacket extends BasePacket {
 
 	@Override
 	public void encode(PacketBuffer buf) {
-		buf.writeString(id);
+		buf.writeResourceLocation(id);
 		buf.writeInt(type.getId());
 		buf.writeBlockPos(pos);
 	}
@@ -38,7 +38,7 @@ public class SpawnPacket extends BasePacket {
 	@Override
 	public boolean action(NetworkEvent.Context ctx) {
 		ServerWorld spawnWorld = ctx.getSender().world.getServer().getWorld(type);
-		EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
+		EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(id);
 		if (entityType == null) throw new IllegalStateException("This cannot happen! Unkown id '" + id + "'!");
 
 		entityType.spawn(spawnWorld, null, null, pos, SpawnReason.EVENT, true, true);

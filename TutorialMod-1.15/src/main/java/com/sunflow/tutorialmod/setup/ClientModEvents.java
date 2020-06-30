@@ -52,7 +52,7 @@ public class ClientModEvents {
 		registerBlockColors();
 
 		Log.debug("Registering the keybindings for u senpai.");
-		KeyBindings.register();
+		ModKeyBindings.register();
 
 		Log.info("m...");
 		Log.info("mm...");

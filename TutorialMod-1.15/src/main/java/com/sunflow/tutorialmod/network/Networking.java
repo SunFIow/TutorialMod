@@ -24,8 +24,8 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class Networking {
 	private static int ID = 0;
 
-	public static final String TUTORIALMOD_NETMARKER = TutorialMod.MODID.toUpperCase();;
-	public static final int TUTORIALMOD_NETVERSION = 1;
+	public static final String TUTORIALMOD_NETMARKER = TutorialMod.MODID.toUpperCase();
+	public static final String TUTORIALMOD_NETVERSION = "1.0";
 	public static final String NETVERSION = TUTORIALMOD_NETMARKER + ":" + TUTORIALMOD_NETVERSION;
 
 	public static final ResourceLocation NAME = new ResourceLocation(TutorialMod.MODID, "tutorialmod");
@@ -104,6 +104,11 @@ public class Networking {
 	// Sending to one player
 	public static <MSG> void sendToPlayer(Supplier<ServerPlayerEntity> player, MSG msg) {
 		TUTORIALMOD_CHANNEL.send(PacketDistributor.PLAYER.with(player), msg);
+	}
+
+	// Sending to one player
+	public static <MSG> void sendToClient(ServerPlayerEntity player, MSG msg) {
+		TUTORIALMOD_CHANNEL.sendTo(msg, player.connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
 	}
 
 	// Send to all players tracking this chunk
