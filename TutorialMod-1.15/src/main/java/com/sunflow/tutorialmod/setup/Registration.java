@@ -2,6 +2,9 @@ package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.TeleporterBlock;
+import com.sunflow.tutorialmod.block._testing.buffer.BufferBlock;
+import com.sunflow.tutorialmod.block._testing.buffer.BufferTileEntity;
+import com.sunflow.tutorialmod.block._testing.multiblock.MultiBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestTile;
@@ -118,9 +121,15 @@ public class Registration {
 	}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static final RegistryObject<BufferBlock> BUFFER_BLOCK = BLOCKS.register("buffer", BufferBlock::new);
+	public static final RegistryObject<BlockItem> BUFFER_BLOCK_ITEM = ITEMS.register("buffer", () -> new BlockItem(BUFFER_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<BufferTileEntity>> BUFFER_BLOCK_TILE = TILEENTITIES.register("buffer", () -> TileEntityType.Builder.create(BufferTileEntity::new, BUFFER_BLOCK.get()).build(null));
+
+	public static final RegistryObject<MultiBlock> MULTIBLOCK = BLOCKS.register("multiblock", MultiBlock::new);
+	public static final RegistryObject<BlockItem> MULTIBLOCK_ITEM = ITEMS.register("multiblock", () -> new BlockItem(MULTIBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 	public static final RegistryObject<GlowstoneGeneratorBlock> GLOWSTONE_GENERATOR_BLOCK = BLOCKS.register("glowstone_generator", GlowstoneGeneratorBlock::new);
-	public static final RegistryObject<Item> GLOWSTONE_GENERATOR_ITEM = ITEMS.register("glowstone_generator", () -> new BlockItem(GLOWSTONE_GENERATOR_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<BlockItem> GLOWSTONE_GENERATOR_ITEM = ITEMS.register("glowstone_generator", () -> new BlockItem(GLOWSTONE_GENERATOR_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<TileEntityType<GlowstoneGeneratorTile>> GLOWSTONE_GENERATOR_TILE = TILEENTITIES.register("glowstone_generator", () -> TileEntityType.Builder.create(GlowstoneGeneratorTile::new, GLOWSTONE_GENERATOR_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<GlowstoneGeneratorContainer>> GLOWSTONE_GENERATOR_CONTAINER = CONTAINERS.register("glowstone_generator", () -> IForgeContainerType.create(GlowstoneGeneratorContainer::new));
 
