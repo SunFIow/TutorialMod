@@ -36,6 +36,7 @@ import com.sunflow.tutorialmod.block.tree.CustomLeavesBlock;
 import com.sunflow.tutorialmod.block.tree.CustomSaplingBlock;
 import com.sunflow.tutorialmod.dimension.ModDimensionBase;
 import com.sunflow.tutorialmod.dimension.badlands.BadlandsDimension;
+import com.sunflow.tutorialmod.effect.PeeEffect;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.entity.centaur.CentaurEntity;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobEntity;
@@ -77,6 +78,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
@@ -107,6 +109,8 @@ public class Registration {
 	public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, TutorialMod.MODID);
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, TutorialMod.MODID);
 
+	public static final DeferredRegister<Effect> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, TutorialMod.MODID);
+
 	public static void registerAll(IEventBus modEventBus) {
 		BLOCKS.register(modEventBus);
 		ITEMS.register(modEventBus);
@@ -118,7 +122,13 @@ public class Registration {
 		FLUIDS.register(modEventBus);
 		CONTAINERS.register(modEventBus);
 		SOUNDS.register(modEventBus);
+
+		POTIONS.register(modEventBus);
 	}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<Effect> PEE_POTIONS = POTIONS.register("pee", PeeEffect::new);
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	public static final RegistryObject<BufferBlock> BUFFER_BLOCK = BLOCKS.register("buffer", BufferBlock::new);
@@ -127,6 +137,7 @@ public class Registration {
 
 	public static final RegistryObject<MultiBlock> MULTIBLOCK = BLOCKS.register("multiblock", MultiBlock::new);
 	public static final RegistryObject<BlockItem> MULTIBLOCK_ITEM = ITEMS.register("multiblock", () -> new BlockItem(MULTIBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static final RegistryObject<GlowstoneGeneratorBlock> GLOWSTONE_GENERATOR_BLOCK = BLOCKS.register("glowstone_generator", GlowstoneGeneratorBlock::new);
 	public static final RegistryObject<BlockItem> GLOWSTONE_GENERATOR_ITEM = ITEMS.register("glowstone_generator", () -> new BlockItem(GLOWSTONE_GENERATOR_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));

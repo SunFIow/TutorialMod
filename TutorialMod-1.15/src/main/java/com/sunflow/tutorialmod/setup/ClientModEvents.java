@@ -16,6 +16,7 @@ import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
 import com.sunflow.tutorialmod.rendering.ModISTER;
+import com.sunflow.tutorialmod.rendering.RenderPlayerFire;
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.client.gui.ScreenManager;
@@ -118,6 +119,8 @@ public class ClientModEvents {
 		ResourceLocation atlas = event.getMap().getTextureLocation();
 		if (atlas.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
 			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
+			event.addSprite(RenderPlayerFire.LOCATION_FIRE_0);
+			event.addSprite(RenderPlayerFire.LOCATION_FIRE_1);
 		} else if (atlas.equals(Atlases.CHEST_ATLAS)) {
 			event.addSprite(CopperChestTileRenderer.COPPER_CHEST_TEXTURE);
 		}
