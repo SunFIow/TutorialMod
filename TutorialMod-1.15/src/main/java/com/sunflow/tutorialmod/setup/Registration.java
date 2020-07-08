@@ -1,10 +1,10 @@
 package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod._testing.block.buffer.BufferBlock;
+import com.sunflow.tutorialmod._testing.block.buffer.BufferTileEntity;
+import com.sunflow.tutorialmod._testing.block.multiblock.MultiBlock;
 import com.sunflow.tutorialmod.block.TeleporterBlock;
-import com.sunflow.tutorialmod.block._testing.buffer.BufferBlock;
-import com.sunflow.tutorialmod.block._testing.buffer.BufferTileEntity;
-import com.sunflow.tutorialmod.block._testing.multiblock.MultiBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestTile;

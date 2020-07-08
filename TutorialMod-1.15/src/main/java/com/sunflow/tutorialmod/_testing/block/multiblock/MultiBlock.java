@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.block._testing.multiblock;
+package com.sunflow.tutorialmod._testing.block.multiblock;
 
 import javax.annotation.Nullable;
 

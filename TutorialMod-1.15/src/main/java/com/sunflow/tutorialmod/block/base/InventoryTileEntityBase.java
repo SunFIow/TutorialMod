@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.block.base;
 import javax.annotation.Nullable;
 
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
-import com.sunflow.tutorialmod.util.interfaces.IHasField;
 
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
@@ -17,7 +16,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class InventoryTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable, IHasField {
+public abstract class InventoryTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable {
 
 	protected ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -32,14 +31,12 @@ public abstract class InventoryTileEntityBase extends TileEntity implements INam
 
 	@Override
 	public void read(CompoundNBT tag) {
-//		handler.ifPresent(h -> h.deserializeNBT(tag.getCompound("inv")));
 		itemHandler.deserializeNBT(tag.getCompound("inv"));
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-//		handler.ifPresent(h -> tag.put("inv", h.serializeNBT()));
 		tag.put("inv", itemHandler.serializeNBT());
 
 		return super.write(tag);

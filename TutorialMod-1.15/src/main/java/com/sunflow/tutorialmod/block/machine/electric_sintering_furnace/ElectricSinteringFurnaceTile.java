@@ -2,6 +2,9 @@ package com.sunflow.tutorialmod.block.machine.electric_sintering_furnace;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
+import com.sunflow.tutorialmod.capability.CapabilityProcessor;
+import com.sunflow.tutorialmod.capability.IProcessor;
+import com.sunflow.tutorialmod.capability.Processor;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
@@ -15,9 +18,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
@@ -30,6 +36,11 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 
 	private static final int ENERGY_USE = TutorialModConfig.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get();
+
+	protected Processor cooker = createProcessor();
+	private LazyOptional<IProcessor> processor = LazyOptional.of(() -> cooker);
+
+	protected Processor createProcessor() { return new Processor(0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()); }
 
 	@Override
 	protected ItemStackHandler createHandler() {
@@ -61,8 +72,6 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 		};
 	}
 
-	private float cookTime;
-
 	public ElectricSinteringFurnaceTile() {
 		super(Registration.ELECTRIC_SINTERING_FURNACE_TILE.get());
 	}
@@ -74,18 +83,19 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 		boolean usedEnergy = false;
 		if (canBurn() && canSmelt()) {
-			cookTime++;
+			cooker.addTime(1);
 			energyStorage.extractEnergy(ENERGY_USE, false);
 			usedEnergy = true;
 
-			if (cookTime >= TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()) {
-				cookTime = 0;
+//			TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()
+			if (cooker.getTime() >= cooker.getTotalTime()) {
+				cooker.setTime(0);
 				smeltItem();
 			}
 			markDirty();
 		}
-		if (!canBurn() || !canSmelt() && cookTime > 0) {
-			cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get());
+		if (!canBurn() || !canSmelt() && cooker.getTime() > 0) {
+			cooker.setTime(MathHelper.clamp(cooker.getTime() - 2, 0, cooker.getTotalTime()));
 		}
 
 //		if (!world.isRemote) {
@@ -141,34 +151,23 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public int getField(int id) {
-		switch (id) {
-			case COOKTIME_ID:
-				return (int) cookTime;
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+		if (cap == CapabilityProcessor.COOKER_CAPABILITY) {
+			return processor.cast();
 		}
-		return super.getField(id);
-	}
-
-	@Override
-	public void setField(int id, int value) {
-		switch (id) {
-			case COOKTIME_ID:
-				cookTime = value;
-				break;
-		}
-		super.setField(id, value);
+		return super.getCapability(cap, side);
 	}
 
 	@Override
 	public void read(CompoundNBT tag) {
-		cookTime = tag.getFloat("cooktime");
+		cooker.deserializeNBT(tag.getCompound("cooker"));
 
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		tag.putFloat("cooktime", cookTime);
+		tag.put("cooker", cooker.serializeNBT());
 
 		return super.write(tag);
 	}

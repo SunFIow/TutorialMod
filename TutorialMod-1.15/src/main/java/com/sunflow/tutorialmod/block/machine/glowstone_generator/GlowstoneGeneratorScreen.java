@@ -2,7 +2,6 @@ package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ScreenBase;
-import com.sunflow.tutorialmod.config.TutorialModConfig;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -24,13 +23,16 @@ public class GlowstoneGeneratorScreen extends ScreenBase<GlowstoneGeneratorConta
 		String text = current + " / " + max;
 		int w = font.getStringWidth(text);
 		font.drawString(text, 148 - w, 72, 0x404040);
+
+//		Log.info("CookTime:{}, TotalCookTime:{}, Energy:{}, EnergyMax:{}", container.getCookTime(), container.getCookTimeTotal(), container.getEnergy(), container.getEnergyMax());
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.GLOWSTONE_GENERATOR_TICKS.get(), 24);
+//		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.GLOWSTONE_GENERATOR_TICKS.get(), 24);
+		int l = getProgressScaled(container.getCookTime(), container.getCookTimeTotal(), 24);
 		this.blit(guiLeft + 113, guiTop + 34, 176, 14, l, 17);
 
 		int k = getProgressScaled(container.getEnergy(), container.getEnergyMax(), 76);

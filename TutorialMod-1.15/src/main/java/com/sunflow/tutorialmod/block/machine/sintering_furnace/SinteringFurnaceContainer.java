@@ -33,18 +33,9 @@ public class SinteringFurnaceContainer extends ContainerBase {
 
 		layoutPlayerInventorySlots(new InvWrapper(inv), 8, 84);
 
-		makeIntArray(3);
-	}
-
-	public int getCookTime() {
-		return field.getField(SinteringFurnaceTile.COOKTIME_ID);
-	}
-
-	public int getBurnTime() {
-		return ((SinteringFurnaceTile) tileentity).getField(SinteringFurnaceTile.BURNTIME_ID);
-	}
-
-	public int getBurnTimeTotal() {
-		return ((SinteringFurnaceTile) tileentity).getField(SinteringFurnaceTile.BURNTIME_TOTAL_ID);
+		trackCookTime();
+		trackCookTimeTotal();
+		trackBurnTime();
+		trackBurnTimeTotal();
 	}
 }

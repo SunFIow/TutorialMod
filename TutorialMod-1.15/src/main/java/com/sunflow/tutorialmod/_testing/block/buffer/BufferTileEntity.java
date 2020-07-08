@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.block._testing.buffer;
+package com.sunflow.tutorialmod._testing.block.buffer;
 
 import java.util.List;
 

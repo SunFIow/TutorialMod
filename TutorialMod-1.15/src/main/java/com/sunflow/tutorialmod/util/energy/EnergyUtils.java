@@ -32,12 +32,20 @@ public class EnergyUtils {
 		return modTag.contains(unit.name);
 	}
 
+	public static int getEnergyStored(ItemStack stack, EnergyUnit unit) {
+		return getEnergyUnit(stack, unit).getInt("Energy");
+	}
+
 	public static int getCapacity(ItemStack stack, EnergyUnit unit) {
 		return getEnergyUnit(stack, unit).getInt("Capacity");
 	}
 
-	public static int getEnergyStored(ItemStack stack, EnergyUnit unit) {
-		return getEnergyUnit(stack, unit).getInt("Energy");
+	public static void setEnergyStored(ItemStack stack, EnergyUnit unit, int value) {
+		getEnergyUnit(stack, unit).putInt("Energy", value);
+	}
+
+	public static void setCapacity(ItemStack stack, EnergyUnit unit, int value) {
+		getEnergyUnit(stack, unit).putInt("Capacity", value);
 	}
 
 	@Nullable
@@ -50,11 +58,9 @@ public class EnergyUtils {
 	}
 
 	private static CompoundNBT getEnergyUnit(ItemStack stack, EnergyUnit unit) {
+		if (stack == null || !(stack.getItem() instanceof IEnergyItem)) return new CompoundNBT();
 		CompoundNBT energyUnitNBT = stack.getOrCreateChildTag(TutorialMod.MODID).getCompound(unit.name);
 		if (energyUnitNBT.isEmpty()) {
-			if (!(stack.getItem() instanceof IEnergyItem)) {
-				return new CompoundNBT();
-			}
 			writeStorage(stack, unit, ((IEnergyItem) stack.getItem()).createEnergy());
 			energyUnitNBT = stack.getOrCreateChildTag(TutorialMod.MODID).getCompound(unit.name);
 		}

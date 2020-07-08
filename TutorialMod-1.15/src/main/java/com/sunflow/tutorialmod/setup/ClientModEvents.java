@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod._testing.rendering.RenderPlayerFire;
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestScreen;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestTileRenderer;
@@ -16,7 +17,6 @@ import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
 import com.sunflow.tutorialmod.rendering.ModISTER;
-import com.sunflow.tutorialmod.rendering.RenderPlayerFire;
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.client.gui.ScreenManager;

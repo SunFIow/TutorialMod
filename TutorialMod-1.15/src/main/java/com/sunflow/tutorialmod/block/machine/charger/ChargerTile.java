@@ -83,42 +83,6 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public int getField(int id) {
-		switch (id) {
-			case ITEM_ENERGY_ID:
-				return getChargeItemEnergy().getEnergyStored();
-			case ITEM_ENERGY_MAX_ID:
-				return getChargeItemEnergy().getMaxEnergyStored();
-		}
-		return super.getField(id);
-	}
-
-	@Override
-	public void setField(int id, int value) {
-		switch (id) {
-			case ITEM_ENERGY_ID:
-				getChargeItemEnergy().setEnergy(value);
-				break;
-			case ITEM_ENERGY_MAX_ID:
-				getChargeItemEnergy().setMaxEnergy(value);
-				break;
-		}
-		super.setField(id, value);
-	}
-
-	private CustomEnergyStorage getChargeItemEnergy() {
-//		if (!handler.isPresent())
-//			throw new RuntimeException("Item Handler of " + this + " is not present");
-
-//		return CustomEnergyStorage.fromNBT(handler.orElse(null)
-//				.getStackInSlot(CHARGE_SLOT)
-//				.getOrCreateChildTag(TutorialMod.MODID)
-//				.getCompound(EnergyUnit.DEFAULT.name));
-		ItemStack stack = itemHandler.getStackInSlot(CHARGE_SLOT);
-		return EnergyUtils.readStorage(stack, EnergyUnit.DEFAULT);
-	}
-
-	@Override
 	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
 		return new ChargerContainer(id, inv, this);
 	}

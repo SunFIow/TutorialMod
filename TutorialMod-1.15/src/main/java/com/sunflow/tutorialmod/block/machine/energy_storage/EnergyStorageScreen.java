@@ -22,8 +22,8 @@ public class EnergyStorageScreen extends ScreenBase<EnergyStorageContainer> {
 
 		font.drawString(playerInventory.getDisplayName().getFormattedText(), 8.0F, ySize - 96 + 2, 0x404040);
 
-		String current = Integer.toString(container.data.get(EnergyStorageTile.ENERGY_ID));
-		String max = Integer.toString(container.data.get(EnergyStorageTile.ENERGY_MAX_ID));
+		String current = Integer.toString(container.getEnergy());
+		String max = Integer.toString(container.getEnergyMax());
 		int wCurrent = font.getStringWidth(current);
 		int wMax = font.getStringWidth(max);
 		font.drawString(current, xSize / 4.0F - wCurrent / 2.0F, ySize / 4.0F, 0x404040);
@@ -34,7 +34,7 @@ public class EnergyStorageScreen extends ScreenBase<EnergyStorageContainer> {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-		int k = getProgressScaled(container.data.get(EnergyStorageTile.ENERGY_ID), container.data.get(EnergyStorageTile.ENERGY_MAX_ID), 75);
+		int k = getProgressScaled(container.getEnergy(), container.getEnergyMax(), 75);
 		this.blit(guiLeft + 80, guiTop + 5, 176, 31, 16, 76 - k);
 	}
 }

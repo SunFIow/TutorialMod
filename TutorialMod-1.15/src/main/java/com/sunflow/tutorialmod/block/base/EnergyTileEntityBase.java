@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
-import com.sunflow.tutorialmod.util.interfaces.IHasField;
 
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
@@ -19,7 +18,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public abstract class EnergyTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable, IHasField, ITickableTileEntity {
+public abstract class EnergyTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable, ITickableTileEntity {
 
 	public static final int ENERGY_ID = 0, ENERGY_MAX_ID = 1;
 
@@ -42,30 +41,6 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 			if (getBlockState().get(EnergyTileBlockBase.FILLLEVEL) != i) {
 				world.setBlockState(pos, getBlockState().with(EnergyTileBlockBase.FILLLEVEL, Integer.valueOf(i)), 3);
 			}
-		}
-	}
-
-	@Override
-	public int getField(int id) {
-		switch (id) {
-			case ENERGY_ID:
-				return energyStorage != null ? energyStorage.getEnergyStored() : -1;
-			case ENERGY_MAX_ID:
-				return energyStorage != null ? energyStorage.getMaxEnergyStored() : -1;
-			default:
-				return -1;
-		}
-	}
-
-	@Override
-	public void setField(int id, int value) {
-		switch (id) {
-			case ENERGY_ID:
-				energyStorage.setEnergy(value);
-				break;
-			case ENERGY_MAX_ID:
-				energyStorage.setMaxEnergy(value);
-				break;
 		}
 	}
 

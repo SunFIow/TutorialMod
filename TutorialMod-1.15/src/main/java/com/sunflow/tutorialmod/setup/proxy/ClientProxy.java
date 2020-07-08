@@ -1,9 +1,9 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
+import com.sunflow.tutorialmod._testing.rendering.RenderPlayerFire;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.rendering.RenderMobPositions;
 import com.sunflow.tutorialmod.rendering.RenderModOverlay;
-import com.sunflow.tutorialmod.rendering.RenderPlayerFire;
 import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
 import com.sunflow.tutorialmod.setup.ClientModEvents;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
@@ -29,6 +29,7 @@ public class ClientProxy extends CommonProxy {
 		eventBus.addListener(RenderModOverlay::render);
 		eventBus.addListener(RenderTileOverlays::render);
 		eventBus.addListener(RenderPlayerFire::render);
+		eventBus.addListener(RenderPlayerFire::renderOverlay);
 
 		eventBus.addListener(EnchantmentMultiJump::enchantmentFunction);
 	}

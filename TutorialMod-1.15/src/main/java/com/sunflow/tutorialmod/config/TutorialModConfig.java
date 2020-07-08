@@ -127,7 +127,7 @@ public class TutorialModConfig {
 				.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
 		ELECTRIC_SINTERING_FURNACE_TICKS = builder.comment("Ticks per item")
 				.defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
-		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = builder.comment("Energy consumption per tick")
+		ELECTRIC_SINTERING_FURNACE_CONSUMPTION = builder.comment("Energy consumption per item")
 				.defineInRange("consumption", 200, 0, Integer.MAX_VALUE);
 		builder.pop();
 	}

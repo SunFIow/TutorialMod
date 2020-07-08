@@ -7,6 +7,9 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.sunflow.tutorialmod.block.base.InventoryTileEntityBase;
+import com.sunflow.tutorialmod.capability.CapabilityProcessor;
+import com.sunflow.tutorialmod.capability.IProcessor;
+import com.sunflow.tutorialmod.capability.Processor;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
 
@@ -24,10 +27,13 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -39,6 +45,16 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	public static final int BURNTIME_ID = 0, BURNTIME_TOTAL_ID = 1, COOKTIME_ID = 2;
 
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
+
+	protected Processor cooker = createCookProcessor();
+	private LazyOptional<IProcessor> cookProcessor = LazyOptional.of(() -> cooker);
+
+	protected Processor burner = createFuelProcessor();
+	private LazyOptional<IProcessor> fuelProcessor = LazyOptional.of(() -> burner);
+
+	protected Processor createCookProcessor() { return new Processor(0, TutorialModConfig.SINTERING_FURNACE_TICKS.get()); }
+
+	protected Processor createFuelProcessor() { return new Processor(); }
 
 	@Override
 	protected ItemStackHandler createHandler() {
@@ -62,10 +78,6 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 		};
 	}
 
-	private float cookTime;
-	private int burnTime;
-	private int burnTimeTotal;
-
 	public SinteringFurnaceTile() {
 		super(Registration.SINTERING_FURNACE_TILE.get());
 	}
@@ -75,14 +87,15 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 		if (world.isRemote) return;
 
 		if (isBurning()) {
-			--burnTime;
+			burner.addTime(-1);
 		}
 		if (canSmelt()) {
 			if (isBurning()) {
-				cookTime++;
+				cooker.addTime(1);
 
-				if (cookTime >= TutorialModConfig.SINTERING_FURNACE_TICKS.get()) {
-					cookTime = 0;
+//				TutorialModConfig.SINTERING_FURNACE_TICKS.get()
+				if (cooker.getTime() >= cooker.getTotalTime()) {
+					cooker.setTime(0);
 //					this.totalCookTime = this.getCookTime((ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT1_ID), (ItemStack) this.inventory.get(TileEntitySinteringFurnace.INPUT2_ID));
 					smeltItem();
 					markDirty();
@@ -90,14 +103,14 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 			} else {
 				ItemStack fuelSlot = itemHandler.getStackInSlot(FUEL_ID);
 				if (!fuelSlot.isEmpty()) {
-					burnTimeTotal = getBurnTime(fuelSlot);
-					burnTime = burnTimeTotal;
+					burner.setTotalTime(getBurnTime(fuelSlot));
+					burner.setTime(burner.getTotalTime());
 					itemHandler.extractItem(FUEL_ID, 1, false);
 				}
 			}
 		}
-		if (!isBurning() || !canSmelt() && cookTime > 0) {
-			cookTime = MathHelper.clamp(cookTime - 2, 0, TutorialModConfig.SINTERING_FURNACE_TICKS.get());
+		if (!isBurning() || !canSmelt() && cooker.getTime() > 0) {
+			cooker.setTime(MathHelper.clamp(cooker.getTime() - 2, 0, cooker.getTotalTime()));
 		}
 
 //		if (!world.isRemote) {
@@ -108,9 +121,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 //		}
 	}
 
-	private boolean isBurning() {
-		return this.burnTime > 0;
-	}
+	private boolean isBurning() { return burner.getTime() > 0; }
 
 	public void smeltItem() {
 		if (this.canSmelt()) {
@@ -244,48 +255,31 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	}
 
 	@Override
-	public int getField(int id) {
-		switch (id) {
-			case COOKTIME_ID:
-				return (int) cookTime;
-			case BURNTIME_ID:
-				return burnTime;
-			case BURNTIME_TOTAL_ID:
-				return burnTimeTotal;
-			default:
-				return -1;
-		}
-	}
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+//		Log.debug("{}    |    {}", CapabilityProcessor.COOKER_CAPABILITY, CapabilityProcessor.BURNER_CAPABILITY);
+//		Log.debug(CapabilityProcessor.COOKER_CAPABILITY == CapabilityProcessor.BURNER_CAPABILITY);
 
-	@Override
-	public void setField(int id, int value) {
-		switch (id) {
-			case COOKTIME_ID:
-				cookTime = value;
-				break;
-			case BURNTIME_ID:
-				burnTime = value;
-				break;
-			case BURNTIME_TOTAL_ID:
-				burnTimeTotal = value;
-				break;
+		if (cap == CapabilityProcessor.COOKER_CAPABILITY) {
+			return cookProcessor.cast();
 		}
+		if (cap == CapabilityProcessor.BURNER_CAPABILITY) {
+			return fuelProcessor.cast();
+		}
+		return super.getCapability(cap, side);
 	}
 
 	@Override
 	public void read(CompoundNBT tag) {
-		cookTime = tag.getFloat("cooktime");
-		this.burnTime = tag.getInt("burntime");
-		this.burnTimeTotal = tag.getInt("burntimetotal");
+		cooker.deserializeNBT(tag.getCompound("cooker"));
+		burner.deserializeNBT(tag.getCompound("burner"));
 
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		tag.putFloat("cooktime", cookTime);
-		tag.putInt("burntime", burnTime);
-		tag.putInt("burntimetotal", burnTimeTotal);
+		tag.put("cooker", cooker.serializeNBT());
+		tag.put("burner", burner.serializeNBT());
 
 		return super.write(tag);
 	}

@@ -1,6 +1,9 @@
 package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.capability.CapabilityProcessor;
+import com.sunflow.tutorialmod.capability.IProcessor;
+import com.sunflow.tutorialmod.capability.Processor;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
@@ -19,7 +22,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -30,6 +35,11 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	public static final int FUEL_SLOT = 0;
 	public static final int COOKTIME_ID = 2;
 	private static final Item FUEL_ITEM = Items.GLOWSTONE_DUST;
+
+	protected Processor cooker = createProcessor();
+	private LazyOptional<IProcessor> processor = LazyOptional.of(() -> cooker);
+
+	protected Processor createProcessor() { return new Processor(); }
 
 	@Override
 	protected ItemStackHandler createHandler() {
@@ -58,7 +68,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	private Item currentFuel = ItemStack.EMPTY.getItem();
 
-	private float cookTime;
+//	private int cookTime;
 	private float powerLeftOvers;
 
 	public GlowstoneGeneratorTile() {
@@ -88,11 +98,11 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 			if (energyStorage.receiveEnergy(partialValue, true) > 0) {
 				producedEnergy = true;
-				cookTime += energyStorage.receiveEnergy(partialValue, false) / partialValue;
+				cooker.addTime(energyStorage.receiveEnergy(partialValue, false) / partialValue);
 
-				if (cookTime >= fuelTicks) {
+				if (cooker.getTime() >= fuelTicks) {
 					currentFuel = EMPTY;
-					cookTime = 0;
+					cooker.setTime(0);
 				}
 				markDirty();
 			}
@@ -101,6 +111,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 			ItemStack fuelSlot = itemHandler.getStackInSlot(FUEL_SLOT);
 			if (!fuelSlot.isEmpty() && isItemFuel(fuelSlot.getItem())) {
 				currentFuel = fuelSlot.getItem();
+				cooker.setTotalTime(getFuelTicks(currentFuel.getItem()));
 				itemHandler.extractItem(FUEL_SLOT, 1, false);
 			}
 		}
@@ -154,27 +165,16 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public int getField(int id) {
-		switch (id) {
-			case COOKTIME_ID:
-				return (int) cookTime;
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+		if (cap == CapabilityProcessor.COOKER_CAPABILITY) {
+			return processor.cast();
 		}
-		return super.getField(id);
-	}
-
-	@Override
-	public void setField(int id, int value) {
-		switch (id) {
-			case COOKTIME_ID:
-				cookTime = value;
-				break;
-		}
-		super.setField(id, value);
+		return super.getCapability(cap, side);
 	}
 
 	@Override
 	public void read(CompoundNBT tag) {
-		cookTime = tag.getFloat("cooktime");
+		cooker.deserializeNBT(tag.getCompound("cooker"));
 		powerLeftOvers = tag.getFloat("powerleftovers");
 		currentFuel = ItemStack.read(tag.getCompound("currentfuel")).getItem();
 
@@ -183,7 +183,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		tag.putFloat("cooktime", cookTime);
+		tag.put("cooker", cooker.serializeNBT());
 		tag.putFloat("powerleftovers", powerLeftOvers);
 		tag.put("currentfuel", new ItemStack(currentFuel).write(new CompoundNBT()));
 

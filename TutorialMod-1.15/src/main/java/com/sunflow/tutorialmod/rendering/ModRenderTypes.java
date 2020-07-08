@@ -29,8 +29,6 @@ public class ModRenderTypes extends RenderType {
 					.writeMask(COLOR_WRITE)
 					.build(false));
 
-	public static RenderType getOverlayLines() {
-		return OVERLAY_LINES;
-	}
+	public static RenderType getOverlayLines() { return OVERLAY_LINES; }
 
 }

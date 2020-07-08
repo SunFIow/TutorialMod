@@ -20,28 +20,16 @@ public class ChargerContainer extends ContainerBase {
 	public ChargerContainer(int id, PlayerInventory inv, TileEntity tile) {
 		super(Registration.CHARGER_CONTAINER.get(), id, 1, tile);
 
-		this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
+		this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent((h) -> {
 			addSlot(new SlotItemHandler(h, ChargerTile.CHARGE_SLOT, 80, 35));
 		});
 
 		layoutPlayerInventorySlots(new InvWrapper(inv), 8, 84);
 
-		makeIntArray(4);
+		trackEnergy();
+		trackEnergyMax();
+		trackItemEnergy();
+		trackItemEnergyMax();
 	}
 
-	public int getItemEnergy() {
-		return field.getField(ChargerTile.ITEM_ENERGY_ID);
-	}
-
-	public int getItemEnergyMax() {
-		return field.getField(ChargerTile.ITEM_ENERGY_MAX_ID);
-	}
-
-	public int getEnergy() {
-		return field.getField(ChargerTile.ENERGY_ID);
-	}
-
-	public int getEnergyMax() {
-		return field.getField(ChargerTile.ENERGY_MAX_ID);
-	}
 }

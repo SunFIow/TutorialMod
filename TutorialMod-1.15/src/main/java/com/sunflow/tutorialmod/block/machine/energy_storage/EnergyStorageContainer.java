@@ -20,14 +20,7 @@ public class EnergyStorageContainer extends ContainerBase {
 
 		layoutPlayerInventorySlots(new InvWrapper(inv), 8, 84);
 
-		makeIntArray(2);
-	}
-
-	public int getEnergy() {
-		return field.getField(EnergyStorageTile.ENERGY_ID);
-	}
-
-	public int getEnergyMax() {
-		return field.getField(EnergyStorageTile.ENERGY_MAX_ID);
+		trackEnergy();
+		trackEnergyMax();
 	}
 }
