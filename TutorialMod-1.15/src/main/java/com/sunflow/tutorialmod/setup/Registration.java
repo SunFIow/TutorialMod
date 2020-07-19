@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod._testing.block.TitleBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferTileEntity;
 import com.sunflow.tutorialmod._testing.block.multiblock.MultiBlock;
@@ -125,6 +126,11 @@ public class Registration {
 
 		POTIONS.register(modEventBus);
 	}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<TitleBlock> TITLEBLOCK = BLOCKS.register("titleblock", TitleBlock::new);
+	public static final RegistryObject<BlockItem> TITLEBLOCK_ITEM = ITEMS.register("titleblock", () -> new BlockItem(TITLEBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
