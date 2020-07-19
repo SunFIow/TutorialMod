@@ -20,11 +20,11 @@ public class RenderMobPositions {
 		ClientPlayerEntity player = TutorialMod.proxy.getMinecraft().player;
 
 		if (player.getHeldItemMainhand().getItem() == Items.GHAST_TEAR)
-			showMobs(event.getMatrixStack(), event.getEntity());
+			showMobs(event.getMatrixStack(), event.getBuffers(), event.getEntity());
 	}
 
-	private static void showMobs(MatrixStack matrixStack, LivingEntity entity) {
-		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+	private static void showMobs(MatrixStack matrixStack, IRenderTypeBuffer buffer, LivingEntity entity) {
+//		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
 		IVertexBuilder builder = buffer.getBuffer(ModRenderTypes.getOverlayLines());
 
 		Matrix4f positionMatrix = matrixStack.getLast().getMatrix();
