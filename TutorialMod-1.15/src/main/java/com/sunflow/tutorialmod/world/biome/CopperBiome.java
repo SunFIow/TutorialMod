@@ -86,11 +86,11 @@ public class CopperBiome extends BiomeBase {
 //						new CountRangeConfig(20, 32, 32, 80)));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 				Feature.ORE.withConfiguration(
-						new OreFeatureConfig(
-								OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
 								Registration.ALUMINIUM_ORE_END.get().getDefaultState(),
 								9))
-						.withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(20, 32, 32, 80))));
+						.withPlacement(
+								Placement.COUNT_RANGE.configure(new CountRangeConfig(20, 32, 32, 80))));
 
 		DefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addStructures(this);

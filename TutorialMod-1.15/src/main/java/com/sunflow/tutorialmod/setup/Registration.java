@@ -1,5 +1,7 @@
 package com.sunflow.tutorialmod.setup;
 
+import java.util.Locale;
+
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod._testing.block.TitleBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferBlock;
@@ -61,6 +63,8 @@ import com.sunflow.tutorialmod.item.tools.ToolPickaxe;
 import com.sunflow.tutorialmod.item.tools.ToolShovel;
 import com.sunflow.tutorialmod.item.tools.ToolSword;
 import com.sunflow.tutorialmod.world.biome.CopperBiome;
+import com.sunflow.tutorialmod.world.gen.RunDownHousePieces;
+import com.sunflow.tutorialmod.world.gen.RunDownHouseStructure;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
@@ -85,8 +89,12 @@ import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -111,6 +119,7 @@ public class Registration {
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, TutorialMod.MODID);
 
 	public static final DeferredRegister<Effect> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, TutorialMod.MODID);
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, TutorialMod.MODID);
 
 	public static void registerAll(IEventBus modEventBus) {
 		BLOCKS.register(modEventBus);
@@ -125,6 +134,20 @@ public class Registration {
 		SOUNDS.register(modEventBus);
 
 		POTIONS.register(modEventBus);
+		FEATURES.register(modEventBus);
+		register(RDHP, "RDHP");
+	}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<RunDownHouseStructure> RUN_DOWN_HOUSE = FEATURES.register("run_down_house", () -> new RunDownHouseStructure(NoFeatureConfig::deserialize));
+	public static IStructurePieceType RDHP = RunDownHousePieces.Piece::new;
+
+	/*
+	 * Registers the structures pieces themselves. If you don't do this part, Forge will complain to you in the Console.
+	 */
+	static IStructurePieceType register(IStructurePieceType structurePiece, String key) {
+		return Registry.register(Registry.STRUCTURE_PIECE, key.toLowerCase(Locale.ROOT), structurePiece);
 	}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,7 +251,7 @@ public class Registration {
 	public static final RegistryObject<BlockItem> COPPER_LOG_ITEM = ITEMS.register("copper_log", () -> new BlockItem(COPPER_LOG.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<Block> COPPER_PLANKS = BLOCKS.register("copper_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<BlockItem> COPPER_PLANKS_ITEM = ITEMS.register("copper_planks", () -> new BlockItem(COPPER_PLANKS.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<CustomSaplingBlock> COPPER_SAPLING = BLOCKS.register("copper_sapling", () -> new CustomSaplingBlock(COPPER_LEAVES.get(), COPPER_LOG.get(), Registration.COPPER_SAPLING::get));
+	public static final RegistryObject<CustomSaplingBlock> COPPER_SAPLING = BLOCKS.register("copper_sapling", () -> new CustomSaplingBlock(COPPER_LOG.get(), COPPER_LEAVES.get(), Registration.COPPER_SAPLING::get));
 	public static final RegistryObject<BlockItem> COPPER_SAPLING_ITEM = ITEMS.register("copper_sapling", () -> new BlockItem(COPPER_SAPLING.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 //	public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", ItemUtil::Default);	
@@ -246,7 +269,7 @@ public class Registration {
 	public static final RegistryObject<BlockItem> ALUMINIUM_LOG_ITEM = ITEMS.register("aluminium_log", () -> new BlockItem(ALUMINIUM_LOG.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<Block> ALUMINIUM_PLANKS = BLOCKS.register("aluminium_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<BlockItem> ALUMINIUM_PLANKS_ITEM = ITEMS.register("aluminium_planks", () -> new BlockItem(ALUMINIUM_PLANKS.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<CustomSaplingBlock> ALUMINIUM_SAPLING = BLOCKS.register("aluminium_sapling", () -> new CustomSaplingBlock(ALUMINIUM_LEAVES.get(), ALUMINIUM_LOG.get(), Registration.ALUMINIUM_SAPLING::get));
+	public static final RegistryObject<CustomSaplingBlock> ALUMINIUM_SAPLING = BLOCKS.register("aluminium_sapling", () -> new CustomSaplingBlock(ALUMINIUM_LOG.get(), ALUMINIUM_LEAVES.get(), Registration.ALUMINIUM_SAPLING::get));
 	public static final RegistryObject<BlockItem> ALUMINIUM_SAPLING_ITEM = ITEMS.register("aluminium_sapling", () -> new BlockItem(ALUMINIUM_SAPLING.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
