@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.setup.proxy;
 
 import com.sunflow.tutorialmod._testing.rendering.RenderPlayerFire;
+import com.sunflow.tutorialmod.config.InGameConfig;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.rendering.RenderMobPositions;
 import com.sunflow.tutorialmod.rendering.RenderModOverlay;
@@ -40,6 +41,8 @@ public class ClientProxy extends CommonProxy {
 		eventBus.addListener(ClientModEvents::setup);
 		eventBus.addListener(ClientModEvents::onItemColor);
 		eventBus.addListener(ClientModEvents::onTextureStitch);
+
+		eventBus.addListener(InGameConfig::RegisterExtensionPoint);
 	}
 
 	@SuppressWarnings("resource")

@@ -5,6 +5,7 @@ import com.sunflow.tutorialmod.data.generator.DataGenerators;
 import com.sunflow.tutorialmod.setup.CommonForgeEvents;
 import com.sunflow.tutorialmod.setup.CommonModEvents;
 import com.sunflow.tutorialmod.util.Log;
+import com.sunflow.tutorialmod.world.gen.ModGenerator;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,6 +36,7 @@ public abstract class CommonProxy {
 		eventBus.addListener(DataGenerators::gatherData);
 		eventBus.addListener(TutorialModConfig::onLoad);
 		eventBus.addListener(TutorialModConfig::onReload);
+		eventBus.addListener(ModGenerator::generate);
 	}
 
 	public abstract World getClientWorld();
