@@ -7,6 +7,7 @@ import com.sunflow.tutorialmod._testing.block.TitleBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferTileEntity;
 import com.sunflow.tutorialmod._testing.block.multiblock.MultiBlock;
+import com.sunflow.tutorialmod.block.ConfigBlock;
 import com.sunflow.tutorialmod.block.TeleporterBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
@@ -47,7 +48,6 @@ import com.sunflow.tutorialmod.item.EnergyWandItem;
 import com.sunflow.tutorialmod.item.FancySwordItem;
 import com.sunflow.tutorialmod.item.ItemUtil;
 import com.sunflow.tutorialmod.item.TestItem;
-import com.sunflow.tutorialmod.item.armor.ArmorBase;
 import com.sunflow.tutorialmod.item.armor.ArmorSkinBase;
 import com.sunflow.tutorialmod.item.armor.CustomArmorMaterial;
 import com.sunflow.tutorialmod.item.armor.ItemNBTSkin;
@@ -79,6 +79,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
@@ -137,6 +138,11 @@ public class Registration {
 		FEATURES.register(modEventBus);
 		register(RDHP, "RDHP");
 	}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<ConfigBlock> CONFIGBLOCK = BLOCKS.register("configblock", ConfigBlock::new);
+	public static final RegistryObject<BlockItem> CONFIGBLOCK_ITEM = ITEMS.register("configblock", () -> new BlockItem(CONFIGBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -301,9 +307,9 @@ public class Registration {
 
 	// Items
 	public static final RegistryObject<Item> FIRSTITEM = ITEMS.register("firstitem", () -> new Item(new Item.Properties().group(ModGroups.itemGroup2)));
-	public static final RegistryObject<Item> TESTITEM = ITEMS.register("testitem", TestItem::new);
-	public static final RegistryObject<Item> ENERGYWAND = ITEMS.register("energy_wand", EnergyWandItem::new);
-	public static final RegistryObject<Item> FANCY_SWORD = ITEMS.register("fancy_sword", FancySwordItem::new);
+	public static final RegistryObject<TestItem> TESTITEM = ITEMS.register("testitem", TestItem::new);
+	public static final RegistryObject<EnergyWandItem> ENERGYWAND = ITEMS.register("energy_wand", EnergyWandItem::new);
+	public static final RegistryObject<FancySwordItem> FANCY_SWORD = ITEMS.register("fancy_sword", FancySwordItem::new);
 
 	// Wands
 	public static final RegistryObject<Item> WOOD_WAND = ITEMS.register("wood_wand", ItemUtil::Default);
@@ -316,34 +322,34 @@ public class Registration {
 	public static final RegistryObject<Item> EMERALD_WAND = ITEMS.register("emerald_wand", ItemUtil::Default);
 
 	// Tools
-	public static final RegistryObject<Item> RUBY_AXE = ITEMS.register("ruby_axe", () -> new ToolAxe(6.0F, -3.1F, ToolMaterial.RUBY));
-	public static final RegistryObject<Item> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new ToolHoe(-1.0f, ToolMaterial.RUBY));
-	public static final RegistryObject<Item> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new ToolPickaxe(1, -3.2f, ToolMaterial.RUBY));
-	public static final RegistryObject<Item> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ToolShovel(1.5f, -3.0f, ToolMaterial.RUBY));
-	public static final RegistryObject<Item> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new ToolSword(6, -3f, ToolMaterial.RUBY));
+	public static final RegistryObject<ToolAxe> RUBY_AXE = ITEMS.register("ruby_axe", () -> new ToolAxe(6.0F, -3.1F, ToolMaterial.RUBY));
+	public static final RegistryObject<ToolHoe> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new ToolHoe(-1.0f, ToolMaterial.RUBY));
+	public static final RegistryObject<ToolPickaxe> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new ToolPickaxe(1, -3.2f, ToolMaterial.RUBY));
+	public static final RegistryObject<ToolShovel> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ToolShovel(1.5f, -3.0f, ToolMaterial.RUBY));
+	public static final RegistryObject<ToolSword> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new ToolSword(6, -3f, ToolMaterial.RUBY));
 
 	// Armor
-	public static final RegistryObject<Item> RUBY_HELMET = ITEMS.register("ruby_helmet", () -> new ArmorBase(CustomArmorMaterial.RUBY, EquipmentSlotType.HEAD));
-	public static final RegistryObject<Item> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () -> new ArmorBase(CustomArmorMaterial.RUBY, EquipmentSlotType.CHEST));
-	public static final RegistryObject<Item> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new ArmorBase(CustomArmorMaterial.RUBY, EquipmentSlotType.LEGS));
-	public static final RegistryObject<Item> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new ArmorBase(CustomArmorMaterial.RUBY, EquipmentSlotType.FEET));
+	public static final RegistryObject<ArmorItem> RUBY_HELMET = ITEMS.register("ruby_helmet", () -> new ArmorItem(CustomArmorMaterial.RUBY, EquipmentSlotType.HEAD, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorItem> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () -> new ArmorItem(CustomArmorMaterial.RUBY, EquipmentSlotType.CHEST, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new ArmorItem(CustomArmorMaterial.RUBY, EquipmentSlotType.LEGS, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new ArmorItem(CustomArmorMaterial.RUBY, EquipmentSlotType.FEET, new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Item> SUNFLOW_HELMET = ITEMS.register("sunflow_helmet", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.HEAD));
-	public static final RegistryObject<Item> SUNFLOW_CHESTPLATE = ITEMS.register("sunflow_chestplate", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.CHEST));
-	public static final RegistryObject<Item> SUNFLOW_LEGGINGS = ITEMS.register("sunflow_leggings", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 2, EquipmentSlotType.LEGS));
-	public static final RegistryObject<Item> SUNFLOW_BOOTS = ITEMS.register("sunflow_boots", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.FEET));
+	public static final RegistryObject<ArmorSkinBase> SUNFLOW_HELMET = ITEMS.register("sunflow_helmet", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.HEAD, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> SUNFLOW_CHESTPLATE = ITEMS.register("sunflow_chestplate", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.CHEST, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> SUNFLOW_LEGGINGS = ITEMS.register("sunflow_leggings", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 2, EquipmentSlotType.LEGS, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> SUNFLOW_BOOTS = ITEMS.register("sunflow_boots", () -> new ArmorSkinBase(SkinType.SUNFLOW, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.FEET, new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Item> BEKE_HELMET = ITEMS.register("beke_helmet", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.HEAD));
-	public static final RegistryObject<Item> BEKE_CHESTPLATE = ITEMS.register("beke_chestplate", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.CHEST));
-	public static final RegistryObject<Item> BEKE_LEGGINGS = ITEMS.register("beke_leggings", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 2, EquipmentSlotType.LEGS));
-	public static final RegistryObject<Item> BEKE_BOOTS = ITEMS.register("beke_boots", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.FEET));
+	public static final RegistryObject<ArmorSkinBase> BEKE_HELMET = ITEMS.register("beke_helmet", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.HEAD, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> BEKE_CHESTPLATE = ITEMS.register("beke_chestplate", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.CHEST, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> BEKE_LEGGINGS = ITEMS.register("beke_leggings", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 2, EquipmentSlotType.LEGS, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> BEKE_BOOTS = ITEMS.register("beke_boots", () -> new ArmorSkinBase(SkinType.BEKESCSABA99, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.FEET, new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Item> PHANTOME_HELMET = ITEMS.register("phantom_helmet", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.HEAD));
-	public static final RegistryObject<Item> PHANTOM_CHESTPLATE = ITEMS.register("phantom_chestplate", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.CHEST));
-	public static final RegistryObject<Item> PHANTOME_LEGGINGS = ITEMS.register("phantom_leggings", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 2, EquipmentSlotType.LEGS));
-	public static final RegistryObject<Item> PHANTOM_BOOTS = ITEMS.register("phantom_boots", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.FEET));
+	public static final RegistryObject<ArmorSkinBase> PHANTOME_HELMET = ITEMS.register("phantom_helmet", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.HEAD, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> PHANTOM_CHESTPLATE = ITEMS.register("phantom_chestplate", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.CHEST, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> PHANTOME_LEGGINGS = ITEMS.register("phantom_leggings", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 2, EquipmentSlotType.LEGS, new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<ArmorSkinBase> PHANTOM_BOOTS = ITEMS.register("phantom_boots", () -> new ArmorSkinBase(SkinType.PHANTOM, CustomArmorMaterial.RUBY, 1, EquipmentSlotType.FEET, new Item.Properties().group(ModGroups.itemGroup)));
 
-	public static final RegistryObject<Item>[] SKIN = ItemNBTSkin.create(ITEMS);
+	public static final RegistryObject<ItemNBTSkin>[] SKIN = ItemNBTSkin.create(ITEMS);
 
 	// Food
 	public static final RegistryObject<Item> EVIL_APPLE = ITEMS.register("evil_apple", () -> new Item(ItemUtil.Food(ModGroups.itemGroup, 6, 4, false, false, true,

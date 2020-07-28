@@ -22,9 +22,9 @@ public class ItemNBTSkin extends Item {
 
 	public ItemNBTSkin(SkinType skin) { super(new Item.Properties().group(ModGroups.itemGroup)); this.skin = skin; }
 
-	public static RegistryObject<Item>[] create(DeferredRegister<Item> ITEMS) {
+	public static RegistryObject<ItemNBTSkin>[] create(DeferredRegister<Item> ITEMS) {
 		@SuppressWarnings("unchecked")
-		RegistryObject<Item>[] skins = new RegistryObject[SkinType.values().length];
+		RegistryObject<ItemNBTSkin>[] skins = new RegistryObject[SkinType.values().length];
 		int i = 0;
 		for (SkinType skin : SkinType.values()) skins[i++] = ITEMS.register(skin.getName() + "_skin", () -> new ItemNBTSkin(skin));
 		return skins;

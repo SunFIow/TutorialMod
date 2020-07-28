@@ -37,6 +37,8 @@ public abstract class CommonProxy {
 		eventBus.addListener(TutorialModConfig::onLoad);
 		eventBus.addListener(TutorialModConfig::onReload);
 		eventBus.addListener(ModGenerator::generate);
+
+//		eventBus.addListener(InGameConfig::RegisterExtensionPoint);
 	}
 
 	public abstract World getClientWorld();

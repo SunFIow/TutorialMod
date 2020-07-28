@@ -4,7 +4,6 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -99,7 +98,7 @@ public class TutorialModConfig {
 //		COMMON_CONFIG = COMMON_BUILDER.build();
 //	}
 
-	private static void setupGlowstoneGeneratorConfig(Builder builder) {
+	private static void setupGlowstoneGeneratorConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("Glowstone Generator Settings").push(SUBCATEGORY_GLOWSTONE_GENERATOR);
 		GLOWSTONE_GENERATOR_GENERATE = builder.comment("Power generation per glowstone")
 				.defineInRange("generate", 256, 0, Integer.MAX_VALUE);
@@ -112,14 +111,14 @@ public class TutorialModConfig {
 		builder.pop();
 	}
 
-	private static void setupSinteringFurnaceConfig(Builder builder) {
+	private static void setupSinteringFurnaceConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("Sintering Furnace Settings").push(SUBCATEGORY_SINTERING_FURNACE);
 		SINTERING_FURNACE_TICKS = builder.comment("Ticks per item")
 				.defineInRange("ticks", 80, 0, Integer.MAX_VALUE);
 		builder.pop();
 	}
 
-	private static void setupElectricSinteringFurnaceConfig(Builder builder) {
+	private static void setupElectricSinteringFurnaceConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("Electric Sintering Furnace Settings").push(SUBCATEGORY_ELECTRIC_SINTERING_FURNACE);
 		ELECTRIC_SINTERING_FURNACE_MAXPOWER = builder.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
@@ -132,7 +131,7 @@ public class TutorialModConfig {
 		builder.pop();
 	}
 
-	private static void setupChargerConfig(Builder builder) {
+	private static void setupChargerConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("Charger Settings").push(SUBCATEGORY_CHARGER);
 		CHARGER_MAXPOWER = builder.comment("Maximum power that can be stored")
 				.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
@@ -143,10 +142,10 @@ public class TutorialModConfig {
 		builder.pop();
 	}
 
-	private static void setupEnergyItemConfig(Builder builder) {
+	private static void setupEnergyItemConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("Energy Item Settings").push(SUBCATEGORY_ENERGY_ITEM);
 		ENERGY_ITEM_MAXPOWER = builder.comment("Maximum power that can be stored")
-				.defineInRange("maxPower", 2500, 0, Integer.MAX_VALUE);
+				.defineInRange("maxPower", 2500, 0, 20000);
 		ENERGY_ITEM_CONSUME = builder.comment("Power that is consumed per operation")
 				.defineInRange("consume", 50, 0, Integer.MAX_VALUE);
 		builder.pop();
