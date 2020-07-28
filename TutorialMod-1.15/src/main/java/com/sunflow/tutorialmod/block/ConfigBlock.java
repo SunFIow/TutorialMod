@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.block;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.config.DefaultConfigScreen.Side;
+import com.sunflow.tutorialmod.config.ConfigScreen;
 import com.sunflow.tutorialmod.config.InGameConfig;
 
 import net.minecraft.block.Block;
@@ -23,7 +23,7 @@ public class ConfigBlock extends Block {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if (worldIn.isRemote) {
-			InGameConfig.create(null, Side.COMMON).open(TutorialMod.proxy.getMinecraft());
+			InGameConfig.create(null, ConfigScreen.Catergory.GENERAL).open(TutorialMod.proxy.getMinecraft());
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.FAIL;

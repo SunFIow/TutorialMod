@@ -18,35 +18,41 @@ import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class DefaultConfigScreen extends Screen {
+public class ConfigScreen extends Screen {
 
-	private Screen parentScreen;
+	protected Screen parentScreen;
 
-	private final DefaultConfigScreen.Builder builder;
+	protected final ConfigScreen.Builder builder;
 
-	private final Side side;
+	protected final Catergory category;
 
-	public DefaultConfigScreen(ITextComponent title, Screen parentScreen, Builder builder, Side side) {
+	protected Button commonButton;
+	protected Button clientButton;
+	protected Button serverButton;
+	protected Button doneButton;
+
+	public ConfigScreen(ITextComponent title, Screen parentScreen, ConfigScreen.Builder builder, Catergory category) {
 		super(title);
 		this.parentScreen = parentScreen;
 		this.builder = builder;
-		this.side = side;
+		this.category = category;
 	}
 
 	public void open(Minecraft mc) { mc.displayGuiScreen(this); }
 
 	@Override
 	protected void init() {
-		AbstractOption[] options = builder.build(side);
-		for (int i = 0; i < options.length; ++i) {
-			AbstractOption abstractoption = options[i];
-			int j = this.width / 2 - 155 + i % 2 * 160;
-			int k = this.height / 6 + 24 * (i >> 1);
-			this.addButton(abstractoption.createWidget(this.minecraft.gameSettings, j, k, 150));
-		}
-
-		this.addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (options.length + 1) / 2, 200, 20, I18n.format("gui.done"),
+		commonButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (1) / 2, 200, 20, I18n.format("options.tutorialmod.common"),
+				button -> new SidedConfigScreen(title.deepCopy().appendText(" - " + button.getMessage()), this, builder.build(Catergory.GENERAL)).open(minecraft)));
+		clientButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (3) / 2, 200, 20, I18n.format("options.tutorialmod.client"),
+				button -> new SidedConfigScreen(title.deepCopy().appendText(" - " + button.getMessage()), this, builder.build(Catergory.CLIENT)).open(minecraft)));
+		serverButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (5) / 2, 200, 20, I18n.format("options.tutorialmod.server"),
+				button -> new SidedConfigScreen(title.deepCopy().appendText(" - " + button.getMessage()), this, builder.build(Catergory.SERVER)).open(minecraft)));
+		doneButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (7) / 2, 200, 20, I18n.format("gui.done"),
 				button -> onClose()));
+
+		if (category == Catergory.CLIENT) serverButton.active = false;
+		else if (category == Catergory.SERVER) clientButton.active = false;
 	}
 
 	@Override
@@ -57,53 +63,38 @@ public class DefaultConfigScreen extends Screen {
 	}
 
 	@Override
-	public void removed() {
-		this.minecraft.gameSettings.saveOptions();
-	}
+	public void onClose() { this.minecraft.displayGuiScreen(this.parentScreen); }
 
-	@Override
-	public void onClose() {
-		this.minecraft.displayGuiScreen(this.parentScreen);
-	}
-
-	public static enum Side {
-		CLIENT(),
-		SERVER(),
-		COMMON(),
+	public static enum Catergory {
+		GENERAL(), CLIENT(), SERVER(),
 	}
 
 	public static class Builder {
 
-		public static DefaultConfigScreen.Builder create() { return new DefaultConfigScreen.Builder(); }
+		public static ConfigScreen.Builder create() { return new ConfigScreen.Builder(); }
 
 		private final List<AbstractOption> optionsClient = new ArrayList<>();
 		private final List<AbstractOption> optionsServer = new ArrayList<>();
-		private final List<AbstractOption> optionsCommon = new ArrayList<>();
+		private final List<AbstractOption> optionsGeneral = new ArrayList<>();
 
-		private List<AbstractOption> options = optionsCommon;
+		private List<AbstractOption> options = optionsGeneral;
 
-		public DefaultConfigScreen.Builder client() { options = optionsClient; return this; }
+		public ConfigScreen.Builder general() { options = optionsGeneral; return this; }
 
-		public DefaultConfigScreen.Builder server() { options = optionsServer; return this; }
+		public ConfigScreen.Builder client() { options = optionsClient; return this; }
 
-		public DefaultConfigScreen.Builder common() { options = optionsCommon; return this; }
+		public ConfigScreen.Builder server() { options = optionsServer; return this; }
 
-		public AbstractOption[] build() { return build(Side.COMMON); }
+		public AbstractOption[] build() { return build(Catergory.GENERAL); }
 
-		public AbstractOption[] build(Side side) {
-			if (side == Side.CLIENT) return optionsClient.toArray(new AbstractOption[optionsClient.size()]);
-			if (side == Side.SERVER) return optionsServer.toArray(new AbstractOption[optionsServer.size()]);
-			if (side == Side.COMMON) {
-				List<AbstractOption> options = new ArrayList<>();
-				options.addAll(optionsClient);
-				options.addAll(optionsServer);
-				options.addAll(optionsCommon);
-				return options.toArray(new AbstractOption[options.size()]);
-			}
+		public AbstractOption[] build(Catergory side) {
+			if (side == Catergory.CLIENT) return optionsClient.toArray(new AbstractOption[optionsClient.size()]);
+			if (side == Catergory.SERVER) return optionsServer.toArray(new AbstractOption[optionsServer.size()]);
+			if (side == Catergory.GENERAL) return optionsGeneral.toArray(new AbstractOption[optionsGeneral.size()]);
 			return null;
 		}
 
-		public DefaultConfigScreen.Builder Boolean(String translationKey, ForgeConfigSpec.BooleanValue value) {
+		public ConfigScreen.Builder Boolean(String translationKey, ForgeConfigSpec.BooleanValue value) {
 			options.add(new BooleanOption(translationKey,
 					(settings) -> value.get(),
 					(settings, _value) -> {
@@ -113,7 +104,7 @@ public class DefaultConfigScreen extends Screen {
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Integer(String translationKey, ForgeConfigSpec.IntValue value, double minValue, double maxValue, float stepSize) {
+		public ConfigScreen.Builder Integer(String translationKey, ForgeConfigSpec.IntValue value, double minValue, double maxValue, float stepSize) {
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
@@ -128,7 +119,7 @@ public class DefaultConfigScreen extends Screen {
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Long(String translationKey, ForgeConfigSpec.LongValue value, double minValue, double maxValue, float stepSize) {
+		public ConfigScreen.Builder Long(String translationKey, ForgeConfigSpec.LongValue value, double minValue, double maxValue, float stepSize) {
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
@@ -143,7 +134,7 @@ public class DefaultConfigScreen extends Screen {
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Double(String translationKey, ForgeConfigSpec.DoubleValue value, double minValue, double maxValue, float stepSize) {
+		public ConfigScreen.Builder Double(String translationKey, ForgeConfigSpec.DoubleValue value, double minValue, double maxValue, float stepSize) {
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
@@ -158,7 +149,7 @@ public class DefaultConfigScreen extends Screen {
 			return this;
 		}
 
-		public <T> DefaultConfigScreen.Builder Value(String translationKey, ForgeConfigSpec.ConfigValue<T> value,
+		public <T> ConfigScreen.Builder Value(String translationKey, ForgeConfigSpec.ConfigValue<T> value,
 				double minValue, double maxValue, float stepSize,
 				Function<T, Double> getter,
 				Function<Double, T> setter,
@@ -177,7 +168,7 @@ public class DefaultConfigScreen extends Screen {
 			return this;
 		}
 
-		public <T extends Enum<T>> DefaultConfigScreen.Builder Enum(String translationKey, ForgeConfigSpec.EnumValue<T> value,
+		public <T extends Enum<T>> ConfigScreen.Builder Enum(String translationKey, ForgeConfigSpec.EnumValue<T> value,
 				double minValue, double maxValue, float stepSize,
 				Function<T, Double> getter,
 				Function<Double, T> setter,
@@ -196,42 +187,42 @@ public class DefaultConfigScreen extends Screen {
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Boolean(String translationKey, ForgeConfigSpec.BooleanValue value,
+		public ConfigScreen.Builder Boolean(String translationKey, ForgeConfigSpec.BooleanValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Integer(String translationKey, ForgeConfigSpec.IntValue value,
+		public ConfigScreen.Builder Integer(String translationKey, ForgeConfigSpec.IntValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Long(String translationKey, ForgeConfigSpec.LongValue value,
+		public ConfigScreen.Builder Long(String translationKey, ForgeConfigSpec.LongValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public DefaultConfigScreen.Builder Double(String translationKey, ForgeConfigSpec.DoubleValue value,
+		public ConfigScreen.Builder Double(String translationKey, ForgeConfigSpec.DoubleValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public <T> DefaultConfigScreen.Builder Value(String translationKey, ForgeConfigSpec.ConfigValue<T> value,
+		public <T> ConfigScreen.Builder Value(String translationKey, ForgeConfigSpec.ConfigValue<T> value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public <T extends Enum<T>> DefaultConfigScreen.Builder Enum(String translationKey, ForgeConfigSpec.EnumValue<T> value,
+		public <T extends Enum<T>> ConfigScreen.Builder Enum(String translationKey, ForgeConfigSpec.EnumValue<T> value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
 			options.add(new IteratableOption(translationKey, setter, getter));
