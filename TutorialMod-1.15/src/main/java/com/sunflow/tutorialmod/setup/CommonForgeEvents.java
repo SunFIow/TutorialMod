@@ -14,7 +14,7 @@ public class CommonForgeEvents {
 	public static void serverStarting(FMLServerStartingEvent event) {
 		Log.info("Preparing the server for u senpai.");
 
-//		Registration.COPPER.get().register();
+//		Registration.COPPER_BIOME.get().register();
 		ModCommands.register(event.getCommandDispatcher());
 		TutorialMod.data = event.getServer().getWorld(DimensionType.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
 	}

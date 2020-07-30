@@ -17,8 +17,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public abstract class CommonProxy {
 
 	public final void registerEvents() {
-		registerModEvents(FMLJavaModLoadingContext.get().getModEventBus());
 		registerForgeEvents(MinecraftForge.EVENT_BUS);
+		registerModEvents(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	public void registerForgeEvents(final IEventBus eventBus) {
@@ -37,8 +37,6 @@ public abstract class CommonProxy {
 		eventBus.addListener(TutorialModConfig::onLoad);
 		eventBus.addListener(TutorialModConfig::onReload);
 		eventBus.addListener(ModGenerator::generate);
-
-//		eventBus.addListener(InGameConfig::RegisterExtensionPoint);
 	}
 
 	public abstract World getClientWorld();

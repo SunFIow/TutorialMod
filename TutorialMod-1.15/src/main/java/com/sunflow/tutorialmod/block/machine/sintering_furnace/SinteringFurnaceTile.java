@@ -52,7 +52,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	protected Processor burner = createFuelProcessor();
 	private LazyOptional<IProcessor> fuelProcessor = LazyOptional.of(() -> burner);
 
-	protected Processor createCookProcessor() { return new Processor(0, TutorialModConfig.SINTERING_FURNACE_TICKS.get()); }
+	protected Processor createCookProcessor() { return new Processor(0, TutorialModConfig.SERVER.SINTERING_FURNACE_TICKS.get()); }
 
 	protected Processor createFuelProcessor() { return new Processor(); }
 

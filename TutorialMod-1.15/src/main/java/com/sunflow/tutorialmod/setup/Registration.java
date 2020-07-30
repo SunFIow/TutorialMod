@@ -8,6 +8,7 @@ import com.sunflow.tutorialmod._testing.block.buffer.BufferBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferTileEntity;
 import com.sunflow.tutorialmod._testing.block.multiblock.MultiBlock;
 import com.sunflow.tutorialmod.block.ConfigBlock;
+import com.sunflow.tutorialmod.block.DustBlock;
 import com.sunflow.tutorialmod.block.TeleporterBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
@@ -140,6 +141,9 @@ public class Registration {
 	}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<DustBlock> DUSTBLOCK = BLOCKS.register("dust", () -> new DustBlock(Block.Properties.create(Material.SNOW).tickRandomly().hardnessAndResistance(0.1F).sound(SoundType.SNOW)));
+	public static final RegistryObject<BlockItem> DUSTBLOCK_ITEM = ITEMS.register("dust", () -> new BlockItem(DUSTBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 	public static final RegistryObject<ConfigBlock> CONFIGBLOCK = BLOCKS.register("configblock", ConfigBlock::new);
 	public static final RegistryObject<BlockItem> CONFIGBLOCK_ITEM = ITEMS.register("configblock", () -> new BlockItem(CONFIGBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
@@ -365,7 +369,7 @@ public class Registration {
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // BIOMES
 
-	public static final RegistryObject<CopperBiome> COPPER = BIOMES.register("copper", CopperBiome::new);
+	public static final RegistryObject<CopperBiome> COPPER_BIOME = BIOMES.register("copper", CopperBiome::new);
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // TILEENTITIES

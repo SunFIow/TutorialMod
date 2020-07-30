@@ -26,7 +26,7 @@ public class EnergyWandItem extends Item implements IEnergyItem {
 
 	@Override
 	public CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.ENERGY_ITEM_MAXPOWER.get());
+		return new CustomEnergyStorage(TutorialModConfig.SERVER.ENERGY_ITEM_MAXPOWER.get());
 	}
 
 	@Override

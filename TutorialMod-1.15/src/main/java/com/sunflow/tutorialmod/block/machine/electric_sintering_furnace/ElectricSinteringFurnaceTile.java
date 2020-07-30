@@ -35,12 +35,12 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 
-	private static final int ENERGY_USE = TutorialModConfig.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get();
+	private static final int ENERGY_USE = TutorialModConfig.SERVER.ELECTRIC_SINTERING_FURNACE_CONSUMPTION.get() / TutorialModConfig.SERVER.ELECTRIC_SINTERING_FURNACE_TICKS.get();
 
 	protected Processor cooker = createProcessor();
 	private LazyOptional<IProcessor> processor = LazyOptional.of(() -> cooker);
 
-	protected Processor createProcessor() { return new Processor(0, TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get()); }
+	protected Processor createProcessor() { return new Processor(0, TutorialModConfig.SERVER.ELECTRIC_SINTERING_FURNACE_TICKS.get()); }
 
 	@Override
 	protected ItemStackHandler createHandler() {
@@ -64,7 +64,7 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000) {
+		return new CustomEnergyStorage(TutorialModConfig.SERVER.ELECTRIC_SINTERING_FURNACE_MAXPOWER.get(), TutorialModConfig.SERVER.ELECTRIC_SINTERING_FURNACE_RECEIVE.get(), 50000) {
 			@Override
 			protected void onEnergyChanged() {
 				markDirty();

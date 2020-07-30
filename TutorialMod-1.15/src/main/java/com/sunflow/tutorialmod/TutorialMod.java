@@ -10,9 +10,7 @@ import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.versions.mcp.MCPVersion;
 
@@ -39,9 +37,7 @@ public class TutorialMod {
 		Log.info("Or would you rather take a bath?");
 		Log.info("Or...");
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TutorialModConfig.CLIENT_CONFIG);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, TutorialModConfig.SERVER_CONFIG);
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.COMMON_CONFIG);
+		TutorialModConfig.setup();
 
 		proxy.registerEvents();
 

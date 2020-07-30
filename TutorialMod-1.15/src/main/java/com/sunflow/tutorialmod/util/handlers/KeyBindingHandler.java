@@ -18,8 +18,8 @@ public class KeyBindingHandler {
 	public static void handleKeyInputEvent(InputEvent.KeyInputEvent event) {
 		if (ModKeyBindings.EXPLODE.isPressed()) Networking.sendToServer(new ExplodePacket(4711));
 		if (ModKeyBindings.OVERLAY.isPressed()) {
-			TutorialModConfig.CONFIG_SHOW_OVERLAY.set(!TutorialModConfig.CONFIG_SHOW_OVERLAY.get());
-			TutorialModConfig.CONFIG_SHOW_OVERLAY.save();
+			TutorialModConfig.CLIENT.showOverlay.set(!TutorialModConfig.CLIENT.showOverlay.get());
+			TutorialModConfig.CLIENT.showOverlay.save();
 		}
 	}
 

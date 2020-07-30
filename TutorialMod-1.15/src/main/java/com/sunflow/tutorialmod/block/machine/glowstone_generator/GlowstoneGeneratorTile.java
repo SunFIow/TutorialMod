@@ -58,7 +58,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get()) {
+		return new CustomEnergyStorage(TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_TRANSFER.get()) {
 			@Override
 			protected void onEnergyChanged() {
 				markDirty();
@@ -137,7 +137,7 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 //							energyHandler.extractEnergy(eReceived, false);							
 //							tileentity.markDirty();
 
-							int maxExtracted = Math.min(energyStorage.getEnergyStored(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
+							int maxExtracted = Math.min(energyStorage.getEnergyStored(), TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_TRANSFER.get());
 							int received = e.receiveEnergy(maxExtracted, false);
 							energyStorage.extractEnergy(received, false);
 
@@ -155,12 +155,12 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	private boolean isItemFuel(Item item) { return getFuelValue(item) > 0; }
 
 	private int getFuelValue(Item item) {
-		if (item == FUEL_ITEM) return TutorialModConfig.GLOWSTONE_GENERATOR_GENERATE.get();
+		if (item == FUEL_ITEM) return TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_GENERATE.get();
 		else return 0;
 	}
 
 	private int getFuelTicks(Item item) {
-		if (item == FUEL_ITEM) return TutorialModConfig.GLOWSTONE_GENERATOR_TICKS.get();
+		if (item == FUEL_ITEM) return TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_TICKS.get();
 		else return 0;
 	}
 

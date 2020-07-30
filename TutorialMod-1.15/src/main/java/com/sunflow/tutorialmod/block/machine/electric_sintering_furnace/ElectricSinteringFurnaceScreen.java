@@ -30,7 +30,7 @@ public class ElectricSinteringFurnaceScreen extends ScreenBase<ElectricSintering
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
-		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.ELECTRIC_SINTERING_FURNACE_TICKS.get(), 24);
+		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.SERVER.ELECTRIC_SINTERING_FURNACE_TICKS.get(), 24);
 		this.blit(guiLeft + 79, guiTop + 34, 176, 14, l, 17);
 
 		int k = getProgressScaled(container.getEnergy(), container.getEnergyMax(), 76);

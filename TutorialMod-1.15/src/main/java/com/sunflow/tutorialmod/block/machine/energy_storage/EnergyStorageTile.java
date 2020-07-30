@@ -15,7 +15,7 @@ public class EnergyStorageTile extends EnergyTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get());
+		return new CustomEnergyStorage(TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_MAXPOWER.get(), TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_TRANSFER.get());
 	}
 
 	public EnergyStorageTile() {

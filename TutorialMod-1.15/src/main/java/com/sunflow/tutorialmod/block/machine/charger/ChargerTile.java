@@ -39,7 +39,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 
 	@Override
 	protected CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(TutorialModConfig.CHARGER_MAXPOWER.get(), TutorialModConfig.CHARGER_RECEIVE.get(), TutorialModConfig.CHARGER_CHARGE_RATE.get()) {
+		return new CustomEnergyStorage(TutorialModConfig.SERVER.CHARGER_MAXPOWER.get(), TutorialModConfig.SERVER.CHARGER_RECEIVE.get(), TutorialModConfig.SERVER.CHARGER_CHARGE_RATE.get()) {
 			@Override
 			protected void onEnergyChanged() {
 				markDirty();
@@ -61,7 +61,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 			if (!chargeSlot.isEmpty()) {
 				CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(chargeSlot, EnergyUnit.DEFAULT);
 				if (itemEnergy.canReceive()) {
-					int maxEExt = energyStorage.extractEnergy(TutorialModConfig.CHARGER_CHARGE_RATE.get(), true);
+					int maxEExt = energyStorage.extractEnergy(TutorialModConfig.SERVER.CHARGER_CHARGE_RATE.get(), true);
 					int eReceived = itemEnergy.receiveEnergy(maxEExt, false);
 					if (eReceived > 0) {
 						energyStorage.extractEnergy(eReceived, false);

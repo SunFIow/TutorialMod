@@ -14,6 +14,7 @@ import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceS
 import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
 import com.sunflow.tutorialmod.block.model.CustomBakedModel;
 import com.sunflow.tutorialmod.block.model.CustomModelLoader;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobRenderer;
 import com.sunflow.tutorialmod.rendering.ModISTER;
@@ -30,8 +31,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientModEvents {
@@ -54,6 +58,9 @@ public class ClientModEvents {
 
 		Log.debug("Registering the keybindings for u senpai.");
 		ModKeyBindings.register();
+
+		ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY,
+				() -> (mc, parent) -> TutorialModConfig.createScreen(parent, ModConfig.Type.CLIENT));
 
 		Log.info("m...");
 		Log.info("mm...");
