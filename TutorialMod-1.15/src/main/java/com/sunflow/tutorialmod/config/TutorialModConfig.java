@@ -8,7 +8,6 @@ import com.sunflow.tutorialmod.util.Log;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 
 public class TutorialModConfig {
@@ -32,12 +31,6 @@ public class TutorialModConfig {
 		return new ConfigScreen(new StringTextComponent(TutorialMod.NAME), parent, type, getOrCreateBuilder());
 	}
 
-	public static void setup() {
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TutorialModConfig.clientSpec);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, TutorialModConfig.serverSpec);
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TutorialModConfig.commonSpec);
-	}
-
 //	private static final ForgeConfigSpec commonSpec;
 //	public static final Common COMMON;
 //	static {
@@ -54,7 +47,7 @@ public class TutorialModConfig {
 //		}
 //	}
 
-	private static final ForgeConfigSpec clientSpec;
+	public static final ForgeConfigSpec clientSpec;
 	public static final Client CLIENT;
 	static {
 		final Pair<Client, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Client::new);
@@ -63,11 +56,12 @@ public class TutorialModConfig {
 	}
 
 	public static class Client {
+		public static final String PATH = "client";
 		public final ForgeConfigSpec.BooleanValue showOverlay;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			builder.comment("Client configuration settings")
-					.push("client");
+					.push(PATH);
 
 			showOverlay = builder.comment("Show the Overlay InGame")
 					.define("show", false);
@@ -77,7 +71,7 @@ public class TutorialModConfig {
 
 	}
 
-	private static final ForgeConfigSpec serverSpec;
+	public static final ForgeConfigSpec serverSpec;
 	public static final Server SERVER;
 	static {
 		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
@@ -86,6 +80,8 @@ public class TutorialModConfig {
 	}
 
 	public static class Server {
+		public static final String PATH = "server";
+
 		public final ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_GENERATE;
 		public final ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_MAXPOWER;
 		public final ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_TRANSFER;
@@ -107,7 +103,7 @@ public class TutorialModConfig {
 
 		Server(ForgeConfigSpec.Builder builder) {
 			builder.comment("Server configuration settings")
-					.push("server");
+					.push(PATH);
 
 			// <Machines>
 			builder.comment("Machine Settings")

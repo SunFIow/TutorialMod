@@ -20,7 +20,7 @@ public class ConfigBlock extends Block {
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if (world.isRemote) {
+		if (world.isRemote && hand == Hand.MAIN_HAND) {
 			TutorialModConfig.createScreen(null, ModConfig.Type.COMMON).open(TutorialMod.proxy.getMinecraft());
 			return ActionResultType.SUCCESS;
 		}

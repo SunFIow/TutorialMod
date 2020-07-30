@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.network;
 import java.util.function.Supplier;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.config.SyncConfigPacket;
 import com.sunflow.tutorialmod.network.packet.ExplodePacket;
 import com.sunflow.tutorialmod.network.packet.MultiJumpPacket;
 import com.sunflow.tutorialmod.network.packet.OpenGuiPacket;
@@ -93,6 +94,12 @@ public class Networking {
 				.encoder(PlayerSkinChangedPacket::encode)
 				.decoder(PlayerSkinChangedPacket::new)
 				.consumer(PlayerSkinChangedPacket::onMessage)
+				.add();
+
+		TUTORIALMOD_CHANNEL.messageBuilder(SyncConfigPacket.class, nextID())
+				.encoder(SyncConfigPacket::encode)
+				.decoder(SyncConfigPacket::new)
+				.consumer(SyncConfigPacket::onMessage)
 				.add();
 	}
 

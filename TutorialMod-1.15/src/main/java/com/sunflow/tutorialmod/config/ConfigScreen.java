@@ -6,8 +6,9 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import com.sunflow.tutorialmod.network.Networking;
+
 import net.minecraft.client.GameSettings;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
@@ -17,11 +18,10 @@ import net.minecraft.client.settings.IteratableOption;
 import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.config.ModConfig;
 
-public class ConfigScreen extends Screen {
-
-	protected final Screen parentScreen;
+public class ConfigScreen extends BaseConfigScreen {
 
 	protected final ConfigScreen.Builder builder;
 
@@ -33,38 +33,24 @@ public class ConfigScreen extends Screen {
 	protected Button doneButton;
 
 	public ConfigScreen(ITextComponent title, Screen parentScreen, ModConfig.Type type, ConfigScreen.Builder builder) {
-		super(title);
-		this.parentScreen = parentScreen;
+		super(title, parentScreen, 9);
 		this.builder = builder;
 		this.type = type;
 	}
 
-	public void open(Minecraft mc) { mc.displayGuiScreen(this); }
-
 	@Override
 	protected void init() {
+		super.init();
 		commonButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (1) / 2, 200, 20, I18n.format("options.tutorialmod.common"),
 				button -> new SidedConfigScreen(title.deepCopy().appendText(" - " + button.getMessage()), this, builder.build(ModConfig.Type.COMMON)).open(minecraft)));
 		clientButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (3) / 2, 200, 20, I18n.format("options.tutorialmod.client"),
 				button -> new SidedConfigScreen(title.deepCopy().appendText(" - " + button.getMessage()), this, builder.build(ModConfig.Type.CLIENT)).open(minecraft)));
 		serverButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (5) / 2, 200, 20, I18n.format("options.tutorialmod.server"),
 				button -> new SidedConfigScreen(title.deepCopy().appendText(" - " + button.getMessage()), this, builder.build(ModConfig.Type.SERVER)).open(minecraft)));
-		doneButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (7) / 2, 200, 20, I18n.format("gui.done"),
-				button -> onClose()));
 
 		if (type == ModConfig.Type.CLIENT) serverButton.active = false;
 		else if (type == ModConfig.Type.SERVER) clientButton.active = false;
 	}
-
-	@Override
-	public void render(int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground();
-		this.drawCenteredString(this.font, this.title.getFormattedText(), this.width / 2, 20, 16777215);
-		super.render(mouseX, mouseY, partialTicks);
-	}
-
-	@Override
-	public void onClose() { this.minecraft.displayGuiScreen(this.parentScreen); }
 
 	public static class Builder {
 
@@ -87,6 +73,15 @@ public class ConfigScreen extends Screen {
 			}
 		}
 
+		private <T> void save(ConfigValue<T> value, ModConfig.Type configScreenType, SyncConfigPacket.Type optionType) {
+			if (configScreenType == ModConfig.Type.SERVER) sync(value, optionType);
+			value.save();
+		}
+
+		private <T> void sync(ConfigValue<T> value, SyncConfigPacket.Type type) {
+			Networking.sendToServer(new SyncConfigPacket(value, type));
+		}
+
 		public AbstractOption[] build(ModConfig.Type type) {
 			List<AbstractOption> options = getList(type);
 			return options.toArray(new AbstractOption[options.size()]);
@@ -98,7 +93,7 @@ public class ConfigScreen extends Screen {
 					(settings) -> value.get(),
 					(settings, _value) -> {
 						value.set(_value);
-						value.save();
+						save(value, type, SyncConfigPacket.Type.BOOL);
 					}));
 			return this;
 		}
@@ -109,7 +104,7 @@ public class ConfigScreen extends Screen {
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.intValue());
-						value.save();
+						save(value, type, SyncConfigPacket.Type.INT);
 					},
 					(settings, _option) -> {
 						double d0 = _option.get(settings);
@@ -125,7 +120,7 @@ public class ConfigScreen extends Screen {
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.longValue());
-						value.save();
+						save(value, type, SyncConfigPacket.Type.LONG);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -141,7 +136,7 @@ public class ConfigScreen extends Screen {
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.doubleValue());
-						value.save();
+						save(value, type, SyncConfigPacket.Type.DOUBLE);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -161,7 +156,7 @@ public class ConfigScreen extends Screen {
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						value.save();
+						save(value, type, SyncConfigPacket.Type.CUSTOM);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -181,7 +176,7 @@ public class ConfigScreen extends Screen {
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						value.save();
+						save(value, type, SyncConfigPacket.Type.ENUM);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
