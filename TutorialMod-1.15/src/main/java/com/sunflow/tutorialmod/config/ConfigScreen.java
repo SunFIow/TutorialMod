@@ -1,11 +1,13 @@
 package com.sunflow.tutorialmod.config;
 
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import com.electronwill.nightconfig.core.Config;
 import com.sunflow.tutorialmod.network.Networking;
 
 import net.minecraft.client.GameSettings;
@@ -60,8 +62,8 @@ public class ConfigScreen extends BaseConfigScreen {
 		private final List<AbstractOption> optionsClient = new ArrayList<>();
 		private final List<AbstractOption> optionsServer = new ArrayList<>();
 
-		private List<AbstractOption> getList(ModConfig.Type type) {
-			switch (type) {
+		private List<AbstractOption> getList(ModConfig.Type screenType) {
+			switch (screenType) {
 				case COMMON:
 					return optionsCommon;
 				case CLIENT:
@@ -73,13 +75,13 @@ public class ConfigScreen extends BaseConfigScreen {
 			}
 		}
 
-		private <T> void save(ConfigValue<T> value, ModConfig.Type configScreenType, SyncConfigPacket.Type optionType) {
-			if (configScreenType == ModConfig.Type.SERVER) sync(value, optionType);
+		private <T> void save(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType) {
+			if (screenType == ModConfig.Type.SERVER) sync(value, packetType);
 			value.save();
 		}
 
-		private <T> void sync(ConfigValue<T> value, SyncConfigPacket.Type type) {
-			Networking.sendToServer(new SyncConfigPacket(value, type));
+		private <T> void sync(ConfigValue<T> value, SyncConfigPacket.Type packetType) {
+			Networking.sendToServer(new SyncConfigPacket(value, packetType));
 		}
 
 		public AbstractOption[] build(ModConfig.Type type) {
@@ -87,24 +89,24 @@ public class ConfigScreen extends BaseConfigScreen {
 			return options.toArray(new AbstractOption[options.size()]);
 		}
 
-		public ConfigScreen.Builder Boolean(ModConfig.Type type, String translationKey, ForgeConfigSpec.BooleanValue value) {
-			List<AbstractOption> options = getList(type);
+		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.BooleanValue value) {
+			List<AbstractOption> options = getList(screenType);
 			options.add(new BooleanOption(translationKey,
 					(settings) -> value.get(),
 					(settings, _value) -> {
 						value.set(_value);
-						save(value, type, SyncConfigPacket.Type.BOOL);
+						save(value, screenType, SyncConfigPacket.Type.BOOL);
 					}));
 			return this;
 		}
 
-		public ConfigScreen.Builder Integer(ModConfig.Type type, String translationKey, ForgeConfigSpec.IntValue value, double minValue, double maxValue, float stepSize) {
-			List<AbstractOption> options = getList(type);
+		public ConfigScreen.Builder Integer(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.IntValue value, double minValue, double maxValue, float stepSize) {
+			List<AbstractOption> options = getList(screenType);
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.intValue());
-						save(value, type, SyncConfigPacket.Type.INT);
+						save(value, screenType, SyncConfigPacket.Type.INT);
 					},
 					(settings, _option) -> {
 						double d0 = _option.get(settings);
@@ -114,13 +116,13 @@ public class ConfigScreen extends BaseConfigScreen {
 			return this;
 		}
 
-		public ConfigScreen.Builder Long(ModConfig.Type type, String translationKey, ForgeConfigSpec.LongValue value, double minValue, double maxValue, float stepSize) {
-			List<AbstractOption> options = getList(type);
+		public ConfigScreen.Builder Long(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.LongValue value, double minValue, double maxValue, float stepSize) {
+			List<AbstractOption> options = getList(screenType);
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.longValue());
-						save(value, type, SyncConfigPacket.Type.LONG);
+						save(value, screenType, SyncConfigPacket.Type.LONG);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -130,13 +132,13 @@ public class ConfigScreen extends BaseConfigScreen {
 			return this;
 		}
 
-		public ConfigScreen.Builder Double(ModConfig.Type type, String translationKey, ForgeConfigSpec.DoubleValue value, double minValue, double maxValue, float stepSize) {
-			List<AbstractOption> options = getList(type);
+		public ConfigScreen.Builder Double(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.DoubleValue value, double minValue, double maxValue, float stepSize) {
+			List<AbstractOption> options = getList(screenType);
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.doubleValue());
-						save(value, type, SyncConfigPacket.Type.DOUBLE);
+						save(value, screenType, SyncConfigPacket.Type.DOUBLE);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -146,90 +148,141 @@ public class ConfigScreen extends BaseConfigScreen {
 			return this;
 		}
 
-		public <T> ConfigScreen.Builder Value(ModConfig.Type type, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
+		public <T extends Enum<T>> ConfigScreen.Builder Enum(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.EnumValue<T> value,
 				double minValue, double maxValue, float stepSize,
 				Function<T, Double> getter,
 				Function<Double, T> setter,
-				Function<Double, String> namer) {
-			List<AbstractOption> options = getList(type);
+				Function<T, String> namer) {
+			List<AbstractOption> options = getList(screenType);
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						save(value, type, SyncConfigPacket.Type.CUSTOM);
+						save(value, screenType, SyncConfigPacket.Type.ENUM);
 					},
 					(settings, option) -> {
-						double d0 = option.get(settings);
 						String s = option.getDisplayString();
-						return s + namer.apply(d0);
+						return s + namer.apply(value.get());
 					}));
 			return this;
 		}
 
-		public <T extends Enum<T>> ConfigScreen.Builder Enum(ModConfig.Type type, String translationKey, ForgeConfigSpec.EnumValue<T> value,
+		public ConfigScreen.Builder String(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<String> value,
+				double minValue, double maxValue, float stepSize,
+				Function<String, Double> getter,
+				Function<Double, String> setter,
+				Function<String, String> namer) {
+			return ConfigValue(SyncConfigPacket.Type.STRING, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+		}
+
+		// TODO: Config
+		public ConfigScreen.Builder Config(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<Config> value,
+				double minValue, double maxValue, float stepSize,
+				Function<Config, Double> getter,
+				Function<Double, Config> setter,
+				Function<Config, String> namer) {
+			return ConfigValue(SyncConfigPacket.Type.CONFIG, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+		}
+
+		// TODO: List
+		public <T> ConfigScreen.Builder List(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<List<T>> value,
+				double minValue, double maxValue, float stepSize,
+				Function<List<T>, Double> getter,
+				Function<Double, List<T>> setter,
+				Function<List<T>, String> namer) {
+			return ConfigValue(SyncConfigPacket.Type.LIST, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+		}
+
+		// TODO: Temporal
+		public ConfigScreen.Builder Date(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<Temporal> value,
+				double minValue, double maxValue, float stepSize,
+				Function<Temporal, Double> getter,
+				Function<Double, Temporal> setter,
+				Function<Temporal, String> namer) {
+			return ConfigValue(SyncConfigPacket.Type.DATE, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+		}
+
+		// TODO: Number
+		public ConfigScreen.Builder Number(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<Number> value,
+				double minValue, double maxValue, float stepSize,
+				Function<Number, Double> getter,
+				Function<Double, Number> setter,
+				Function<Number, String> namer) {
+			return ConfigValue(SyncConfigPacket.Type.NUMBER, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+		}
+
+		@SuppressWarnings("unused")
+		private <T> ConfigScreen.Builder ConfigValue(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
 				double minValue, double maxValue, float stepSize,
 				Function<T, Double> getter,
 				Function<Double, T> setter,
-				Function<Double, String> namer) {
-			List<AbstractOption> options = getList(type);
+				Function<T, String> namer) {
+			return ConfigValue(SyncConfigPacket.Type.CUSTOM, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+		}
+
+		private <T> ConfigScreen.Builder ConfigValue(SyncConfigPacket.Type packetType, ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
+				double minValue, double maxValue, float stepSize,
+				Function<T, Double> getter,
+				Function<Double, T> setter,
+				Function<T, String> namer) {
+			List<AbstractOption> options = getList(screenType);
 			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						save(value, type, SyncConfigPacket.Type.ENUM);
+						save(value, screenType, packetType);
 					},
 					(settings, option) -> {
-						double d0 = option.get(settings);
 						String s = option.getDisplayString();
-						return s + namer.apply(d0);
+						return s + namer.apply(value.get());
 					}));
 			return this;
 		}
 
-		public ConfigScreen.Builder Boolean(ModConfig.Type type, String translationKey, ForgeConfigSpec.BooleanValue value,
+		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.BooleanValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
-			List<AbstractOption> options = getList(type);
+			List<AbstractOption> options = getList(screenType);
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public ConfigScreen.Builder Integer(ModConfig.Type type, String translationKey, ForgeConfigSpec.IntValue value,
+		public ConfigScreen.Builder Integer(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.IntValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
-			List<AbstractOption> options = getList(type);
+			List<AbstractOption> options = getList(screenType);
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public ConfigScreen.Builder Long(ModConfig.Type type, String translationKey, ForgeConfigSpec.LongValue value,
+		public ConfigScreen.Builder Long(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.LongValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
-			List<AbstractOption> options = getList(type);
+			List<AbstractOption> options = getList(screenType);
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public ConfigScreen.Builder Double(ModConfig.Type type, String translationKey, ForgeConfigSpec.DoubleValue value,
+		public ConfigScreen.Builder Double(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.DoubleValue value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
-			List<AbstractOption> options = getList(type);
+			List<AbstractOption> options = getList(screenType);
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public <T> ConfigScreen.Builder Value(ModConfig.Type type, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
+		public <T> ConfigScreen.Builder ConfigValue(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
-			List<AbstractOption> options = getList(type);
+			List<AbstractOption> options = getList(screenType);
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}
 
-		public <T extends Enum<T>> ConfigScreen.Builder Enum(ModConfig.Type type, String translationKey, ForgeConfigSpec.EnumValue<T> value,
+		public <T extends Enum<T>> ConfigScreen.Builder Enum(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.EnumValue<T> value,
 				BiConsumer<GameSettings, Integer> setter,
 				BiFunction<GameSettings, IteratableOption, String> getter) {
-			List<AbstractOption> options = getList(type);
+			List<AbstractOption> options = getList(screenType);
 			options.add(new IteratableOption(translationKey, setter, getter));
 			return this;
 		}

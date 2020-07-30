@@ -5,8 +5,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.Log;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -22,8 +24,32 @@ public class TutorialModConfig {
 
 	private static ConfigScreen.Builder getOrCreateBuilder() {
 		if (builder == null) builder = ConfigScreen.Builder.create()
-				.Boolean(ModConfig.Type.CLIENT, "options.tutorialmod.client.overlay", TutorialModConfig.CLIENT.showOverlay)
-				.Integer(ModConfig.Type.SERVER, "options.tutorialmod.server.energyitem.maxpower", TutorialModConfig.SERVER.ENERGY_ITEM_MAXPOWER, 0.0D, 20000, 1.0F);
+//				.Boolean(ModConfig.Type.CLIENT, "options.tutorialmod.client.overlay", TutorialModConfig.CLIENT.showOverlay)
+//				.Integer(ModConfig.Type.SERVER, "options.tutorialmod.server.energyitem.maxpower", TutorialModConfig.SERVER.ENERGY_ITEM_MAXPOWER, 0.0D, 20000, 1.0F)
+
+				.Boolean(ModConfig.Type.SERVER, "boolean", SERVER.BOOLEAN_CONFIG)
+				.Integer(ModConfig.Type.SERVER, "integer", SERVER.INTEGER_CONFIG, 69, 4711, 0)
+				.Long(ModConfig.Type.SERVER, "long", SERVER.LONG_CONFIG, 69L, 4711L, 0)
+				.Double(ModConfig.Type.SERVER, "double", SERVER.DOUBLE_CONFIG, 0D, 3D, 0)
+				.Enum(ModConfig.Type.SERVER, "enum", SERVER.ENUM_CONFIG, 0, SyncConfigPacket.Type.values().length, 1,
+						e -> {
+							SyncConfigPacket.Type[] values = SyncConfigPacket.Type.values();
+							for (int i = 0; i < SyncConfigPacket.Type.values().length; i++)
+								if (values[i] == e) return (double) i;
+							return -1D;
+						},
+						d -> SyncConfigPacket.Type.values()[Math.min(d.intValue(), SyncConfigPacket.Type.values().length - 1)],
+						e -> {
+							SyncConfigPacket.Type[] values = SyncConfigPacket.Type.values();
+							for (int i = 0; i < SyncConfigPacket.Type.values().length; i++)
+								if (values[i] == e) return i + "/" + values.length + " " + e;
+							return "-1/" + (values.length - 1) + " " + e;
+						})
+				.String(ModConfig.Type.SERVER, "string", SERVER.String_VALUE_CONFIG, 0, 3, 0,
+						s -> s == Blocks.STONE.getTranslationKey() ? 0D : s == Blocks.NETHERRACK.getTranslationKey() ? 1D : 2D,
+						d -> d < 1 ? Blocks.STONE.getTranslationKey() : d < 2 ? Blocks.NETHERRACK.getTranslationKey() : Blocks.END_STONE.getTranslationKey(),
+						s -> new TranslationTextComponent(s).getFormattedText());
+
 		return builder;
 	}
 
@@ -101,9 +127,35 @@ public class TutorialModConfig {
 		public final ForgeConfigSpec.IntValue ENERGY_ITEM_MAXPOWER;
 		public final ForgeConfigSpec.IntValue ENERGY_ITEM_CONSUME;
 
+		public final ForgeConfigSpec.BooleanValue BOOLEAN_CONFIG;
+		public final ForgeConfigSpec.IntValue INTEGER_CONFIG;
+		public final ForgeConfigSpec.LongValue LONG_CONFIG;
+		public final ForgeConfigSpec.DoubleValue DOUBLE_CONFIG;
+		public final ForgeConfigSpec.EnumValue<SyncConfigPacket.Type> ENUM_CONFIG;
+		public final ForgeConfigSpec.ConfigValue<String> String_VALUE_CONFIG;
+
 		Server(ForgeConfigSpec.Builder builder) {
 			builder.comment("Server configuration settings")
 					.push(PATH);
+
+			// <General>
+			builder.comment("General Settings")
+					.push("general");
+			BOOLEAN_CONFIG = builder.comment("Boolean Test Config")
+					.define("boolean", true);
+			INTEGER_CONFIG = builder.comment("Integer Test Config")
+					.defineInRange("integer", 1337, 69, 4711);
+			LONG_CONFIG = builder.comment("Long Test Config")
+					.defineInRange("long", 1337L, 69L, 4711L);
+			DOUBLE_CONFIG = builder.comment("Double Test Config")
+					.defineInRange("double", 13.37D, 6.9D, 47.11D);
+			String_VALUE_CONFIG = builder.comment("String Value Test Config")
+					.define("string", Blocks.STONE.getTranslationKey());
+			ENUM_CONFIG = builder.comment("Enum Test Config")
+					.defineEnum("enum", SyncConfigPacket.Type.CUSTOM);
+
+			// </General>
+			builder.pop();
 
 			// <Machines>
 			builder.comment("Machine Settings")

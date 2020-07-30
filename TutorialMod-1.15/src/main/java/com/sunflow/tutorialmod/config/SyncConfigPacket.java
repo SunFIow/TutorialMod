@@ -6,7 +6,6 @@ import java.util.List;
 import com.sunflow.tutorialmod.network.packet.BasePacket;
 import com.sunflow.tutorialmod.util.Log;
 
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
@@ -50,9 +49,6 @@ public class SyncConfigPacket extends BasePacket {
 			case DOUBLE:
 				val = buf.readDouble();
 				break;
-			case CUSTOM:
-				val = buf.readCompoundTag();
-				break;
 			case ENUM:
 				String enumClazzName = buf.readString(1000);
 				try {
@@ -62,8 +58,23 @@ public class SyncConfigPacket extends BasePacket {
 					e.printStackTrace();
 				}
 				break;
+			case STRING:
+				val = buf.readString(1000);
+				break;
+			// TODO:
+			case CONFIG:
+				break;
+			case LIST:
+				break;
+			case DATE:
+				break;
+			case NUMBER:
+				break;
+//			case CUSTOM:
+//				break;
 			default:
-				Log.error(type + " isnt a known Type");
+				Log.error("SyncConfigPacket#decode - type unknown");
+				Log.error(type);
 				break;
 		}
 	}
@@ -73,7 +84,7 @@ public class SyncConfigPacket extends BasePacket {
 		List<String> path = value.getPath();
 
 		buf.writeInt(path.size());
-		path.forEach((s) -> buf.writeString(s));
+		path.forEach((s) -> buf.writeString(s, 1000));
 
 		buf.writeEnumValue(type);
 
@@ -90,20 +101,27 @@ public class SyncConfigPacket extends BasePacket {
 			case DOUBLE:
 				buf.writeDouble((Double) value.get());
 				break;
-			case CUSTOM:
-				if (value.get() instanceof IConfigValue) {
-					buf.writeCompoundTag(((IConfigValue) value.get()).serializeNBT());
-				} else {
-					Log.error("SyncConfigPacket#encode - " + value.get().getClass().getSimpleName() + " doesn't implement IConfigValue");
-				}
-				break;
 			case ENUM:
-				buf.writeString(value.get().getClass().getName());
+				buf.writeString(value.get().getClass().getName(), 1000);
 				buf.writeEnumValue((Enum<?>) value.get());
 				break;
+			case STRING:
+				buf.writeString((String) value.get(), 1000);
+				break;
+			// TODO:
+			case CONFIG:
+				break;
+			case LIST:
+				break;
+			case DATE:
+				break;
+			case NUMBER:
+				break;
+//			case CUSTOM:
+//				break;
 			default:
-				Log.error("SyncConfigPacket#encode - value class unknown");
-				Log.error(value.getClass());
+				Log.error("SyncConfigPacket#encode - type unknown");
+				Log.error(type);
 				break;
 		}
 	}
@@ -135,20 +153,34 @@ public class SyncConfigPacket extends BasePacket {
 			case DOUBLE:
 				((DoubleValue) value).set((Double) val);
 				break;
-			case CUSTOM:
-				((IConfigValue) value.get()).deserializeNBT(value, (CompoundNBT) val);
-				break;
 			case ENUM:
 				((EnumValue) value).set(val);
 				break;
+			case STRING:
+				((ConfigValue<String>) value).set((String) val);
+				break;
+			// TODO:
+			case CONFIG:
+				break;
+			case LIST:
+				break;
+			case DATE:
+				break;
+			case NUMBER:
+				break;
+//			case CUSTOM:
+//				break;
 			default:
+				Log.error("SyncConfigPacket#action - type unknown");
+				Log.error(type);
 				return false;
 		}
 		return true;
 	}
 
 	static enum Type {
-		BOOL, INT, LONG, DOUBLE, CUSTOM, ENUM
+		BOOL, INT, LONG, DOUBLE, ENUM, STRING, CONFIG, LIST, DATE, NUMBER,
+		CUSTOM
 	}
 
 }
