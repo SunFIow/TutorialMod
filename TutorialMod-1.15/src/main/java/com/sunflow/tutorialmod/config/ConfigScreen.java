@@ -1,6 +1,5 @@
 package com.sunflow.tutorialmod.config;
 
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -191,24 +190,6 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<Double, List<T>> setter,
 				Function<List<T>, String> namer) {
 			return ConfigValue(SyncConfigPacket.Type.LIST, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
-		}
-
-		// TODO: Temporal
-		public ConfigScreen.Builder Date(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<Temporal> value,
-				double minValue, double maxValue, float stepSize,
-				Function<Temporal, Double> getter,
-				Function<Double, Temporal> setter,
-				Function<Temporal, String> namer) {
-			return ConfigValue(SyncConfigPacket.Type.DATE, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
-		}
-
-		// TODO: Number
-		public ConfigScreen.Builder Number(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<Number> value,
-				double minValue, double maxValue, float stepSize,
-				Function<Number, Double> getter,
-				Function<Double, Number> setter,
-				Function<Number, String> namer) {
-			return ConfigValue(SyncConfigPacket.Type.NUMBER, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
 		}
 
 		@SuppressWarnings("unused")

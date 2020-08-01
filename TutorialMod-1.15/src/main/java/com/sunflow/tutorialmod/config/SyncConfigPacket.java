@@ -66,10 +66,6 @@ public class SyncConfigPacket extends BasePacket {
 				break;
 			case LIST:
 				break;
-			case DATE:
-				break;
-			case NUMBER:
-				break;
 //			case CUSTOM:
 //				break;
 			default:
@@ -112,10 +108,6 @@ public class SyncConfigPacket extends BasePacket {
 			case CONFIG:
 				break;
 			case LIST:
-				break;
-			case DATE:
-				break;
-			case NUMBER:
 				break;
 //			case CUSTOM:
 //				break;
@@ -164,10 +156,6 @@ public class SyncConfigPacket extends BasePacket {
 				break;
 			case LIST:
 				break;
-			case DATE:
-				break;
-			case NUMBER:
-				break;
 //			case CUSTOM:
 //				break;
 			default:
@@ -179,7 +167,7 @@ public class SyncConfigPacket extends BasePacket {
 	}
 
 	static enum Type {
-		BOOL, INT, LONG, DOUBLE, ENUM, STRING, CONFIG, LIST, DATE, NUMBER,
+		BOOL, INT, LONG, DOUBLE, ENUM, STRING, CONFIG, LIST,
 		CUSTOM
 	}
 

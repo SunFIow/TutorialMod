@@ -45,7 +45,7 @@ public class TutorialModConfig {
 								if (values[i] == e) return i + "/" + values.length + " " + e;
 							return "-1/" + (values.length - 1) + " " + e;
 						})
-				.String(ModConfig.Type.SERVER, "string", SERVER.String_VALUE_CONFIG, 0, 3, 0,
+				.String(ModConfig.Type.SERVER, "string", SERVER.STRING_CONFIG, 0, 3, 0,
 						s -> s == Blocks.STONE.getTranslationKey() ? 0D : s == Blocks.NETHERRACK.getTranslationKey() ? 1D : 2D,
 						d -> d < 1 ? Blocks.STONE.getTranslationKey() : d < 2 ? Blocks.NETHERRACK.getTranslationKey() : Blocks.END_STONE.getTranslationKey(),
 						s -> new TranslationTextComponent(s).getFormattedText());
@@ -132,7 +132,9 @@ public class TutorialModConfig {
 		public final ForgeConfigSpec.LongValue LONG_CONFIG;
 		public final ForgeConfigSpec.DoubleValue DOUBLE_CONFIG;
 		public final ForgeConfigSpec.EnumValue<SyncConfigPacket.Type> ENUM_CONFIG;
-		public final ForgeConfigSpec.ConfigValue<String> String_VALUE_CONFIG;
+		public final ForgeConfigSpec.ConfigValue<String> STRING_CONFIG;
+//		public final ForgeConfigSpec.ConfigValue<Config> CONFIG_CONFIG;
+//		public final ForgeConfigSpec.ConfigValue<List> LIST_CONFIG;
 
 		Server(ForgeConfigSpec.Builder builder) {
 			builder.comment("Server configuration settings")
@@ -149,10 +151,14 @@ public class TutorialModConfig {
 					.defineInRange("long", 1337L, 69L, 4711L);
 			DOUBLE_CONFIG = builder.comment("Double Test Config")
 					.defineInRange("double", 13.37D, 6.9D, 47.11D);
-			String_VALUE_CONFIG = builder.comment("String Value Test Config")
-					.define("string", Blocks.STONE.getTranslationKey());
 			ENUM_CONFIG = builder.comment("Enum Test Config")
 					.defineEnum("enum", SyncConfigPacket.Type.CUSTOM);
+			STRING_CONFIG = builder.comment("String Test Config")
+					.define("string", Blocks.STONE.getTranslationKey());
+//			CONFIG_CONFIG = builder.comment("Config Value Test Config")
+//					.define("config", Blocks.STONE.getTranslationKey());
+//			LIST_CONFIG = builder.comment("List Value Test Config")
+//					.define("list", Blocks.STONE.getTranslationKey());
 
 			// </General>
 			builder.pop();
