@@ -1,7 +1,11 @@
 package com.sunflow.tutorialmod.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.Lists;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.util.Log;
 
@@ -23,33 +27,44 @@ public class TutorialModConfig {
 	private static ConfigScreen.Builder builder;
 
 	private static ConfigScreen.Builder getOrCreateBuilder() {
-		if (builder == null) builder = ConfigScreen.Builder.create()
+
+		if (builder == null) {
+			SyncConfigPacket.Type[] enumValues = SyncConfigPacket.Type.values();
+			builder = ConfigScreen.Builder.create()
 //				.Boolean(ModConfig.Type.CLIENT, "options.tutorialmod.client.overlay", TutorialModConfig.CLIENT.showOverlay)
 //				.Integer(ModConfig.Type.SERVER, "options.tutorialmod.server.energyitem.maxpower", TutorialModConfig.SERVER.ENERGY_ITEM_MAXPOWER, 0.0D, 20000, 1.0F)
 
-				.Boolean(ModConfig.Type.SERVER, "boolean", SERVER.BOOLEAN_CONFIG)
-				.Integer(ModConfig.Type.SERVER, "integer", SERVER.INTEGER_CONFIG, 69, 4711, 0)
-				.Long(ModConfig.Type.SERVER, "long", SERVER.LONG_CONFIG, 69L, 4711L, 0)
-				.Double(ModConfig.Type.SERVER, "double", SERVER.DOUBLE_CONFIG, 0D, 3D, 0)
-				.Enum(ModConfig.Type.SERVER, "enum", SERVER.ENUM_CONFIG, 0, SyncConfigPacket.Type.values().length, 1,
-						e -> {
-							SyncConfigPacket.Type[] values = SyncConfigPacket.Type.values();
-							for (int i = 0; i < SyncConfigPacket.Type.values().length; i++)
-								if (values[i] == e) return (double) i;
-							return -1D;
-						},
-						d -> SyncConfigPacket.Type.values()[Math.min(d.intValue(), SyncConfigPacket.Type.values().length - 1)],
-						e -> {
-							SyncConfigPacket.Type[] values = SyncConfigPacket.Type.values();
-							for (int i = 0; i < SyncConfigPacket.Type.values().length; i++)
-								if (values[i] == e) return i + "/" + values.length + " " + e;
-							return "-1/" + (values.length - 1) + " " + e;
-						})
-				.String(ModConfig.Type.SERVER, "string", SERVER.STRING_CONFIG, 0, 3, 0,
-						s -> s == Blocks.STONE.getTranslationKey() ? 0D : s == Blocks.NETHERRACK.getTranslationKey() ? 1D : 2D,
-						d -> d < 1 ? Blocks.STONE.getTranslationKey() : d < 2 ? Blocks.NETHERRACK.getTranslationKey() : Blocks.END_STONE.getTranslationKey(),
-						s -> new TranslationTextComponent(s).getFormattedText());
-
+					.Boolean(ModConfig.Type.SERVER, "boolean", SERVER.BOOLEAN_CONFIG)
+					.Integer(ModConfig.Type.SERVER, "integer", SERVER.INTEGER_CONFIG, 69, 4711, 0)
+					.Long(ModConfig.Type.SERVER, "long", SERVER.LONG_CONFIG, 69L, 4711L, 0)
+					.Double(ModConfig.Type.SERVER, "double", SERVER.DOUBLE_CONFIG, 0D, 3D, 0)
+					.Enum(ModConfig.Type.SERVER, "enum", SERVER.ENUM_CONFIG, 0, enumValues.length, 1,
+							e -> {
+								for (int i = 0; i < enumValues.length; i++)
+									if (enumValues[i] == e) return (double) i;
+								return -1D;
+							},
+							d -> enumValues[Math.min(d.intValue(), enumValues.length - 1)],
+							e -> {
+								for (int i = 0; i < enumValues.length; i++)
+									if (enumValues[i] == e) return (i + 1) + "/" + enumValues.length + " " + e;
+								return "-1/" + (enumValues.length - 1) + " " + e;
+							})
+					.String(ModConfig.Type.SERVER, "string", SERVER.STRING_CONFIG, 0, 3, 0,
+							s -> s == Blocks.STONE.getTranslationKey() ? 0D : s == Blocks.NETHERRACK.getTranslationKey() ? 1D : 2D,
+							d -> d < 1 ? Blocks.STONE.getTranslationKey() : d < 2 ? Blocks.NETHERRACK.getTranslationKey() : Blocks.END_STONE.getTranslationKey(),
+							s -> new TranslationTextComponent(s).getFormattedText())
+					.List(ModConfig.Type.SERVER, SyncConfigPacket.Type.STRING, "list", SERVER.LIST_CONFIG, 0, 4, 0,
+							l -> (double) l.size(),
+							d -> {
+								ArrayList<String> list = new ArrayList<>();
+								if (d >= 1) list.add("ONE");
+								if (d >= 2) list.add("TWO");
+								if (d >= 3) list.add("THREE");
+								return list;
+							},
+							l -> l.toString());
+		}
 		return builder;
 	}
 
@@ -134,7 +149,7 @@ public class TutorialModConfig {
 		public final ForgeConfigSpec.EnumValue<SyncConfigPacket.Type> ENUM_CONFIG;
 		public final ForgeConfigSpec.ConfigValue<String> STRING_CONFIG;
 //		public final ForgeConfigSpec.ConfigValue<Config> CONFIG_CONFIG;
-//		public final ForgeConfigSpec.ConfigValue<List> LIST_CONFIG;
+		public final ForgeConfigSpec.ConfigValue<List<String>> LIST_CONFIG;
 
 		Server(ForgeConfigSpec.Builder builder) {
 			builder.comment("Server configuration settings")
@@ -152,14 +167,13 @@ public class TutorialModConfig {
 			DOUBLE_CONFIG = builder.comment("Double Test Config")
 					.defineInRange("double", 13.37D, 6.9D, 47.11D);
 			ENUM_CONFIG = builder.comment("Enum Test Config")
-					.defineEnum("enum", SyncConfigPacket.Type.CUSTOM);
+					.defineEnum("enum", SyncConfigPacket.Type.LONG);
 			STRING_CONFIG = builder.comment("String Test Config")
 					.define("string", Blocks.STONE.getTranslationKey());
 //			CONFIG_CONFIG = builder.comment("Config Value Test Config")
-//					.define("config", Blocks.STONE.getTranslationKey());
-//			LIST_CONFIG = builder.comment("List Value Test Config")
-//					.define("list", Blocks.STONE.getTranslationKey());
-
+//					.define("config", Blocks.STONE.getTranslationKey()); 
+			LIST_CONFIG = builder.comment("List Value Test Config")
+					.define("list", Lists.newArrayList());
 			// </General>
 			builder.pop();
 

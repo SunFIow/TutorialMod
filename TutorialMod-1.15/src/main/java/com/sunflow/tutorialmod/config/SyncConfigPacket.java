@@ -22,11 +22,18 @@ public class SyncConfigPacket extends BasePacket {
 
 	private List<String> path;
 	private Type type;
+	private Type listType;
 	private Object val;
 
 	public SyncConfigPacket(ConfigValue<?> value, Type type) {
-		this.type = type;
 		this.value = value;
+		this.type = type;
+	}
+
+	public SyncConfigPacket(ConfigValue<?> value, Type type, Type listType) {
+		this.value = value;
+		this.type = type;
+		this.listType = listType;
 	}
 
 	public SyncConfigPacket(PacketBuffer buf) {
@@ -36,6 +43,19 @@ public class SyncConfigPacket extends BasePacket {
 
 		type = buf.readEnumValue(Type.class);
 
+		if (type == Type.LIST) {
+			listType = buf.readEnumValue(Type.class);
+			int size = buf.readInt();
+			List list = new ArrayList<>();
+			for (int i = 0; i < size; i++)
+				list.add(readValue(buf, listType));
+			val = list;
+//		} else if (type == type.CONFIG) {
+		} else val = readValue(buf, type);
+	}
+
+	private Object readValue(PacketBuffer buf, Type type) {
+		Object val = null;
 		switch (type) {
 			case BOOL:
 				val = buf.readBoolean();
@@ -62,9 +82,10 @@ public class SyncConfigPacket extends BasePacket {
 				val = buf.readString(1000);
 				break;
 			// TODO:
-			case CONFIG:
-				break;
+//			case CONFIG:
+//				break;
 			case LIST:
+				Log.error("SyncConfigPacket#readValue - Lists int Lists is not supported");
 				break;
 //			case CUSTOM:
 //				break;
@@ -73,6 +94,7 @@ public class SyncConfigPacket extends BasePacket {
 				Log.error(type);
 				break;
 		}
+		return val;
 	}
 
 	@Override
@@ -84,35 +106,48 @@ public class SyncConfigPacket extends BasePacket {
 
 		buf.writeEnumValue(type);
 
+		if (type == Type.LIST) {
+			buf.writeEnumValue(listType);
+			List<?> list = (List<?>) value.get();
+			buf.writeInt(list.size());
+			list.forEach(a -> {
+				writeValue(buf, listType, a);
+			});
+//		} else if (type == type.CONFIG) {
+		} else writeValue(buf, type, value.get());
+	}
+
+	private void writeValue(PacketBuffer buf, Type type, Object value) {
 		switch (type) {
 			case BOOL:
-				buf.writeBoolean((Boolean) value.get());
+				buf.writeBoolean((Boolean) value);
 				break;
 			case INT:
-				buf.writeInt((Integer) value.get());
+				buf.writeInt((Integer) value);
 				break;
 			case LONG:
-				buf.writeLong((Long) value.get());
+				buf.writeLong((Long) value);
 				break;
 			case DOUBLE:
-				buf.writeDouble((Double) value.get());
+				buf.writeDouble((Double) value);
 				break;
 			case ENUM:
-				buf.writeString(value.get().getClass().getName(), 1000);
-				buf.writeEnumValue((Enum<?>) value.get());
+				buf.writeString(value.getClass().getName(), 1000);
+				buf.writeEnumValue((Enum<?>) value);
 				break;
 			case STRING:
-				buf.writeString((String) value.get(), 1000);
+				buf.writeString((String) value, 1000);
 				break;
 			// TODO:
 			case CONFIG:
 				break;
 			case LIST:
+				Log.error("SyncConfigPacket#writeValue - Lists int Lists is not supported");
 				break;
 //			case CUSTOM:
 //				break;
 			default:
-				Log.error("SyncConfigPacket#encode - type unknown");
+				Log.error("SyncConfigPacket#writeValue - type unknown");
 				Log.error(type);
 				break;
 		}
@@ -155,6 +190,7 @@ public class SyncConfigPacket extends BasePacket {
 			case CONFIG:
 				break;
 			case LIST:
+				((ConfigValue<List<?>>) value).set((List<?>) val);
 				break;
 //			case CUSTOM:
 //				break;
@@ -168,7 +204,7 @@ public class SyncConfigPacket extends BasePacket {
 
 	static enum Type {
 		BOOL, INT, LONG, DOUBLE, ENUM, STRING, CONFIG, LIST,
-		CUSTOM
+//		CUSTOM
 	}
 
 }

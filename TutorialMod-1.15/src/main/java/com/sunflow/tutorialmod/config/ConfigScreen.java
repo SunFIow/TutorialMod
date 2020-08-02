@@ -74,13 +74,17 @@ public class ConfigScreen extends BaseConfigScreen {
 			}
 		}
 
-		private <T> void save(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType) {
-			if (screenType == ModConfig.Type.SERVER) sync(value, packetType);
-			value.save();
+		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType, SyncConfigPacket.Type listPacketType) {
+			sync(value, screenType, new SyncConfigPacket(value, packetType, listPacketType));
 		}
 
-		private <T> void sync(ConfigValue<T> value, SyncConfigPacket.Type packetType) {
-			Networking.sendToServer(new SyncConfigPacket(value, packetType));
+		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType) {
+			sync(value, screenType, new SyncConfigPacket(value, packetType));
+		}
+
+		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket packet) {
+			if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(packet);
+			value.save();
 		}
 
 		public AbstractOption[] build(ModConfig.Type type) {
@@ -94,7 +98,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> value.get(),
 					(settings, _value) -> {
 						value.set(_value);
-						save(value, screenType, SyncConfigPacket.Type.BOOL);
+						sync(value, screenType, SyncConfigPacket.Type.BOOL);
 					}));
 			return this;
 		}
@@ -105,7 +109,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.intValue());
-						save(value, screenType, SyncConfigPacket.Type.INT);
+						sync(value, screenType, SyncConfigPacket.Type.INT);
 					},
 					(settings, _option) -> {
 						double d0 = _option.get(settings);
@@ -121,7 +125,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.longValue());
-						save(value, screenType, SyncConfigPacket.Type.LONG);
+						sync(value, screenType, SyncConfigPacket.Type.LONG);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -137,7 +141,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.doubleValue());
-						save(value, screenType, SyncConfigPacket.Type.DOUBLE);
+						sync(value, screenType, SyncConfigPacket.Type.DOUBLE);
 					},
 					(settings, option) -> {
 						double d0 = option.get(settings);
@@ -157,7 +161,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						save(value, screenType, SyncConfigPacket.Type.ENUM);
+						sync(value, screenType, SyncConfigPacket.Type.ENUM);
 					},
 					(settings, option) -> {
 						String s = option.getDisplayString();
@@ -184,12 +188,23 @@ public class ConfigScreen extends BaseConfigScreen {
 		}
 
 		// TODO: List
-		public <T> ConfigScreen.Builder List(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<List<T>> value,
+		public <T> ConfigScreen.Builder List(ModConfig.Type screenType, SyncConfigPacket.Type listType, String translationKey, ForgeConfigSpec.ConfigValue<List<T>> value,
 				double minValue, double maxValue, float stepSize,
 				Function<List<T>, Double> getter,
 				Function<Double, List<T>> setter,
 				Function<List<T>, String> namer) {
-			return ConfigValue(SyncConfigPacket.Type.LIST, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
+			List<AbstractOption> options = getList(screenType);
+			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+					(settings) -> getter.apply(value.get()),
+					(settings, _value) -> {
+						value.set(setter.apply(_value));
+						sync(value, screenType, SyncConfigPacket.Type.LIST, listType);
+					},
+					(settings, option) -> {
+						String s = option.getDisplayString();
+						return s + namer.apply(value.get());
+					}));
+			return this;
 		}
 
 		@SuppressWarnings("unused")
@@ -211,7 +226,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						save(value, screenType, packetType);
+						sync(value, screenType, packetType);
 					},
 					(settings, option) -> {
 						String s = option.getDisplayString();
