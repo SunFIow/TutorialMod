@@ -74,38 +74,28 @@ public class ConfigScreen extends BaseConfigScreen {
 			}
 		}
 
-		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType, SyncConfigPacket.Type listPacketType) {
-			sync(value, screenType, new SyncConfigPacket(value, packetType, listPacketType));
-		}
-
-		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType) {
-			sync(value, screenType, new SyncConfigPacket(value, packetType));
-		}
-
-		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket packet) {
-			if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(packet);
-			value.save();
-		}
-
-		public AbstractOption[] build(ModConfig.Type type) {
-			List<AbstractOption> options = getList(type);
+		public AbstractOption[] build(ModConfig.Type screenType) {
+			List<AbstractOption> options = getList(screenType);
 			return options.toArray(new AbstractOption[options.size()]);
 		}
 
-		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.BooleanValue value) {
+		public ConfigScreen.Builder addOption(ModConfig.Type screenType, AbstractOption option) {
 			List<AbstractOption> options = getList(screenType);
-			options.add(new BooleanOption(translationKey,
+			options.add(option);
+			return this;
+		}
+
+		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.BooleanValue value) {
+			return addOption(screenType, new BooleanOption(translationKey,
 					(settings) -> value.get(),
 					(settings, _value) -> {
 						value.set(_value);
 						sync(value, screenType, SyncConfigPacket.Type.BOOL);
 					}));
-			return this;
 		}
 
 		public ConfigScreen.Builder Integer(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.IntValue value, double minValue, double maxValue, float stepSize) {
-			List<AbstractOption> options = getList(screenType);
-			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+			return addOption(screenType, new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.intValue());
@@ -116,12 +106,10 @@ public class ConfigScreen extends BaseConfigScreen {
 						String s = _option.getDisplayString();
 						return s + (int) d0;
 					}));
-			return this;
 		}
 
 		public ConfigScreen.Builder Long(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.LongValue value, double minValue, double maxValue, float stepSize) {
-			List<AbstractOption> options = getList(screenType);
-			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+			return addOption(screenType, new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.longValue());
@@ -132,12 +120,10 @@ public class ConfigScreen extends BaseConfigScreen {
 						String s = option.getDisplayString();
 						return s + (long) d0;
 					}));
-			return this;
 		}
 
 		public ConfigScreen.Builder Double(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.DoubleValue value, double minValue, double maxValue, float stepSize) {
-			List<AbstractOption> options = getList(screenType);
-			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+			return addOption(screenType, new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.doubleValue());
@@ -148,7 +134,6 @@ public class ConfigScreen extends BaseConfigScreen {
 						String s = option.getDisplayString();
 						return s + d0;
 					}));
-			return this;
 		}
 
 		public <T extends Enum<T>> ConfigScreen.Builder Enum(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.EnumValue<T> value,
@@ -156,8 +141,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<T, Double> getter,
 				Function<Double, T> setter,
 				Function<T, String> namer) {
-			List<AbstractOption> options = getList(screenType);
-			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+			return addOption(screenType, new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
@@ -167,7 +151,6 @@ public class ConfigScreen extends BaseConfigScreen {
 						String s = option.getDisplayString();
 						return s + namer.apply(value.get());
 					}));
-			return this;
 		}
 
 		public ConfigScreen.Builder String(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<String> value,
@@ -193,27 +176,17 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<List<T>, Double> getter,
 				Function<Double, List<T>> setter,
 				Function<List<T>, String> namer) {
-			List<AbstractOption> options = getList(screenType);
-			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+			return addOption(screenType, new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						sync(value, screenType, SyncConfigPacket.Type.LIST, listType);
+						value.save();
+						if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(new SyncConfigPacket(value, SyncConfigPacket.Type.LIST, listType));
 					},
 					(settings, option) -> {
 						String s = option.getDisplayString();
 						return s + namer.apply(value.get());
 					}));
-			return this;
-		}
-
-		@SuppressWarnings("unused")
-		private <T> ConfigScreen.Builder ConfigValue(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
-				double minValue, double maxValue, float stepSize,
-				Function<T, Double> getter,
-				Function<Double, T> setter,
-				Function<T, String> namer) {
-			return ConfigValue(SyncConfigPacket.Type.CUSTOM, screenType, translationKey, value, minValue, maxValue, stepSize, getter, setter, namer);
 		}
 
 		private <T> ConfigScreen.Builder ConfigValue(SyncConfigPacket.Type packetType, ModConfig.Type screenType, String translationKey, ForgeConfigSpec.ConfigValue<T> value,
@@ -221,8 +194,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<T, Double> getter,
 				Function<Double, T> setter,
 				Function<T, String> namer) {
-			List<AbstractOption> options = getList(screenType);
-			options.add(new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
+			return addOption(screenType, new SliderPercentageOption(translationKey, minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
@@ -232,7 +204,11 @@ public class ConfigScreen extends BaseConfigScreen {
 						String s = option.getDisplayString();
 						return s + namer.apply(value.get());
 					}));
-			return this;
+		}
+
+		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType) {
+			value.save();
+			if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(new SyncConfigPacket(value, packetType));
 		}
 
 		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.BooleanValue value,
