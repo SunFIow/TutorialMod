@@ -31,7 +31,6 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	public static final int INPUT1_ID = 0, INPUT2_ID = 1, OUTPUT_ID = 2;
-	public static final int COOKTIME_ID = 2;
 
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 
@@ -151,14 +150,6 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-		if (cap == CapabilityProcessor.COOKER_CAPABILITY) {
-			return processor.cast();
-		}
-		return super.getCapability(cap, side);
-	}
-
-	@Override
 	public void read(CompoundNBT tag) {
 		cooker.deserializeNBT(tag.getCompound("cooker"));
 
@@ -170,6 +161,14 @@ public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
 		tag.put("cooker", cooker.serializeNBT());
 
 		return super.write(tag);
+	}
+
+	@Override
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+		if (cap == CapabilityProcessor.COOKER_CAPABILITY) {
+			return processor.cast();
+		}
+		return super.getCapability(cap, side);
 	}
 
 	@Override

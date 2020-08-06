@@ -19,7 +19,7 @@ import net.minecraftforge.items.ItemStackHandler;
 public abstract class InventoryTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable {
 
 	protected ItemStackHandler itemHandler = createHandler();
-	private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+	private LazyOptional<IItemHandler> itemHandlerOptional = LazyOptional.of(() -> itemHandler);
 
 	protected abstract ItemStackHandler createHandler();
 
@@ -45,7 +45,7 @@ public abstract class InventoryTileEntityBase extends TileEntity implements INam
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return handler.cast();
+			return itemHandlerOptional.cast();
 		}
 		return super.getCapability(cap, side);
 	}

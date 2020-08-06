@@ -23,7 +23,7 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 	public static final int ENERGY_ID = 0, ENERGY_MAX_ID = 1;
 
 	protected CustomEnergyStorage energyStorage = createEnergy();
-	private LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
+	private LazyOptional<IEnergyStorage> energyStorageOptional = LazyOptional.of(() -> energyStorage);
 
 	protected abstract CustomEnergyStorage createEnergy();
 
@@ -64,7 +64,7 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (cap == CapabilityEnergy.ENERGY) {
-			return energy.cast();
+			return energyStorageOptional.cast();
 		}
 		return super.getCapability(cap, side);
 	}

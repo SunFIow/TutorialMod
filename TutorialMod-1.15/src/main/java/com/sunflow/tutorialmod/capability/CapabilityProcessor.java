@@ -20,7 +20,6 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.IntNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
@@ -36,32 +35,22 @@ public class CapabilityProcessor {
 	public static Capability<IProcessor> BURNER_CAPABILITY = null;
 
 	public static void register() {
-		CapabilityManager.INSTANCE.register(Cooker.class, new IStorage<Cooker>() {
-			@Override
-			public INBT writeNBT(Capability<Cooker> capability, Cooker instance, Direction side) {
-				return IntNBT.valueOf(instance.getTime());
-			}
+		CapabilityManager.INSTANCE.register(Cooker.class, new DefaultProccesorStorage<>(), Cooker::new);
+		CapabilityManager.INSTANCE.register(Burner.class, new DefaultProccesorStorage<>(), Burner::new);
+	}
 
-			@Override
-			public void readNBT(Capability<Cooker> capability, Cooker instance, Direction side, INBT nbt) {
-				if (!(instance instanceof Cooker))
-					throw new IllegalArgumentException("Can not deserialize to an instance that isn't the default implementation");
-				instance.time = ((IntNBT) nbt).getInt();
-			}
-		}, Cooker::new);
+	private static class DefaultProccesorStorage<T extends IProcessor> implements Capability.IStorage<T> {
+		@Override
+		public INBT writeNBT(Capability<T> capability, T instance, Direction side) {
+			return IntNBT.valueOf(instance.getTime());
+		}
 
-		CapabilityManager.INSTANCE.register(Burner.class, new IStorage<Burner>() {
-			@Override
-			public INBT writeNBT(Capability<Burner> capability, Burner instance, Direction side) {
-				return IntNBT.valueOf(instance.getTime());
-			}
-
-			@Override
-			public void readNBT(Capability<Burner> capability, Burner instance, Direction side, INBT nbt) {
-				if (!(instance instanceof Burner))
-					throw new IllegalArgumentException("Can not deserialize to an instance that isn't the default implementation");
-				instance.time = ((IntNBT) nbt).getInt();
-			}
-		}, Burner::new);
+		@Override
+		public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt) {
+			if (!(instance instanceof Processor))
+				throw new RuntimeException("Cannot deserialize to an instance that isn't the default implementation");
+			Processor processor = (Processor) instance;
+			processor.time = ((IntNBT) nbt).getInt();
+		}
 	}
 }

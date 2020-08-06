@@ -42,7 +42,6 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	public static final int FUEL_ID = 0, INPUT1_ID = 1, INPUT2_ID = 2, OUTPUT_ID = 3;
-	public static final int BURNTIME_ID = 0, BURNTIME_TOTAL_ID = 1, COOKTIME_ID = 2;
 
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 

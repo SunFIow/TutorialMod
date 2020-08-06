@@ -4,12 +4,11 @@ import java.util.LinkedList;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import com.sunflow.tutorialmod.block.machine.charger.ChargerTile;
+import com.sunflow.tutorialmod.capability.CapabilityItemEnergy;
 import com.sunflow.tutorialmod.capability.CapabilityProcessor;
+import com.sunflow.tutorialmod.capability.IItemEnergy;
 import com.sunflow.tutorialmod.capability.IProcessor;
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
-import com.sunflow.tutorialmod.util.energy.EnergyUtils;
-import com.sunflow.tutorialmod.util.energy.EnergyUtils.EnergyUnit;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ClickType;
@@ -22,7 +21,6 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -284,11 +282,12 @@ public abstract class ContainerBase extends Container {
 
 			@Override
 			public void set(int value) {
-				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-					CustomEnergyStorage energy = EnergyUtils.readStorage(h.getStackInSlot(ChargerTile.CHARGE_SLOT), EnergyUnit.DEFAULT);
+				tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).ifPresent(h -> {
+					CustomEnergyStorage energy = h.getStorage();
 					int energyStored = energy.getEnergyStored() & 0xffff0000;
 					energy.setEnergy(energyStored + (value & 0xffff));
 				});
+
 			}
 		});
 		trackInt(new IntReferenceHolder() {
@@ -299,8 +298,8 @@ public abstract class ContainerBase extends Container {
 
 			@Override
 			public void set(int value) {
-				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-					CustomEnergyStorage energy = EnergyUtils.readStorage(h.getStackInSlot(ChargerTile.CHARGE_SLOT), EnergyUnit.DEFAULT);
+				tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).ifPresent(h -> {
+					CustomEnergyStorage energy = h.getStorage();
 					int energyStored = energy.getEnergyStored() & 0x0000ffff;
 					energy.setEnergy(energyStored | (value << 16));
 				});
@@ -320,8 +319,8 @@ public abstract class ContainerBase extends Container {
 
 			@Override
 			public void set(int value) {
-				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-					CustomEnergyStorage energy = EnergyUtils.readStorage(h.getStackInSlot(ChargerTile.CHARGE_SLOT), EnergyUnit.DEFAULT);
+				tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).ifPresent(h -> {
+					CustomEnergyStorage energy = h.getStorage();
 					int maxEnergyStored = energy.getMaxEnergyStored() & 0xffff0000;
 					energy.setMaxEnergy(maxEnergyStored + (value & 0xffff));
 				});
@@ -335,8 +334,8 @@ public abstract class ContainerBase extends Container {
 
 			@Override
 			public void set(int value) {
-				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-					CustomEnergyStorage energy = EnergyUtils.readStorage(h.getStackInSlot(ChargerTile.CHARGE_SLOT), EnergyUnit.DEFAULT);
+				tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).ifPresent(h -> {
+					CustomEnergyStorage energy = h.getStorage();
 					int maxEnergyStored = energy.getMaxEnergyStored() & 0x0000ffff;
 					energy.setMaxEnergy(maxEnergyStored | (value << 16));
 				});
@@ -369,20 +368,21 @@ public abstract class ContainerBase extends Container {
 	}
 
 	public int getItemEnergy() {
-		return EnergyUtils.getEnergyStored(
-				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).map(
-						h -> h.getStackInSlot(ChargerTile.CHARGE_SLOT))
-						.orElse(null),
-				EnergyUnit.DEFAULT);
+//		return EnergyUtils.getEnergyStored(
+//				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).map(
+//						h -> h.getStackInSlot(ChargerTile.CHARGE_SLOT))
+//						.orElse(null),
+//				EnergyUnit.DEFAULT);
+		return tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).map(IItemEnergy::getStorage).orElse(CustomEnergyStorage.DEFAULT).getEnergyStored();
 	}
 
 	public int getItemEnergyMax() {
-
-		return EnergyUtils.getCapacity(
-				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).map(
-						h -> h.getStackInSlot(ChargerTile.CHARGE_SLOT))
-						.orElse(null),
-				EnergyUnit.DEFAULT);
+//		return EnergyUtils.getCapacity(
+//				tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).map(
+//						h -> h.getStackInSlot(ChargerTile.CHARGE_SLOT))
+//						.orElse(null),
+//				EnergyUnit.DEFAULT);
+		return tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).map(IItemEnergy::getStorage).orElse(CustomEnergyStorage.DEFAULT).getMaxEnergyStored();
 	}
 
 	@Override

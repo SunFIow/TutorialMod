@@ -1,6 +1,9 @@
 package com.sunflow.tutorialmod.block.machine.charger;
 
 import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.capability.CapabilityItemEnergy;
+import com.sunflow.tutorialmod.capability.DefaultItemEnergy;
+import com.sunflow.tutorialmod.capability.IItemEnergy;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
@@ -15,8 +18,11 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ChargerTile extends EnergyInvTileEntityBase {
@@ -24,7 +30,11 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	public static final int CHARGE_SLOT = 0;
-	public static final int ITEM_ENERGY_ID = 2, ITEM_ENERGY_MAX_ID = 3;
+
+	protected DefaultItemEnergy itemEnergy = new DefaultItemEnergy(
+			() -> EnergyUtils.readStorage(this.itemEnergy.getItemStack(), EnergyUnit.DEFAULT),
+			() -> itemHandler.getStackInSlot(CHARGE_SLOT));
+	private LazyOptional<IItemEnergy> energyItemOptional = LazyOptional.of(() -> itemEnergy);
 
 	@Override
 	protected ItemStackHandler createHandler() {
@@ -41,9 +51,7 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 	protected CustomEnergyStorage createEnergy() {
 		return new CustomEnergyStorage(TutorialModConfig.SERVER.CHARGER_MAXPOWER.get(), TutorialModConfig.SERVER.CHARGER_RECEIVE.get(), TutorialModConfig.SERVER.CHARGER_CHARGE_RATE.get()) {
 			@Override
-			protected void onEnergyChanged() {
-				markDirty();
-			}
+			protected void onEnergyChanged() { markDirty(); }
 		};
 	}
 
@@ -56,23 +64,21 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 
 		boolean isCharging = false;
 
-		if (energyStorage.getEnergyStored() > 0) {
-			ItemStack chargeSlot = itemHandler.getStackInSlot(CHARGE_SLOT);
-			if (!chargeSlot.isEmpty()) {
-				CustomEnergyStorage itemEnergy = EnergyUtils.readStorage(chargeSlot, EnergyUnit.DEFAULT);
-				if (itemEnergy.canReceive()) {
-					int maxEExt = energyStorage.extractEnergy(TutorialModConfig.SERVER.CHARGER_CHARGE_RATE.get(), true);
-					int eReceived = itemEnergy.receiveEnergy(maxEExt, false);
-					if (eReceived > 0) {
-						energyStorage.extractEnergy(eReceived, false);
-						markDirty();
+		ItemStack chargeSlot = itemEnergy.getItemStack();
+		if (!chargeSlot.isEmpty()) {
+			CustomEnergyStorage itemEnergyStorage = itemEnergy.getStorage();
+			if (energyStorage.getEnergyStored() > 0 && itemEnergyStorage.canReceive()) {
+				int maxEExt = energyStorage.extractEnergy(TutorialModConfig.SERVER.CHARGER_CHARGE_RATE.get(), true);
+				int eReceived = itemEnergyStorage.receiveEnergy(maxEExt, false);
+				if (eReceived > 0) {
+					energyStorage.extractEnergy(eReceived, false);
+					markDirty();
 
-						isCharging = true;
-					}
-					EnergyUtils.writeStorage(chargeSlot, EnergyUnit.DEFAULT, itemEnergy);
+					isCharging = true;
 				}
+				EnergyUtils.writeStorage(chargeSlot, EnergyUnit.DEFAULT, itemEnergyStorage);
 			}
-		}
+		} else markDirty();
 
 //		if (!world.isRemote) {
 		BlockState state = world.getBlockState(pos);
@@ -80,6 +86,14 @@ public class ChargerTile extends EnergyInvTileEntityBase {
 			world.setBlockState(pos, state.with(POWERED, isCharging), 3);
 		}
 //		}
+	}
+
+	@Override
+	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+		if (cap == CapabilityItemEnergy.ENERGYITEM_CAPABILITY) {
+			return energyItemOptional.cast();
+		}
+		return super.getCapability(cap, side);
 	}
 
 	@Override

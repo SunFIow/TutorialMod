@@ -33,7 +33,6 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
 	public static final int FUEL_SLOT = 0;
-	public static final int COOKTIME_ID = 2;
 	private static final Item FUEL_ITEM = Items.GLOWSTONE_DUST;
 
 	protected Processor cooker = createProcessor();
