@@ -1,5 +1,7 @@
 package com.sunflow.tutorialmod.block.base;
 
+import java.util.function.Supplier;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
@@ -13,8 +15,8 @@ import net.minecraft.world.World;
 public abstract class PoweredTileBlockBase extends TileBlockBase {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-	public PoweredTileBlockBase(Properties properties) {
-		super(properties);
+	public PoweredTileBlockBase(Properties properties, Supplier<TileEntity> tile) {
+		super(properties, tile);
 		setDefaultState(getDefaultState().with(POWERED, false));
 	}
 

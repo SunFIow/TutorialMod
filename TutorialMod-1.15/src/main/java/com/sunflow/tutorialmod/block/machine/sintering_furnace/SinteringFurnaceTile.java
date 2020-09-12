@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-import com.sunflow.tutorialmod.block.base.InventoryTileEntityBase;
+import com.sunflow.tutorialmod.block.base.InventoryTileBase;
 import com.sunflow.tutorialmod.capability.CapabilityProcessor;
 import com.sunflow.tutorialmod.capability.IProcessor;
 import com.sunflow.tutorialmod.capability.Processor;
@@ -18,6 +18,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -37,7 +38,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITickableTileEntity {
+public class SinteringFurnaceTile extends InventoryTileBase implements INamedContainerProvider, ITickableTileEntity {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 

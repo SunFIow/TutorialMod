@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.machine.electric_sintering_furnace;
 
-import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.block.base.EnergyInventoryTileBase;
 import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.capability.CapabilityProcessor;
 import com.sunflow.tutorialmod.capability.IProcessor;
@@ -13,6 +13,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -26,7 +27,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ElectricSinteringFurnaceTile extends EnergyInvTileEntityBase {
+public class ElectricSinteringFurnaceTile extends EnergyInventoryTileBase implements INamedContainerProvider {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 

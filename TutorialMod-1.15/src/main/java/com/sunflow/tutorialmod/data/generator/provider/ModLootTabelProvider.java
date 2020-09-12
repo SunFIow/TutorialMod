@@ -19,9 +19,9 @@ public class ModLootTabelProvider extends BaseLootTableProvider {
 //		lootTables.put(Registration.ELECTRIC_SINTERING_FURNACE.get(), createStandardTableNBT(Registration.ELECTRIC_SINTERING_FURNACE.get().getRegistryName().getPath(), Registration.ELECTRIC_SINTERING_FURNACE.get(), "inv", "energy", "cooktime"));
 
 		addNBTBlock(Registration.GLOWSTONE_GENERATOR_BLOCK.get(), "inv", "energy", "cooktime", "currentfuel");
-		addNBTBlock(Registration.ENERGY_STORAGE.get(), "energy");
-		addNBTBlock(Registration.SINTERING_FURNACE.get(), "inv", "cooktime", "burntime", "burntimetotal");
-		addNBTBlock(Registration.ELECTRIC_SINTERING_FURNACE.get(), "inv", "energy", "cooktime");
+		addNBTBlock(Registration.ENERGY_STORAGE_BLOCK.get(), "energy");
+		addNBTBlock(Registration.SINTERING_FURNACE_BLOCK.get(), "inv", "cooktime", "burntime", "burntimetotal");
+		addNBTBlock(Registration.ELECTRIC_SINTERING_FURNACE_BLOCK.get(), "inv", "energy", "cooktime");
 
 		Registration.BLOCKS.getEntries().forEach((block) -> {
 			if (!(block.get() instanceof TileBlockBase) && block.get() != Registration.RICE_PLANT.get())

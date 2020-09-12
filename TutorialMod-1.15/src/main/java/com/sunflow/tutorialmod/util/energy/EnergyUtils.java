@@ -1,5 +1,7 @@
 package com.sunflow.tutorialmod.util.energy;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.annotation.Nullable;
 
 import com.sunflow.tutorialmod.TutorialMod;
@@ -7,7 +9,12 @@ import com.sunflow.tutorialmod.util.interfaces.IEnergyItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.energy.CapabilityEnergy;
 
 public class EnergyUtils {
 
@@ -86,5 +93,64 @@ public class EnergyUtils {
 		public int getColor() {
 			return MathHelper.rgb(color[0], color[1], color[2]);
 		}
+	}
+
+	public static boolean receivePower(World world, BlockPos pos, CustomEnergyStorage energyStorage) {
+		AtomicBoolean markDirty = new AtomicBoolean(false);
+		if (energyStorage.getEnergyStored() < energyStorage.getMaxEnergyStored()) {
+			for (Direction dir : Direction.values()) {
+				TileEntity tileentity = world.getTileEntity(pos.offset(dir));
+				if (tileentity != null) {
+					tileentity.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
+						if (e.canReceive()) {
+//							int maxEExt = energyHandler.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
+//							int eReceived = e.receiveEnergy(maxEExt, false);
+//							energyHandler.extractEnergy(eReceived, false);							
+//							tileentity.markDirty();
+
+							int maxExtract = e.extractEnergy(e.getMaxEnergyStored(), true);
+							if (maxExtract > 0) {
+								int received = energyStorage.receiveEnergy(maxExtract, false);
+								e.extractEnergy(received, false);
+
+								markDirty.set(true);
+							}
+						}
+					});
+				}
+				if (energyStorage.getEnergyStored() <= 0) return markDirty.get();
+			}
+		}
+		return markDirty.get();
+
+	}
+
+	public static boolean sendOutPower(World world, BlockPos pos, CustomEnergyStorage energyStorage) {
+		AtomicBoolean markDirty = new AtomicBoolean(false);
+		if (energyStorage.getEnergyStored() > 0) {
+			for (Direction dir : Direction.values()) {
+				TileEntity tileentity = world.getTileEntity(pos.offset(dir));
+				if (tileentity != null) {
+					tileentity.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
+						if (e.canReceive()) {
+//							int maxEExt = energyHandler.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
+//							int eReceived = e.receiveEnergy(maxEExt, false);
+//							energyHandler.extractEnergy(eReceived, false);							
+//							tileentity.markDirty();
+
+							int maxExtract = energyStorage.extractEnergy(energyStorage.getMaxEnergyStored(), true);
+							if (maxExtract > 0) {
+								int received = e.receiveEnergy(maxExtract, false);
+								energyStorage.extractEnergy(received, false);
+
+								markDirty.set(true);
+							}
+						}
+					});
+				}
+				if (energyStorage.getEnergyStored() <= 0) return markDirty.get();
+			}
+		}
+		return markDirty.get();
 	}
 }

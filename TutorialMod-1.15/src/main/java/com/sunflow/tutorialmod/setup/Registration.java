@@ -43,6 +43,8 @@ import com.sunflow.tutorialmod.dimension.ModDimensionBase;
 import com.sunflow.tutorialmod.dimension.badlands.BadlandsDimension;
 import com.sunflow.tutorialmod.effect.PeeEffect;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
+import com.sunflow.tutorialmod.energy.block.WireBlock;
+import com.sunflow.tutorialmod.energy.block.WireTile;
 import com.sunflow.tutorialmod.entity.centaur.CentaurEntity;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobEntity;
 import com.sunflow.tutorialmod.item.EnergyWandItem;
@@ -142,6 +144,12 @@ public class Registration {
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	public static final RegistryObject<WireBlock> WIRE_BLOCK = BLOCKS.register("wire", WireBlock::new);
+	public static final RegistryObject<BlockItem> WIRE_ITEM = ITEMS.register("wire", () -> new BlockItem(WIRE_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<WireTile>> WIRE_TILE = TILEENTITIES.register("wire", () -> TileEntityType.Builder.create(WireTile::new, WIRE_BLOCK.get()).build(null));
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public static final RegistryObject<DustBlock> DUSTBLOCK = BLOCKS.register("dust", () -> new DustBlock(Block.Properties.create(Material.SNOW).tickRandomly().hardnessAndResistance(0.1F).sound(SoundType.SNOW)));
 	public static final RegistryObject<BlockItem> DUSTBLOCK_ITEM = ITEMS.register("dust", () -> new BlockItem(DUSTBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
@@ -183,29 +191,29 @@ public class Registration {
 	public static final RegistryObject<TileEntityType<GlowstoneGeneratorTile>> GLOWSTONE_GENERATOR_TILE = TILEENTITIES.register("glowstone_generator", () -> TileEntityType.Builder.create(GlowstoneGeneratorTile::new, GLOWSTONE_GENERATOR_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<GlowstoneGeneratorContainer>> GLOWSTONE_GENERATOR_CONTAINER = CONTAINERS.register("glowstone_generator", () -> IForgeContainerType.create(GlowstoneGeneratorContainer::new));
 
-	public static final RegistryObject<EnergyStorageBlock> ENERGY_STORAGE = BLOCKS.register("energy_storage", EnergyStorageBlock::new);
-	public static final RegistryObject<BlockItem> ENERGY_STORAGE_ITEM = ITEMS.register("energy_storage", () -> new BlockItem(ENERGY_STORAGE.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<TileEntityType<EnergyStorageTile>> ENERGY_STORAGE_TILE = TILEENTITIES.register("energy_storage", () -> TileEntityType.Builder.create(EnergyStorageTile::new, ENERGY_STORAGE.get()).build(null));
+	public static final RegistryObject<EnergyStorageBlock> ENERGY_STORAGE_BLOCK = BLOCKS.register("energy_storage", EnergyStorageBlock::new);
+	public static final RegistryObject<BlockItem> ENERGY_STORAGE_ITEM = ITEMS.register("energy_storage", () -> new BlockItem(ENERGY_STORAGE_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<EnergyStorageTile>> ENERGY_STORAGE_TILE = TILEENTITIES.register("energy_storage", () -> TileEntityType.Builder.create(EnergyStorageTile::new, ENERGY_STORAGE_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<EnergyStorageContainer>> ENERGY_STORAGE_CONTAINER = CONTAINERS.register("energy_storage", () -> IForgeContainerType.create(EnergyStorageContainer::new));
 
-	public static final RegistryObject<SinteringFurnaceBlock> SINTERING_FURNACE = BLOCKS.register("sintering_furnace", SinteringFurnaceBlock::new);
-	public static final RegistryObject<BlockItem> SINTERING_FURNACE_ITEM = ITEMS.register("sintering_furnace", () -> new BlockItem(SINTERING_FURNACE.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<TileEntityType<SinteringFurnaceTile>> SINTERING_FURNACE_TILE = TILEENTITIES.register("sintering_furnace", () -> TileEntityType.Builder.create(SinteringFurnaceTile::new, SINTERING_FURNACE.get()).build(null));
+	public static final RegistryObject<SinteringFurnaceBlock> SINTERING_FURNACE_BLOCK = BLOCKS.register("sintering_furnace", SinteringFurnaceBlock::new);
+	public static final RegistryObject<BlockItem> SINTERING_FURNACE_ITEM = ITEMS.register("sintering_furnace", () -> new BlockItem(SINTERING_FURNACE_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<SinteringFurnaceTile>> SINTERING_FURNACE_TILE = TILEENTITIES.register("sintering_furnace", () -> TileEntityType.Builder.create(SinteringFurnaceTile::new, SINTERING_FURNACE_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<SinteringFurnaceContainer>> SINTERING_FURNACE_CONTAINER = CONTAINERS.register("sintering_furnace", () -> IForgeContainerType.create(SinteringFurnaceContainer::new));
 
-	public static final RegistryObject<ElectricSinteringFurnaceBlock> ELECTRIC_SINTERING_FURNACE = BLOCKS.register("electric_sintering_furnace", ElectricSinteringFurnaceBlock::new);
-	public static final RegistryObject<BlockItem> ELECTRIC_SINTERING_FURNACE_ITEM = ITEMS.register("electric_sintering_furnace", () -> new BlockItem(ELECTRIC_SINTERING_FURNACE.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<TileEntityType<ElectricSinteringFurnaceTile>> ELECTRIC_SINTERING_FURNACE_TILE = TILEENTITIES.register("electric_sintering_furnace", () -> TileEntityType.Builder.create(ElectricSinteringFurnaceTile::new, ELECTRIC_SINTERING_FURNACE.get()).build(null));
+	public static final RegistryObject<ElectricSinteringFurnaceBlock> ELECTRIC_SINTERING_FURNACE_BLOCK = BLOCKS.register("electric_sintering_furnace", ElectricSinteringFurnaceBlock::new);
+	public static final RegistryObject<BlockItem> ELECTRIC_SINTERING_FURNACE_ITEM = ITEMS.register("electric_sintering_furnace", () -> new BlockItem(ELECTRIC_SINTERING_FURNACE_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<ElectricSinteringFurnaceTile>> ELECTRIC_SINTERING_FURNACE_TILE = TILEENTITIES.register("electric_sintering_furnace", () -> TileEntityType.Builder.create(ElectricSinteringFurnaceTile::new, ELECTRIC_SINTERING_FURNACE_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<ElectricSinteringFurnaceContainer>> ELECTRIC_SINTERING_FURNACE_CONTAINER = CONTAINERS.register("electric_sintering_furnace", () -> IForgeContainerType.create(ElectricSinteringFurnaceContainer::new));
 
-	public static final RegistryObject<ChargerBlock> CHARGER = BLOCKS.register("charger", ChargerBlock::new);
-	public static final RegistryObject<Item> CHARGER_ITEM = ITEMS.register("charger", () -> new BlockItem(CHARGER.get(), new Item.Properties().group(ModGroups.itemGroup)));
-	public static final RegistryObject<TileEntityType<ChargerTile>> CHARGER_TILE = TILEENTITIES.register("charger", () -> TileEntityType.Builder.create(ChargerTile::new, CHARGER.get()).build(null));
+	public static final RegistryObject<ChargerBlock> CHARGER_BLOCK = BLOCKS.register("charger", ChargerBlock::new);
+	public static final RegistryObject<Item> CHARGER_ITEM = ITEMS.register("charger", () -> new BlockItem(CHARGER_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<ChargerTile>> CHARGER_TILE = TILEENTITIES.register("charger", () -> TileEntityType.Builder.create(ChargerTile::new, CHARGER_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<ChargerContainer>> CHARGER_CONTAINER = CONTAINERS.register("charger", () -> IForgeContainerType.create(ChargerContainer::new));
 
-	public static final RegistryObject<CopperChestBlock> COPPER_CHEST = BLOCKS.register("copper_chest", CopperChestBlock::new);
-	public static final RegistryObject<BlockItem> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST.get(), ItemUtil.ISTER(ModGroups.itemGroup)));
-	public static final RegistryObject<TileEntityType<CopperChestTile>> COPPER_CHEST_TILE = TILEENTITIES.register("copper_chest", () -> TileEntityType.Builder.create(CopperChestTile::new, COPPER_CHEST.get()).build(null));
+	public static final RegistryObject<CopperChestBlock> COPPER_CHEST_BLOCK = BLOCKS.register("copper_chest", CopperChestBlock::new);
+	public static final RegistryObject<BlockItem> COPPER_CHEST_ITEM = ITEMS.register("copper_chest", () -> new BlockItem(COPPER_CHEST_BLOCK.get(), ItemUtil.ISTER(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<CopperChestTile>> COPPER_CHEST_TILE = TILEENTITIES.register("copper_chest", () -> TileEntityType.Builder.create(CopperChestTile::new, COPPER_CHEST_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<CopperChestContainer>> COPPER_CHEST_CONTAINER = CONTAINERS.register("copper_chest", () -> IForgeContainerType.create(CopperChestContainer::new));
 
 	public static final RegistryObject<FancyBlock> FANCYBLOCK = BLOCKS.register("fancyblock", FancyBlock::new);
@@ -216,7 +224,7 @@ public class Registration {
 	public static final RegistryObject<BlockItem> MAGICBLOCK_ITEM = ITEMS.register("magicblock", () -> new BlockItem(MAGICBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup2)));
 	public static final RegistryObject<TileEntityType<MagicBlockTile>> MAGICBLOCK_TILE = TILEENTITIES.register("magicblock", () -> TileEntityType.Builder.create(MagicBlockTile::new, MAGICBLOCK.get()).build(null));
 
-	public static final RegistryObject<GrenadeItem> GRENADE = ITEMS.register("grenade", GrenadeItem::new);
+	public static final RegistryObject<GrenadeItem> GRENADE_ITEM = ITEMS.register("grenade", GrenadeItem::new);
 //	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> createEntity("grenade", 0.5F, 0.5F, true, EntityClassification.MISC, GrenadeEntity::new));
 	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> EntityType.Builder.<GrenadeEntity>create(GrenadeEntity::new, EntityClassification.MISC)
 			.size(0.5F, 0.5F)

@@ -1,6 +1,6 @@
 package com.sunflow.tutorialmod.block.machine.charger;
 
-import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.block.base.EnergyInventoryTileBase;
 import com.sunflow.tutorialmod.capability.CapabilityItemEnergy;
 import com.sunflow.tutorialmod.capability.DefaultItemEnergy;
 import com.sunflow.tutorialmod.capability.IItemEnergy;
@@ -15,6 +15,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -25,7 +26,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ChargerTile extends EnergyInvTileEntityBase {
+public class ChargerTile extends EnergyInventoryTileBase implements INamedContainerProvider {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 

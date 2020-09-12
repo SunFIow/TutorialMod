@@ -1,34 +1,34 @@
 package com.sunflow.tutorialmod.block.machine.glowstone_generator;
 
-import com.sunflow.tutorialmod.block.base.EnergyInvTileEntityBase;
+import com.sunflow.tutorialmod.block.base.EnergyInventoryTileBase;
 import com.sunflow.tutorialmod.capability.CapabilityProcessor;
 import com.sunflow.tutorialmod.capability.IProcessor;
 import com.sunflow.tutorialmod.capability.Processor;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
+import com.sunflow.tutorialmod.util.energy.EnergyUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
+public class GlowstoneGeneratorTile extends EnergyInventoryTileBase implements INamedContainerProvider {
 
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 	public static final Item EMPTY = ItemStack.EMPTY.getItem();
@@ -121,35 +121,36 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 					Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
 		}
 
-		sendOutPower();
+//		sendOutPower();
+		if (EnergyUtils.sendOutPower(world, pos, energyStorage)) markDirty();
 	}
 
-	private void sendOutPower() {
-		if (energyStorage.getEnergyStored() > 0) {
-			for (Direction dir : Direction.values()) {
-				TileEntity tileentity = world.getTileEntity(pos.offset(dir));
-				if (tileentity != null) {
-					tileentity.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
-						if (e.canReceive()) {
-//							int maxEExt = energyHandler.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
-//							int eReceived = e.receiveEnergy(maxEExt, false);
-//							energyHandler.extractEnergy(eReceived, false);							
-//							tileentity.markDirty();
-
-							int maxExtracted = Math.min(energyStorage.getEnergyStored(), TutorialModConfig.SERVER.GLOWSTONE_GENERATOR_TRANSFER.get());
-							int received = e.receiveEnergy(maxExtracted, false);
-							energyStorage.extractEnergy(received, false);
-
-							this.markDirty();
-						}
-					});
-				}
-				if (energyStorage.getEnergyStored() <= 0) {
-					return;
-				}
-			}
-		}
-	}
+//	private void sendOutPower() {
+//		if (energyStorage.getEnergyStored() > 0) {
+//			for (Direction dir : Direction.values()) {
+//				TileEntity tileentity = world.getTileEntity(pos.offset(dir));
+//				if (tileentity != null) {
+//					tileentity.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(e -> {
+//						if (e.canReceive()) {
+////							int maxEExt = energyHandler.extractEnergy(TutorialModConfig.GLOWSTONE_GENERATOR_TRANSFER.get(), true);
+////							int eReceived = e.receiveEnergy(maxEExt, false);
+////							energyHandler.extractEnergy(eReceived, false);							
+////							tileentity.markDirty();
+//
+//							int maxExtracted = Math.min(energyStorage.getEnergyStored(), energyStorage.getMaxExtract());
+//							int received = e.receiveEnergy(maxExtracted, false);
+//							energyStorage.extractEnergy(received, false);
+//
+//							this.markDirty();
+//						}
+//					});
+//				}
+//				if (energyStorage.getEnergyStored() <= 0) {
+//					return;
+//				}
+//			}
+//		}
+//	}
 
 	private boolean isItemFuel(Item item) { return getFuelValue(item) > 0; }
 

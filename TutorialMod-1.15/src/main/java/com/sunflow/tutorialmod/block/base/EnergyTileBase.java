@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +17,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public abstract class EnergyTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable, ITickableTileEntity {
+public abstract class EnergyTileBase extends TileEntity implements ICustomNameable, ITickableTileEntity {
 
 	public static final int ENERGY_ID = 0, ENERGY_MAX_ID = 1;
 
@@ -29,9 +28,7 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 
 	private ITextComponent customName;
 
-	public EnergyTileEntityBase(TileEntityType<?> type) {
-		super(type);
-	}
+	public EnergyTileBase(TileEntityType<?> type) { super(type); }
 
 	@Override
 	public void tick() {
@@ -76,7 +73,7 @@ public abstract class EnergyTileEntityBase extends TileEntity implements INamedC
 
 	@Override
 	public ITextComponent getName() {
-		return this.customName != null ? this.customName : this.getDefaultName();
+		return hasCustomName() ? this.customName : this.getDefaultName();
 	}
 
 	@Override

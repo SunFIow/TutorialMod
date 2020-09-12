@@ -123,6 +123,12 @@ public class TutorialModConfig {
 	public static class Server {
 		public static final String PATH = "server";
 
+		public final ForgeConfigSpec.IntValue WIRE_MAXPOWER;
+		public final ForgeConfigSpec.IntValue WIRE_TRANSFER;
+
+		public final ForgeConfigSpec.IntValue ENERGY_STORAGE_MAXPOWER;
+		public final ForgeConfigSpec.IntValue ENERGY_STORAGE_TRANSFER;
+
 		public final ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_GENERATE;
 		public final ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_MAXPOWER;
 		public final ForgeConfigSpec.IntValue GLOWSTONE_GENERATOR_TRANSFER;
@@ -223,6 +229,24 @@ public class TutorialModConfig {
 					.defineInRange("receive", 100, 0, Integer.MAX_VALUE);
 			CHARGER_CHARGE_RATE = builder.comment("Rate at which items get charged per tick")
 					.defineInRange("chargeRate", 10, 0, Integer.MAX_VALUE);
+			builder.pop();
+
+			// Energy Storage Config
+			builder.comment("Energy Storage Settings")
+					.push("energy_storage");
+			ENERGY_STORAGE_MAXPOWER = builder.comment("Maximum power that can be stored")
+					.defineInRange("maxPower", 10000, 0, Integer.MAX_VALUE);
+			ENERGY_STORAGE_TRANSFER = builder.comment("Maximum power to transfer per tick")
+					.defineInRange("transfer", 100, 0, Integer.MAX_VALUE);
+			builder.pop();
+
+			// Wire Config
+			builder.comment("Wire Settings")
+					.push("wire");
+			WIRE_MAXPOWER = builder.comment("Maximum power that can be stored")
+					.defineInRange("maxPower", 2000, 0, Integer.MAX_VALUE);
+			WIRE_TRANSFER = builder.comment("Maximum power to transfer per tick")
+					.defineInRange("transfer", 100, 0, Integer.MAX_VALUE);
 			builder.pop();
 
 			// Energy Item Config

@@ -9,18 +9,15 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class ChargerBlock extends EnergyTileBlockBase {
 	public ChargerBlock() {
 		super(Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
-				.lightValue(14));
+				.lightValue(14),
+				ChargerTile::new);
 	}
-
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) { return new ChargerTile(); }
 
 	@Override
 	public int getComparatorInputOverride(BlockState state, World world, BlockPos pos) {

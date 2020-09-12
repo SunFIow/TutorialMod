@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -16,7 +15,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class InventoryTileEntityBase extends TileEntity implements INamedContainerProvider, ICustomNameable {
+public abstract class InventoryTileBase extends TileEntity implements ICustomNameable {
 
 	protected ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> itemHandlerOptional = LazyOptional.of(() -> itemHandler);
@@ -25,9 +24,7 @@ public abstract class InventoryTileEntityBase extends TileEntity implements INam
 
 	private ITextComponent customName;
 
-	public InventoryTileEntityBase(TileEntityType<?> type) {
-		super(type);
-	}
+	public InventoryTileBase(TileEntityType<?> type) { super(type); }
 
 	@Override
 	public void read(CompoundNBT tag) {

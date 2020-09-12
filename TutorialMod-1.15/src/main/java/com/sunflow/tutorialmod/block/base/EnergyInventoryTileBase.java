@@ -9,14 +9,14 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class EnergyInvTileEntityBase extends EnergyTileEntityBase {
+public abstract class EnergyInventoryTileBase extends EnergyTileBase {
 
 	protected ItemStackHandler itemHandler = createHandler();
 	private LazyOptional<IItemHandler> itemHandlerOptional = LazyOptional.of(() -> itemHandler);
 
 	protected abstract ItemStackHandler createHandler();
 
-	public EnergyInvTileEntityBase(TileEntityType<?> type) {
+	public EnergyInventoryTileBase(TileEntityType<?> type) {
 		super(type);
 	}
 

@@ -1,5 +1,7 @@
 package com.sunflow.tutorialmod.block.base;
 
+import java.util.function.Supplier;
+
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 
 import net.minecraft.block.BlockState;
@@ -13,12 +15,14 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public abstract class TileBlockBase extends OrientableBlockBase {
+	private Supplier<TileEntity> tile;
 
-	public TileBlockBase(Properties properties) { super(properties); }
+	public TileBlockBase(Properties properties, Supplier<TileEntity> tile) { super(properties); this.tile = tile; }
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
@@ -44,5 +48,10 @@ public abstract class TileBlockBase extends OrientableBlockBase {
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return tile.get();
 	}
 }

@@ -37,7 +37,7 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 	public void render(CopperChestTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
 		World world = tileEntity.getWorld();
 		boolean flag = world != null;
-		BlockState blockstate = flag ? tileEntity.getBlockState() : Registration.COPPER_CHEST.get().getDefaultState().with(CopperChestBlock.FACING, Direction.SOUTH);
+		BlockState blockstate = flag ? tileEntity.getBlockState() : Registration.COPPER_CHEST_BLOCK.get().getDefaultState().with(CopperChestBlock.FACING, Direction.SOUTH);
 		Block block = blockstate.getBlock();
 		if (block instanceof CopperChestBlock) {
 			matrixStack.push();

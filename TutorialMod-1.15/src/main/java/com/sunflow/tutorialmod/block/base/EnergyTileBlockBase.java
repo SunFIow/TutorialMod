@@ -1,19 +1,22 @@
 package com.sunflow.tutorialmod.block.base;
 
+import java.util.function.Supplier;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class EnergyTileBlockBase extends PoweredTileBlockBase {
 	public static final IntegerProperty FILLLEVEL = BlockStateProperties.POWER_0_15;
 
-	public EnergyTileBlockBase(Properties properties) {
-		super(properties);
+	public EnergyTileBlockBase(Properties properties, Supplier<TileEntity> tile) {
+		super(properties, tile);
 		setDefaultState(getDefaultState().with(FILLLEVEL, Integer.valueOf(0)));
 	}
 
