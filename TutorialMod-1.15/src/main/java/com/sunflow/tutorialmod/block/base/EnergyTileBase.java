@@ -6,6 +6,8 @@ import com.sunflow.tutorialmod.util.energy.CustomEnergyStorage;
 import com.sunflow.tutorialmod.util.interfaces.ICustomNameable;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -47,15 +49,46 @@ public abstract class EnergyTileBase extends TileEntity implements ICustomNameab
 
 	@Override
 	public void read(CompoundNBT tag) {
-		energyStorage.deserializeNBT(tag.getCompound("energy"));
+		readEnergy(tag);
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		tag.put("energy", energyStorage.serializeNBT());
-
+		writeEnergy(tag);
 		return super.write(tag);
+	}
+
+	public void readEnergy(CompoundNBT tag) {
+		energyStorage.deserializeNBT(tag.getCompound("energy"));
+	}
+
+	public CompoundNBT writeEnergy(CompoundNBT tag) {
+		tag.put("energy", energyStorage.serializeNBT());
+		return tag;
+	}
+
+	@Override
+	public CompoundNBT getUpdateTag() {
+		CompoundNBT tag = super.getUpdateTag();
+		writeEnergy(tag);
+		return tag;
+	}
+
+	@Override
+	public void handleUpdateTag(CompoundNBT tag) {
+		read(tag);
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		return new SUpdateTileEntityPacket(pos, -1, getUpdateTag());
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		CompoundNBT tag = pkt.getNbtCompound();
+		handleUpdateTag(tag);
 	}
 
 	@Override

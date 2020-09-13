@@ -190,6 +190,22 @@ public class GlowstoneGeneratorTile extends EnergyInventoryTileBase implements I
 		return super.write(tag);
 	}
 
+//	public void readInventory(CompoundNBT tag) {
+//		itemHandler.deserializeNBT(tag.getCompound("inv"));
+//	}
+//
+//	public CompoundNBT writeInventory(CompoundNBT tag) {
+//		tag.put("inv", itemHandler.serializeNBT());
+//		return tag;
+//	}
+//
+//	@Override
+//	public CompoundNBT getUpdateTag() {
+//		CompoundNBT tag = super.getUpdateTag();
+//		writeInventory(tag);
+//		return tag;
+//	}
+
 	@Override
 	public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
 		return new GlowstoneGeneratorContainer(id, inv, this);

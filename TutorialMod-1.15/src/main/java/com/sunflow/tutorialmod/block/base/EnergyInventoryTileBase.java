@@ -22,16 +22,31 @@ public abstract class EnergyInventoryTileBase extends EnergyTileBase {
 
 	@Override
 	public void read(CompoundNBT tag) {
-		itemHandler.deserializeNBT(tag.getCompound("inv"));
+		readInventory(tag);
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
-		tag.put("inv", itemHandler.serializeNBT());
-
+		writeInventory(tag);
 		return super.write(tag);
 	}
+
+	public void readInventory(CompoundNBT tag) {
+		itemHandler.deserializeNBT(tag.getCompound("inv"));
+	}
+
+	public CompoundNBT writeInventory(CompoundNBT tag) {
+		tag.put("inv", itemHandler.serializeNBT());
+		return tag;
+	}
+
+//	@Override
+//	public CompoundNBT getUpdateTag() {
+//		CompoundNBT tag = super.getUpdateTag();
+//		writeInventory(tag);
+//		return tag;
+//	}
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
