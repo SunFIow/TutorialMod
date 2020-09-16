@@ -1,0 +1,169 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "down": "none"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlenone"
+      }
+    },
+    {
+      "when": {
+        "up": "none"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlenone",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "south": "none"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlenone",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlenone",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "west": "none"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlenone",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "east": "none"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlenone",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "cable"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlecable"
+      }
+    },
+    {
+      "when": {
+        "up": "cable"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlecable",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "south": "cable"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlecable",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "cable"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlecable",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "west": "cable"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlecable",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "east": "cable"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singlecable",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "connection"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singleconnection"
+      }
+    },
+    {
+      "when": {
+        "up": "connection"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singleconnection",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "south": "connection"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singleconnection",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "connection"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singleconnection",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "west": "connection"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singleconnection",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "east": "connection"
+      },
+      "apply": {
+        "model": "tutorialmod:block/power_cable/singleconnection",
+        "x": 90,
+        "y": 270
+      }
+    }
+  ]
+}

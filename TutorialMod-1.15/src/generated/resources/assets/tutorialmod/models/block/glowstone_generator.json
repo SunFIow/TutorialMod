@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "tutorialmod:block/glowstone_generator_top",
+    "up": "tutorialmod:block/glowstone_generator_top",
+    "north": "tutorialmod:block/glowstone_generator_front",
+    "south": "tutorialmod:block/glowstone_generator_side",
+    "east": "tutorialmod:block/glowstone_generator_side",
+    "west": "tutorialmod:block/glowstone_generator_side"
+  }
+}

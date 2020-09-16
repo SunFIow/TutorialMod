@@ -1,0 +1,33 @@
+{
+  "textures": {
+    "single": "tutorialmod:block/power_cable/cable"
+  },
+  "elements": [
+    {
+      "from": [
+        10,
+        0,
+        10
+      ],
+      "to": [
+        6,
+        6,
+        6
+      ],
+      "faces": {
+        "north": {
+          "texture": "#single"
+        },
+        "south": {
+          "texture": "#single"
+        },
+        "west": {
+          "texture": "#single"
+        },
+        "east": {
+          "texture": "#single"
+        }
+      }
+    }
+  ]
+}
