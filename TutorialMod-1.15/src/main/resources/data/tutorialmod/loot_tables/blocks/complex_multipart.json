@@ -2,12 +2,12 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "multiblock",
+      "name": "complex_multipart",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:multiblock"
+          "name": "tutorialmod:complex_multipart"
         }
       ],
       "conditions": [

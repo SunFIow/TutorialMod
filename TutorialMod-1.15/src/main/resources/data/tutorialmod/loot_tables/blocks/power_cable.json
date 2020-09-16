@@ -2,12 +2,12 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "multiblock",
+      "name": "power_cable",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:multiblock"
+          "name": "tutorialmod:power_cable"
         }
       ],
       "conditions": [
