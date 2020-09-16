@@ -5,12 +5,12 @@ import com.sunflow.tutorialmod._testing.rendering.RenderPlayerFire;
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestScreen;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestTileRenderer;
+import com.sunflow.tutorialmod.block.energy.machine.charger.ChargerScreen;
+import com.sunflow.tutorialmod.block.energy.machine.electric_sintering_furnace.ElectricSinteringFurnaceScreen;
+import com.sunflow.tutorialmod.block.energy.machine.energy_storage.EnergyStorageScreen;
+import com.sunflow.tutorialmod.block.energy.machine.glowstone_generator.GlowstoneGeneratorScreen;
+import com.sunflow.tutorialmod.block.energy.machine.sintering_furnace.SinteringFurnaceScreen;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockColor;
-import com.sunflow.tutorialmod.block.machine.charger.ChargerScreen;
-import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.ElectricSinteringFurnaceScreen;
-import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageScreen;
-import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorScreen;
-import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceScreen;
 import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
 import com.sunflow.tutorialmod.block.model.CustomBakedModel;
 import com.sunflow.tutorialmod.block.model.CustomModelLoader;
@@ -105,6 +105,8 @@ public class ClientModEvents {
 		RenderTypeLookup.setRenderLayer(Registration.RICE_PLANT.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(Registration.COPPER_SAPLING.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.getCutout());
+
+		RenderTypeLookup.setRenderLayer(Registration.COMPLEX_MULTIPART_BLOCK.get(), RenderType.getTranslucent());
 	}
 
 	private static void registerBlockColors() {

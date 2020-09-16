@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class PoweredTileBlockBase extends TileBlockBase {
+public abstract class PoweredTileBlockBase extends ContainerBlockBase {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	public PoweredTileBlockBase(Properties properties, Supplier<TileEntity> tile) {

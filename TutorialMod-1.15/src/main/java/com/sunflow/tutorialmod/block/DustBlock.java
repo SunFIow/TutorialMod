@@ -19,13 +19,22 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.server.ServerWorld;
 
 public class DustBlock extends Block {
 	public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS_1_8;
-	protected static final VoxelShape[] SHAPES = new VoxelShape[] { VoxelShapes.empty(), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) };
+	protected static final VoxelShape[] SHAPES = new VoxelShape[] {
+			VoxelShapes.empty(),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 2.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 4.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 6.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 10.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 12.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 14.0D),
+			Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+	};
 
 	public DustBlock(Block.Properties properties) {
 		super(properties);
@@ -61,21 +70,6 @@ public class DustBlock extends Block {
 		return true;
 	}
 
-	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockState blockstate = worldIn.getBlockState(pos.down());
-		Block block = blockstate.getBlock();
-		if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER) {
-			if (block != Blocks.HONEY_BLOCK && block != Blocks.SOUL_SAND) {
-				return Block.doesSideFillSquare(blockstate.getCollisionShape(worldIn, pos.down()), Direction.UP) || block == this && blockstate.get(LAYERS) == 8;
-			} else {
-				return true;
-			}
-		} else {
-			return false;
-		}
-	}
-
 	/**
 	 * Update the provided state given the provided neighbor facing and neighbor state, returning a new state.
 	 * For example, fences make their connections to the passed in state if possible, and wet concrete powder immediately
@@ -84,7 +78,9 @@ public class DustBlock extends Block {
 	 */
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return !stateIn.isValidPosition(worldIn, currentPos)
+				? Blocks.AIR.getDefaultState()
+				: stateIn;
 	}
 
 	@Override

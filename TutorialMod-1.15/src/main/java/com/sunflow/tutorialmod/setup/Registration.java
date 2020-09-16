@@ -13,27 +13,33 @@ import com.sunflow.tutorialmod.block.TeleporterBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestTile;
+import com.sunflow.tutorialmod.block.energy.cable.PowerCableBlock;
+import com.sunflow.tutorialmod.block.energy.cable.PowerCableTile;
+import com.sunflow.tutorialmod.block.energy.machine.charger.ChargerBlock;
+import com.sunflow.tutorialmod.block.energy.machine.charger.ChargerContainer;
+import com.sunflow.tutorialmod.block.energy.machine.charger.ChargerTile;
+import com.sunflow.tutorialmod.block.energy.machine.electric_sintering_furnace.ElectricSinteringFurnaceBlock;
+import com.sunflow.tutorialmod.block.energy.machine.electric_sintering_furnace.ElectricSinteringFurnaceContainer;
+import com.sunflow.tutorialmod.block.energy.machine.electric_sintering_furnace.ElectricSinteringFurnaceTile;
+import com.sunflow.tutorialmod.block.energy.machine.energy_storage.EnergyStorageBlock;
+import com.sunflow.tutorialmod.block.energy.machine.energy_storage.EnergyStorageContainer;
+import com.sunflow.tutorialmod.block.energy.machine.energy_storage.EnergyStorageTile;
+import com.sunflow.tutorialmod.block.energy.machine.glowstone_generator.GlowstoneGeneratorBlock;
+import com.sunflow.tutorialmod.block.energy.machine.glowstone_generator.GlowstoneGeneratorContainer;
+import com.sunflow.tutorialmod.block.energy.machine.glowstone_generator.GlowstoneGeneratorTile;
+import com.sunflow.tutorialmod.block.energy.machine.sintering_furnace.SinteringFurnaceBlock;
+import com.sunflow.tutorialmod.block.energy.machine.sintering_furnace.SinteringFurnaceContainer;
+import com.sunflow.tutorialmod.block.energy.machine.sintering_furnace.SinteringFurnaceTile;
+import com.sunflow.tutorialmod.block.energy.wire.WireBlock;
+import com.sunflow.tutorialmod.block.energy.wire.WireTile;
 import com.sunflow.tutorialmod.block.food.FoodPlantBlock;
 import com.sunflow.tutorialmod.block.furniture.SantaHatBlock;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlock;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
-import com.sunflow.tutorialmod.block.machine.charger.ChargerBlock;
-import com.sunflow.tutorialmod.block.machine.charger.ChargerContainer;
-import com.sunflow.tutorialmod.block.machine.charger.ChargerTile;
-import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.ElectricSinteringFurnaceBlock;
-import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.ElectricSinteringFurnaceContainer;
-import com.sunflow.tutorialmod.block.machine.electric_sintering_furnace.ElectricSinteringFurnaceTile;
-import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageBlock;
-import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageContainer;
-import com.sunflow.tutorialmod.block.machine.energy_storage.EnergyStorageTile;
-import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorBlock;
-import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorContainer;
-import com.sunflow.tutorialmod.block.machine.glowstone_generator.GlowstoneGeneratorTile;
-import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceBlock;
-import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceContainer;
-import com.sunflow.tutorialmod.block.machine.sintering_furnace.SinteringFurnaceTile;
 import com.sunflow.tutorialmod.block.magicblock.MagicBlock;
 import com.sunflow.tutorialmod.block.magicblock.MagicBlockTile;
+import com.sunflow.tutorialmod.block.multipart.ComplexMultipartBlock;
+import com.sunflow.tutorialmod.block.multipart.ComplexMultipartTile;
 import com.sunflow.tutorialmod.block.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.block.ore.RubyBlock;
 import com.sunflow.tutorialmod.block.ore.RubyOre;
@@ -43,8 +49,6 @@ import com.sunflow.tutorialmod.dimension.ModDimensionBase;
 import com.sunflow.tutorialmod.dimension.badlands.BadlandsDimension;
 import com.sunflow.tutorialmod.effect.PeeEffect;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
-import com.sunflow.tutorialmod.energy.block.WireBlock;
-import com.sunflow.tutorialmod.energy.block.WireTile;
 import com.sunflow.tutorialmod.entity.centaur.CentaurEntity;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobEntity;
 import com.sunflow.tutorialmod.item.EnergyWandItem;
@@ -143,6 +147,15 @@ public class Registration {
 	}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<ComplexMultipartBlock> COMPLEX_MULTIPART_BLOCK = BLOCKS.register("complex_multipart", ComplexMultipartBlock::new);
+	public static final RegistryObject<BlockItem> COMPLEX_MULTIPART_ITEM = ITEMS.register("complex_multipart", () -> new BlockItem(COMPLEX_MULTIPART_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<ComplexMultipartTile>> COMPLEX_MULTIPART_TILE = TILEENTITIES.register("complex_multipart", () -> TileEntityType.Builder.create(ComplexMultipartTile::new, COMPLEX_MULTIPART_BLOCK.get()).build(null));
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static final RegistryObject<PowerCableBlock> POWER_CABLE_BLOCK = BLOCKS.register("power_cable", PowerCableBlock::new);
+	public static final RegistryObject<BlockItem> POWER_CABLE_ITEM = ITEMS.register("power_cable", () -> new BlockItem(POWER_CABLE_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	public static final RegistryObject<TileEntityType<PowerCableTile>> POWER_CABLE_TILE = TILEENTITIES.register("power_cable", () -> TileEntityType.Builder.create(PowerCableTile::new, POWER_CABLE_BLOCK.get()).build(null));
 
 	public static final RegistryObject<WireBlock> WIRE_BLOCK = BLOCKS.register("wire", WireBlock::new);
 	public static final RegistryObject<BlockItem> WIRE_ITEM = ITEMS.register("wire", () -> new BlockItem(WIRE_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));

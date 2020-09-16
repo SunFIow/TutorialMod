@@ -1,5 +1,6 @@
 {
-   "textures": {
-       "particle": "tutorialmod:block/magicblock"
-   }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "tutorialmod:block/magicblock"
+  }
 }
