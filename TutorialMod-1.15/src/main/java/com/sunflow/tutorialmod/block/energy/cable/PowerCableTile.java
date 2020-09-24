@@ -17,18 +17,17 @@ public class PowerCableTile extends TileEntity {
 	}
 
 	public void changeMode(Direction side, Mode newMode) {
+		if (modes[side.ordinal()] == newMode) return;
 		modes[side.ordinal()] = newMode;
 		updateState(side);
 	}
 
 	private void updateState(Direction side) {
 		world.setBlockState(pos, world.getBlockState(pos)
-				.with(PowerCableBlock.getProp(side), getMode(side)),
+				.with(PowerCableBlock.getProperty(side), modes[side.ordinal()]),
 				Constants.BlockFlags.BLOCK_UPDATE | Constants.BlockFlags.NOTIFY_NEIGHBORS);
 		markDirty();
 	}
-
-	private Mode getMode(Direction side) { return modes[side.ordinal()]; }
 
 	@Override
 	public void read(CompoundNBT tag) {
@@ -43,21 +42,24 @@ public class PowerCableTile extends TileEntity {
 	}
 
 	public void readModes(CompoundNBT tag) {
-		modes[0] = Mode.values()[tag.getByte("m0")];
-		modes[1] = Mode.values()[tag.getByte("m1")];
-		modes[2] = Mode.values()[tag.getByte("m2")];
-		modes[3] = Mode.values()[tag.getByte("m3")];
-		modes[4] = Mode.values()[tag.getByte("m4")];
-		modes[5] = Mode.values()[tag.getByte("m5")];
+		CompoundNBT modesNBT = tag.getCompound("modes");
+		modes[0] = Mode.values()[modesNBT.getByte("down")];
+		modes[1] = Mode.values()[modesNBT.getByte("up")];
+		modes[2] = Mode.values()[modesNBT.getByte("north")];
+		modes[3] = Mode.values()[modesNBT.getByte("south")];
+		modes[4] = Mode.values()[modesNBT.getByte("west")];
+		modes[5] = Mode.values()[modesNBT.getByte("east")];
 	}
 
 	public CompoundNBT writeModes(CompoundNBT tag) {
-		tag.putByte("m0", (byte) modes[0].ordinal());
-		tag.putByte("m1", (byte) modes[1].ordinal());
-		tag.putByte("m2", (byte) modes[2].ordinal());
-		tag.putByte("m3", (byte) modes[3].ordinal());
-		tag.putByte("m4", (byte) modes[4].ordinal());
-		tag.putByte("m5", (byte) modes[5].ordinal());
+		CompoundNBT modesNBT = new CompoundNBT();
+		modesNBT.putByte("down", (byte) modes[0].ordinal());
+		modesNBT.putByte("up", (byte) modes[1].ordinal());
+		modesNBT.putByte("north", (byte) modes[2].ordinal());
+		modesNBT.putByte("south", (byte) modes[3].ordinal());
+		modesNBT.putByte("west", (byte) modes[4].ordinal());
+		modesNBT.putByte("east", (byte) modes[5].ordinal());
+		tag.put("modes", modesNBT);
 		return tag;
 	}
 

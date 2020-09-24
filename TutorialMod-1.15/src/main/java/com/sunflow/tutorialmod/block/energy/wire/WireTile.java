@@ -37,6 +37,8 @@ public class WireTile extends EnergyTileBase {
 			}
 		}
 
+		if (world.isRemote) return;
+
 //		if (EnergyUtils.receivePower(world, pos, energyStorage)) markDirty();
 //		if (EnergyUtils.sendOutPower(world, pos, energyStorage)) markDirty();
 		sendOutPower();
