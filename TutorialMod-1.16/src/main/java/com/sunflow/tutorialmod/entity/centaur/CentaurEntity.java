@@ -4,9 +4,9 @@ import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
@@ -19,18 +19,22 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class CentaurEntity extends CowEntity {
 
 	public CentaurEntity(EntityType<? extends CentaurEntity> type, World world) {
 		super(type, world);
-		getAttribute(Attributes.field_233818_a_).setBaseValue(40.0D);
+//		getAttribute(Attributes.MAX_HEALTH).setBaseValue(40.0D);
+	}
+
+	public static AttributeModifierMap.MutableAttribute prepareAttributes() {
+		return LivingEntity.registerAttributes()
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.22D)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 40.0D);
 	}
 
 	@Override
@@ -45,21 +49,20 @@ public class CentaurEntity extends CowEntity {
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
 
-	@Override
-	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
-		if (spawnDataIn == null) {
-			spawnDataIn = new AgeableEntity.AgeableData();
-			((AgeableEntity.AgeableData) spawnDataIn).func_226258_a_(0.2F);
-		}
-
-		this.func_230273_eI_();
-		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-	}
-
-	protected void func_230273_eI_() {
-		this.getAttribute(Attributes.field_233818_a_).setBaseValue(40.0D);
-		this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.22D);
-	}
+//	@Override
+//	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+//		if (spawnDataIn == null) {
+//			spawnDataIn = new AgeableEntity.AgeableData(0.2F);
+//		}
+//
+//		this.func_230273_eI_();
+//		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+//	}
+//
+//	protected void func_230273_eI_() {
+//		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(40.0D);
+//		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.22D);
+//	}
 
 	@Override
 	public float getEyeHeight(Pose pose) { return 2.6f; }
@@ -74,7 +77,8 @@ public class CentaurEntity extends CowEntity {
 	protected SoundEvent getDeathSound() { return Registration.ENTITY_CENTAUR_DEATH.get(); }
 
 	@Override
-	public CentaurEntity createChild(AgeableEntity ageable) { return Registration.CENTAUR.get().create(this.world); }
+//	createChild
+	public CentaurEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity ageable) { return Registration.CENTAUR.get().create(p_241840_1_); }
 
 //	@Override
 //	protected ResourceLocation getLootTable(){ return LootTableHandler.CENTAUR; }

@@ -29,7 +29,7 @@ public class SlimeChunkCommand extends CommandBase { // implements ICommand {
 				.then(Commands.literal("check")
 						.then(Commands.argument("pos", BlockPosArgument.blockPos())
 								.executes(ctx -> check(ctx.getSource(), BlockPosArgument.getBlockPos(ctx, "pos"))))
-						.executes(ctx -> check(ctx.getSource(), ctx.getSource().asPlayer().func_233580_cy_())))
+						.executes(ctx -> check(ctx.getSource(), ctx.getSource().asPlayer().getPosition())))
 				.then(Commands.literal("find")
 						.then(Commands.argument("radius", IntegerArgumentType.integer(0))
 								.executes(ctx -> find(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "radius"))))
@@ -39,18 +39,18 @@ public class SlimeChunkCommand extends CommandBase { // implements ICommand {
 
 	private static int check(CommandSource source, BlockPos pos) throws CommandSyntaxException {
 		ChunkPos chunk = new ChunkPos(pos);
-		long seed = source.getServer().getWorld(World.field_234918_g_).getSeed();
+		long seed = source.getServer().getWorld(World.OVERWORLD).getSeed();
 		boolean isSlimeChunk = checkChunk(seed, chunk.x, chunk.z);
-		source.asPlayer().sendMessage(new TranslationTextComponent("This is " + (!isSlimeChunk ? "not" : "") + " a Slime Chunk"), Util.field_240973_b_);
+		source.asPlayer().sendMessage(new TranslationTextComponent("This is " + (!isSlimeChunk ? "not" : "") + " a Slime Chunk"), Util.DUMMY_UUID);
 		return 1;
 	}
 
 	private static int find(CommandSource source, int radius) throws CommandSyntaxException {
-		ChunkPos chunk = new ChunkPos(source.asPlayer().func_233580_cy_());
-		long seed = source.getServer().getWorld(World.field_234918_g_).getSeed();
+		ChunkPos chunk = new ChunkPos(source.asPlayer().getPosition());
+		long seed = source.getServer().getWorld(World.OVERWORLD).getSeed();
 		ChunkPos closest;
 		if (checkChunk(seed, chunk.x, chunk.z)) {
-			source.asPlayer().sendMessage(new StringTextComponent("You are in a Slime Chunk"), Util.field_240973_b_);
+			source.asPlayer().sendMessage(new StringTextComponent("You are in a Slime Chunk"), Util.DUMMY_UUID);
 			return 1;
 		} else {
 			closest = new ChunkPos(chunk.x - radius, chunk.z - radius);
@@ -67,7 +67,7 @@ public class SlimeChunkCommand extends CommandBase { // implements ICommand {
 				}
 			}
 		}
-		source.asPlayer().sendMessage(new StringTextComponent("Your closest Slime Chunk is at [X:" + closest.x + ", Z:" + closest.z + "]"), Util.field_240973_b_);
+		source.asPlayer().sendMessage(new StringTextComponent("Your closest Slime Chunk is at [X:" + closest.x + ", Z:" + closest.z + "]"), Util.DUMMY_UUID);
 		return 1;
 	}
 

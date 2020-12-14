@@ -16,4 +16,5 @@ public abstract class BasePacket {
 	public final void onMessage(Supplier<NetworkEvent.Context> ctx) { ctx.get().enqueueWork(() -> ctx.get().setPacketHandled(action(ctx.get()))); }
 
 	protected abstract boolean action(NetworkEvent.Context ctx);
+
 }

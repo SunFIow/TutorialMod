@@ -12,7 +12,6 @@ import com.sunflow.tutorialmod.command.SlimeChunkCommand;
 import com.sunflow.tutorialmod.command.spawner.SpawnerCommand;
 
 import net.minecraft.command.CommandSource;
-import net.minecraft.command.Commands;
 
 public class ModCommands {
 	public static final List<CommandBase> COMMANDS = new ArrayList<>();
@@ -22,13 +21,12 @@ public class ModCommands {
 //	public static final CommandBase TpDim_COMMAND = new TpDimCommand();
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-//		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal(TutorialMod.MODID);
-		LiteralArgumentBuilder<CommandSource> builder = Commands.literal(TutorialMod.MODID);
-		for (CommandBase command : COMMANDS) {
-			builder.then(command.getBuilder());
-		}
+		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal(TutorialMod.MODID);
+		COMMANDS.forEach(command -> builder.then(command.getBuilder()));
 		LiteralCommandNode<CommandSource> cmdTut = dispatcher.register(builder);
-		dispatcher.register(Commands.literal("tut").redirect(cmdTut));
+
+		LiteralArgumentBuilder<CommandSource> lab = LiteralArgumentBuilder.<CommandSource>literal("tut").redirect(cmdTut);
+		dispatcher.register(lab);
 //		ConfigCommand.register(dispatcher);
 	}
 }

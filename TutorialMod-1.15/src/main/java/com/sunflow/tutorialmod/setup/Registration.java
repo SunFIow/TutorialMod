@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.setup;
 import java.util.Locale;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod._testing.PackageItem;
 import com.sunflow.tutorialmod._testing.block.TitleBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferBlock;
 import com.sunflow.tutorialmod._testing.block.buffer.BufferTileEntity;
@@ -145,6 +146,10 @@ public class Registration {
 		FEATURES.register(modEventBus);
 		register(RDHP, "RDHP");
 	}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<PackageItem> TEST_ITEM = ITEMS.register("packageitem", PackageItem::new);
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

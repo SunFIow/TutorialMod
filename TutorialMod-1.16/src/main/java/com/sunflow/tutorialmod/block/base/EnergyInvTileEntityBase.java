@@ -22,9 +22,9 @@ public abstract class EnergyInvTileEntityBase extends EnergyTileEntityBase {
 	}
 
 	@Override
-	public void func_230337_a_(BlockState state, CompoundNBT tag) {
+	public void read(BlockState state, CompoundNBT tag) {
 		itemHandler.deserializeNBT(tag.getCompound("inv"));
-		super.func_230337_a_(state, tag);
+		super.read(state, tag);
 	}
 
 	@Override

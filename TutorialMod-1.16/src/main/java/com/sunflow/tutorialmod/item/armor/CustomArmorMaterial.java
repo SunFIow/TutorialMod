@@ -98,7 +98,7 @@ public enum CustomArmorMaterial implements IArmorMaterial {
 	}
 
 	@Override
-	public float func_230304_f_() {
+	public float getKnockbackResistance() {
 		return field_234660_o_;
 	}
 }

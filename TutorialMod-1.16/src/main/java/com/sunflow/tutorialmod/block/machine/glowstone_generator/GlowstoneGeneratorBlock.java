@@ -11,7 +11,7 @@ public class GlowstoneGeneratorBlock extends EnergyTileBlockBase {
 	public GlowstoneGeneratorBlock() {
 		super(Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
-				.func_235838_a_(state -> state.get(FILLLEVEL) * 7 / 15
+				.setLightLevel(state -> state.get(FILLLEVEL) * 7 / 15
 						+ (state.get(POWERED) ? 7 : 0)));
 	}
 

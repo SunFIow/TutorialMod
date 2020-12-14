@@ -18,25 +18,27 @@ public class SinteringFurnaceScreen extends ScreenBase<SinteringFurnaceContainer
 	}
 
 	@Override
-	protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-		super.func_230451_b_(matrixStack, mouseX, mouseY);
+	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+		super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
 
 		String current = Integer.toString(container.data.get(SinteringFurnaceTile.BURNTIME_ID));
 		String max = Integer.toString(container.data.get(SinteringFurnaceTile.BURNTIME_TOTAL_ID));
 		String text = current + " / " + max;
-		int w = field_230712_o_.getStringWidth(text);
-		field_230712_o_.func_238422_b_(matrixStack, new StringTextComponent(text), 148 - w, 72, 0x404040);
+		int w = font.getStringWidth(text);
+//		field_230712_o_.func_238422_b_(matrixStack, new StringTextComponent(text), 148 - w, 72, 0x404040);
+//		font.drawString(matrixStack, text, 148 - w, 72, 0x404040);
+		this.font.func_243248_b(matrixStack, new StringTextComponent(text), 148 - w, 72, 0x404040);
 	}
 
 	@Override
-	protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-		super.func_230450_a_(matrixStack, partialTicks, mouseX, mouseY);
+	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+		super.drawGuiContainerBackgroundLayer(matrixStack, partialTicks, mouseX, mouseY);
 
 //		blit(xIG, yIG, xOffset, yOffset, wIG, hIG);
 		int l = getProgressScaled(container.getCookTime(), TutorialModConfig.SINTERING_FURNACE_TICKS.get(), 24);
-		this.func_238474_b_(matrixStack, guiLeft + 79, guiTop + 34, 176, 14, l, 17);
+		this.blit(matrixStack, guiLeft + 79, guiTop + 34, 176, 14, l, 17);
 
 		int k = getProgressScaled(container.getBurnTime(), container.getBurnTimeTotal(), 14);
-		this.func_238474_b_(matrixStack, guiLeft + 21, guiTop + 54 + 14 - k, 176, 14 - k, 14, k);
+		this.blit(matrixStack, guiLeft + 21, guiTop + 54 + 14 - k, 176, 14 - k, 14, k);
 	}
 }

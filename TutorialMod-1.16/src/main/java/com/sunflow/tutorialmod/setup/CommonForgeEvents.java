@@ -5,6 +5,7 @@ import com.sunflow.tutorialmod.util.Log;
 import com.sunflow.tutorialmod.util.MyWorldData;
 
 import net.minecraft.world.World;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 public class CommonForgeEvents {
@@ -13,8 +14,11 @@ public class CommonForgeEvents {
 		Log.info("Preparing the server for u senpai.");
 
 //		Registration.COPPER.get().register();
-		ModCommands.register(event.getCommandDispatcher());
-		TutorialMod.data = event.getServer().getWorld(World.field_234918_g_).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+		TutorialMod.data = event.getServer().getWorld(World.OVERWORLD).getSavedData().getOrCreate(MyWorldData::new, MyWorldData.ID_GENERAL);
+	}
+
+	public static void onCommandsRegister(RegisterCommandsEvent event) {
+		ModCommands.register(event.getDispatcher());
 	}
 
 //	public static void onDimensionRegistry(RegisterDimensionsEvent event) {
@@ -23,4 +27,5 @@ public class CommonForgeEvents {
 //		net.minecraft.world.DimensionType.field_235999_c_;
 //		Registration.BADLANDS_TYPE = DimensionManager.registerOrGetDimension(Registration.BADLANDS_ID, Registration.BADLANDS.get(), null, true);
 //	}
+
 }

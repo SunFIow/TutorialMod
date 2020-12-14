@@ -18,37 +18,36 @@ public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T> {
 	}
 
 	@Override
-//	public void render(int mouseX, int mouseY, float partialTicks) {
-	public void func_230430_a_(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-//		this.renderBackground();
-		this.func_230446_a_(matrixStack);
-//		super.redner(mouseX, mouseY, partialTicks);
-		super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
-//		this.renderHoveredToolTip(mouseX, mouseY);
-		this.func_230459_a_(matrixStack, mouseX, mouseY);
+	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(matrixStack);
+		super.render(matrixStack, mouseX, mouseY, partialTicks);
+		this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
 	}
 
 	@Override
-//	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-	protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-		super.func_230451_b_(matrixStack, mouseX, mouseY);
+	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+		super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
 //		font.drawString(title.getFormattedText(), xSize / 2 - font.getStringWidth(title.getFormattedText()) / 2, 6.0F, 0x404040);
 //		font.drawString(playerInventory.getDisplayName().getFormattedText(), 8.0F, ySize - 96 + 2, 0x404040);
+
 //		this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, this.field_238742_p_, this.field_238743_q_, 4210752);
 //		this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), this.field_238744_r_, this.field_238745_s_, 4210752);
+
+//		this.font.func_243248_b(matrixStack, this.title, (float)this.titleX, (float)this.titleY, 4210752);
+//	    this.font.func_243248_b(matrixStack, this.playerInventory.getDisplayName(), (float)this.playerInventoryTitleX, (float)this.playerInventoryTitleY, 4210752);
+
 	}
 
 	@Override
 //	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-	protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-//		minecraft.getTextureManager().bindTexture(GUI);
-		this.field_230706_i_.getTextureManager().bindTexture(GUI);
+		this.minecraft.getTextureManager().bindTexture(GUI);
 
 //		blit(xIG, yIG, xOffset, yOffset, wIG, hIG);
 //		blit(guiLeft, guiTop, 0, 0, xSize, ySize);
-		func_238474_b_(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
+		blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 
 	protected int getProgressScaled(int current, int max, int pixels) {

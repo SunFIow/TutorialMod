@@ -39,7 +39,7 @@ public class RenderTileOverlays {
 		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
 		IVertexBuilder builder = buffer.getBuffer(ModRenderTypes.getOverlayLines());
 
-		BlockPos playerPos = player.func_233580_cy_();
+		BlockPos playerPos = player.getPosition();
 		int px = playerPos.getX();
 		int py = playerPos.getY();
 		int pz = playerPos.getZ();

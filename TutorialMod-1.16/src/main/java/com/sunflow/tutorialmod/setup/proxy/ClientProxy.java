@@ -36,6 +36,7 @@ public class ClientProxy extends CommonProxy {
 		super.registerModEvents(eventBus);
 		eventBus.addListener(ClientModEvents::setup);
 		eventBus.addListener(ClientModEvents::onItemColor);
+		eventBus.addListener(ClientModEvents::onModelRegistryEvent);
 		eventBus.addListener(ClientModEvents::onTextureStitch);
 	}
 

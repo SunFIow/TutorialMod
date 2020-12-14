@@ -193,9 +193,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 	}
 
 	@Override
-	public boolean func_230044_c_() {
-		return false;
-	}
+	public boolean isSideLit() { return false; }
 
 //	@Override
 //	public ItemCameraTransforms getItemCameraTransforms() { return transforms; }

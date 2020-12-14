@@ -12,7 +12,7 @@ public class SinteringFurnaceBlock extends PoweredTileBlockBase {
 	public SinteringFurnaceBlock() {
 		super(Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
-				.func_235838_a_((state) -> state.get(POWERED) ? 14 : 0));
+				.setLightLevel((state) -> state.get(POWERED) ? 14 : 0));
 	}
 
 	@Override

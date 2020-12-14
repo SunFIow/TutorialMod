@@ -32,10 +32,10 @@ public abstract class InventoryTileEntityBase extends TileEntity implements INam
 	}
 
 	@Override
-	public void func_230337_a_(BlockState state, CompoundNBT tag) {
+	public void deserializeNBT(BlockState state, CompoundNBT tag) {
 //		handler.ifPresent(h -> h.deserializeNBT(tag.getCompound("inv")));
 		itemHandler.deserializeNBT(tag.getCompound("inv"));
-		super.func_230337_a_(state, tag);
+		super.deserializeNBT(state, tag);
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class MultiBlock2 extends Block {
 		super(Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
 //				.lightValue(14)
-				.func_235838_a_(state -> 14)
+				.setLightLevel(state -> 14)
 				.notSolid());
 		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.UPPER));
 	}

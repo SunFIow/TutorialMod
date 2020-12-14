@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.network;
 import java.util.function.Supplier;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod._testing.TestPackage;
 import com.sunflow.tutorialmod.config.SyncConfigPacket;
 import com.sunflow.tutorialmod.network.packet.ExplodePacket;
 import com.sunflow.tutorialmod.network.packet.MultiJumpPacket;
@@ -66,6 +67,12 @@ public class Networking {
 				.consumer(ExplodePacket::onMessage)
 				.add();
 
+		TUTORIALMOD_CHANNEL.registerMessage(nextID(),
+				ExplodePacket.class,
+				ExplodePacket::encode,
+				ExplodePacket::new,
+				ExplodePacket::onMessage);
+
 		TUTORIALMOD_CHANNEL.messageBuilder(MultiJumpPacket.class, nextID())
 				.encoder(MultiJumpPacket::encode)
 				.decoder(MultiJumpPacket::new)
@@ -101,6 +108,12 @@ public class Networking {
 				.decoder(SyncConfigPacket::new)
 				.consumer(SyncConfigPacket::onMessage)
 				.add();
+
+		TUTORIALMOD_CHANNEL.registerMessage(nextID(),
+				TestPackage.class,
+				TestPackage::encode,
+				TestPackage::new,
+				TestPackage::onMessage);
 	}
 
 	// Sending to Server

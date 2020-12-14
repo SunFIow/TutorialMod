@@ -233,10 +233,7 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	}
 
 	private static void addItemTagBurnTime(Map<Item, Integer> map, ITag<Item> itemTag, int burnTime) {
-		for (Item item : itemTag.func_230236_b_()) {
-			map.put(item, burnTime);
-		}
-
+		itemTag.getAllElements().forEach(item -> map.put(item, burnTime));
 	}
 
 	private static void addItemBurnTime(Map<Item, Integer> map, IItemProvider itemProvider, int burnTimeIn) {
@@ -273,12 +270,12 @@ public class SinteringFurnaceTile extends InventoryTileEntityBase implements ITi
 	}
 
 	@Override
-	public void func_230337_a_(BlockState state, CompoundNBT tag) {
+	public void read(BlockState state, CompoundNBT tag) {
 		cookTime = tag.getFloat("cooktime");
 		this.burnTime = tag.getInt("burntime");
 		this.burnTimeTotal = tag.getInt("burntimetotal");
 
-		super.func_230337_a_(state, tag);
+		super.read(state, tag);
 	}
 
 	@Override

@@ -173,12 +173,12 @@ public class GlowstoneGeneratorTile extends EnergyInvTileEntityBase {
 	}
 
 	@Override
-	public void func_230337_a_(BlockState state, CompoundNBT tag) {
+	public void read(BlockState state, CompoundNBT tag) {
 		cookTime = tag.getFloat("cooktime");
 		powerLeftOvers = tag.getFloat("powerleftovers");
 		currentFuel = ItemStack.read(tag.getCompound("currentfuel")).getItem();
 
-		super.func_230337_a_(state, tag);
+		super.read(state, tag);
 	}
 
 	@Override

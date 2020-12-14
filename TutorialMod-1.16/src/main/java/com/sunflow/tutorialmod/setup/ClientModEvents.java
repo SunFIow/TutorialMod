@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -42,11 +43,12 @@ public class ClientModEvents {
 
 		registerScreens();
 
-		setRenderLayers();
+		event.enqueueWork(ClientModEvents::setRenderLayers);
+//		event.enqueueWork(ClientModEvents::registerBlockColors);
 
 		registerEntityRenderingHandlers();
 
-		registerModelLoaders();
+//		registerModelLoaders();
 
 		bindTileEntityRenderers();
 
@@ -81,24 +83,15 @@ public class ClientModEvents {
 		RenderTypeLookup.setRenderLayer(Registration.ALUMINIUM_SAPLING.get(), RenderType.getCutout());
 	}
 
+//	private static void registerBlockColors() {
+//		TutorialMod.proxy.getMinecraft().getBlockColors().register(new FancyBlockColor(), Registration.FANCYBLOCK.get());
+//	}
+
 	private static void registerEntityRenderingHandlers() {
 		RenderingRegistry.registerEntityRenderingHandler(Registration.WEIRDMOB.get(), WeirdMobRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(Registration.CENTAUR.get(), CentaurRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(Registration.GRENADE_ENTITY.get(),
 				(erm) -> new SpriteRenderer<>(erm, TutorialMod.proxy.getMinecraft().getItemRenderer()));
-	}
-
-	private static void registerModelLoaders() {
-		BakedBlockBase block = Registration.FANCYBLOCK.get();
-		ModelLoaderRegistry.registerLoader(
-				new ResourceLocation(TutorialMod.MODID, "customloader"),
-//				new CustomModelLoader(block.location(), block.offset(), block.length()));
-				new CustomModelLoader(
-						() -> new CustomModelGeometry(block.location(),
-								() -> new CustomBakedModel(
-										block.location(),
-										block.offset(),
-										block.length()))));
 	}
 
 	private static void bindTileEntityRenderers() {
@@ -112,6 +105,19 @@ public class ClientModEvents {
 		ItemColors registry = event.getItemColors();
 		registry.register((stack, i) -> Registration.CENTAUR_SPAWN_EGG.get().eggColor, Registration.CENTAUR_SPAWN_EGG.get());
 		registry.register((stack, i) -> Registration.WEIRDMOB_SPAWN_EGG.get().eggColor, Registration.WEIRDMOB_SPAWN_EGG.get());
+	}
+
+	public static void onModelRegistryEvent(ModelRegistryEvent event) {
+		BakedBlockBase block = Registration.FANCYBLOCK.get();
+		ModelLoaderRegistry.registerLoader(
+				new ResourceLocation(TutorialMod.MODID, "customloader"),
+//				new CustomModelLoader(block.location(), block.offset(), block.length()));
+				new CustomModelLoader(
+						() -> new CustomModelGeometry(block.location(),
+								() -> new CustomBakedModel(
+										block.location(),
+										block.offset(),
+										block.length()))));
 	}
 
 	@SuppressWarnings("deprecation")

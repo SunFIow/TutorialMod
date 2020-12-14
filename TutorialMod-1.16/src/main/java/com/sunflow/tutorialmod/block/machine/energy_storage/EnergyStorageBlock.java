@@ -12,7 +12,7 @@ public class EnergyStorageBlock extends EnergyTileBlockBase {
 	public EnergyStorageBlock() {
 		super(Properties.create(Material.ROCK)
 				.hardnessAndResistance(2.0f)
-				.func_235838_a_(state -> state.get(POWERED) ? (int) (state.get(FILLLEVEL) / 15F * 14) : 0));
+				.setLightLevel(state -> state.get(POWERED) ? (int) (state.get(FILLLEVEL) / 15F * 14) : 0));
 	}
 
 	@Override
