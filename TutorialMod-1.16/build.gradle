@@ -114,7 +114,7 @@ dependencies {
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
-    manifest {
+    manifest {	
         attributes([
             "Specification-Title": modId,
             "Specification-Vendor": modGroup,
