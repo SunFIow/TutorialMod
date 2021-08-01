@@ -10,6 +10,7 @@ public class RenderModOverlay {
 
 	@SuppressWarnings("resource")
 	public static void render(RenderGameOverlayEvent.Text event) {
+//		Log.info("test");
 		if (!TutorialMod.proxy.getMinecraft().gameSettings.showDebugInfo && TutorialModConfig.CONFIG_SHOW_OVERLAY.get()) {
 			BlockPos pos = TutorialMod.proxy.getClientPlayer().getPosition();
 			event.getLeft().add(0, String.format("X: %s, Y: %s, Z: %s", pos.getX(), pos.getY(), pos.getZ()));

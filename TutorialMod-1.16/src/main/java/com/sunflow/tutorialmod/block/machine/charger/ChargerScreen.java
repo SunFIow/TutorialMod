@@ -4,10 +4,13 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.ScreenBase;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class ChargerScreen extends ScreenBase<ChargerContainer> {
 
@@ -16,10 +19,13 @@ public class ChargerScreen extends ScreenBase<ChargerContainer> {
 		GUI = new ResourceLocation(TutorialMod.MODID, "textures/gui/container/charger.png");
 	}
 
-//	@Override
-//	public void init(Minecraft p_231158_1_, int p_231158_2_, int p_231158_3_) {
-//		super.init(p_231158_1_, p_231158_2_, p_231158_3_);
-//	}
+	@Override
+	public void init(Minecraft minecraft, int width, int height) {
+		super.init(minecraft, width, height);
+		addButton(new Button(guiLeft + 10, guiTop + 10 + 27 * 0, 160, 20, new TranslationTextComponent("Test"), this::bla));
+	}
+
+	private void bla(Button b) { System.out.println("bla"); }
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
