@@ -17,7 +17,7 @@ public class TestItem extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		player.sendMessage(new StringTextComponent(world.isRemote + ": " + player.fallDistance), Util.field_240973_b_);
+		player.sendMessage(new StringTextComponent(world.isRemote + ": " + player.fallDistance), Util.DUMMY_UUID);
 
 		return super.onItemRightClick(world, player, hand);
 	}

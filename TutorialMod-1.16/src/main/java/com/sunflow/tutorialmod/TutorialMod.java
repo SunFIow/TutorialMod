@@ -22,7 +22,7 @@ public class TutorialMod {
 	public static final String MODID = "tutorialmod";
 	public static final String NAME = "Tutorial Mod";
 	public static final String VERSION = "0.0.1";
-	public static final String ACCEPTED_VERSION = "[1.16.1,)";
+	public static final String ACCEPTED_VERSION = "[1.16.3,)";
 
 //	public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);

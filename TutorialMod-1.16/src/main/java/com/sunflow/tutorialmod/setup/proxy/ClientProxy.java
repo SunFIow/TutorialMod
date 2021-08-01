@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.setup.proxy;
 import com.sunflow.tutorialmod.enchantment.EnchantmentMultiJump;
 import com.sunflow.tutorialmod.rendering.RenderMobPositions;
 import com.sunflow.tutorialmod.rendering.RenderModOverlay;
+import com.sunflow.tutorialmod.rendering.RenderNoArmor;
 import com.sunflow.tutorialmod.rendering.RenderTileOverlays;
 import com.sunflow.tutorialmod.setup.ClientModEvents;
 import com.sunflow.tutorialmod.util.handlers.KeyBindingHandler;
@@ -26,6 +27,8 @@ public class ClientProxy extends CommonProxy {
 
 		eventBus.addListener(RenderMobPositions::render);
 		eventBus.addListener(RenderModOverlay::render);
+		eventBus.addListener(RenderNoArmor::renderPre);
+		eventBus.addListener(RenderNoArmor::renderPost);
 		eventBus.addListener(RenderTileOverlays::render);
 
 		eventBus.addListener(EnchantmentMultiJump::enchantmentFunction);
@@ -36,6 +39,7 @@ public class ClientProxy extends CommonProxy {
 		super.registerModEvents(eventBus);
 		eventBus.addListener(ClientModEvents::setup);
 		eventBus.addListener(ClientModEvents::onItemColor);
+		eventBus.addListener(ClientModEvents::onModelRegistryEvent);
 		eventBus.addListener(ClientModEvents::onTextureStitch);
 	}
 

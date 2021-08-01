@@ -73,7 +73,6 @@ public class CopperChestTile extends LockableLootTileEntity implements IChestLid
 		if (!this.checkLootAndRead(compound)) {
 			ItemStackHelper.loadAllItems(compound, this.chestContents);
 		}
-
 	}
 
 	@Override

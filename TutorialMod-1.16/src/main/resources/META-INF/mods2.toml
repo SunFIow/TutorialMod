@@ -1,0 +1,32 @@
+modLoader="javafml" #mandatory
+loaderVersion="[33,)" #mandatory 
+# issueTrackerURL="http://my.issue.tracker/" #option
+logoFile="logo.png" #optional
+
+[[mods]] #mandatory
+	modId="tutorialmod" #mandatory
+	version="${file.jarVersion}" #mandatory
+	displayName="Tutorial Mod" #mandatory
+	# displayURL="http://example.com/" #optional
+	# updateJSONURL="http://myurl.me/" #optional
+	credits="Thanks To Drieeeeeeeeeeeemel." #optional
+	authors="HackerMeiser SunFlow" #optional	
+	
+	description='''
+    This is a simple Mod.
+    To learn Minecraft Modding
+    EZ PZ
+    '''
+
+[[dependencies.tutorialmod]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[33,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.tutorialmod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.2,)"
+    ordering="NONE"
+    side="BOTH"

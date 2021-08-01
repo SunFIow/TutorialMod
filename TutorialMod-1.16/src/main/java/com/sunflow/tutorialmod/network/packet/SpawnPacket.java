@@ -21,7 +21,7 @@ public class SpawnPacket extends BasePacket {
 	public SpawnPacket(PacketBuffer buf) {
 		this.id = buf.readString();
 //		this.type = DimensionType.func_236022_a_(buf.readInt());
-		this.type = RegistryKey.func_240903_a_(Registry.field_239699_ae_, buf.readResourceLocation());
+		this.type = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, buf.readResourceLocation());
 		this.pos = buf.readBlockPos();
 	}
 
@@ -34,7 +34,8 @@ public class SpawnPacket extends BasePacket {
 	@Override
 	public void encode(PacketBuffer buf) {
 		buf.writeString(id);
-		buf.writeResourceLocation(type.func_240901_a_());
+		System.out.println(type);
+		buf.writeResourceLocation(type.getLocation());
 		buf.writeBlockPos(pos);
 	}
 

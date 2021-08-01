@@ -30,6 +30,9 @@ import com.sunflow.tutorialmod.block.magicblock.MagicBlockTile;
 import com.sunflow.tutorialmod.block.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.block.ore.RubyBlock;
 import com.sunflow.tutorialmod.block.ore.RubyOre;
+import com.sunflow.tutorialmod.block.teston.TEstonBlock;
+import com.sunflow.tutorialmod.block.teston.TEstonHeadBlock;
+import com.sunflow.tutorialmod.block.teston.TEstonTileEntity;
 import com.sunflow.tutorialmod.block.tree.CustomLeavesBlock;
 import com.sunflow.tutorialmod.block.tree.CustomLogBlock;
 import com.sunflow.tutorialmod.block.tree.CustomSaplingBlock;
@@ -57,6 +60,7 @@ import com.sunflow.tutorialmod.item.tools.ToolShovel;
 import com.sunflow.tutorialmod.item.tools.ToolSword;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -114,8 +118,23 @@ public class Registration {
 	}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static final RegistryObject<TEstonHeadBlock> TESTON_HEAD_BLOCK = BLOCKS.register("teston_head", TEstonHeadBlock::new);
+	public static final RegistryObject<Item> TESTON_HEAD_ITEM = ITEMS.register("teston_head", () -> new BlockItem(TESTON_HEAD_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+
+	public static final RegistryObject<TEstonBlock> TESTON_BLOCK = BLOCKS.register("teston", TEstonBlock.create(false));
+	public static final RegistryObject<Item> TESTON_ITEM = ITEMS.register("teston", () -> new BlockItem(TESTON_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+
+	public static final RegistryObject<TEstonBlock> STICKY_TESTON_BLOCK = BLOCKS.register("sticky_teston", TEstonBlock.create(true));
+	public static final RegistryObject<Item> STICKY_TESTON_ITEM = ITEMS.register("sticky_teston", () -> new BlockItem(STICKY_TESTON_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+
+	public static final RegistryObject<TileEntityType<TEstonTileEntity>> TESTON_TILE = TILEENTITIES.register("teston", () -> TileEntityType.Builder.create(TEstonTileEntity::new, Blocks.MOVING_PISTON).build(null));
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public static final RegistryObject<MultiBlock> MULTIBLOCK = BLOCKS.register("multiblock", MultiBlock::new);
 	public static final RegistryObject<BlockItem> MULTIBLOCK_ITEM = ITEMS.register("multiblock", () -> new BlockItem(MULTIBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
+
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static final RegistryObject<GlowstoneGeneratorBlock> GLOWSTONE_GENERATOR_BLOCK = BLOCKS.register("glowstone_generator", GlowstoneGeneratorBlock::new);

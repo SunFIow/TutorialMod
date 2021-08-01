@@ -48,12 +48,10 @@ public class CopperChestTileRenderer extends TileEntityRenderer<CopperChestTile>
 			TileEntityMerger.ICallbackWrapper<? extends ChestTileEntity> icallbackwrapper;
 			icallbackwrapper = TileEntityMerger.ICallback::func_225537_b_;
 
-			float f1 = icallbackwrapper.apply(ChestBlock.func_226917_a_(tileEntity)).get(partialTicks);
+			float f1 = icallbackwrapper.apply(ChestBlock.getLidRotationCallback(tileEntity)).get(partialTicks);
 			f1 = 1.0F - f1;
 			f1 = 1.0F - f1 * f1 * f1;
 			int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLight);
-
-//			IVertexBuilder ivertexbuilder = COPPER_CHEST_MATERIAL.getBuffer(buffer, RenderType::entityCutout);
 			IVertexBuilder ivertexbuilder = COPPER_CHEST_MATERIAL.getBuffer(buffer, RenderType::getEntityCutout);
 
 			simpleChest.applyRotation(f1);

@@ -33,7 +33,7 @@ public class EnchantmentMultiJump extends Enchantment {
 			int level = EnchantmentHelper.getMaxEnchantmentLevel(Registration.ENCHANTMENT_MULTIJUMP.get(), player);
 			if (level == 0) return;
 
-			if (!player.func_233570_aj_()) {
+			if (!player.isOnGround()) {
 				if (!spaceStillDown) {
 					if (jumpNum < level) {
 						jumpNum += 1;

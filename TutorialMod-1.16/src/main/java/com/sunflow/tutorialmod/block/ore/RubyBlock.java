@@ -18,7 +18,7 @@ public class RubyBlock extends Block {
 				.harvestTool(ToolType.PICKAXE)
 				.harvestLevel(2)
 				.sound(SoundType.METAL)
-				.func_235838_a_(state -> 0));
+				.setLightLevel(state -> 0));
 	}
 
 	@Override

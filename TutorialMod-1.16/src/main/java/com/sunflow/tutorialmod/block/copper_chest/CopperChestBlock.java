@@ -157,11 +157,12 @@ public class CopperChestBlock extends ContainerBlock implements IWaterLoggable {
 		List<CatEntity> list = world.getEntitiesWithinAABB(CatEntity.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1));
 		if (!list.isEmpty()) {
 			for (CatEntity catentity : list) {
-				if (catentity.func_233684_eK_()) {
+				if (catentity.isSitting()) {
 					return true;
 				}
 			}
 		}
+//		list.stream().filter(CatEntity::isSitting).findAny().isPresent();
 		return false;
 	}
 

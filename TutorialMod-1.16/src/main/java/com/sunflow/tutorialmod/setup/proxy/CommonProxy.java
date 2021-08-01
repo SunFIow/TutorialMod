@@ -23,6 +23,7 @@ public abstract class CommonProxy {
 		Log.debug("Registering the Mod Events for u senpai.");
 
 		eventBus.addListener(CommonForgeEvents::serverStarting);
+		eventBus.addListener(CommonForgeEvents::onCommandsRegister);
 //		eventBus.addListener(CommonForgeEvents::onDimensionRegistry);
 	}
 

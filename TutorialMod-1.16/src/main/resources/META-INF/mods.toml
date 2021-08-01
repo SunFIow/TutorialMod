@@ -1,5 +1,6 @@
 modLoader="javafml" #mandatory
-loaderVersion="[32,)" #mandatory 
+loaderVersion="[33,)" #mandatory 
+license="All rights reserved"
 # issueTrackerURL="http://my.issue.tracker/" #option
 logoFile="logo.png" #optional
 
@@ -21,12 +22,12 @@ logoFile="logo.png" #optional
 [[dependencies.tutorialmod]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[32,)" #mandatory
+    versionRange="[33,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.tutorialmod]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.1]"
+    versionRange="[1.16.3,)"
     ordering="NONE"
     side="BOTH"
