@@ -9,6 +9,7 @@ import net.minecraft.util.text.ITextComponent;
 public class BaseConfigScreen extends Screen {
 
 	private Screen parentScreen;
+	protected Button doneButton;
 
 	private int i;
 
@@ -22,7 +23,7 @@ public class BaseConfigScreen extends Screen {
 
 	@Override
 	protected void init() {
-		addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (i) / 2, 200, 20, I18n.format("gui.done"), button -> onClose()));
+		doneButton = addButton(new Button(this.width / 2 - 100, this.height / 6 + 24 * (i) / 2, 200, 20, I18n.format("gui.done"), button -> onClose()));
 	}
 
 	@Override
