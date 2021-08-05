@@ -48,7 +48,7 @@ public class TutorialModConfig {
 							e -> {
 								for (int i = 0; i < enumValues.length; i++)
 									if (enumValues[i] == e) return (i + 1) + "/" + enumValues.length + " " + e;
-								return "-1/" + (enumValues.length - 1) + " " + e;
+								return "-1/" + enumValues.length + " " + e;
 							})
 					.String(ModConfig.Type.SERVER, "string", SERVER.STRING_CONFIG, 0, 3, 0,
 							s -> s == Blocks.STONE.getTranslationKey() ? 0D : s == Blocks.NETHERRACK.getTranslationKey() ? 1D : 2D,

@@ -31,7 +31,6 @@ public class ConfigScreen extends BaseConfigScreen {
 	protected Button commonButton;
 	protected Button clientButton;
 	protected Button serverButton;
-	protected Button doneButton;
 
 	public ConfigScreen(ITextComponent title, Screen parentScreen, ModConfig.Type type, ConfigScreen.Builder builder) {
 		super(title, parentScreen, 9);
@@ -180,8 +179,7 @@ public class ConfigScreen extends BaseConfigScreen {
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
-						value.save();
-						if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(new SyncConfigPacket(value, SyncConfigPacket.Type.LIST, listType));
+						syncList(value, screenType, listType);
 					},
 					(settings, option) -> {
 						String s = option.getDisplayString();
@@ -209,6 +207,11 @@ public class ConfigScreen extends BaseConfigScreen {
 		private <T> void sync(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type packetType) {
 			value.save();
 			if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(new SyncConfigPacket(value, packetType));
+		}
+
+		private <T> void syncList(ConfigValue<T> value, ModConfig.Type screenType, SyncConfigPacket.Type listType) {
+			value.save();
+			if (screenType == ModConfig.Type.SERVER) Networking.sendToServer(new SyncConfigPacket(value, SyncConfigPacket.Type.LIST, listType));
 		}
 
 		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, ForgeConfigSpec.BooleanValue value,

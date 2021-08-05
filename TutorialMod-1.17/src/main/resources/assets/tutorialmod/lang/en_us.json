@@ -1,0 +1,5 @@
+{
+	"item.tutorialmod.tutorial_item": "Tutorial Item",
+	"message.tutorialmod.tutorial_item.tooltip": "Can mine with extra distance %s",
+	"message.tutorialmod.tutorial_item.change": "Extra Distance changed from %s to %s"
+}

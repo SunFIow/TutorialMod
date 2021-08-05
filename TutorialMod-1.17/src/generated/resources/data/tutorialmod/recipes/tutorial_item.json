@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tutorial",
+  "pattern": [
+    "#sr",
+    "rs#",
+    "#sr"
+  ],
+  "key": {
+    "r": {
+      "tag": "forge:dyes/red"
+    },
+    "#": {
+      "tag": "forge:string"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "tutorialmod:tutorial_item"
+  }
+}

@@ -3,9 +3,13 @@ package com.sunflow.tutorialmod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.sunflow.tutorialmod.datagen.DataGenerators;
+import com.sunflow.tutorialmod.setup.ClientSetup;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.Log;
 
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,6 +26,13 @@ public class TutorialMod {
 	public static final String NAME = "Tutorial Mod";
 	public static final String VERSION = "0.0.1";
 	public static final String ACCEPTED_VERSION = "[1.17.1,1.18)";
+
+	public static final CreativeModeTab TAB_TUTORIALMOD = (new CreativeModeTab(8, "tutorialmod") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Registration.TUTORIAL_ITEM.get());
+		}
+	});
 
 //	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
@@ -42,8 +53,10 @@ public class TutorialMod {
 
 		IEventBus bus_mod = FMLJavaModLoadingContext.get().getModEventBus();
 		bus_mod.addListener(this::setup);
+		bus_mod.addListener(ClientSetup::setup);
 
 		Registration.init(bus_mod);
+		bus_mod.addListener(DataGenerators::gatherData);
 
 //		IEventBus bus_forge = MinecraftForge.EVENT_BUS;
 //		bus_forge.addListener(this::onServerStarting);
