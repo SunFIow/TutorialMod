@@ -5,7 +5,9 @@ import com.sunflow.tutorialmod.setup.ClientSetup;
 import com.sunflow.tutorialmod.setup.Registration;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -25,6 +27,7 @@ public class ItemsProvider extends ItemModelProvider {
 				.override().predicate(ClientSetup.DISTANCE_PROPERTY, 2).model(createTutorialModel(2)).end()
 				.override().predicate(ClientSetup.DISTANCE_PROPERTY, 3).model(createTutorialModel(3)).end();
 
+		registerBlockItem(Registration.GENERATOR_BLOCK.get());
 	}
 
 	private void registerSingleTexture(Item item) {
@@ -38,4 +41,14 @@ public class ItemsProvider extends ItemModelProvider {
 				.texture("layer0", "item/tutorial_item" + index);
 	}
 
+	private void registerBlockItem(Block block) {
+		String name = block.getRegistryName().getPath();
+		withExistingParent(name, new ResourceLocation(TutorialMod.MODID, "block/" + name));
+
+	}
+
+	@Override
+	public String getName() {
+		return TutorialMod.MODID + " " + super.getName();
+	}
 }

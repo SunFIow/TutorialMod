@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tutorial",
+  "pattern": [
+    "iii",
+    "ici",
+    "iri"
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "c": {
+      "tag": "forge:storage_blocks/coal"
+    }
+  },
+  "result": {
+    "item": "tutorialmod:generator"
+  }
+}

@@ -20,7 +20,7 @@ import net.minecraftforge.versions.mcp.MCPVersion;
 @Mod(TutorialMod.MODID)
 public class TutorialMod {
 	// Directly reference a log4j logger.
-	private static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogManager.getLogger();
 
 	public static final String MODID = "tutorialmod";
 	public static final String NAME = "Tutorial Mod";
