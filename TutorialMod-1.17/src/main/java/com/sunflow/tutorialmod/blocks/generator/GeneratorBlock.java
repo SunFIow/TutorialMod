@@ -49,7 +49,7 @@ public class GeneratorBlock extends Block implements EntityBlock {
 		if (level.isClientSide()) return null;
 		return (level1, pos1, state1, be) -> {
 			if (be instanceof GeneratorBE generator) {
-				generator.tickServer(state1);
+				generator.tickServer();
 			}
 		};
 	}

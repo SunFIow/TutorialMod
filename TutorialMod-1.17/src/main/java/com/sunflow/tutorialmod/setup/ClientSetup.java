@@ -5,6 +5,8 @@ import com.sunflow.tutorialmod.blocks.generator.GeneratorScreen;
 import com.sunflow.tutorialmod.items.TutorialItem;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -15,6 +17,7 @@ public class ClientSetup {
 	public static void setup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			MenuScreens.register(Registration.GENERATOR_CONTAINER.get(), GeneratorScreen::new);
+			ItemBlockRenderTypes.setRenderLayer(Registration.POWERUSER_BLOCK.get(), RenderType.translucent());
 			setupTutorialItemOverrides();
 		});
 	}

@@ -41,6 +41,16 @@ public class RecipesProvider extends RecipeProvider {
 				.unlockedBy("coals", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COAL))
 				.save(consumer);
 
+		ShapedRecipeBuilder.shaped(Registration.POWERUSER_BLOCK.get())
+				.pattern("iii")
+				.pattern("iri")
+				.pattern("iri")
+				.define('r', Items.REDSTONE)
+				.define('i', Items.IRON_INGOT)
+				.group("tutorial")
+				.unlockedBy("redstone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.REDSTONE))
+				.save(consumer);
+
 	}
 
 	@Override

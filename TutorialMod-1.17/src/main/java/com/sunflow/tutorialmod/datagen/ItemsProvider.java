@@ -28,6 +28,7 @@ public class ItemsProvider extends ItemModelProvider {
 				.override().predicate(ClientSetup.DISTANCE_PROPERTY, 3).model(createTutorialModel(3)).end();
 
 		registerBlockItem(Registration.GENERATOR_BLOCK.get());
+		registerBlockItem(Registration.POWERUSER_BLOCK.get());
 	}
 
 	private void registerSingleTexture(Item item) {

@@ -24,7 +24,10 @@ public class BlockStatesProvider extends BlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		registerGeneratorBlock();
+		registerPowerUserBlock();
 	}
+
+	private void registerPowerUserBlock() { simpleBlock(Registration.POWERUSER_BLOCK.get()); }
 
 	private void registerGeneratorBlock() {
 		ResourceLocation loc_side = new ResourceLocation(TutorialMod.MODID, "block/generator_side");

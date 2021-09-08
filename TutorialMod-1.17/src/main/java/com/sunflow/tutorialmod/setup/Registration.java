@@ -4,6 +4,8 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.blocks.generator.GeneratorBE;
 import com.sunflow.tutorialmod.blocks.generator.GeneratorBlock;
 import com.sunflow.tutorialmod.blocks.generator.GeneratorContainer;
+import com.sunflow.tutorialmod.blocks.poweruser.PowerUserBE;
+import com.sunflow.tutorialmod.blocks.poweruser.PowerUserBlock;
 import com.sunflow.tutorialmod.items.TutorialItem;
 
 import net.minecraft.core.BlockPos;
@@ -44,5 +46,9 @@ public class Registration {
 		Level world = inv.player.getCommandSenderWorld();
 		return new GeneratorContainer(windowId, world, pos, inv, inv.player);
 	}));
+
+	public static final RegistryObject<PowerUserBlock> POWERUSER_BLOCK = BLOCKS.register("poweruser", PowerUserBlock::new);
+	public static final RegistryObject<BlockItem> POWERUSER_ITEM = ITEMS.register("poweruser", () -> new BlockItem(POWERUSER_BLOCK.get(), new Item.Properties().tab(TutorialMod.TAB_TUTORIALMOD)));
+	public static final RegistryObject<BlockEntityType<PowerUserBE>> POWERUSER_BE = BLOCK_ENTITIES.register("poweruser", () -> BlockEntityType.Builder.of(PowerUserBE::new, POWERUSER_BLOCK.get()).build(null));
 
 }

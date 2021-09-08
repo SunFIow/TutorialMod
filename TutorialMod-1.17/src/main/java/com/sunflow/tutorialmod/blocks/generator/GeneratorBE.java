@@ -29,39 +29,6 @@ public class GeneratorBE extends BlockEntity {
 
 	private final CustomEnergyStorage energyStorage = createEnergy();
 
-	private final ItemStackHandler createHandler() {
-		return new ItemStackHandler(1) {
-			@Override
-			protected void onContentsChanged(int slot) {
-				// To make sure the BE persists when the chunk is saved later
-				// we need to mark it dirty every thime the item handler changes.
-				setChanged();
-			}
-
-			@Override
-			public boolean isItemValid(int slot, ItemStack stack) {
-				return ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) > 0;
-			}
-
-			@Override
-			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-				if (ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) <= 0) return stack;
-				return super.insertItem(slot, stack, simulate);
-			}
-		};
-	}
-
-	private final CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(100000, 200) {
-			@Override
-			protected void onEnergyChanged() {
-				// To make sure the BE persists when the chunk is saved later
-				// we need to mark it dirty every thime the item handler changes.
-				setChanged();
-			}
-		};
-	}
-
 	// Never create LazyOptionals in getCapability. Always place them as fields in the tile entity
 	private final LazyOptional<IItemHandler> items = LazyOptional.of(() -> itemStorage);
 	private final LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
@@ -78,10 +45,10 @@ public class GeneratorBE extends BlockEntity {
 		energy.invalidate();
 	}
 
-	public void tickServer(BlockState state) {
+	public void tickServer() {
 		if (counter > 0) {
 			counter--;
-			energyStorage.addEnergy(5000);
+			energyStorage.addEnergy(50);
 			setChanged();
 		}
 
@@ -93,9 +60,9 @@ public class GeneratorBE extends BlockEntity {
 			setChanged();
 		}
 
-		BlockState newState = level.getBlockState(worldPosition);
-		if (newState.getValue(BlockStateProperties.POWERED) != counter > 0) {
-			level.setBlock(worldPosition, newState.setValue(BlockStateProperties.POWERED, counter > 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
+		BlockState state = level.getBlockState(worldPosition);
+		if (state.getValue(BlockStateProperties.POWERED) != counter > 0) {
+			level.setBlock(worldPosition, state.setValue(BlockStateProperties.POWERED, counter > 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
 		}
 
 		sendOutPower();
@@ -147,5 +114,38 @@ public class GeneratorBE extends BlockEntity {
 		tm.put("energy", energyStorage.serializeNBT());
 		tm.putInt("counter", counter);
 		return tag;
+	}
+
+	private final ItemStackHandler createHandler() {
+		return new ItemStackHandler(1) {
+			@Override
+			protected void onContentsChanged(int slot) {
+				// To make sure the BE persists when the chunk is saved later
+				// we need to mark it dirty every thime the item handler changes.
+				setChanged();
+			}
+
+			@Override
+			public boolean isItemValid(int slot, ItemStack stack) {
+				return ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) > 0;
+			}
+
+			@Override
+			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+				if (ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) <= 0) return stack;
+				return super.insertItem(slot, stack, simulate);
+			}
+		};
+	}
+
+	private final CustomEnergyStorage createEnergy() {
+		return new CustomEnergyStorage(100000, 200) {
+			@Override
+			protected void onEnergyChanged() {
+				// To make sure the BE persists when the chunk is saved later
+				// we need to mark it dirty every thime the item handler changes.
+				setChanged();
+			}
+		};
 	}
 }

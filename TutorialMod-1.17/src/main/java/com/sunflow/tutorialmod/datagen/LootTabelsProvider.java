@@ -37,16 +37,20 @@ public class LootTabelsProvider extends LootTableProvider {
 
 	@Override
 	public void run(HashCache cache) {
-//		super.run(cache);
 		Map<ResourceLocation, LootTable> tables = new HashMap<>();
-		tables.put(Registration.GENERATOR_BLOCK.get().getLootTable(), createStandartTable(Registration.GENERATOR_BLOCK.get()).setParamSet(LootContextParamSets.BLOCK).build());
+		simpleBlock(tables, Registration.GENERATOR_BLOCK.get());
+		simpleBlock(tables, Registration.POWERUSER_BLOCK.get());
+
 		writeTables(cache, tables);
+	}
+
+	private void simpleBlock(Map<ResourceLocation, LootTable> tables, Block block) {
+		tables.put(block.getLootTable(), createStandartTable(block).setParamSet(LootContextParamSets.BLOCK).build());
 	}
 
 	private LootTable.Builder createStandartTable(Block block) {
 		String name = block.getRegistryName().getPath();
 
-		System.out.println("BlockName: " + name);
 		LootPool.Builder builder = LootPool.lootPool()
 				.name(name)
 				.setRolls(ConstantValue.exactly(1))
