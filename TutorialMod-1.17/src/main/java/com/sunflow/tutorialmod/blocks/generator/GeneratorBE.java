@@ -102,17 +102,18 @@ public class GeneratorBE extends BlockEntity {
 		super.load(tag);
 		CompoundTag tm = tag.getCompound("tutorialmod");
 		itemStorage.deserializeNBT(tm.getCompound("inv"));
-		energyStorage.deserializeNBT(tm.getCompound("energy"));
+		energyStorage.deserializeNBT(tm.get("energy"));
 		counter = tm.getInt("counter");
 	}
 
 	@Override
 	public CompoundTag save(CompoundTag tag) {
 		super.save(tag);
-		CompoundTag tm = tag.getCompound("tutorialmod");
+		CompoundTag tm = new CompoundTag();
 		tm.put("inv", itemStorage.serializeNBT());
 		tm.put("energy", energyStorage.serializeNBT());
 		tm.putInt("counter", counter);
+		tag.put("tutorialmod", tm);
 		return tag;
 	}
 

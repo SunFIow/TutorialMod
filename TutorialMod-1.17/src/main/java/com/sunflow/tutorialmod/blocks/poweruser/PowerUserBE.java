@@ -90,14 +90,15 @@ public class PowerUserBE extends BlockEntity {
 	public void load(CompoundTag tag) {
 		super.load(tag);
 		CompoundTag tm = tag.getCompound("tutorialmod");
-		energyStorage.deserializeNBT(tm.getCompound("energy"));
+		energyStorage.deserializeNBT(tm.get("energy"));
 	}
 
 	@Override
 	public CompoundTag save(CompoundTag tag) {
 		super.save(tag);
-		CompoundTag tm = tag.getCompound("tutorialmod");
+		CompoundTag tm = new CompoundTag();
 		tm.put("energy", energyStorage.serializeNBT());
+		tag.put("tutorialmod", tm);
 		return tag;
 	}
 

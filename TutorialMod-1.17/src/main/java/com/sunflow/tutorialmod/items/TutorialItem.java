@@ -80,7 +80,7 @@ public class TutorialItem extends PickaxeItem {
 
 	private boolean tryHarvest(ItemStack stack, LivingEntity entity, BlockPos pos) {
 		BlockState state = entity.level.getBlockState(pos);
-		if (isCorrectToolForDrops(stack, state)) {
+		if (stack.getItem().isCorrectToolForDrops(stack, state)) {
 			if (entity instanceof ServerPlayer player) {
 				return player.gameMode.destroyBlock(pos);
 			}

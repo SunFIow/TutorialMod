@@ -27,12 +27,8 @@ public class TutorialMod {
 	public static final String VERSION = "0.0.1";
 	public static final String ACCEPTED_VERSION = "[1.17.1,1.18)";
 
-	public static final CreativeModeTab TAB_TUTORIALMOD = (new CreativeModeTab(8, "tutorialmod") {
-		@Override
-		public ItemStack makeIcon() {
-			return new ItemStack(Registration.TUTORIAL_ITEM.get());
-		}
-	});
+	public static final CreativeModeTab TAB_TUTORIALMOD = tutTab();
+	public static final int TAB_TUTORIALMOD_ID = CreativeModeTab.getGroupCountSafe() - 1;
 
 //	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
@@ -60,6 +56,21 @@ public class TutorialMod {
 
 //		IEventBus bus_forge = MinecraftForge.EVENT_BUS;
 //		bus_forge.addListener(this::onServerStarting);
+	}
+
+	private static final CreativeModeTab tutTab() {
+		int index = CreativeModeTab.getGroupCountSafe();
+		CreativeModeTab newGroup = (new CreativeModeTab(index, "tutorialmod") {
+			@Override
+			public ItemStack makeIcon() {
+				return new ItemStack(Registration.TUTORIAL_ITEM.get());
+			}
+		});
+		CreativeModeTab[] tmp = new CreativeModeTab[index + 1];
+		System.arraycopy(CreativeModeTab.TABS, 0, tmp, 0, CreativeModeTab.TABS.length);
+		CreativeModeTab.TABS = tmp;
+		CreativeModeTab.TABS[index] = newGroup;
+		return newGroup;
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
