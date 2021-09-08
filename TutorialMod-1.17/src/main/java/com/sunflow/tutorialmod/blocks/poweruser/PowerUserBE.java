@@ -1,5 +1,6 @@
 package com.sunflow.tutorialmod.blocks.poweruser;
 
+import com.sunflow.tutorialmod.setup.Config;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.tools.CustomEnergyStorage;
 
@@ -68,15 +69,15 @@ public class PowerUserBE extends BlockEntity {
 	public void tickClient(BlockState state) {
 		if (!hasPower) return;
 		BlockPos pos = this.worldPosition;
-		level.addParticle(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+		level.addParticle(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 0.0, Config.POWERUSER_PARTICLE_YPSPEED.get(), 0.0);
 	}
 
 	public void tickServer(BlockState state) {
 		if (!hasEnoughPowerToWork()) return;
-		energyStorage.consumeEnergy(10);
+		energyStorage.consumeEnergy(Config.POWERUSER_PERTICK.get());
 	}
 
-	private boolean hasEnoughPowerToWork() { return energyStorage.getEnergyStored() >= 10; }
+	private boolean hasEnoughPowerToWork() { return energyStorage.getEnergyStored() >= Config.POWERUSER_PERTICK.get(); }
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
@@ -103,7 +104,7 @@ public class PowerUserBE extends BlockEntity {
 	}
 
 	private final CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(1000, 20) {
+		return new CustomEnergyStorage(Config.POWERUSER_CAPACITY.get(), Config.POWERUSER_PERTICK.get() * 2) {
 			@Override
 			protected void onEnergyChanged() {
 				boolean newHasPower = hasEnoughPowerToWork();

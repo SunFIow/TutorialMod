@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.sunflow.tutorialmod.datagen.DataGenerators;
 import com.sunflow.tutorialmod.setup.ClientSetup;
+import com.sunflow.tutorialmod.setup.Config;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.Log;
 
@@ -32,6 +33,15 @@ public class TutorialMod {
 
 //	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
+	/*
+	 * Order of initialization
+	 * At setup
+	 * 1. Registration
+	 * 2. Config reading (for client + common)
+	 * 3. FMLCommonSetupEvent
+	 * After world load:
+	 * 4. Config reading for server
+	 */
 	public TutorialMod() {
 		Log.info("{} loading, version {}, accepted for {}, for MC {} with MCP {}", NAME, VERSION, ACCEPTED_VERSION, MCPVersion.getMCVersion(), MCPVersion.getMCPVersion());
 //		Log.info("Loading Network data for {} net version: {}", NAME, Networking.getVersion());
@@ -51,8 +61,9 @@ public class TutorialMod {
 		bus_mod.addListener(this::setup);
 		bus_mod.addListener(ClientSetup::setup);
 
-		Registration.init(bus_mod);
 		bus_mod.addListener(DataGenerators::gatherData);
+		Registration.init(bus_mod);
+		Config.init();
 
 //		IEventBus bus_forge = MinecraftForge.EVENT_BUS;
 //		bus_forge.addListener(this::onServerStarting);
