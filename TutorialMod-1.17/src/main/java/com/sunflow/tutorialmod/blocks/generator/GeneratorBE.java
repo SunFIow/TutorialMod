@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.blocks.generator;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.sunflow.tutorialmod.setup.Config;
+import com.sunflow.tutorialmod.setup.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.tools.CustomEnergyStorage;
 
@@ -49,7 +49,7 @@ public class GeneratorBE extends BlockEntity {
 	public void tickServer() {
 		if (counter > 0) {
 			counter--;
-			energyStorage.addEnergy(Config.GENERATOR_PERTICK.get());
+			energyStorage.addEnergy(TutorialModConfig.SERVER.GENERATOR_PERTICK.get());
 			setChanged();
 		}
 
@@ -77,7 +77,7 @@ public class GeneratorBE extends BlockEntity {
 				if (be == null) continue;
 				boolean noEnergy = be.getCapability(CapabilityEnergy.ENERGY, dir).map(storage -> {
 					if (storage.canReceive()) {
-						int recieved = storage.receiveEnergy(Math.min(Config.GENERATOR_SENDPERTICK.get(), capacity.get()), false);
+						int recieved = storage.receiveEnergy(Math.min(TutorialModConfig.SERVER.GENERATOR_SENDPERTICK.get(), capacity.get()), false);
 						capacity.addAndGet(-recieved);
 						energyStorage.consumeEnergy(recieved);
 						setChanged();
@@ -141,7 +141,7 @@ public class GeneratorBE extends BlockEntity {
 	}
 
 	private final CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(Config.GENERATOR_CAPACITY.get(), Config.GENERATOR_SENDPERTICK.get()) {
+		return new CustomEnergyStorage(TutorialModConfig.SERVER.GENERATOR_CAPACITY.get(), TutorialModConfig.SERVER.GENERATOR_SENDPERTICK.get()) {
 			@Override
 			protected void onEnergyChanged() {
 				// To make sure the BE persists when the chunk is saved later

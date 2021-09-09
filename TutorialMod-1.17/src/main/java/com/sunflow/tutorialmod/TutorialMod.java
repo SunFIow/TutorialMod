@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.sunflow.tutorialmod.datagen.DataGenerators;
 import com.sunflow.tutorialmod.setup.ClientSetup;
-import com.sunflow.tutorialmod.setup.Config;
 import com.sunflow.tutorialmod.setup.Registration;
+import com.sunflow.tutorialmod.setup.TutorialModConfig;
 import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.world.item.CreativeModeTab;
@@ -28,9 +28,22 @@ public class TutorialMod {
 	public static final String VERSION = "0.0.1";
 	public static final String ACCEPTED_VERSION = "[1.17.1,1.18)";
 
-	public static final CreativeModeTab TAB_TUTORIALMOD = tutTab();
-	public static final int TAB_TUTORIALMOD_ID = CreativeModeTab.getGroupCountSafe() - 1;
+	public static final CreativeModeTab TAB_TUTORIALMOD;
+	public static final int TAB_TUTORIALMOD_ID;
+	static {
+		TAB_TUTORIALMOD_ID = CreativeModeTab.getGroupCountSafe();
+		TAB_TUTORIALMOD = new CreativeModeTab(TAB_TUTORIALMOD_ID, "tutorialmod") {
+			@Override
+			public ItemStack makeIcon() {
+				return new ItemStack(Registration.TUTORIAL_ITEM.get());
+			}
+		};
+		CreativeModeTab[] tmp = new CreativeModeTab[TAB_TUTORIALMOD_ID + 1];
+		System.arraycopy(CreativeModeTab.TABS, 0, tmp, 0, CreativeModeTab.TABS.length);
+		CreativeModeTab.TABS = tmp;
+		CreativeModeTab.TABS[TAB_TUTORIALMOD_ID] = TAB_TUTORIALMOD;
 
+	}
 //	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
 	/*
@@ -63,25 +76,12 @@ public class TutorialMod {
 
 		bus_mod.addListener(DataGenerators::gatherData);
 		Registration.init(bus_mod);
-		Config.init();
+		TutorialModConfig.init();
+		bus_mod.addListener(TutorialModConfig::onLoad);
+		bus_mod.addListener(TutorialModConfig::onReload);
 
 //		IEventBus bus_forge = MinecraftForge.EVENT_BUS;
 //		bus_forge.addListener(this::onServerStarting);
-	}
-
-	private static final CreativeModeTab tutTab() {
-		int index = CreativeModeTab.getGroupCountSafe();
-		CreativeModeTab newGroup = (new CreativeModeTab(index, "tutorialmod") {
-			@Override
-			public ItemStack makeIcon() {
-				return new ItemStack(Registration.TUTORIAL_ITEM.get());
-			}
-		});
-		CreativeModeTab[] tmp = new CreativeModeTab[index + 1];
-		System.arraycopy(CreativeModeTab.TABS, 0, tmp, 0, CreativeModeTab.TABS.length);
-		CreativeModeTab.TABS = tmp;
-		CreativeModeTab.TABS[index] = newGroup;
-		return newGroup;
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
