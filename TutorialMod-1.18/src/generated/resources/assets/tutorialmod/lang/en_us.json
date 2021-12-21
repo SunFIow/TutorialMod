@@ -1,0 +1,8 @@
+{
+  "block.tutorialmod.sun_ore_deepslate": "Sun Ore",
+  "block.tutorialmod.sun_ore_end": "Sun Ore",
+  "block.tutorialmod.sun_ore_nether": "Sun Ore",
+  "block.tutorialmod.sun_ore_overworld": "Sun Ore",
+  "itemGroup.tutorialmod": "Tutorial Items",
+  "message.tutorialmod.tutorial_message.tooltip": "Just a Tutorial Tooltip"
+}
