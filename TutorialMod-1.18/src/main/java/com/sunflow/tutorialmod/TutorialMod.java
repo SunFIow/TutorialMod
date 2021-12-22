@@ -1,36 +1,38 @@
 package com.sunflow.tutorialmod;
 
-import com.sunflow.tutorialmod.datagen.DataGenerators;
-import com.sunflow.tutorialmod.setup.ClientSetup;
-import com.sunflow.tutorialmod.setup.ModSetup;
+import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.setup.Registration;
+import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
+import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
+import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
+import com.sunflow.tutorialmod.util.MyWorldData;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TutorialMod.MODID)
 public class TutorialMod {
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger(TutorialMod.class);
     public static final String MODID = "tutorialmod";
+    public static final String NAME = "Tutorial Mod";
+    public static final String VERSION = "0.0.1";
+    public static final String ACCEPTED_VERSION = "[1.18,)";
+
+    public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+
+    public static MyWorldData data;
 
     public TutorialMod() {
         Registration.init();
 
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modBus.addListener(ModSetup::init);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> modBus.addListener(ClientSetup::init));
+        TutorialModConfig.init();
 
-        modBus.addListener(DataGenerators::gatherData);
-
-        // IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        proxy.registerEvents();
     }
-
 }

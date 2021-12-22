@@ -3,6 +3,9 @@
   "block.tutorialmod.sun_ore_end": "Sun Ore",
   "block.tutorialmod.sun_ore_nether": "Sun Ore",
   "block.tutorialmod.sun_ore_overworld": "Sun Ore",
-  "itemGroup.tutorialmod": "Tutorial Items",
+  "container.copper_chest": "Copper Chest",
+  "enchantment.tutorialmod.multijump": "MutliJump",
+  "itemGroup.tutorialtab": "Tutorial Items",
+  "itemGroup.tutorialtab2": "Tutorial Test Items",
   "message.tutorialmod.tutorial_message.tooltip": "Just a Tutorial Tooltip"
 }
