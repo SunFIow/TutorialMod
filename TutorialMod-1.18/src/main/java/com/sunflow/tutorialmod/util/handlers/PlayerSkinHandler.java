@@ -15,20 +15,20 @@ import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 public class PlayerSkinHandler {
-	private static final String[] OBFUSCATED_PLAYER_INFO = new String[] { "d", "field_175157_a", "playerInfo" };
-
-	private static final String[] OBFUSCATED_PLAYER_TEXTURES = new String[] { "a", "field_187107_a", "playerTextures" };
 
 	public static void playerJoined(ClientPlayerNetworkEvent.LoggedInEvent event) { Networking.sendToServer(new PlayerLoggedInPacket()); }
 
 	public static final void changePlayerSkin(AbstractClientPlayer player, ResourceLocation location) {
 		if (!player.isCapeLoaded()) throw new IllegalAccessError("The player needs to have Player Info");
 		PlayerInfo playerInfo = TutorialMod.proxy.getMinecraft().getConnection().getPlayerInfo(player.getUUID());
-		// player.registerSkinTexture(p_172522_, p_172523_);
-		Map<MinecraftProfileTexture.Type, ResourceLocation> textures = ObfuscationReflectionHelper.getPrivateValue(PlayerInfo.class, playerInfo, OBFUSCATED_PLAYER_TEXTURES[2]);
-		if (!textures.containsKey(MinecraftProfileTexture.Type.SKIN) || !textures.get(MinecraftProfileTexture.Type.SKIN).equals(location)) {
-			textures.put(MinecraftProfileTexture.Type.SKIN, location);
-			Networking.sendToServer(new PlayerSkinChangedPacket(player.getUUID(), location));
-		}
+		Map<MinecraftProfileTexture.Type, ResourceLocation> textures = ObfuscationReflectionHelper.getPrivateValue(PlayerInfo.class, playerInfo, "textureLocations");
+		// if (!textures.containsKey(MinecraftProfileTexture.Type.SKIN) || !textures.get(MinecraftProfileTexture.Type.SKIN).equals(location)) {
+		// textures.put(MinecraftProfileTexture.Type.SKIN, location);
+		// Networking.sendToServer(new PlayerSkinChangedPacket(player.getUUID(), location));
+		// }
+		textures.compute(MinecraftProfileTexture.Type.SKIN, (type, loc) -> {
+			if (!loc.equals(location)) Networking.sendToServer(new PlayerSkinChangedPacket(player.getUUID(), location));
+			return location;
+		});
 	}
 }

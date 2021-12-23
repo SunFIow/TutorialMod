@@ -1,11 +1,16 @@
 {
+  "block.tutorialmod.copper_chest": "Copper Chest",
   "block.tutorialmod.sun_ore_deepslate": "Sun Ore",
   "block.tutorialmod.sun_ore_end": "Sun Ore",
   "block.tutorialmod.sun_ore_nether": "Sun Ore",
   "block.tutorialmod.sun_ore_overworld": "Sun Ore",
   "container.copper_chest": "Copper Chest",
-  "enchantment.tutorialmod.multijump": "MutliJump",
+  "enchantment.tutorialmod.multijump": "MultiJump",
   "itemGroup.tutorialtab": "Tutorial Items",
   "itemGroup.tutorialtab2": "Tutorial Test Items",
+  "key.categories.tutorialmod": "Tutorial Mod",
+  "key.tutorialmod.explode": "Create an Explosion",
+  "key.tutorialmod.overlay": "Toggle Overlay",
+  "key.tutorialmod.zoom": "Zoom",
   "message.tutorialmod.tutorial_message.tooltip": "Just a Tutorial Tooltip"
 }

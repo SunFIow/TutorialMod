@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.network.packet;
 
 import com.sunflow.tutorialmod.network.Networking;
+import com.sunflow.tutorialmod.util.NBTUtils;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,13 +20,13 @@ public class PlayerLoggedInPacket extends BasePacket {
 		ServerPlayer player = ctx.getSender();
 		PlayerList list = player.getServer().getPlayerList();
 		for (ServerPlayer spe : list.getPlayers()) {
-			CompoundTag tag = spe.getPersistentData();
+			CompoundTag tag = NBTUtils.getModTag(spe);
 			if (spe != player && tag.contains("skin")) {
 				ResourceLocation location = new ResourceLocation(tag.getString("skin"));
 				Networking.sendToPlayer(() -> player, new PlayerSkinPacket(spe.getUUID(), location));
 			}
 		}
-		CompoundTag tag = player.getPersistentData();
+		CompoundTag tag = NBTUtils.getModTag(player);
 		if (tag.contains("skin")) {
 			ResourceLocation location = new ResourceLocation(tag.getString("skin"));
 			Networking.sendToConnected(new PlayerSkinPacket(player.getUUID(), location));

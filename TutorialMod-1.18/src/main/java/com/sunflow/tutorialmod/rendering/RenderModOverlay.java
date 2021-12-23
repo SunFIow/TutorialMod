@@ -12,8 +12,9 @@ public class RenderModOverlay {
 	public static void render(RenderGameOverlayEvent.Text event) {
 		if (!TutorialMod.proxy.getMinecraft().options.renderDebug && TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.get()) {
 			BlockPos pos = TutorialMod.proxy.getClientPlayer().blockPosition();
-			event.getLeft().add(0, String.format("X: %s, Y: %s, Z: %s", pos.getX(), pos.getY(), pos.getZ()));
-			event.getLeft().add(0, String.format("%s", TutorialMod.proxy.getMinecraft().fpsString));
+			event.getLeft().add(String.format("§e%s fps", TutorialMod.proxy.getMinecraft().fpsString.split(" fps")[0]));
+			event.getLeft().add(String.format("§cX %s§r §9Y %s§r §aZ %s", pos.getX(), pos.getY(), pos.getZ()));
+			if (!TutorialModConfig.CLIENT.CONFIG_SHOW_ARMOR.get()) event.getRight().add("Hiding your Armor");
 		}
 	}
 }

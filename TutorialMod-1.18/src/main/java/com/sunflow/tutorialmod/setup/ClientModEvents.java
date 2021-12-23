@@ -48,7 +48,7 @@ public class ClientModEvents {
 		// ScreenManager.registerFactory(Registration.ELECTRIC_SINTERING_FURNACE_CONTAINER.get(), ElectricSinteringFurnaceScreen::new);
 		// ScreenManager.registerFactory(Registration.CHARGER_CONTAINER.get(), ChargerScreen::new);
 		// ScreenManager.registerFactory(Registration.COPPER_CHEST_CONTAINER.get(), CopperChestScreen::new);
-		MenuScreens.register(Registration.COPPER_CHEST_CONTAINER.get(), CopperChestScreen::new);
+		MenuScreens.register(Registration.COPPER_CHEST.menu(), CopperChestScreen::new);
 
 	}
 
@@ -71,7 +71,7 @@ public class ClientModEvents {
 		// event.registerEntityRenderer(Registration.GRENADE_ENTITY.get(, erp_c -> {
 		// return new SpriteRenderer<>(erp_c, TutorialMod.proxy.getMinecraft().getItemRenderer()));
 		// });
-		event.registerBlockEntityRenderer(Registration.COPPER_CHEST_TILE.get(), CopperChestRenderer::new);
+		event.registerBlockEntityRenderer(Registration.COPPER_CHEST.blockEntity(), CopperChestRenderer::new);
 		// event.registerBlockEntityRenderer(Registration.MAGICBLOCK_TILE.get(), MagicBockTileRenderer::new);
 
 	}

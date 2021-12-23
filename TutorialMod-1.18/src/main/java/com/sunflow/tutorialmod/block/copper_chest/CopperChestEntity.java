@@ -1,6 +1,7 @@
 package com.sunflow.tutorialmod.block.copper_chest;
 
 import com.sunflow.tutorialmod.setup.Registration;
+import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -16,7 +17,6 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -78,18 +78,17 @@ public class CopperChestEntity extends RandomizableContainerBlockEntity implemen
 
 	private final ChestLidController chestLidController = new ChestLidController();
 
-	public CopperChestEntity(BlockPos pos, BlockState state) { super(Registration.COPPER_CHEST_TILE.get(), pos, state); }
+	public CopperChestEntity(BlockPos pos, BlockState state) { super(Registration.COPPER_CHEST.blockEntity(), pos, state); }
 
 	@Override
 	public int getContainerSize() { return SIZE; }
 
 	@Override
-	protected Component getDefaultName() { return new TranslatableComponent("container.copper_chest"); }
+	protected Component getDefaultName() { return CopperChestBlock.CONTAINER_TITLE; }
 
 	@Override
-	protected AbstractContainerMenu createMenu(int id, Inventory playerInv) {
-		// return new CopperChestContainer(id, playerInv, this);
-		return ChestMenu.sixRows(id, playerInv, this);
+	public AbstractContainerMenu createMenu(int id, Inventory playerInv) {
+		return new CopperChestContainer(id, playerInv, this);
 	}
 
 	@Override

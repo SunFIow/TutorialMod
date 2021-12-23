@@ -15,12 +15,16 @@ public class CopperChestContainer extends AbstractContainerMenu {
 	private final Container chestInventory;
 	private final int containerRows;
 
-	public CopperChestContainer(int id, Inventory inv, FriendlyByteBuf data) {
+	// public CopperChestContainer(int id, Inventory inv, FriendlyByteBuf data) { this(id, inv, new SimpleContainer(CopperChestEntity.SIZE)); }
+
+	// public CopperChestContainer(int id, Inventory inv, Player player) { this(id, inv, new SimpleContainer(CopperChestEntity.SIZE)); }
+
+	public CopperChestContainer(int id, Inventory inv) {
 		this(id, inv, new SimpleContainer(CopperChestEntity.SIZE));
 	}
 
 	public CopperChestContainer(int id, Inventory playerInv, Container chestInv) {
-		super(Registration.COPPER_CHEST_CONTAINER.get(), id);
+		super(Registration.COPPER_CHEST.menu(), id);
 		checkContainerSize(chestInv, CopperChestEntity.SIZE);
 		this.chestInventory = chestInv;
 		this.containerRows = CopperChestEntity.ROWS;

@@ -27,6 +27,7 @@ public class SunBlockStatesProvider extends BlockStateProvider {
 		simpleBlock(Registration.SUN_ORE_DEEPSLATE.block());
 		simpleBlock(Registration.SUN_ORE_NETHER.block());
 		simpleBlock(Registration.SUN_ORE_END.block());
+		simpleBlock(Registration.RUBY_BLOCK.block());
 	}
 
 	// private void registerGeneratorBlock() {

@@ -2,6 +2,8 @@ package com.sunflow.tutorialmod.network.packet;
 
 import java.util.UUID;
 
+import com.sunflow.tutorialmod.util.NBTUtils;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +25,7 @@ public class PlayerSkinChangedPacket extends BasePacket {
 	@Override
 	protected boolean action(NetworkEvent.Context ctx) {
 		ServerPlayer player = ctx.getSender().getServer().getPlayerList().getPlayer(uuid);
-		CompoundTag tag = player.getPersistentData();
+		CompoundTag tag = NBTUtils.getModTag(player);
 		tag.putString("skin", location.toString());
 		return true;
 	}

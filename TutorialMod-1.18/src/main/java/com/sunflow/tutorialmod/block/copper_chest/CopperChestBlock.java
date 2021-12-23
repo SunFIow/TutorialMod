@@ -11,15 +11,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType.MenuSupplier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -48,6 +48,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> implements SimpleWaterloggedBlock {
@@ -55,22 +56,54 @@ public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> impl
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
-	private static final Component CONTAINER_TITLE = new TranslatableComponent("container.copper_chest");
+	public static final Component CONTAINER_TITLE = new TranslatableComponent("container.copper_chest");
 
 	public CopperChestBlock() {
-		super(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD), Registration.COPPER_CHEST_TILE::get);
+		super(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD), Registration.COPPER_CHEST::blockEntity);
 		registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.valueOf(false)));
 	}
 
-	public RenderShape getRenderShape(BlockState state) {
-		return RenderShape.MODEL;
+	@Override
+	public DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combine(BlockState state, Level level, BlockPos pos, boolean bool) {
+		return DoubleBlockCombiner.Combiner::acceptNone;
 	}
 
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext ctx) {
+		return SHAPE;
+	}
+
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.ENTITYBLOCK_ANIMATED;
+	}
+
+	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext p_53128_) {
 		FluidState fluidstate = p_53128_.getLevel().getFluidState(p_53128_.getClickedPos());
 		return this.defaultBlockState().setValue(FACING, p_53128_.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
 	}
 
+	public static class BaseMenuProvider implements MenuProvider {
+		private final Component title;
+		private final MenuSupplier<AbstractContainerMenu> menuSupplier;
+
+		public BaseMenuProvider(MenuSupplier<AbstractContainerMenu> menuSupplier, Component title) {
+			this.title = title;
+			this.menuSupplier = menuSupplier;
+		}
+
+		@Override
+		public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
+			return menuSupplier.create(id, playerInventory);
+		}
+
+		@Override
+		public Component getDisplayName() { return title; }
+
+	}
+
+	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		BlockEntity blockentity = level.getBlockEntity(pos);
 		if (blockentity instanceof CopperChestEntity) {
@@ -81,10 +114,8 @@ public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> impl
 				return InteractionResult.SUCCESS;
 			} else {
 				CopperChestEntity copperchestentity = (CopperChestEntity) blockentity;
-				player.openMenu(new SimpleMenuProvider((p_53124_, p_53125_, p_53126_) -> {
-					return ChestMenu.threeRows(p_53124_, p_53125_, copperchestentity);
-				}, CONTAINER_TITLE));
-				player.awardStat(getOpenChestStat());
+				player.openMenu(new BaseMenuProvider(copperchestentity::createMenu, CONTAINER_TITLE));
+				player.awardStat(Stats.CUSTOM.get(Stats.OPEN_CHEST));
 				return InteractionResult.CONSUME;
 			}
 		} else {
@@ -92,23 +123,18 @@ public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> impl
 		}
 	}
 
-	public DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combine(BlockState state, Level level, BlockPos pos, boolean bool) {
-		return DoubleBlockCombiner.Combiner::acceptNone;
-	}
-
-	protected Stat<ResourceLocation> getOpenChestStat() {
-		return Stats.CUSTOM.get(Stats.OPEN_CHEST);
-	}
-
+	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new CopperChestEntity(pos, state);
 	}
 
 	@Nullable
+	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153199_, BlockState p_153200_, BlockEntityType<T> entityType) {
-		return p_153199_.isClientSide ? createTickerHelper(entityType, Registration.COPPER_CHEST_TILE.get(), CopperChestEntity::lidAnimateTick) : null;
+		return p_153199_.isClientSide ? createTickerHelper(entityType, blockEntityType.get(), CopperChestEntity::lidAnimateTick) : null;
 	}
 
+	@Override
 	public void animateTick(BlockState p_53144_, Level p_53145_, BlockPos p_53146_, Random p_53147_) {
 		for (int i = 0; i < 3; ++i) {
 			int j = p_53147_.nextInt(2) * 2 - 1;
@@ -124,22 +150,27 @@ public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> impl
 
 	}
 
+	@Override
 	public BlockState rotate(BlockState p_53157_, Rotation p_53158_) {
 		return p_53157_.setValue(FACING, p_53158_.rotate(p_53157_.getValue(FACING)));
 	}
 
+	@Override
 	public BlockState mirror(BlockState p_53154_, Mirror p_53155_) {
 		return p_53154_.rotate(p_53155_.getRotation(p_53154_.getValue(FACING)));
 	}
 
+	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_53167_) {
 		p_53167_.add(FACING, WATERLOGGED);
 	}
 
+	@Override
 	public FluidState getFluidState(BlockState p_53177_) {
 		return p_53177_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_53177_);
 	}
 
+	@Override
 	public BlockState updateShape(BlockState p_53160_, Direction p_53161_, BlockState p_53162_, LevelAccessor p_53163_, BlockPos p_53164_, BlockPos p_53165_) {
 		if (p_53160_.getValue(WATERLOGGED)) {
 			p_53163_.scheduleTick(p_53164_, Fluids.WATER, Fluids.WATER.getTickDelay(p_53163_));
@@ -148,10 +179,12 @@ public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> impl
 		return super.updateShape(p_53160_, p_53161_, p_53162_, p_53163_, p_53164_, p_53165_);
 	}
 
+	@Override
 	public boolean isPathfindable(BlockState p_53132_, BlockGetter p_53133_, BlockPos p_53134_, PathComputationType p_53135_) {
 		return false;
 	}
 
+	@Override
 	public void tick(BlockState p_153203_, ServerLevel p_153204_, BlockPos p_153205_, Random p_153206_) {
 		BlockEntity blockentity = p_153204_.getBlockEntity(p_153205_);
 		if (blockentity instanceof EnderChestBlockEntity) {

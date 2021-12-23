@@ -37,7 +37,7 @@ public class ModBEWLR extends BlockEntityWithoutLevelRenderer {
 	private CopperChestEntity chestCopper;
 
 	public void setup() {
-		chestCopper = new CopperChestEntity(BlockPos.ZERO, Registration.COPPER_CHEST.get().defaultBlockState());
+		chestCopper = new CopperChestEntity(BlockPos.ZERO, Registration.COPPER_CHEST.block().defaultBlockState());
 	}
 
 	@Override

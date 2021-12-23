@@ -19,6 +19,10 @@ public class KeyBindingHandler {
 			TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.set(!TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.get());
 			TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.save();
 		}
+		if (KeyBindings.NOARMOR.consumeClick()) {
+			TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.set(!TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.get());
+			TutorialModConfig.CLIENT.CONFIG_SHOW_OVERLAY.save();
+		}
 	}
 
 	@SubscribeEvent

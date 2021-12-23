@@ -18,9 +18,9 @@ public class CopperChestScreen extends AbstractContainerScreen<CopperChestContai
 
 	public CopperChestScreen(CopperChestContainer container, Inventory playerInv, Component title) {
 		super(container, playerInv, title);
-		// this.passEvents = false;
+		this.passEvents = false;
 		this.imageHeight = 256;
-		// this.inventoryLabelY = this.imageHeight - 94;
+		this.inventoryLabelY = this.imageHeight - 93;
 	}
 
 	@Override
@@ -28,14 +28,6 @@ public class CopperChestScreen extends AbstractContainerScreen<CopperChestContai
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
 		this.renderTooltip(matrixStack, mouseX, mouseY);
-	}
-
-	@Override
-	protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
-		super.renderLabels(matrixStack, mouseX, mouseY);
-
-		this.font.draw(matrixStack, this.title + "_T", 8.0F, 6.0F, 4210752);
-		this.font.draw(matrixStack, this.playerInventoryTitle + "_T", 8.0F, this.imageHeight - 96 + 3, 4210752);
 	}
 
 	@Override

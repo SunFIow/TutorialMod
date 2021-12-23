@@ -31,12 +31,15 @@ public class TutorialModConfig {
 		public static final String PATH = "client";
 
 		public final ForgeConfigSpec.BooleanValue CONFIG_SHOW_OVERLAY;
+		public final ForgeConfigSpec.BooleanValue CONFIG_SHOW_ARMOR;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			builder.comment(COMMENT).push(PATH);
 
 			CONFIG_SHOW_OVERLAY = builder.comment("Show the Overlay InGame")
 					.define("show", false);
+			CONFIG_SHOW_ARMOR = builder.comment("Show your Armor")
+					.define("show", true);
 			builder.pop();
 
 		}
