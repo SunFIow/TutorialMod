@@ -3,6 +3,7 @@ package com.sunflow.tutorialmod.setup;
 import java.util.function.Supplier;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.block.ConfigBlock;
 import com.sunflow.tutorialmod.block.RubyBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
@@ -21,10 +22,11 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -49,13 +51,14 @@ public class Registration {
         CONTAINERS.register(modBus);
     }
 
-    public static final BlockBehaviour.Properties ORE_PROPERTIES = BlockBehaviour.Properties.copy(Blocks.STONE).strength(2.0f);
+    public static final BlockBehaviour.Properties ORE_PROPERTIES = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(2.5F, 4.0F);
     public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(ModGroups.ITEM_GROUP);
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // BLOCKS
 
     public static final SunSimpleBlock<RubyBlock> RUBY_BLOCK = new SunSimpleBlock<>("ruby_block", RubyBlock::new, ITEM_PROPERTIES);
+    public static final SunSimpleBlock<ConfigBlock> CONFIG_BLOCK = new SunSimpleBlock<>("config_block", ConfigBlock::new, ITEM_PROPERTIES);
 
     // Ores
     public static final SunSimpleBlock<Block> SUN_ORE_OVERWORLD = new SunSimpleBlock<>("sun_ore_overworld", () -> new Block(ORE_PROPERTIES), ITEM_PROPERTIES);

@@ -37,9 +37,9 @@ public class TutorialModConfig {
 			builder.comment(COMMENT).push(PATH);
 
 			CONFIG_SHOW_OVERLAY = builder.comment("Show the Overlay InGame")
-					.define("show", false);
+					.define("show_overlay", false);
 			CONFIG_SHOW_ARMOR = builder.comment("Show your Armor")
-					.define("show", true);
+					.define("show_armor", true);
 			builder.pop();
 
 		}

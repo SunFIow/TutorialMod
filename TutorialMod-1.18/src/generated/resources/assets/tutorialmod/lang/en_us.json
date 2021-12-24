@@ -10,7 +10,20 @@
   "itemGroup.tutorialtab2": "Tutorial Test Items",
   "key.categories.tutorialmod": "Tutorial Mod",
   "key.tutorialmod.explode": "Create an Explosion",
+  "key.tutorialmod.noarmor": "Toggle Armor",
   "key.tutorialmod.overlay": "Toggle Overlay",
   "key.tutorialmod.zoom": "Zoom",
-  "message.tutorialmod.tutorial_message.tooltip": "Just a Tutorial Tooltip"
+  "message.tutorialmod.tutorial_message.tooltip": "Just a Tutorial Tooltip",
+  "option.tutorialmod.client": "Client Settings",
+  "option.tutorialmod.client.overlay": "Toggle Overlay",
+  "option.tutorialmod.common": "Common Settings",
+  "option.tutorialmod.server": "Server Settings",
+  "option.tutorialmod.server.boolean": "Boolean Config Value",
+  "option.tutorialmod.server.double": "Double Config Value",
+  "option.tutorialmod.server.energyitem.maxpower": "Maximum Power the EnergyItem can store",
+  "option.tutorialmod.server.enum": "Enum Config Value",
+  "option.tutorialmod.server.integer": "Integer Config Value",
+  "option.tutorialmod.server.list": "List Config Value",
+  "option.tutorialmod.server.long": "Long Config Value",
+  "option.tutorialmod.server.string": "String Config Value"
 }

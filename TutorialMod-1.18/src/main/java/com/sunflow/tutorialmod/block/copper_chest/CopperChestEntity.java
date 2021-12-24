@@ -1,13 +1,11 @@
 package com.sunflow.tutorialmod.block.copper_chest;
 
 import com.sunflow.tutorialmod.setup.Registration;
-import com.sunflow.tutorialmod.util.Log;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
