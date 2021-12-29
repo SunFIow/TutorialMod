@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod.block;
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.config.TutorialModConfig1;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

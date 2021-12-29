@@ -1,7 +1,7 @@
 package com.sunflow.tutorialmod.item.armor;
 
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.item.armor.SkinUtil.SkinType;
+import com.sunflow.tutorialmod.item.armor.ItemNBTSkin.SkinType;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;

@@ -14,12 +14,14 @@ public class EnergyUtils {
 
 	public static final String DEFAULT_ENERGY_UNIT = "default";
 
-	public static double getEnergyDurabilityForDisplay(ItemStack stack, EnergyUnit unit) {
+	// return Math.round(13.0F - (float) pStack.getDamageValue() * 13.0F / (float) this.getMaxDamage());
+	public static int getEnergyDurabilityForDisplay(ItemStack stack, EnergyUnit unit) {
 		if (hasSupport(stack, unit)) {
-			double capacity = getCapacity(stack, unit);
-			double energyDiff = capacity - getEnergyStored(stack, unit);
+			int capacity = getCapacity(stack, unit);
+			int energyDiff = capacity - getEnergyStored(stack, unit);
 
-			return energyDiff / capacity;
+			// return energyDiff / capacity;
+			return Math.round(13.0F - energyDiff * 13.0F / capacity);
 		}
 		return 0;
 	}

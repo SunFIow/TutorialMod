@@ -8,8 +8,8 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderType;
 
 public class ModRenderTypes extends RenderType {
-	// DUMMY
 	@SuppressWarnings("java:S4449")
+	// DUMMY
 	private ModRenderTypes() { super(null, null, null, 0, false, false, null, null); }
 
 	private static final LineStateShard THICK_LINES = new LineStateShard(OptionalDouble.of(3.0D));

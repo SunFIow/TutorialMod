@@ -38,13 +38,13 @@ public class TeleporterBlock extends Block {
 				player.sendStatusMessage(new StringTextComponent("Linked to Dimension " + dimensionID), true);
 			} else {
 				if (player instanceof ServerPlayerEntity) {
-//					TeleportationTools.teleportToDimension((ServerPlayerEntity) player, this.dimensionID, player.func_233580_cy_());
-//					player.attemptTeleport(p_213373_1_, p_213373_3_, p_213373_5_, p_213373_7_)
-//					((ServerPlayerEntity) player).teleport(ServerWorld
-//							/*     */ dimensionID == -1 ? World.field_234919_h_
-//									: dimensionID == +0 ? World.field_234918_g_
-//											/*       */ : World.field_234920_i_,
-//							player.getPosX(), player.getPosY(), player.getPosZ(), player.cameraYaw, player.rotationPitch);
+					//					TeleportationTools.teleportToDimension((ServerPlayerEntity) player, this.dimensionID, player.func_233580_cy_());
+					//					player.attemptTeleport(p_213373_1_, p_213373_3_, p_213373_5_, p_213373_7_)
+					//					((ServerPlayerEntity) player).teleport(ServerWorld
+					//							/*     */ dimensionID == -1 ? World.field_234919_h_
+					//									: dimensionID == +0 ? World.field_234918_g_
+					//											/*       */ : World.field_234920_i_,
+					//							player.getPosX(), player.getPosY(), player.getPosZ(), player.cameraYaw, player.rotationPitch);
 				} else {
 					Log.warn("You are not an ServerPlayerEntity");
 				}

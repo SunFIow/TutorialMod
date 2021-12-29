@@ -59,7 +59,8 @@ public class CopperChestBlock extends AbstractChestBlock<CopperChestEntity> impl
 	public static final Component CONTAINER_TITLE = new TranslatableComponent("container.copper_chest");
 
 	public CopperChestBlock() {
-		super(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD), Registration.COPPER_CHEST::blockEntity);
+		super(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)// .noOcclusion()
+				, Registration.COPPER_CHEST::blockEntity);
 		registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.valueOf(false)));
 	}
 

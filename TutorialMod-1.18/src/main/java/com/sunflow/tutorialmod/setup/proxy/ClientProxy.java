@@ -37,11 +37,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerModEvents(IEventBus eventBus) {
 		super.registerModEvents(eventBus);
-		eventBus.addListener(ClientModEvents::entityRenderers);
 		eventBus.addListener(ClientModEvents::setup);
-		eventBus.addListener(ClientModEvents::onItemColor);
 		eventBus.addListener(ClientModEvents::onModelRegistryEvent);
 		eventBus.addListener(ClientModEvents::onTextureStitch);
+		eventBus.addListener(ClientModEvents::onRegisterLayers);
+		eventBus.addListener(ClientModEvents::onRegisterRenderers);
 	}
 
 	@SuppressWarnings("resource")

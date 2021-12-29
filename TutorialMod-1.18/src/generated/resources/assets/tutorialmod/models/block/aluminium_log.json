@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "tutorialmod:block/aluminium_log",
+    "end": "tutorialmod:block/aluminium_log_top"
+  }
+}

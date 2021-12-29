@@ -20,18 +20,21 @@ public class SunBlockTagsProvider extends BlockTagsProvider {
 				.add(Registration.SUN_ORE_DEEPSLATE.block())
 				.add(Registration.SUN_ORE_NETHER.block())
 				.add(Registration.SUN_ORE_END.block())
+				.add(Registration.RUBY_ORE.block())
 				.add(Registration.RUBY_BLOCK.block());
 		tag(BlockTags.NEEDS_IRON_TOOL)
 				.add(Registration.SUN_ORE_OVERWORLD.block())
 				.add(Registration.SUN_ORE_DEEPSLATE.block())
 				.add(Registration.SUN_ORE_NETHER.block())
 				.add(Registration.SUN_ORE_END.block())
+				.add(Registration.RUBY_ORE.block())
 				.add(Registration.RUBY_BLOCK.block());
 		tag(Tags.Blocks.ORES)
 				.add(Registration.SUN_ORE_OVERWORLD.block())
 				.add(Registration.SUN_ORE_DEEPSLATE.block())
 				.add(Registration.SUN_ORE_NETHER.block())
-				.add(Registration.SUN_ORE_END.block());
+				.add(Registration.SUN_ORE_END.block())
+				.add(Registration.RUBY_ORE.block());
 	}
 
 	@Override

@@ -21,13 +21,10 @@ public class PlayerSkinHandler {
 	public static final void changePlayerSkin(AbstractClientPlayer player, ResourceLocation location) {
 		if (!player.isCapeLoaded()) throw new IllegalAccessError("The player needs to have Player Info");
 		PlayerInfo playerInfo = TutorialMod.proxy.getMinecraft().getConnection().getPlayerInfo(player.getUUID());
-		Map<MinecraftProfileTexture.Type, ResourceLocation> textures = ObfuscationReflectionHelper.getPrivateValue(PlayerInfo.class, playerInfo, "textureLocations");
-		// if (!textures.containsKey(MinecraftProfileTexture.Type.SKIN) || !textures.get(MinecraftProfileTexture.Type.SKIN).equals(location)) {
-		// textures.put(MinecraftProfileTexture.Type.SKIN, location);
-		// Networking.sendToServer(new PlayerSkinChangedPacket(player.getUUID(), location));
-		// }
+		String tex_loc_field_name = "f_105299_"; // "b", "f_105299_", "textureLocations", "field_187107_a", "a"
+		Map<MinecraftProfileTexture.Type, ResourceLocation> textures = ObfuscationReflectionHelper.getPrivateValue(PlayerInfo.class, playerInfo, tex_loc_field_name);
 		textures.compute(MinecraftProfileTexture.Type.SKIN, (type, loc) -> {
-			if (!loc.equals(location)) Networking.sendToServer(new PlayerSkinChangedPacket(player.getUUID(), location));
+			if (!location.equals(loc)) Networking.sendToServer(new PlayerSkinChangedPacket(player.getUUID(), location));
 			return location;
 		});
 	}

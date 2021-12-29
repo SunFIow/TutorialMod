@@ -38,7 +38,7 @@ public class EnergyWandItem extends Item implements IEnergyItem {
 			if (player.isSneaking()) {
 				itemEnergy.receiveEnergy(100, false);
 			}
-//			tag.put(EnergyUnit.DEFAULT.name, itemEnergy.serializeNBT());
+			// tag.put(EnergyUnit.DEFAULT.name, itemEnergy.serializeNBT());
 			EnergyUtils.writeStorage(stack, EnergyUnit.DEFAULT, itemEnergy);
 		}
 
@@ -55,11 +55,11 @@ public class EnergyWandItem extends Item implements IEnergyItem {
 		return EnergyUtils.getEnergyDurabilityForDisplay(stack, EnergyUnit.DEFAULT);
 	}
 
-//	@Override
-//	public int getRGBDurabilityForDisplay(ItemStack stack) {
-////	    return MathHelper.hsvToRGB(Math.max(0.0F, (float) (1.0F - getDurabilityForDisplay(stack))) / 3.0F, 1.0F, 1.0F);    
-//		return EnergyUtils.getEnergyRGBForDisplay(stack, EnergyUnit.DEFAULT);
-//	}
+	// @Override
+	// public int getRGBDurabilityForDisplay(ItemStack stack) {
+	//// return MathHelper.hsvToRGB(Math.max(0.0F, (float) (1.0F - getDurabilityForDisplay(stack))) / 3.0F, 1.0F, 1.0F);
+	// return EnergyUtils.getEnergyRGBForDisplay(stack, EnergyUnit.DEFAULT);
+	// }
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {

@@ -1,4 +1,4 @@
-package com.sunflow.tutorialmod.block;
+package com.sunflow.tutorialmod.block.ore;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.IPlantable;
 public class RubyBlock extends Block {
 
 	public RubyBlock() {
-		super(Properties.of(Material.AIR)
+		super(Properties.of(Material.STONE)
 				.strength(5.0f)
 				.requiresCorrectToolForDrops()
 				.sound(SoundType.METAL)

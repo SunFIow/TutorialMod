@@ -18,6 +18,7 @@ public class ModTags {
 
 	public static class Blocks {
 		public static final IOptionalNamedTag<Block> TUTORIAL = makeTag(TutorialMod.MODID, "tutorial");
+		// public static final IOptionalNamedTag<Block> NEEDS_RUBY_TOOL = makeTag(TutorialMod.MODID, "needs_ruby_tool");
 
 		private static IOptionalNamedTag<Block> makeTag(String modid, String name) { return BlockTags.createOptional(new ResourceLocation(modid, name)); }
 	}

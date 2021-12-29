@@ -32,7 +32,7 @@ public abstract class CommonProxy {
 		TutorialMod.LOGGER.debug("Registering the Forge Events for u senpai.");
 
 		eventBus.addListener(CommonModEvents::setup);
-		eventBus.addListener(CommonModEvents::addAttributes);
+		eventBus.addListener(CommonModEvents::onEntityAttributeCreation);
 
 		eventBus.addListener(DataGenerators::gatherData);
 		eventBus.addListener(TutorialModConfig::onLoad);
