@@ -3,7 +3,6 @@ package com.sunflow.tutorialmod;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.config.TutorialModConfig1;
 import com.sunflow.tutorialmod.setup.Registration;
-import com.sunflow.tutorialmod.setup.Registration.SunBlockEntity;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
@@ -21,7 +20,6 @@ import net.minecraftforge.fml.config.ModConfig;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TutorialMod.MODID)
 public class TutorialMod {
-    private static Logger SUNLOGGER;
 
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
@@ -35,9 +33,6 @@ public class TutorialMod {
     public static MyWorldData data;
 
     public TutorialMod() {
-        SUNLOGGER = LogManager.getLogger();
-        SUNLOGGER.info("Hello from TutorialMod");
-        SUNLOGGER.info("[{}] Starting version check at {}", MODID, NAME);
         Registration.init();
 
         TutorialModConfig.init();

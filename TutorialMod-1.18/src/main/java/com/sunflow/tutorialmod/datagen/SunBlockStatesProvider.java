@@ -1,23 +1,18 @@
 package com.sunflow.tutorialmod.datagen;
 
-import java.util.function.Function;
-
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.setup.Registration;
 
-import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class SunBlockStatesProvider extends BlockStateProvider {
 
@@ -70,6 +65,17 @@ public class SunBlockStatesProvider extends BlockStateProvider {
 
 		// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		// FLUIDS
+
+		// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// BLOCK ENTITES
+		customLoaderBlock(Registration.FANCYBLOCK.block());
+		simpleBlock(Registration.MAGICBLOCK.block(), models().getBuilder(named(Registration.MAGICBLOCK.block())).texture("particle", modLoc("block/" + named(Registration.MAGICBLOCK.block()))));
+	}
+
+	private void customLoaderBlock(Block block) {
+		simpleBlock(block, models().getBuilder(named(block)).customLoader((builder, helper) -> {
+			return new CustomLoaderBuilder<BlockModelBuilder>(modLoc("customloader"), builder, helper) {};
+		}).end());
 	}
 
 	private void cropBlock(Block block) {
@@ -89,7 +95,7 @@ public class SunBlockStatesProvider extends BlockStateProvider {
 		simpleBlock(block, models().cubeColumn(name, modLoc("block/" + name), modLoc("block/" + name + "_top")));
 	}
 
-	private String named(Block block) { return block.getRegistryName().getPath(); }
+	private String named(ForgeRegistryEntry<?> entry) { return entry.getRegistryName().getPath(); }
 
 	@Override
 	public String getName() { return TutorialMod.MODID + " " + super.getName(); }

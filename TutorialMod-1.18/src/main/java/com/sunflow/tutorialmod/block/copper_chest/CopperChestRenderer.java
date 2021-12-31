@@ -46,6 +46,7 @@ public class CopperChestRenderer implements BlockEntityRenderer<CopperChestEntit
 		simpleChest = new CopperChestModel(context);
 	}
 
+	@Override
 	public void render(CopperChestEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		Level level = blockEntity.getLevel();
 		boolean flag = level != null;

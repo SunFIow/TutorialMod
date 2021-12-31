@@ -11,6 +11,10 @@ import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestEntity;
 import com.sunflow.tutorialmod.block.food.FoodPlantBlock;
 import com.sunflow.tutorialmod.block.furniture.SantaHatBlock;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlock;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
+import com.sunflow.tutorialmod.block.magicblock.MagicBlock;
+import com.sunflow.tutorialmod.block.magicblock.MagicBlockTile;
 import com.sunflow.tutorialmod.block.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.block.ore.RubyBlock;
 import com.sunflow.tutorialmod.block.ore.RubyOre;
@@ -327,6 +331,8 @@ public class Registration {
     public static final SunBlockEntityMenu<CopperChestBlock, CopperChestEntity, CopperChestContainer> COPPER_CHEST = new SunBlockEntityMenu<>(
             "copper_chest", CopperChestBlock::new, ITEM_PROPERTIES,
             CopperChestEntity::new, CopperChestContainer::new);
+    public static final SunBlockEntity<FancyBlock, FancyBlockTile> FANCYBLOCK = new SunBlockEntity<>("fancyblock", FancyBlock::new, ITEM_PROPERTIES2, FancyBlockTile::new);
+    public static final SunBlockEntity<MagicBlock, MagicBlockTile> MAGICBLOCK = new SunBlockEntity<>("magicblock", MagicBlock::new, ITEM_PROPERTIES2, MagicBlockTile::new);
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // PARTICLES

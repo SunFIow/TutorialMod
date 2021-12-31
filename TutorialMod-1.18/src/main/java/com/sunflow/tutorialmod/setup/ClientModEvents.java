@@ -1,8 +1,13 @@
 package com.sunflow.tutorialmod.setup;
 
 import com.sunflow.tutorialmod.TutorialMod;
+import com.sunflow.tutorialmod.block.base.BakedBlockBase;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestRenderer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestScreen;
+import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
+import com.sunflow.tutorialmod.block.model.CustomBakedModel;
+import com.sunflow.tutorialmod.block.model.CustomModelGeometry;
+import com.sunflow.tutorialmod.block.model.CustomModelLoader;
 import com.sunflow.tutorialmod.entity.centaur.CentaurModel;
 import com.sunflow.tutorialmod.entity.centaur.CentaurRenderer;
 import com.sunflow.tutorialmod.entity.weirdmob.WeirdMobModel;
@@ -16,11 +21,12 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientModEvents {
@@ -34,7 +40,6 @@ public class ClientModEvents {
 		event.enqueueWork(ClientModEvents::setRenderLayers);
 
 		// event.enqueueWork(ClientModEvents::registerBlockColors);
-		// registerModelLoaders();
 
 		TutorialMod.LOGGER.debug("Registering the keybindings for u senpai.");
 		KeyBindings.register();
@@ -56,7 +61,6 @@ public class ClientModEvents {
 		// ScreenManager.registerFactory(Registration.CHARGER_CONTAINER.get(), ChargerScreen::new);
 		// ScreenManager.registerFactory(Registration.COPPER_CHEST_CONTAINER.get(), CopperChestScreen::new);
 		MenuScreens.register(Registration.COPPER_CHEST.menu(), CopperChestScreen::new);
-
 	}
 
 	private static void setRenderLayers() {
@@ -66,27 +70,27 @@ public class ClientModEvents {
 		ItemBlockRenderTypes.setRenderLayer(Registration.RICE.block(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(Registration.COPPER_SAPLING.block(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(Registration.ALUMINIUM_SAPLING.block(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(Registration.MAGICBLOCK.block(), RenderType.translucent());
 	}
 
 	public static void onModelRegistryEvent(ModelRegistryEvent event) {
-		// BakedBlockBase block = Registration.FANCYBLOCK.get();
-		// ModelLoaderRegistry.registerLoader(
-		// new ResourceLocation(TutorialMod.MODID, "customloader"),
-		// // new CustomModelLoader(block.location(), block.offset(), block.length()));
-		// new CustomModelLoader(
-		// () -> new CustomModelGeometry(block.location(),
-		// () -> new CustomBakedModel(
-		// block.location(),
-		// block.offset(),
-		// block.length()))));
+		BakedBlockBase block = Registration.FANCYBLOCK.block();
+		ModelLoaderRegistry.registerLoader(
+				new ResourceLocation(TutorialMod.MODID, "customloader"),
+				new CustomModelLoader(
+						() -> new CustomModelGeometry(block.location(),
+								() -> new CustomBakedModel(
+										block.location(),
+										block.offset(),
+										block.length()))));
 	}
 
 	public static void onTextureStitch(final TextureStitchEvent.Pre event) {
 		TutorialMod.LOGGER.debug("Stitching textures for u senpai.");
 
 		ResourceLocation atlas = event.getAtlas().location();
-		if (atlas.equals(TextureAtlas.LOCATION_BLOCKS)) {
-			// event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
+		if (atlas.equals(InventoryMenu.BLOCK_ATLAS)) {
+			event.addSprite(MagicBockTileRenderer.MAGICBLOCK_TEXTURE);
 		} else if (atlas.equals(Sheets.CHEST_SHEET)) {
 			event.addSprite(CopperChestRenderer.COPPER_CHEST_TEXTURE);
 		}
@@ -102,11 +106,11 @@ public class ClientModEvents {
 		event.registerEntityRenderer(Registration.CENTAUR.get(), CentaurRenderer::new);
 		event.registerEntityRenderer(Registration.GRENADE_ENTITY.get(), ThrownItemRenderer::new);
 		event.registerBlockEntityRenderer(Registration.COPPER_CHEST.blockEntity(), CopperChestRenderer::new);
-		// event.registerBlockEntityRenderer(Registration.MAGICBLOCK_TILE.get(), MagicBockTileRenderer::new);
+		event.registerBlockEntityRenderer(Registration.MAGICBLOCK.blockEntity(), MagicBockTileRenderer::new);
 	}
 
 	// private static void registerBlockColors() {
-	// TutorialMod.proxy.getMinecraft().getBlockColors().register(new FancyBlockColor(), Registration.FANCYBLOCK.get());
+	// 	TutorialMod.proxy.getMinecraft().getBlockColors().register(new FancyBlockColor(), Registration.FANCYBLOCK.get());
 	// }
 
 }

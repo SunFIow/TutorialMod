@@ -169,6 +169,8 @@ public class SunLanguageProvider extends LanguageProvider {
         // BLOCK ENTITES        
         add(CopperChestBlock.CONTAINER_TITLE.getString(), "Copper Chest");
         add(Registration.COPPER_CHEST.block(), "Copper Chest");
+        add(Registration.FANCYBLOCK.block(), "Fancy Block");
+        add(Registration.MAGICBLOCK.block(), "Magic Block");
 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         // PARTICLES

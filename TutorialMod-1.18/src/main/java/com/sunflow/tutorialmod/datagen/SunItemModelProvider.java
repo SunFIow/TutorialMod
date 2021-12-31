@@ -7,8 +7,10 @@ import com.sunflow.tutorialmod.setup.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -120,6 +122,11 @@ public class SunItemModelProvider extends ItemModelProvider {
 		singleTexture(Registration.GRENADE.get());
 		withParent(Registration.WEIRDMOB_SPAWN_EGG.get(), "item/template_spawn_egg");
 		withParent(Registration.CENTAUR_SPAWN_EGG.get(), "item/template_spawn_egg");
+
+		// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// BLOCK ENTITES
+		blockItem(Registration.FANCYBLOCK.block());
+		withParent(Registration.MAGICBLOCK.block(), "item/generated").texture("layer0", modLoc("item/magicblock_item"));
 	}
 
 	private void singleTexture(Item item) {
@@ -127,8 +134,8 @@ public class SunItemModelProvider extends ItemModelProvider {
 		singleTexture(name, mcLoc("item/handheld"), "layer0", modLoc("item/" + name));
 	}
 
-	private <T extends IForgeRegistryEntry<? super T>> void withParent(T entry, String parent) {
-		withExistingParent(entry.getRegistryName().getPath(), mcLoc(parent));
+	private <T extends IForgeRegistryEntry<? super T>> ItemModelBuilder withParent(T entry, String parent) {
+		return withExistingParent(entry.getRegistryName().getPath(), mcLoc(parent));
 	}
 
 	private void blockItem(Block block) {
@@ -140,6 +147,8 @@ public class SunItemModelProvider extends ItemModelProvider {
 		String name = item.getRegistryName().getPath();
 		singleTexture(name, mcLoc("item/handheld"), "layer0", modLoc("item/skin_" + name.split("_")[1]));
 	}
+
+	private String named(ForgeRegistryEntry<?> entry) { return entry.getRegistryName().getPath(); }
 
 	@Override
 	public String getName() { return TutorialMod.MODID + " " + super.getName(); }
