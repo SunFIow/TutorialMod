@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.electronwill.nightconfig.core.Config;
-import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.datagen.SunLanguageProvider;
+import com.sunflow.tutorialmod.data.provider.SunLanguageProvider;
 
 import net.minecraft.client.CycleOption;
 import net.minecraft.client.Option;
@@ -20,7 +19,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.config.ModConfig.Type;
 
 public class ConfigScreen extends BaseConfigScreen {
 
@@ -79,7 +77,7 @@ public class ConfigScreen extends BaseConfigScreen {
 		}
 
 		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, String translation, ForgeConfigSpec.BooleanValue value) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.createOnOff(SunLanguageProvider.getTranslationKey(screenType, translationKey),
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.createOnOff(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey),
 					(settings) -> value.get(),
 					(settings, _setting, _value) -> {
 						value.set(_value);
@@ -88,7 +86,7 @@ public class ConfigScreen extends BaseConfigScreen {
 		}
 
 		public ConfigScreen.Builder Integer(ModConfig.Type screenType, String translationKey, String translation, ForgeConfigSpec.IntValue value, double minValue, double maxValue, float stepSize) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKey(screenType, translationKey), minValue, maxValue, stepSize,
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.intValue());
@@ -101,7 +99,7 @@ public class ConfigScreen extends BaseConfigScreen {
 		}
 
 		public ConfigScreen.Builder Long(ModConfig.Type screenType, String translationKey, String translation, ForgeConfigSpec.LongValue value, double minValue, double maxValue, float stepSize) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKey(screenType, translationKey), minValue, maxValue, stepSize,
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.longValue());
@@ -114,7 +112,7 @@ public class ConfigScreen extends BaseConfigScreen {
 		}
 
 		public ConfigScreen.Builder Double(ModConfig.Type screenType, String translationKey, String translation, ForgeConfigSpec.DoubleValue value, double minValue, double maxValue, float stepSize) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKey(screenType, translationKey), minValue, maxValue, stepSize,
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), minValue, maxValue, stepSize,
 					(settings) -> (double) value.get(),
 					(settings, _value) -> {
 						value.set(_value.doubleValue());
@@ -131,7 +129,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<T, Double> getter,
 				Function<Double, T> setter,
 				Function<T, String> namer) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKey(screenType, translationKey), minValue, maxValue, stepSize,
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
@@ -165,7 +163,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<List<T>, Double> getter,
 				Function<Double, List<T>> setter,
 				Function<List<T>, String> namer) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKey(screenType, translationKey), minValue, maxValue, stepSize,
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
@@ -181,7 +179,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<T, Double> getter,
 				Function<Double, T> setter,
 				Function<T, String> namer) {
-			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKey(screenType, translationKey), minValue, maxValue, stepSize,
+			return addOption(screenType, new SunOption(screenType, translationKey, translation, new ProgressOption(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), minValue, maxValue, stepSize,
 					(settings) -> getter.apply(value.get()),
 					(settings, _value) -> {
 						value.set(setter.apply(_value));
@@ -205,7 +203,7 @@ public class ConfigScreen extends BaseConfigScreen {
 		public ConfigScreen.Builder Boolean(ModConfig.Type screenType, String translationKey, String translation, ForgeConfigSpec.BooleanValue value,
 				Function<Options, Boolean> setter,
 				CycleOption.OptionSetter<Boolean> getter) {
-			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.createOnOff(SunLanguageProvider.getTranslationKey(screenType, translationKey), setter, getter)));
+			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.createOnOff(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), setter, getter)));
 			return this;
 		}
 
@@ -214,7 +212,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<Integer, Component> namer,
 				Function<Options, Integer> getter,
 				CycleOption.OptionSetter<Integer> setter) {
-			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKey(screenType, translationKey), values, namer, getter, setter)));
+			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), values, namer, getter, setter)));
 			return this;
 		}
 
@@ -223,7 +221,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<Long, Component> namer,
 				Function<Options, Long> getter,
 				CycleOption.OptionSetter<Long> setter) {
-			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKey(screenType, translationKey), values, namer, getter, setter)));
+			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), values, namer, getter, setter)));
 			return this;
 		}
 
@@ -232,7 +230,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<Double, Component> namer,
 				Function<Options, Double> getter,
 				CycleOption.OptionSetter<Double> setter) {
-			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKey(screenType, translationKey), values, namer, getter, setter)));
+			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), values, namer, getter, setter)));
 			return this;
 		}
 
@@ -241,7 +239,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<T, Component> namer,
 				Function<Options, T> getter,
 				CycleOption.OptionSetter<T> setter) {
-			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKey(screenType, translationKey), values, namer, getter, setter)));
+			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), values, namer, getter, setter)));
 			return this;
 		}
 
@@ -250,7 +248,7 @@ public class ConfigScreen extends BaseConfigScreen {
 				Function<T, Component> namer,
 				Function<Options, T> getter,
 				CycleOption.OptionSetter<T> setter) {
-			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKey(screenType, translationKey), values, namer, getter, setter)));
+			addOption(screenType, new SunOption(screenType, translationKey, translation, CycleOption.create(SunLanguageProvider.getTranslationKeyOption(screenType, translationKey), values, namer, getter, setter)));
 			return this;
 		}
 

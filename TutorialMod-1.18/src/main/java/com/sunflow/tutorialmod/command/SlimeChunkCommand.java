@@ -16,11 +16,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
-public class SlimeChunkCommand extends CommandBase { // implements ICommand {
-
-	// public SlimeChunkCommand() {
-	// ModCommands.COMMANDS.add(this);
-	// }
+public class SlimeChunkCommand implements ICommand {
 
 	@Override
 	public ArgumentBuilder<CommandSourceStack, ?> getBuilder() {

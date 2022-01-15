@@ -95,7 +95,7 @@ public class Registration {
 
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TutorialMod.MODID);
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TutorialMod.MODID);
-//	public static final DeferredRegister<ModDimension> DIMENSIONS = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, TutorialMod.MODID);
+	//	public static final DeferredRegister<ModDimension> DIMENSIONS = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, TutorialMod.MODID);
 	public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, TutorialMod.MODID);
 	public static final DeferredRegister<TileEntityType<?>> TILEENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, TutorialMod.MODID);
 	public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, TutorialMod.MODID);
@@ -107,7 +107,7 @@ public class Registration {
 	public static void registerAll(IEventBus modEventBus) {
 		BLOCKS.register(modEventBus);
 		ITEMS.register(modEventBus);
-//		DIMENSIONS.register(modEventBus);
+		//		DIMENSIONS.register(modEventBus);
 		BIOMES.register(modEventBus);
 		TILEENTITIES.register(modEventBus);
 		ENCHANTMENTS.register(modEventBus);
@@ -117,7 +117,7 @@ public class Registration {
 		SOUNDS.register(modEventBus);
 	}
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static final RegistryObject<TEstonHeadBlock> TESTON_HEAD_BLOCK = BLOCKS.register("teston_head", TEstonHeadBlock::new);
 	public static final RegistryObject<Item> TESTON_HEAD_ITEM = ITEMS.register("teston_head", () -> new BlockItem(TESTON_HEAD_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
@@ -130,12 +130,12 @@ public class Registration {
 
 	public static final RegistryObject<TileEntityType<TEstonTileEntity>> TESTON_TILE = TILEENTITIES.register("teston", () -> TileEntityType.Builder.create(TEstonTileEntity::new, Blocks.MOVING_PISTON).build(null));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static final RegistryObject<MultiBlock> MULTIBLOCK = BLOCKS.register("multiblock", MultiBlock::new);
 	public static final RegistryObject<BlockItem> MULTIBLOCK_ITEM = ITEMS.register("multiblock", () -> new BlockItem(MULTIBLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public static final RegistryObject<GlowstoneGeneratorBlock> GLOWSTONE_GENERATOR_BLOCK = BLOCKS.register("glowstone_generator", GlowstoneGeneratorBlock::new);
 	public static final RegistryObject<Item> GLOWSTONE_GENERATOR_ITEM = ITEMS.register("glowstone_generator", () -> new BlockItem(GLOWSTONE_GENERATOR_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
@@ -176,21 +176,21 @@ public class Registration {
 	public static final RegistryObject<TileEntityType<MagicBlockTile>> MAGICBLOCK_TILE = TILEENTITIES.register("magicblock", () -> TileEntityType.Builder.create(MagicBlockTile::new, MAGICBLOCK.get()).build(null));
 
 	public static final RegistryObject<GrenadeItem> GRENADE = ITEMS.register("grenade", GrenadeItem::new);
-//	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> createEntity("grenade", 0.5F, 0.5F, true, EntityClassification.MISC, GrenadeEntity::new));
+	//	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> createEntity("grenade", 0.5F, 0.5F, true, EntityClassification.MISC, GrenadeEntity::new));
 	public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE_ENTITY = ENTITIES.register("grenade", () -> EntityType.Builder.<GrenadeEntity>create(GrenadeEntity::new, EntityClassification.MISC)
 			.size(0.5F, 0.5F)
 			.setShouldReceiveVelocityUpdates(true)
 			.build("grenade"));
 
 	public static final RegistryObject<MobEggBase> WEIRDMOB_SPAWN_EGG = ITEMS.register("weirdmob_spawn_egg", () -> new MobEggBase(0xff1111, ModGroups.itemGroup, Registration.WEIRDMOB::get));
-//	public static final RegistryObject<EntityType<?>> WEIRDMOB = ENTITIES.register("weirdmob", () -> createEntity("weirdmob", 1.0F, 1.0F, false, EntityClassification.CREATURE, WeirdMobEntity::new));
+	//	public static final RegistryObject<EntityType<?>> WEIRDMOB = ENTITIES.register("weirdmob", () -> createEntity("weirdmob", 1.0F, 1.0F, false, EntityClassification.CREATURE, WeirdMobEntity::new));
 	public static final RegistryObject<EntityType<WeirdMobEntity>> WEIRDMOB = ENTITIES.register("weirdmob", () -> EntityType.Builder.create(WeirdMobEntity::new, EntityClassification.CREATURE)
 			.size(1.0F, 1.0F)
 			.setShouldReceiveVelocityUpdates(false)
 			.build("weirdmob"));
 
 	public static final RegistryObject<MobEggBase> CENTAUR_SPAWN_EGG = ITEMS.register("centaur_spawn_egg", () -> new MobEggBase(0xeecc11, ModGroups.itemGroup2, Registration.CENTAUR::get));
-//	public static final RegistryObject<EntityType<?>> CENTAUR = ENTITIES.register("centaur", () -> createEntity("centaur", 0.9F, 2.8F, false, EntityClassification.CREATURE, CentaurEntity::new));
+	//	public static final RegistryObject<EntityType<?>> CENTAUR = ENTITIES.register("centaur", () -> createEntity("centaur", 0.9F, 2.8F, false, EntityClassification.CREATURE, CentaurEntity::new));
 	public static final RegistryObject<EntityType<CentaurEntity>> CENTAUR = ENTITIES.register("centaur", () -> EntityType.Builder.create(CentaurEntity::new, EntityClassification.CREATURE)
 			.size(0.9F, 2.8F)
 			.setShouldReceiveVelocityUpdates(false)
@@ -204,7 +204,7 @@ public class Registration {
 	public static final RegistryObject<BlockItem> RUBY_BLOCK_ITEM = ITEMS.register("ruby_block", () -> new BlockItem(RUBY_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 	// Tree
-// TODO: Looking for improvments
+	// TODO: Looking for improvments
 	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", ItemUtil::Default);
 	public static final RegistryObject<Block> COPPER_BLOCK = BLOCKS.register("copper_block", () -> new Block(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f)));
 	public static final RegistryObject<BlockItem> COPPER_BLOCK_ITEM = ITEMS.register("copper_block", () -> new BlockItem(COPPER_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
@@ -223,7 +223,7 @@ public class Registration {
 	public static final RegistryObject<CustomSaplingBlock> COPPER_SAPLING = BLOCKS.register("copper_sapling", () -> new CustomSaplingBlock(COPPER_LEAVES.get(), COPPER_LOG.get(), Registration.COPPER_SAPLING::get));
 	public static final RegistryObject<BlockItem> COPPER_SAPLING_ITEM = ITEMS.register("copper_sapling", () -> new BlockItem(COPPER_SAPLING.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-//	public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", ItemUtil::Default);	
+	//	public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", ItemUtil::Default);	
 	public static final RegistryObject<Block> ALUMINIUM_BLOCK = BLOCKS.register("aluminium_block", () -> new Block(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f)));
 	public static final RegistryObject<BlockItem> ALUMINIUM_BLOCK_ITEM = ITEMS.register("aluminium_block", () -> new BlockItem(ALUMINIUM_BLOCK.get(), new Item.Properties().group(ModGroups.itemGroup)));
 	public static final RegistryObject<CustomOreBlock> ALUMINIUM_ORE_OVERWORLD = BLOCKS.register("aluminium_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3).harvestLevel(2)));
@@ -241,8 +241,8 @@ public class Registration {
 	public static final RegistryObject<CustomSaplingBlock> ALUMINIUM_SAPLING = BLOCKS.register("aluminium_sapling", () -> new CustomSaplingBlock(ALUMINIUM_LEAVES.get(), ALUMINIUM_LOG.get(), Registration.ALUMINIUM_SAPLING::get));
 	public static final RegistryObject<BlockItem> ALUMINIUM_SAPLING_ITEM = ITEMS.register("aluminium_sapling", () -> new BlockItem(ALUMINIUM_SAPLING.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// BLOCKS
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// BLOCKS
 
 	// Ores
 	public static final RegistryObject<RubyOre> RUBY_ORE = BLOCKS.register("ruby_ore", RubyOre::new);
@@ -253,11 +253,11 @@ public class Registration {
 	public static final RegistryObject<BlockItem> SANTA_HAT_ITEM = ITEMS.register("santa_hat", () -> new BlockItem(SANTA_HAT.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 	// Food
-// TODO: Looking for improvments
+	// TODO: Looking for improvments
 	public static final RegistryObject<SeedItem> RICE = ITEMS.register("rice", () -> new SeedItem(Registration.RICE_PLANT.get(), 3));
-//	public static final RegistryObject<FoodPlantBlock> RICE_PLANT = BLOCKS.register("rice_plant", () -> new FoodPlantBlock(() -> Registration.RICE.get(), () -> Registration.RICE.get(), 3f, 2f));
+	//	public static final RegistryObject<FoodPlantBlock> RICE_PLANT = BLOCKS.register("rice_plant", () -> new FoodPlantBlock(() -> Registration.RICE.get(), () -> Registration.RICE.get(), 3f, 2f));
 	public static final RegistryObject<FoodPlantBlock> RICE_PLANT = BLOCKS.register("rice_plant", () -> new FoodPlantBlock(() -> RICE.get(), () -> RICE.get(), 3f, 2f));
-//	public static final RegistryObject<BlockItem> RICE = ITEMS.register("rice_plant", () -> new BlockItem(RICE_PLANT.get(), new Item.Properties().group(ModGroups.itemGroup)));
+	//	public static final RegistryObject<BlockItem> RICE = ITEMS.register("rice_plant", () -> new BlockItem(RICE_PLANT.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
 	public static final RegistryObject<Item> RICE_BOWL = ITEMS.register("rice_bowl", () -> new Item(ItemUtil.Food(ModGroups.itemGroup, 8, 2)));
 
@@ -265,8 +265,8 @@ public class Registration {
 	public static final RegistryObject<TeleporterBlock> TELEPORTER = BLOCKS.register("teleporter", () -> new TeleporterBlock(1));
 	public static final RegistryObject<BlockItem> TELEPORTER_ITEM = ITEMS.register("teleporter", () -> new BlockItem(TELEPORTER.get(), new Item.Properties().group(ModGroups.itemGroup)));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// ITEMS 
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ITEMS 
 
 	// Items
 	public static final RegistryObject<Item> FIRSTITEM = ITEMS.register("firstitem", () -> new Item(new Item.Properties().group(ModGroups.itemGroup2)));
@@ -319,27 +319,27 @@ public class Registration {
 			new EffectInstance(Effects.INSTANT_HEALTH, 1, 1),
 			new EffectInstance(Effects.REGENERATION, 20 * 4, 0))));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// DIMENSIONS
-//	public static ResourceLocation BADLANDS_ID = new ResourceLocation(TutorialMod.MODID, "badlands");
-//	public static DimensionType BADLANDS_TYPE;
-//	public static final RegistryObject<ModDimension> BADLANDS = DIMENSIONS.register("badlands", () -> new ModDimensionBase(BadlandsDimension::new));
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// DIMENSIONS
+	//	public static ResourceLocation BADLANDS_ID = new ResourceLocation(TutorialMod.MODID, "badlands");
+	//	public static DimensionType BADLANDS_TYPE;
+	//	public static final RegistryObject<ModDimension> BADLANDS = DIMENSIONS.register("badlands", () -> new ModDimensionBase(BadlandsDimension::new));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// BIOMES
-//	public static final RegistryObject<CopperBiome> COPPER = BIOMES.register("copper", CopperBiome::new);
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// BIOMES
+	//	public static final RegistryObject<CopperBiome> COPPER = BIOMES.register("copper", CopperBiome::new);
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// TILEENTITIES
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// ENCHANTMENTS
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// TILEENTITIES
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ENCHANTMENTS
 
 	public static final RegistryObject<EnchantmentMultiJump> ENCHANTMENT_MULTIJUMP = ENCHANTMENTS.register("multijump", EnchantmentMultiJump::new);
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// ENTITIES
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// FLUIDS
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ENTITIES
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// FLUIDS
 	public static final ForgeFlowingFluid.Properties MOLTEN_COPPER_PROPERTIES = new ForgeFlowingFluid.Properties(() -> Registration.MOLTEN_COPPER.get(), () -> Registration.FLOWING_MOLTEN_COPPER.get(),
 			FluidAttributes.builder(new ResourceLocation(TutorialMod.MODID, "block/molten_copper_still"), new ResourceLocation(TutorialMod.MODID, "block/molten_copper_flow")))
 					.bucket(() -> Registration.MOLTEN_COPPER_BUCKET.get()).block(() -> Registration.MOLTEN_COPPER_BLOCK.get());
@@ -352,10 +352,10 @@ public class Registration {
 
 	public static final RegistryObject<BucketItem> MOLTEN_COPPER_BUCKET = ITEMS.register("molten_copper_bucket", () -> new BucketItem(() -> MOLTEN_COPPER.get(), new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModGroups.itemGroup)));
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// CONTAINERS
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// SOUNDS
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// CONTAINERS
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// SOUNDS
 
 	public static <T extends Entity> EntityType<T> createEntity(String name, float w, float h, boolean receiveVelocityUpdates, EntityClassification classification, EntityType.IFactory<T> factory) {
 		EntityType<T> type = EntityType.Builder.<T>create(factory, classification)

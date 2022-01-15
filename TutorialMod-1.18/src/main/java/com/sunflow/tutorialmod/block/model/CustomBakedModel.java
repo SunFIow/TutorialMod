@@ -13,7 +13,7 @@ import com.mojang.blaze3d.vertex.VertexFormatElement;
 import com.mojang.math.Vector3d;
 import com.mojang.math.Vector3f;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlock;
-import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockModelShaper;
@@ -54,7 +54,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 	@Nonnull
 	@Override
 	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
-		BlockState mimic = extraData.getData(FancyBlockTile.MIMIC);
+		BlockState mimic = extraData.getData(FancyBlockEntity.PROPERTY_MIMIC);
 		if (mimic != null && !(mimic.getBlock() instanceof FancyBlock)) {
 			ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
 			if (location != null) {
@@ -65,7 +65,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 
 		if (side != null) return Collections.emptyList();
 
-		Vector3d offset = extraData.getData(FancyBlockTile.OFFSET);
+		Vector3d offset = extraData.getData(FancyBlockEntity.PROPERTY_OFFSET);
 		if (offset != null) {
 			this.offset = offset;
 			quads = null;
@@ -164,7 +164,7 @@ public class CustomBakedModel implements IDynamicBakedModel {
 	public boolean useAmbientOcclusion() { return true; }
 
 	@Override
-	public boolean usesBlockLight() { return false; }
+	public boolean usesBlockLight() { return true; }
 
 	@Override
 	public boolean isCustomRenderer() { return true; }

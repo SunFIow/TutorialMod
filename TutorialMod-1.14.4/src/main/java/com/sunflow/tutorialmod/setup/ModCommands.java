@@ -23,13 +23,13 @@ public class ModCommands {
 	public static final CommandBase TpDim_COMMAND = new TpDimCommand();
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-//		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal(TutorialMod.MODID);
+		//		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal(TutorialMod.MODID);
 		LiteralArgumentBuilder<CommandSource> builder = Commands.literal(TutorialMod.MODID);
 		for (CommandBase command : COMMANDS) {
 			builder.then(command.getBuilder());
 		}
 		LiteralCommandNode<CommandSource> cmdTut = dispatcher.register(builder);
 		dispatcher.register(Commands.literal("tut").redirect(cmdTut));
-//		ConfigCommand.register(dispatcher);
+		//		ConfigCommand.register(dispatcher);
 	}
 }

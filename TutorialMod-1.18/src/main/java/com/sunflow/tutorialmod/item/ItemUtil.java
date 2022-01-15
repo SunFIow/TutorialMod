@@ -1,14 +1,20 @@
 package com.sunflow.tutorialmod.item;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import com.sunflow.tutorialmod.rendering.ModBEWLR;
 import com.sunflow.tutorialmod.setup.ModTabs;
 import com.sunflow.tutorialmod.util.Log;
 
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.IItemRenderProperties;
 
 public class ItemUtil {
 
@@ -37,11 +43,33 @@ public class ItemUtil {
 
 	}
 
-	public static Item.Properties ISTER(CreativeModeTab tab) {
-		Log.warn("ISTER");
-		Item.Properties properties = new Item.Properties().tab(tab);
-		// DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> properties.setISTER(() -> () -> ModISTER.instance));
-		// if (TutorialMod.proxy.isClient()) properties.setISTER(() -> () -> ModISTER.instance);
-		return properties;
+	public static Item BEWLR(Item.Properties properties) {
+		Log.warn("Item BEWLR");
+		return new Item(properties) {
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return ModBEWLR.instance;
+					}
+				});
+			}
+		};
+	}
+
+	public static BlockItem BEWLR(Block block, Item.Properties properties) {
+		Log.warn("BlockItem BEWLR");
+		return new BlockItem(block, properties) {
+			@Override
+			public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+				consumer.accept(new IItemRenderProperties() {
+					@Override
+					public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+						return ModBEWLR.instance;
+					}
+				});
+			}
+		};
 	}
 }

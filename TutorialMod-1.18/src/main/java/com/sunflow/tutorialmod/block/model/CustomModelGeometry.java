@@ -37,7 +37,7 @@ public class CustomModelGeometry implements IModelGeometry<CustomModelGeometry> 
 	}
 
 	@Override
-	public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) { // TODO Auto-generated method stub
+	public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
 		return Collections.singletonList(new Material(InventoryMenu.BLOCK_ATLAS, texture));
 	}
 

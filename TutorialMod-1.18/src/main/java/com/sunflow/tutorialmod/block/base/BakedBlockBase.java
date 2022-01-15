@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.block.base;
 
 import com.mojang.math.Vector3d;
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +35,7 @@ public class BakedBlockBase extends Block {
 	@Override
 	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-		if (blockEntity instanceof FancyBlockTile fancyEntity) {
+		if (blockEntity instanceof FancyBlockEntity fancyEntity) {
 			Vector3d offset = fancyEntity.getOffset();
 			if (offset != null) return shape.move(offset.x, offset.y, offset.z);
 		}

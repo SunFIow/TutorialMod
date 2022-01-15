@@ -52,7 +52,7 @@ public class CopperChestRenderer implements BlockEntityRenderer<CopperChestEntit
 		boolean flag = level != null;
 		BlockState blockstate = flag ? blockEntity.getBlockState() : Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 		Block block = blockstate.getBlock();
-		if (block instanceof CopperChestBlock copperchestblock) {
+		if (block instanceof CopperChest copperchestblock) {
 			poseStack.pushPose();
 			float f = blockstate.getValue(ChestBlock.FACING).toYRot();
 			poseStack.translate(0.5D, 0.5D, 0.5D);

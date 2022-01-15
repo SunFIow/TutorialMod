@@ -82,7 +82,7 @@ public class CopperChestEntity extends RandomizableContainerBlockEntity implemen
 	public int getContainerSize() { return SIZE; }
 
 	@Override
-	protected Component getDefaultName() { return CopperChestBlock.CONTAINER_TITLE; }
+	protected Component getDefaultName() { return CopperChest.CONTAINER_TITLE; }
 
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory playerInv) {

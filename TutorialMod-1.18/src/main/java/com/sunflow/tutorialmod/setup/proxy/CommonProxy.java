@@ -2,7 +2,7 @@ package com.sunflow.tutorialmod.setup.proxy;
 
 import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.config.TutorialModConfig;
-import com.sunflow.tutorialmod.datagen.DataGenerators;
+import com.sunflow.tutorialmod.data.DataGenerators;
 import com.sunflow.tutorialmod.setup.CommonForgeEvents;
 import com.sunflow.tutorialmod.setup.CommonModEvents;
 

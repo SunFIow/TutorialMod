@@ -23,13 +23,13 @@ public class ChargerBlock extends EnergyTileBlockBase {
 	public int getComparatorInputOverride(BlockState state, World world, BlockPos pos) {
 		TileEntity tileEntity = world.getTileEntity(pos);
 
-//		ItemStack stack = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).map(h -> h.getStackInSlot(ChargerTile.CHARGE_SLOT)).orElse(null);
-//		CustomEnergyStorage itemEnergyStorage = tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).map(IItemEnergy::getStorage).orElse(CustomEnergyStorage.DEFAULT);
-//
-//		int energy = itemEnergyStorage.getEnergyStored();
-//		int capacity = itemEnergyStorage.getMaxEnergyStored();
-//
-//		return 14 * energy / capacity + (stack.getItem() instanceof IEnergyItem ? 1 : 0);
+		//		ItemStack stack = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).map(h -> h.getStackInSlot(ChargerTile.CHARGE_SLOT)).orElse(null);
+		//		CustomEnergyStorage itemEnergyStorage = tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).map(IItemEnergy::getStorage).orElse(CustomEnergyStorage.DEFAULT);
+		//
+		//		int energy = itemEnergyStorage.getEnergyStored();
+		//		int capacity = itemEnergyStorage.getMaxEnergyStored();
+		//
+		//		return 14 * energy / capacity + (stack.getItem() instanceof IEnergyItem ? 1 : 0);
 
 		return tileEntity.getCapability(CapabilityItemEnergy.ENERGYITEM_CAPABILITY).map(i -> {
 			int itemPower = 0;

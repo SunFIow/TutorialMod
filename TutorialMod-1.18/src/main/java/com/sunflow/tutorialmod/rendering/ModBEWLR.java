@@ -2,8 +2,9 @@ package com.sunflow.tutorialmod.rendering;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
+import com.sunflow.tutorialmod.block.copper_chest.CopperChest;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestEntity;
+import com.sunflow.tutorialmod.block.copper_chest.CopperChestModel;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.util.Log;
 
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -26,10 +28,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ModBEWLR extends BlockEntityWithoutLevelRenderer {
 
 	private final BlockEntityRenderDispatcher dispatcher;
+	// private final ItemRenderer itemRenderer;
 
 	public ModBEWLR() {
 		super(TutorialMod.proxy.getMinecraft().getBlockEntityRenderDispatcher(), TutorialMod.proxy.getMinecraft().getEntityModels());
 		this.dispatcher = TutorialMod.proxy.getMinecraft().getBlockEntityRenderDispatcher();
+		// this.itemRenderer = TutorialMod.proxy.getMinecraft().getItemRenderer();
 	}
 
 	public static final ModBEWLR instance = new ModBEWLR();
@@ -45,10 +49,11 @@ public class ModBEWLR extends BlockEntityWithoutLevelRenderer {
 		Item item = itemStackIn.getItem();
 		if (item instanceof BlockItem blockItem) {
 			Block block = blockItem.getBlock();
-			BlockEntity tileentity;
-			if (block instanceof CopperChestBlock) {
-				tileentity = this.chestCopper;
-				dispatcher.renderItem(tileentity, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+			// BlockEntity tileentity;
+			if (block instanceof CopperChest) {
+				// tileentity = this.chestCopper;
+				// Log.info("renderItem:{}", chestCopper);
+				dispatcher.renderItem(chestCopper, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
 			}
 		}
 		super.renderByItem(itemStackIn, transformType, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);

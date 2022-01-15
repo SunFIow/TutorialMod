@@ -18,8 +18,8 @@ import net.minecraftforge.client.model.data.ModelProperty;
 import net.minecraftforge.common.util.Constants;
 
 public class FancyBlockTile extends TileEntity {
-	public static final ModelProperty<BlockState> MIMIC = new ModelProperty<BlockState>();
-	public static final ModelProperty<Vec3d> OFFSET = new ModelProperty<Vec3d>();
+	public static final ModelProperty<BlockState> MIMIC = new ModelProperty<>();
+	public static final ModelProperty<Vec3d> OFFSET = new ModelProperty<>();
 
 	private BlockState mimic;
 	private Vec3d offset;
@@ -42,7 +42,7 @@ public class FancyBlockTile extends TileEntity {
 
 	public void setOffset(Vec3d offset) {
 		this.offset = new Vec3d(offset.x, offset.y, offset.z);
-//		this.offset = offset;
+		//		this.offset = offset;
 		markDirty();
 		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 0 +
 				Constants.BlockFlags.BLOCK_UPDATE +

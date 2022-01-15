@@ -1,0 +1,57 @@
+{
+  "textures": {
+    "particle": "tutorialmod:block/power_cable/main",
+    "single": "tutorialmod:block/power_cable/none"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        6
+      ],
+      "to": [
+        10,
+        7,
+        10
+      ],
+      "faces": {
+        "down": {
+          "texture": "#single"
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        5.75,
+        7
+      ],
+      "to": [
+        9,
+        6,
+        9
+      ],
+      "faces": {
+        "down": {
+          "texture": "#single"
+        },
+        "up": {
+          "texture": "#single"
+        },
+        "north": {
+          "texture": "#single"
+        },
+        "south": {
+          "texture": "#single"
+        },
+        "west": {
+          "texture": "#single"
+        },
+        "east": {
+          "texture": "#single"
+        }
+      }
+    }
+  ]
+}

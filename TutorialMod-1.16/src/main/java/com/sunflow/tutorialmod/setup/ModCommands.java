@@ -15,10 +15,9 @@ import net.minecraft.command.CommandSource;
 
 public class ModCommands {
 	public static final List<CommandBase> COMMANDS = new ArrayList<>();
-
 	public static final CommandBase SLIME_CHUNK_COMMAND = new SlimeChunkCommand();
 	public static final CommandBase SPAWNER_COMMAND = new SpawnerCommand();
-//	public static final CommandBase TpDim_COMMAND = new TpDimCommand();
+	//	public static final CommandBase TpDim_COMMAND = new TpDimCommand();
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
 		LiteralArgumentBuilder<CommandSource> builder = LiteralArgumentBuilder.<CommandSource>literal(TutorialMod.MODID);
@@ -27,6 +26,6 @@ public class ModCommands {
 
 		LiteralArgumentBuilder<CommandSource> lab = LiteralArgumentBuilder.<CommandSource>literal("tut").redirect(cmdTut);
 		dispatcher.register(lab);
-//		ConfigCommand.register(dispatcher);
+		//		ConfigCommand.register(dispatcher);
 	}
 }

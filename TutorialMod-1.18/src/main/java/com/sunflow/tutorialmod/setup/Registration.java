@@ -6,15 +6,17 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.ConfigBlock;
 import com.sunflow.tutorialmod.block.MultiBlock;
 import com.sunflow.tutorialmod.block.TeleporterBlock;
-import com.sunflow.tutorialmod.block.copper_chest.CopperChestBlock;
+import com.sunflow.tutorialmod.block.copper_chest.CopperChest;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestContainer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestEntity;
 import com.sunflow.tutorialmod.block.food.FoodPlantBlock;
 import com.sunflow.tutorialmod.block.furniture.SantaHatBlock;
 import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlock;
-import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockTile;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockEntity;
 import com.sunflow.tutorialmod.block.magicblock.MagicBlock;
-import com.sunflow.tutorialmod.block.magicblock.MagicBlockTile;
+import com.sunflow.tutorialmod.block.magicblock.MagicBlockEntity;
+import com.sunflow.tutorialmod.block.multipart.ComplexMultipart;
+import com.sunflow.tutorialmod.block.multipart.ComplexMultipartEntity;
 import com.sunflow.tutorialmod.block.ore.CustomOreBlock;
 import com.sunflow.tutorialmod.block.ore.RubyBlock;
 import com.sunflow.tutorialmod.block.ore.RubyOre;
@@ -45,6 +47,7 @@ import com.sunflow.tutorialmod.item.tools.ToolSword;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -53,17 +56,25 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.common.world.ForgeWorldPreset;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -74,7 +85,7 @@ public class Registration {
     // _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________   
     // Game objects
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TutorialMod.MODID);
-    // private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, TutorialMod.MODID);
+    private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, TutorialMod.MODID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TutorialMod.MODID);
     // private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, TutorialMod.MODID);
     private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, TutorialMod.MODID);
@@ -124,7 +135,7 @@ public class Registration {
         // _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________   
         // Game objects
         BLOCKS.register(modBus);
-        // FLUIDS.register(modBus);
+        FLUIDS.register(modBus);
         ITEMS.register(modBus);
         // MOB_EFFECTS.register(modBus);
         SOUND_EVENTS.register(modBus);
@@ -211,6 +222,7 @@ public class Registration {
 
     // Machines
     public static final SunSimpleBlock<TeleporterBlock> TELEPORTER = new SunSimpleBlock<>("teleporter", () -> new TeleporterBlock(1), ITEM_PROPERTIES);
+    public static final SunBlockEntity<ComplexMultipart, ComplexMultipartEntity> COMPLEX_MULTIPART = new SunBlockEntity<>("complex_multipart", ComplexMultipart::new, ITEM_PROPERTIES, ComplexMultipartEntity::new);
 
     // Tree
     public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", ItemUtil::Default);
@@ -237,6 +249,26 @@ public class Registration {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // FLUIDS
+    public static final FluidAttributes.Builder MOLTEN_COPPER_ATTRIBUTES = FluidAttributes.builder(
+            new ResourceLocation(TutorialMod.MODID, "block/molten_copper_still"),
+            new ResourceLocation(TutorialMod.MODID, "block/molten_copper_flow"))
+            // .color(0xFF_3F_76_E4)
+            .luminosity(15).density(3000).viscosity(6000).temperature(1300)
+            .sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA);
+    public static final ForgeFlowingFluid.Properties MOLTEN_COPPER_PROPERTIES = new ForgeFlowingFluid.Properties(
+            Registration.MOLTEN_COPPER,
+            Registration.FLOWING_MOLTEN_COPPER,
+            MOLTEN_COPPER_ATTRIBUTES)
+                    .bucket(Registration.MOLTEN_COPPER_BUCKET)
+                    .block(Registration.MOLTEN_COPPER_BLOCK);
+
+    public static final RegistryObject<ForgeFlowingFluid.Source> MOLTEN_COPPER = FLUIDS.register("molten_copper", () -> new ForgeFlowingFluid.Source(MOLTEN_COPPER_PROPERTIES));
+
+    public static final RegistryObject<ForgeFlowingFluid.Flowing> FLOWING_MOLTEN_COPPER = FLUIDS.register("molten_copper_flowing", () -> new ForgeFlowingFluid.Flowing(MOLTEN_COPPER_PROPERTIES));
+
+    public static final RegistryObject<LiquidBlock> MOLTEN_COPPER_BLOCK = BLOCKS.register("molten_copper_block", () -> new LiquidBlock(MOLTEN_COPPER, Block.Properties.copy(Blocks.LAVA)));
+
+    public static final RegistryObject<BucketItem> MOLTEN_COPPER_BUCKET = ITEMS.register("molten_copper_bucket", () -> new BucketItem(MOLTEN_COPPER, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ModTabs.ITEM_TAB)));
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ITEMS
@@ -296,6 +328,7 @@ public class Registration {
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // SOUNDS
     public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_AMBIENT = SOUND_EVENTS.register("entity.centaur.ambient", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.ambient")));
+    // public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_HURT = SOUND_EVENTS.register("entity.centaur.hurt", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.hurt")));
     public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_HURT = SOUND_EVENTS.register("entity.centaur.hurt", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.hurt")));
     public static final RegistryObject<SoundEvent> ENTITY_CENTAUR_DEATH = SOUND_EVENTS.register("entity.centaur.death", () -> new SoundEvent(new ResourceLocation(TutorialMod.MODID, "entity.centaur.death")));
 
@@ -328,11 +361,11 @@ public class Registration {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // BLOCK ENTITES
-    public static final SunBlockEntityMenu<CopperChestBlock, CopperChestEntity, CopperChestContainer> COPPER_CHEST = new SunBlockEntityMenu<>(
-            "copper_chest", CopperChestBlock::new, ITEM_PROPERTIES,
+    public static final SunBlockEntityMenu<CopperChest, CopperChestEntity, CopperChestContainer> COPPER_CHEST = new SunBlockEntityMenu<>(
+            "copper_chest", CopperChest::new, () -> ItemUtil.BEWLR(Registration.COPPER_CHEST.block(), ITEM_PROPERTIES),
             CopperChestEntity::new, CopperChestContainer::new);
-    public static final SunBlockEntity<FancyBlock, FancyBlockTile> FANCYBLOCK = new SunBlockEntity<>("fancyblock", FancyBlock::new, ITEM_PROPERTIES2, FancyBlockTile::new);
-    public static final SunBlockEntity<MagicBlock, MagicBlockTile> MAGICBLOCK = new SunBlockEntity<>("magicblock", MagicBlock::new, ITEM_PROPERTIES2, MagicBlockTile::new);
+    public static final SunBlockEntity<FancyBlock, FancyBlockEntity> FANCYBLOCK = new SunBlockEntity<>("fancyblock", FancyBlock::new, ITEM_PROPERTIES2, FancyBlockEntity::new);
+    public static final SunBlockEntity<MagicBlock, MagicBlockEntity> MAGICBLOCK = new SunBlockEntity<>("magicblock", MagicBlock::new, ITEM_PROPERTIES2, MagicBlockEntity::new);
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // PARTICLES
@@ -406,8 +439,14 @@ public class Registration {
             menuType = CONTAINERS.register(name, () -> new MenuType<>(menuGetter));
         }
 
-        public MenuType<M> menu() { return menuType.get(); }
+        public <I extends Item> SunBlockEntityMenu(String name, Supplier<B> blockGetter, Supplier<I> itemGetter,
+                BlockEntityType.BlockEntitySupplier<E> blockEntityGetter,
+                MenuType.MenuSupplier<M> menuGetter) {
+            super(name, blockGetter, itemGetter, blockEntityGetter);
+            menuType = CONTAINERS.register(name, () -> new MenuType<>(menuGetter));
+        }
 
+        public MenuType<M> menu() { return menuType.get(); }
     }
 
     public static class SunBlockEntity<B extends Block, E extends BlockEntity> extends SunSimpleBlock<B> {
@@ -416,6 +455,12 @@ public class Registration {
         public SunBlockEntity(String name, Supplier<B> blockGetter, Item.Properties itemProperties,
                 BlockEntityType.BlockEntitySupplier<E> blockEntityGetter) {
             super(name, blockGetter, itemProperties);
+            blockEntityType = BLOCK_ENTITIES.register(name, () -> BlockEntityType.Builder.of(blockEntityGetter, block()).build(null));
+        }
+
+        public <I extends Item> SunBlockEntity(String name, Supplier<B> blockGetter, Supplier<I> itemGetter,
+                BlockEntityType.BlockEntitySupplier<E> blockEntityGetter) {
+            super(name, blockGetter, itemGetter);
             blockEntityType = BLOCK_ENTITIES.register(name, () -> BlockEntityType.Builder.of(blockEntityGetter, block()).build(null));
         }
 

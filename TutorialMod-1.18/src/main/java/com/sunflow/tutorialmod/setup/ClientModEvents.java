@@ -4,6 +4,7 @@ import com.sunflow.tutorialmod.TutorialMod;
 import com.sunflow.tutorialmod.block.base.BakedBlockBase;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestRenderer;
 import com.sunflow.tutorialmod.block.copper_chest.CopperChestScreen;
+import com.sunflow.tutorialmod.block.furniture.fancyblock.FancyBlockColor;
 import com.sunflow.tutorialmod.block.magicblock.MagicBockTileRenderer;
 import com.sunflow.tutorialmod.block.model.CustomBakedModel;
 import com.sunflow.tutorialmod.block.model.CustomModelGeometry;
@@ -38,8 +39,7 @@ public class ClientModEvents {
 
 		// setRenderLayers();
 		event.enqueueWork(ClientModEvents::setRenderLayers);
-
-		// event.enqueueWork(ClientModEvents::registerBlockColors);
+		event.enqueueWork(ClientModEvents::registerBlockColors);
 
 		TutorialMod.LOGGER.debug("Registering the keybindings for u senpai.");
 		KeyBindings.register();
@@ -71,6 +71,7 @@ public class ClientModEvents {
 		ItemBlockRenderTypes.setRenderLayer(Registration.COPPER_SAPLING.block(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(Registration.ALUMINIUM_SAPLING.block(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(Registration.MAGICBLOCK.block(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(Registration.COMPLEX_MULTIPART.block(), RenderType.translucent());
 	}
 
 	public static void onModelRegistryEvent(ModelRegistryEvent event) {
@@ -109,8 +110,8 @@ public class ClientModEvents {
 		event.registerBlockEntityRenderer(Registration.MAGICBLOCK.blockEntity(), MagicBockTileRenderer::new);
 	}
 
-	// private static void registerBlockColors() {
-	// 	TutorialMod.proxy.getMinecraft().getBlockColors().register(new FancyBlockColor(), Registration.FANCYBLOCK.get());
-	// }
+	private static void registerBlockColors() {
+		TutorialMod.proxy.getMinecraft().getBlockColors().register(new FancyBlockColor(), Registration.FANCYBLOCK.block());
+	}
 
 }

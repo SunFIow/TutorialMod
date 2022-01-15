@@ -2,20 +2,25 @@ package com.sunflow.tutorialmod;
 
 import com.sunflow.tutorialmod.config.TutorialModConfig;
 import com.sunflow.tutorialmod.config.TutorialModConfig1;
+import com.sunflow.tutorialmod.data.MySaveData;
+import com.sunflow.tutorialmod.data.TutorialData;
 import com.sunflow.tutorialmod.setup.Registration;
 import com.sunflow.tutorialmod.setup.proxy.ClientProxy;
 import com.sunflow.tutorialmod.setup.proxy.CommonProxy;
 import com.sunflow.tutorialmod.setup.proxy.ServerProxy;
-import com.sunflow.tutorialmod.util.MyWorldData;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.LevelStorageSource;
+import net.minecraft.world.level.storage.WorldData;
 import net.minecraftforge.client.ConfigGuiHandler.ConfigGuiFactory;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.internal.WorldPersistenceHooks;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TutorialMod.MODID)
@@ -30,12 +35,14 @@ public class TutorialMod {
 
     public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-    public static MyWorldData data;
+    public static MySaveData data;
 
     public TutorialMod() {
         Registration.init();
 
         TutorialModConfig.init();
+
+        WorldPersistenceHooks.addHook(new TutorialData());
 
         proxy.registerEvents();
 

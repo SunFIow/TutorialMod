@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sunflow.tutorialmod.TutorialMod;
-import com.sunflow.tutorialmod.command.CommandBase;
+import com.sunflow.tutorialmod.command.ICommand;
 import com.sunflow.tutorialmod.network.Networking;
 import com.sunflow.tutorialmod.network.packet.OpenGuiPacket;
 
@@ -14,7 +14,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 
-public class SpawnerCommand extends CommandBase implements Command<CommandSourceStack> {
+public class SpawnerCommand implements ICommand, Command<CommandSourceStack> {
 
 	@Override
 	public ArgumentBuilder<CommandSourceStack, ?> getBuilder() {

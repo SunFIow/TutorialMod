@@ -23,7 +23,7 @@ public class MagicBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) { return new MagicBlockTile(pPos, pState); }
+	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) { return new MagicBlockEntity(pPos, pState); }
 
 	@Override
 	public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {

@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
-public class MagicBockTileRenderer implements BlockEntityRenderer<MagicBlockTile> {
+public class MagicBockTileRenderer implements BlockEntityRenderer<MagicBlockEntity> {
 
 	public static final ResourceLocation MAGICBLOCK_TEXTURE = new ResourceLocation(TutorialMod.MODID, "block/magicblock");
 
@@ -54,7 +54,7 @@ public class MagicBockTileRenderer implements BlockEntityRenderer<MagicBlockTile
 
 	@Override
 	// public void render(MagicBlockTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
-	public void render(MagicBlockTile blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+	public void render(MagicBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		TextureAtlasSprite sprite = TutorialMod.proxy.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(MAGICBLOCK_TEXTURE);
 		VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
