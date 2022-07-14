@@ -17,9 +17,7 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class TutorialModConfig1 {
 
-	public static ConfigScreen createScreen(Screen parent, ModConfig.Type type) {
-		return new ConfigScreen(new TextComponent(TutorialMod.NAME), parent, type, getOrCreateBuilder());
-	}
+	public static ConfigScreen createScreen(Screen parent, ModConfig.Type type) { return new ConfigScreen(new TextComponent(TutorialMod.NAME), parent, type, getOrCreateBuilder()); }
 
 	private static ConfigScreen.Builder builder;
 
