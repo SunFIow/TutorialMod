@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "tutorialmod:sun_ore_overworld",
+    "tutorialmod:sun_ore_deepslate",
+    "tutorialmod:sun_ore_nether",
+    "tutorialmod:sun_ore_end",
+    "tutorialmod:ruby_ore",
+    "tutorialmod:ruby_block"
+  ]
+}

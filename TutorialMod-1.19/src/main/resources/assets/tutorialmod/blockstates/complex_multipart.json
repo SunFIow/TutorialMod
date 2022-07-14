@@ -1,0 +1,174 @@
+{
+	"multipart": [
+		{
+			"apply": {
+				"model": "tutorialmod:block/complex/main"
+			}
+		},
+		{
+			"when": {
+				"down": "none"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlenone"
+			}
+		},
+		{
+			"when": {
+				"up": "none"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlenone",
+				"x": 180
+			}
+		},
+		{
+			"when": {
+				"south": "none"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlenone",
+				"x": 90
+			}
+		},
+		{
+			"when": {
+				"north": "none"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlenone",
+				"x": 270
+			}
+		},
+		{
+			"when": {
+				"west": "none"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlenone",
+				"x": 90,
+				"y": 90
+			}
+		},
+		{
+			"when": {
+				"east": "none"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlenone",
+				"x": 90,
+				"y": 270
+			}
+		},
+		{
+			"when": {
+				"down": "input"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlein"
+			}
+		},
+		{
+			"when": {
+				"up": "input"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlein",
+				"x": 180
+			}
+		},
+		{
+			"when": {
+				"south": "input"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlein",
+				"x": 90
+			}
+		},
+		{
+			"when": {
+				"north": "input"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlein",
+				"x": 270
+			}
+		},
+		{
+			"when": {
+				"west": "input"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlein",
+				"x": 90,
+				"y": 90
+			}
+		},
+		{
+			"when": {
+				"east": "input"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singlein",
+				"x": 90,
+				"y": 270
+			}
+		},
+		{
+			"when": {
+				"down": "output"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singleout"
+			}
+		},
+		{
+			"when": {
+				"up": "output"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singleout",
+				"x": 180
+			}
+		},
+		{
+			"when": {
+				"south": "output"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singleout",
+				"x": 90
+			}
+		},
+		{
+			"when": {
+				"north": "output"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singleout",
+				"x": 270
+			}
+		},
+		{
+			"when": {
+				"west": "output"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singleout",
+				"x": 90,
+				"y": 90
+			}
+		},
+		{
+			"when": {
+				"east": "output"
+			},
+			"apply": {
+				"model": "tutorialmod:block/complex/singleout",
+				"x": 90,
+				"y": 270
+			}
+		}
+	]
+}
